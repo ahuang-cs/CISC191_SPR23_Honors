@@ -4,7 +4,7 @@
     <groupId>edu.sdccd.cisc191.template</groupId>
     <artifactId>FinalProject</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.0</version>
+    <version>1.0.1-SNAPSHOT</version>
     <modules>
         <module>Common</module>
         <module>Server</module>
