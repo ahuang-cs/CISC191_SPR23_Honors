@@ -6,7 +6,7 @@
     <parent>
         <groupId>edu.sdccd.cisc191.template</groupId>
         <artifactId>FinalProject</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.1-SNAPSHOT</version>
     </parent>
     <artifactId>Common</artifactId>
 
