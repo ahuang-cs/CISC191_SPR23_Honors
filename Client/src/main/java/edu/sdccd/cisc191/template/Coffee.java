@@ -65,6 +65,7 @@ public class Coffee extends Drink{
         //Created an inner Class for to place the Lattes recipe
         private class Latte{
 
+
         }
         //Created an inner Class for to place the Cappuccinos recipe
         private class Cappuccino{
