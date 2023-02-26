@@ -57,6 +57,16 @@ public class Client {
         System.out.println("New price: " + foodstuffs.getSalePrice());
         System.out.println("New toString: " + foodstuffs);
 
+        // Adding stuff to the recipe.
+        System.out.println("Adding stuff to the recipe... \n");
+        foodstuffs.addToRecipe("Flour");
+        foodstuffs.addToRecipe("Sugar");
+        foodstuffs.addToRecipe("Water");
+        foodstuffs.addToRecipe("Escargot");
+        foodstuffs.addToRecipe("Eggs");
+
+
+
 
 
 
