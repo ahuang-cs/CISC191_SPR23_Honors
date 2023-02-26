@@ -16,6 +16,10 @@ package edu.sdccd.cisc191.template;
     Abstract Classes Ideas
         - Subclasses will have tags that alter ingredients as needed (e.g. sugar free removes sugar, etc.)
 
+    We'll probably want our INGREDIENT class to have a null ingredient in order to allow for future stuff.
+
+
+
     TODO:   Create functional MenuItem Class
             Add subclasses of MenuItem
             Make MenuItem an abstract class, adjust children accordingly
