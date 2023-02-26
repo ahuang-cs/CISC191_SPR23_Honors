@@ -79,15 +79,45 @@ public class Coffee extends Drink{
         }
         //Created an inner Class for to place the Cappuccinos recipe
         private class Cappuccino{
+            private int espresso;       // Amount of espresso shots used
+            private int steamedMilk;    // Amount of steamed milk used
+            private int foam;           // Amount of foam used
+            private String flavor;      // Optional flavoring
+
+            public Cappuccino(int espresso, int steamedMilk, int foam, String flavor) {
+                this.espresso = espresso;
+                this.steamedMilk = steamedMilk;
+                this.foam = foam;
+                this.flavor = flavor;
+            }
 
         }
         //Created an inner Class for to place the Frozen Coffees recipe
         private class Frozen{
+            private boolean isBlended;  // Whether or not the frozen coffee is blended.
+            private String flavor;      // The flavor of the frozen coffee.
+
+            public Frozen() {
+                super();
+                this.isBlended = true;
+                this.flavor = "Vanilla";
+            }
+            public Frozen(String name, double price, String size, boolean isHot, boolean isBlended, String flavor) {
+                //super(name, price, size, isHot);
+                this.isBlended = isBlended;
+                this.flavor = flavor;
+            }
+
 
         }
         //Created an inner Class for to place the Iced Coffees recipe
         private class Iced{
-
+            private boolean hasMilk;
         }
+    public Iced(){
+        super();
+        this.hasMilk = true;
+    }
+    // im not too sure what i can do here...
 
 }
