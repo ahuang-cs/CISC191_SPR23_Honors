@@ -92,6 +92,14 @@ public class MenuItem
         // TODO: Change this method to include Ingredient objects instead of Strings.
     }
 
+    /**
+     * Deletes all ingredients within the Recipe ArrayList.
+     */
+    public void clearRecipe()
+    {
+        recipe.clear();
+    }
+
 
 
     /**
