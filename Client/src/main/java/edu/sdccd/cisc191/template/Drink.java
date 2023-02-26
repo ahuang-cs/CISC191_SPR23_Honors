@@ -51,8 +51,8 @@ public class Drink extends MenuItem {
      * @param size The size of the drink (Small, Medium, Large)
      * @param isHot Whether the drink is hot (true) or cold (false).
      */
-    public Drink(String name, String size, boolean isHot){
-        super(name);
+    public Drink(String name, double salePrice, String size, boolean isHot){
+        super(name, salePrice);
         this.size = size;
         this.isHot = isHot;
     }

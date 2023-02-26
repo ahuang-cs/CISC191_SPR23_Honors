@@ -37,7 +37,27 @@ public class Client {
         out.close();
         clientSocket.close();
     }
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
+        // Testing here (Will be deleted in future commit)
+        MenuItem foodstuffs = new MenuItem();
+
+        // Testing default constructor:
+        System.out.println("Default name: " + foodstuffs.getName());
+        System.out.println("Default price: " + foodstuffs.getSalePrice());
+        System.out.println("Default toString: " + foodstuffs);
+
+        // Testing setter methods:
+        System.out.println("Changing values... \n");
+        foodstuffs.setName("Foodstuffs");
+        foodstuffs.setSalePrice(9.99);
+
+        // Printing Results:
+        System.out.println("New name: " + foodstuffs.getName());
+        System.out.println("New price: " + foodstuffs.getSalePrice());
+        System.out.println("New toString: " + foodstuffs);
+
+
 
 
 
@@ -52,6 +72,7 @@ public class Client {
             e.printStackTrace();
         }
         */
-    }
+
+    }   // End public static void main(String[] args)
 } //end class Client
 

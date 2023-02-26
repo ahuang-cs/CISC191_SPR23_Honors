@@ -35,7 +35,7 @@ public class MenuItem
 
     /**
      * Default Constructor
-     * Fills all fields with empty / null values.
+     * Fills all fields with empty known values.
      */
     public MenuItem()
     {
@@ -65,6 +65,15 @@ public class MenuItem
     }
 
     /**
+     * This method returns the sale price of a menu item.
+     * @return The sale price of this menu item.
+     */
+    public double getSalePrice()
+    {
+        return salePrice;
+    }
+
+    /**
      * This method sets the name of a menu item
      * @param name The new name of the menu item.
      */
@@ -72,6 +81,17 @@ public class MenuItem
     {
         itemName = name;
     }
+
+    /**
+     * This method changes the sale price for a menu item.
+     * @param newPrice The new value for the menu item's sale price.
+     */
+    public void setSalePrice(double newPrice)
+    {
+        // TODO: Consider adding input validation to prevent negative input.
+        salePrice = newPrice;
+    }
+
 
     /**
      * This method prints out a string representing this menuItem object.
