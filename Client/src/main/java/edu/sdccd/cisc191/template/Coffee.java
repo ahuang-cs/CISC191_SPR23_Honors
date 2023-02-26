@@ -64,7 +64,17 @@ public class Coffee extends Drink{
         }
         //Created an inner Class for to place the Lattes recipe
         private class Latte{
+            private String espressoType;   // The type of espresso used
+            private String milkType;       // The type of milk used
+            private boolean hasFoam;       // Whether or not the latte has foam
+            private String flavor;         // Any additional flavor added to the latte
 
+            public Latte(String espressoType, String milkType, boolean hasFoam, String flavor) {
+                this.espressoType = espressoType;
+                this.milkType = milkType;
+                this.hasFoam = hasFoam;
+                this.flavor = flavor;
+            }
 
         }
         //Created an inner Class for to place the Cappuccinos recipe
