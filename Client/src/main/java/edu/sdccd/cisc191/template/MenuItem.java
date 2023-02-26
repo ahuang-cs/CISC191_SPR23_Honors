@@ -1,5 +1,7 @@
 package edu.sdccd.cisc191.template;
 
+import java.util.ArrayList;     // Allows for dynamic resizing of arrays
+
 /*
     The MenuItem class will be an abstract class representing all menu items. Currently in progress.
     Will serve as a framework for subclasses prior to abstraction and conversion.
@@ -27,20 +29,30 @@ package edu.sdccd.cisc191.template;
 
 public class MenuItem
 {
-    private String itemName;        // Name of this menuItem (Cannot be changed later)
+    private String itemName;            // Name of this menuItem (Cannot be changed later)
+    private double salePrice;           // Price of menu item
+    private ArrayList<String> recipe;   // Holds ingredients to make this menuItem
 
+    /**
+     * Default Constructor
+     * Fills all fields with empty / null values.
+     */
     public MenuItem()
     {
         itemName = "";
+        salePrice = 0.0;
+        recipe = new ArrayList<String>();
     }
 
     /**
      * This is the constructor for MenuItem objects.
      * @param name The name of the Menu Item.
      */
-    public MenuItem(String name)
+    public MenuItem(String name, double salePrice)
     {
-        itemName = name;
+        this.itemName = name;
+        this.salePrice = salePrice;
+        recipe = new ArrayList<String>();
     }
 
     /**
