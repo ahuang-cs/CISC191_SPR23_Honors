@@ -1,13 +1,14 @@
 package edu.sdccd.cisc191.template;
 
 /*
-    The Drink class will be an abstract class representing all drinks. Currently in progress.
+    The Drink class will be an abstract class representing all drinks.
+    Currently in progress.
     Will serve as a framework for subclasses prior to abstraction and conversion.
 
     Drinks should include:
         - Type (Hot/Cold)
-        - Sizes
-        - SugarFree
+        - Sizes (Large/ Medium/ Small)
+        - SugarFree (Contains Aspartame)
 
     Example:
         Coffee
