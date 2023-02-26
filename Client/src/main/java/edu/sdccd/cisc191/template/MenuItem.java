@@ -2,6 +2,7 @@ package edu.sdccd.cisc191.template;
 
 /*
     The MenuItem class will be an abstract class representing all menu items. Currently in progress.
+    Will serve as a framework for subclasses prior to abstraction and conversion.
 
     All MenuItem objects should contain:
         - Item Name (String)
@@ -13,7 +14,7 @@ package edu.sdccd.cisc191.template;
         - Create Boolean for hot and cold drinks
 
     Abstract Classes Ideas
-        -
+        - Subclasses will have tags that alter ingredients as needed (e.g. sugar free removes sugar, etc.)
 
     TODO:   Create functional MenuItem Class
             Add subclasses of MenuItem
