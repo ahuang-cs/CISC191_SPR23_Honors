@@ -11,8 +11,8 @@ package edu.sdccd.cisc191.template;
 
 public class Pastry extends MenuItem {
 
-    private String icingFlavor;
-    private boolean hasGluten;
+    private String icingFlavor;     //Flavor of Icing on Pastry(Vanilla, Chocolate, Strawberry)
+    private boolean hasGluten;      //Whether the pastry is gluten-free or not
 
     //Default Constructor
     public Pastry()
