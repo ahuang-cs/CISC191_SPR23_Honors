@@ -100,6 +100,30 @@ public class MenuItem
         recipe.clear();
     }
 
+    /**
+     * Returns a list of ingredients to make the menu item as an array.
+     * TODO: Review implementation (Do we want to return array, individual ingredients, etc.)
+     * @return An ArrayList of ingredients to make the menu item.
+     */
+    public String[] getRecipe()
+    {
+        // For security reasons, we want to limit other classes from having access to our recipe ArrayList.
+        // This method transfers the recipe into a separate array for access outside of this class.
+        // That way, this method can only read from the ArrayList.
+
+        // Create a new array
+        String[] ingredientList = new String[recipe.size()];
+
+        // Transfer each element of the recipe ArrayList to the corresponding index of the new array.
+        for (int i = 0; i < recipe.size(); i++)
+        {
+            ingredientList[i]= recipe.get(i);
+        }
+
+        // Return the new array.
+        return ingredientList;
+    }
+
 
 
     /**

@@ -65,6 +65,47 @@ public class Client {
         foodstuffs.addToRecipe("Escargot");
         foodstuffs.addToRecipe("Eggs");
 
+        // Printing recipe
+        for (int i = 0; i < foodstuffs.getRecipe().length; i++)
+        {
+            System.out.println(foodstuffs.getRecipe()[i]);
+        }
+
+        // Removing items from recipe:
+        System.out.println("Removing items from recipe:");
+        foodstuffs.removeFromRecipe("Escargot");
+
+        // Printing recipe:
+        System.out.println("New Recipe: ");
+        for (int i = 0; i < foodstuffs.getRecipe().length; i++)
+        {
+            System.out.println(foodstuffs.getRecipe()[i]);
+        }
+
+        // Demonstrating one-way access capabilities
+        System.out.println("Adding recipe from the accessor method:");
+        foodstuffs.getRecipe()[2] = "Wine";
+
+        // Printing Recipe:
+        System.out.println("New Recipe: ");
+        for (int i = 0; i < foodstuffs.getRecipe().length; i++)
+        {
+            System.out.println(foodstuffs.getRecipe()[i]);
+        }
+
+        // Clearing recipe:
+        System.out.println("Clearing Recipe: ");
+        foodstuffs.clearRecipe();
+
+        // Printing recipe:
+        System.out.println("New Recipe: ");
+        for (int i = 0; i < foodstuffs.getRecipe().length; i++)
+        {
+            System.out.println(foodstuffs.getRecipe()[i]);
+        }
+
+
+
 
 
 
