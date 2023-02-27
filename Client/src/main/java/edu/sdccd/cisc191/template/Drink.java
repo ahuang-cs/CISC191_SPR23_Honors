@@ -80,7 +80,7 @@ public class Drink extends MenuItem {
     }
 
     /**
-     * This method changes whether or not the drink is classified as a hot drink (true) or not.
+     * This method changes whether the drink is classified as a hot drink (true) or not.
      * @param isHot True if the drink is hot, false if not.
      */
     public void setHeatValue(boolean isHot)
