@@ -103,6 +103,24 @@ public class Client {
         {
             System.out.println(foodstuffs.getRecipe()[i]);
         }
+        System.out.println("\n");
+
+        System.out.println("Testing Drink Class: \n");
+
+        Drink classicCappuccino = new Drink("Cappuccino Classico", 3.99, "small", true);
+        classicCappuccino.addToRecipe("Double Espresso");
+        classicCappuccino.addToRecipe("Milk");
+        classicCappuccino.addToRecipe("Milk Foam");
+        classicCappuccino.setVolume(8);
+
+        for (int i = 0; i < classicCappuccino.getRecipe().length; i++)
+        {
+            System.out.println(classicCappuccino.getRecipe()[i]);
+        }
+
+        System.out.println(classicCappuccino + ", " + classicCappuccino.getVolume() + " oz.");
+
+
 
 
 
