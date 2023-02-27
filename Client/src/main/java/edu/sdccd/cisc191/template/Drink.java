@@ -58,6 +58,70 @@ public class Drink extends MenuItem {
     }
 
     /**
+     * This method changes the size of the drink to a specified value (Small, Medium, Large).
+     * @param newSize The new value for the size.
+     */
+    public void setSize(String newSize)
+    {
+        // TODO:    Validate user input for acceptable values (small, medium, large, etc.) (FOR REVIEW)
+        //          Discard other values and throw error.
+        // TODO:    Set volume of drink according to size (Perhaps based on a static final 2D array) (FOR REVIEW)
+        size = newSize;
+    }
+
+    /**
+     * This method changes the volume of the drink to a specified numerical value (oz).
+     * @param newVolume The volume of the drink in ounces.
+     */
+    public void setVolume(int newVolume)
+    {
+        // TODO: Set size of drink if it matches a value in the table? (FOR REVIEW)
+        volume = newVolume;
+    }
+
+    /**
+     * This method changes whether or not the drink is classified as a hot drink (true) or not.
+     * @param isHot True if the drink is hot, false if not.
+     */
+    public void setHeatValue(boolean isHot)
+    {
+        this.isHot = isHot;
+    }
+
+
+    /**
+     * This method returns the size of a drink object.
+     * @return The size of a drink object (Small, Medium, Large, etc.)
+     */
+    public String getSize()
+    {
+        return size;
+    }
+
+    /**
+     * This method returns the volume in ounces of a drink object
+     * @return The volume of the drink in ounces.
+     */
+    public int getVolume()
+    {
+        return volume;
+    }
+
+    /**
+     * This method returns true if the drink is hot, otherwise it will return false.
+     * @return Boolean representing whether or not the drink is hot.
+     */
+    public boolean getHeatValue()
+    {
+        return isHot;
+    }
+
+
+
+
+
+
+    /**
      * String representation of this drink object.
      * @return String containing size and name of drink
      */
