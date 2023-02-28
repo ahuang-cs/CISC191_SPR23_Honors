@@ -85,6 +85,8 @@ public class MenuItem
         {
             // If the ingredient is in the recipe array, remove it.
             recipe.remove(ingredient);
+        } else if (!(recipe.contains(ingredient))) {
+            System.out.println("This ingredient does not exist in this recipe.");
         }
 
         // TODO: Consider throwing an exception when trying to remove an ingredient that is not in the recipe
