@@ -46,9 +46,11 @@ public class Client {
         System.out.println("Default name: " + item.getName());
         System.out.println("Default price: " + item.getSalePrice());
         System.out.println("Default toString: " + item);
+        //creating a new line
+        System.out.println();
 
         // Testing setter methods:
-        System.out.println("Changing values... \n");
+        System.out.println("Changing values...");
         item.setName("Foodstuffs");
         item.setSalePrice(9.99);
 
@@ -56,11 +58,13 @@ public class Client {
         System.out.println("New name: " + item.getName());
         System.out.println("New price: " + item.getSalePrice());
         System.out.println("New toString: " + item);
+        //creating a new line
+        System.out.println();
 
         // Adding stuff to the recipe.
-        System.out.println("Adding stuff to the recipe... \n");
+        System.out.println("Adding stuff to the recipe...");
         item.addToRecipe("Flour");
-        item.addToRecipe("Flour");      //To test that you cannot add two of the same ingredient
+        item.addToRecipe("Flour");  //To test that you cannot add two of the same ingredient
         item.addToRecipe("Sugar");
         item.addToRecipe("Water");
         item.addToRecipe("Escargot");
@@ -71,6 +75,8 @@ public class Client {
         {
             System.out.println(item.getRecipe()[i]);
         }
+        //creating a new line
+        System.out.println();
 
         // Removing items from recipe:
         System.out.println("Removing items from recipe:");
@@ -82,6 +88,8 @@ public class Client {
         {
             System.out.println(item.getRecipe()[i]);
         }
+        //creating a new line
+        System.out.println();
 
         // Demonstrating one-way access capabilities
         System.out.println("Adding recipe from the accessor method:");
@@ -93,6 +101,14 @@ public class Client {
         {
             System.out.println(item.getRecipe()[i]);
         }
+        //creating a new line
+        System.out.println();
+
+        // Removing invalid items from recipe:
+        System.out.println("Attempting to remove invalid items from recipe:");
+        item.removeFromRecipe("Gasoline");
+        //creating a new line
+        System.out.println();
 
         // Clearing recipe:
         System.out.println("Clearing Recipe: ");
@@ -104,10 +120,11 @@ public class Client {
         {
             System.out.println(item.getRecipe()[i]);
         }
-        System.out.println("\n");
+        //creating a new line
+        System.out.println();
 
-        System.out.println("Testing Drink Class: \n");
-
+        //Testing Drink Class
+        System.out.println("Testing Drink Class: ");
         Drink classicCappuccino = new Drink("Cappuccino Classico", 3.99, "small", true);
         classicCappuccino.addToRecipe("Double Espresso");
         classicCappuccino.addToRecipe("Milk");
