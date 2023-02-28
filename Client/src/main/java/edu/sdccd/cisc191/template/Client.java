@@ -60,6 +60,7 @@ public class Client {
         // Adding stuff to the recipe.
         System.out.println("Adding stuff to the recipe... \n");
         item.addToRecipe("Flour");
+        item.addToRecipe("Flour");      //To test that you cannot add two of the same ingredient
         item.addToRecipe("Sugar");
         item.addToRecipe("Water");
         item.addToRecipe("Escargot");

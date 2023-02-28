@@ -117,7 +117,7 @@ public class MenuItem
         // Transfer each element of the recipe ArrayList to the corresponding index of the new array.
         for (int i = 0; i < recipe.size(); i++)
         {
-            ingredientList[i]= recipe.get(i);
+            ingredientList[i] = recipe.get(i);
         }
 
         // Return the new array.
