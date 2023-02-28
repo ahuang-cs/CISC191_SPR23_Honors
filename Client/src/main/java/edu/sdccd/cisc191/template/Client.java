@@ -40,68 +40,68 @@ public class Client {
     public static void main(String[] args)
     {
         // Testing here (Will be deleted in future commit)
-        MenuItem foodstuffs = new MenuItem();
+        MenuItem item = new MenuItem();
 
         // Testing default constructor:
-        System.out.println("Default name: " + foodstuffs.getName());
-        System.out.println("Default price: " + foodstuffs.getSalePrice());
-        System.out.println("Default toString: " + foodstuffs);
+        System.out.println("Default name: " + item.getName());
+        System.out.println("Default price: " + item.getSalePrice());
+        System.out.println("Default toString: " + item);
 
         // Testing setter methods:
         System.out.println("Changing values... \n");
-        foodstuffs.setName("Foodstuffs");
-        foodstuffs.setSalePrice(9.99);
+        item.setName("Foodstuffs");
+        item.setSalePrice(9.99);
 
         // Printing Results:
-        System.out.println("New name: " + foodstuffs.getName());
-        System.out.println("New price: " + foodstuffs.getSalePrice());
-        System.out.println("New toString: " + foodstuffs);
+        System.out.println("New name: " + item.getName());
+        System.out.println("New price: " + item.getSalePrice());
+        System.out.println("New toString: " + item);
 
         // Adding stuff to the recipe.
         System.out.println("Adding stuff to the recipe... \n");
-        foodstuffs.addToRecipe("Flour");
-        foodstuffs.addToRecipe("Sugar");
-        foodstuffs.addToRecipe("Water");
-        foodstuffs.addToRecipe("Escargot");
-        foodstuffs.addToRecipe("Eggs");
+        item.addToRecipe("Flour");
+        item.addToRecipe("Sugar");
+        item.addToRecipe("Water");
+        item.addToRecipe("Escargot");
+        item.addToRecipe("Eggs");
 
         // Printing recipe
-        for (int i = 0; i < foodstuffs.getRecipe().length; i++)
+        for (int i = 0; i < item.getRecipe().length; i++)
         {
-            System.out.println(foodstuffs.getRecipe()[i]);
+            System.out.println(item.getRecipe()[i]);
         }
 
         // Removing items from recipe:
         System.out.println("Removing items from recipe:");
-        foodstuffs.removeFromRecipe("Escargot");
+        item.removeFromRecipe("Escargot");
 
         // Printing recipe:
         System.out.println("New Recipe: ");
-        for (int i = 0; i < foodstuffs.getRecipe().length; i++)
+        for (int i = 0; i < item.getRecipe().length; i++)
         {
-            System.out.println(foodstuffs.getRecipe()[i]);
+            System.out.println(item.getRecipe()[i]);
         }
 
         // Demonstrating one-way access capabilities
         System.out.println("Adding recipe from the accessor method:");
-        foodstuffs.getRecipe()[2] = "Wine";
+        item.getRecipe()[2] = "Wine";
 
         // Printing Recipe:
         System.out.println("New Recipe: ");
-        for (int i = 0; i < foodstuffs.getRecipe().length; i++)
+        for (int i = 0; i < item.getRecipe().length; i++)
         {
-            System.out.println(foodstuffs.getRecipe()[i]);
+            System.out.println(item.getRecipe()[i]);
         }
 
         // Clearing recipe:
         System.out.println("Clearing Recipe: ");
-        foodstuffs.clearRecipe();
+        item.clearRecipe();
 
         // Printing recipe:
         System.out.println("New Recipe: ");
-        for (int i = 0; i < foodstuffs.getRecipe().length; i++)
+        for (int i = 0; i < item.getRecipe().length; i++)
         {
-            System.out.println(foodstuffs.getRecipe()[i]);
+            System.out.println(item.getRecipe()[i]);
         }
         System.out.println("\n");
 
