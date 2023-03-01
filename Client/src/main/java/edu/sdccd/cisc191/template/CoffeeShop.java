@@ -2,12 +2,16 @@
 package edu.sdccd.cisc191.template;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,7 +26,7 @@ public class CoffeeShop extends Application {
 
     static ArrayList<String> itemName = new ArrayList<>(Arrays.asList("Coffee\t", "Donut\t", "Tea\t\t", "Cake\t", "Croissant", "Juice\t"));  // initialize an empty array
     static ArrayList<Integer> itemQuantity = new ArrayList<>(Arrays.asList(10, 25, 30, 16, 20, 15));
-    static final String[][] navMenu = new String[][] { {"1","Display the menu"},
+    static final String[][] navMenu = new String[][] {  {"1","Display the menu"},
                                                         {"2", "Add item quantity"},
                                                         {"3", "Subtract item quantity"},
                                                         {"4", "Quit" }};
@@ -132,6 +136,17 @@ public class CoffeeShop extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+
+        try {
+            Parent shopMenu = FXMLLoader.load(getClass().getResource("/CoffeeShop.fxml"));
+            Scene scene = new Scene(shopMenu);
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        /*
         Stage window = new Stage();
         displayMenu();
 
@@ -173,15 +188,13 @@ public class CoffeeShop extends Application {
         VBox layout2 = new VBox (20);
         layout2.getChildren().addAll(button5,button6,button7,button8);
 
-
-
-
-
         scene2 = new Scene(layout2,600, 300);
 
         window.setScene(scene1);
         window2.setScene(scene2);
         window.setTitle("SDCCD CAFETERIA");
         window.show();
+
+         */
     }
 }
