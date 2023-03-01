@@ -132,8 +132,9 @@ public class CoffeeShop extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        window = stage;
+        Stage window = new Stage();
         displayMenu();
+
         //Button 1
         Label label1 = new Label("Display Menu");
         Button button1 = new Button("Display Menu");
@@ -168,12 +169,18 @@ public class CoffeeShop extends Application {
         button8.setOnAction(e -> window.close());
 
         //Layout 2
+        Stage window2 = new Stage();
         VBox layout2 = new VBox (20);
         layout2.getChildren().addAll(button5,button6,button7,button8);
+
+
+
+
 
         scene2 = new Scene(layout2,600, 300);
 
         window.setScene(scene1);
+        window2.setScene(scene2);
         window.setTitle("SDCCD CAFETERIA");
         window.show();
     }
