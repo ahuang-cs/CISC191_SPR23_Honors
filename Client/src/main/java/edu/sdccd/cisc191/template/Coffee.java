@@ -113,11 +113,14 @@ public class Coffee extends Drink{
         //Created an inner Class for to place the Iced Coffees recipe
         private class Iced{
             private boolean hasMilk;
+            public Iced(){
+                super();
+                this.hasMilk = true;
+
+                // im not too sure what i can do here...
+            }
+
         }
-    public Iced(){
-        super();
-        this.hasMilk = true;
-    }
-    // im not too sure what i can do here...
+
 
 }

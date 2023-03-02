@@ -40,30 +40,144 @@ public class Client {
     public static void main(String[] args)
     {
         // Testing here (Will be deleted in future commit)
-        MenuItem foodstuffs = new MenuItem();
+        MenuItem item = new MenuItem();
 
         // Testing default constructor:
-        System.out.println("Default name: " + foodstuffs.getName());
-        System.out.println("Default price: " + foodstuffs.getSalePrice());
-        System.out.println("Default toString: " + foodstuffs);
+        System.out.println("Default name: " + item.getName());
+        System.out.println("Default price: " + item.getSalePrice());
+        System.out.println("Default toString: " + item);
+        //creating a new line
+        System.out.println();
 
         // Testing setter methods:
-        System.out.println("Changing values... \n");
-        foodstuffs.setName("Foodstuffs");
-        foodstuffs.setSalePrice(9.99);
+        System.out.println("Changing values...");
+        item.setName("Foodstuffs");
+        item.setSalePrice(9.99);
 
         // Printing Results:
-        System.out.println("New name: " + foodstuffs.getName());
-        System.out.println("New price: " + foodstuffs.getSalePrice());
-        System.out.println("New toString: " + foodstuffs);
+        System.out.println("New name: " + item.getName());
+        System.out.println("New price: " + item.getSalePrice());
+        System.out.println("New toString: " + item);
+        //creating a new line
+        System.out.println();
 
         // Adding stuff to the recipe.
-        System.out.println("Adding stuff to the recipe... \n");
-        foodstuffs.addToRecipe("Flour");
-        foodstuffs.addToRecipe("Sugar");
-        foodstuffs.addToRecipe("Water");
-        foodstuffs.addToRecipe("Escargot");
-        foodstuffs.addToRecipe("Eggs");
+        System.out.println("Adding stuff to the recipe...");
+        item.addToRecipe("Flour");
+        item.addToRecipe("Flour");  //To test that you cannot add two of the same ingredient
+        item.addToRecipe("Sugar");
+        item.addToRecipe("Water");
+        item.addToRecipe("Escargot");
+        item.addToRecipe("Eggs");
+
+        // Printing recipe
+        for (int i = 0; i < item.getRecipe().length; i++)
+        {
+            System.out.println(item.getRecipe()[i]);
+        }
+        //creating a new line
+        System.out.println();
+
+        // Removing items from recipe:
+        System.out.println("Removing items from recipe:");
+        item.removeFromRecipe("Escargot");
+
+        // Printing recipe:
+        System.out.println("New Recipe: ");
+        for (int i = 0; i < item.getRecipe().length; i++)
+        {
+            System.out.println(item.getRecipe()[i]);
+        }
+        //creating a new line
+        System.out.println();
+
+        // Demonstrating one-way access capabilities
+        System.out.println("Adding recipe from the accessor method:");
+        item.getRecipe()[2] = "Wine";
+
+        // Printing Recipe:
+        System.out.println("New Recipe: ");
+        for (int i = 0; i < item.getRecipe().length; i++)
+        {
+            System.out.println(item.getRecipe()[i]);
+        }
+        //creating a new line
+        System.out.println();
+
+        // Removing invalid items from recipe:
+        System.out.println("Attempting to remove invalid items from recipe:");
+        item.removeFromRecipe("Gasoline");
+        //creating a new line
+        System.out.println();
+
+        // Clearing recipe:
+        System.out.println("Clearing Recipe: ");
+        item.clearRecipe();
+
+        // Printing recipe:
+        System.out.println("New Recipe: ");
+        for (int i = 0; i < item.getRecipe().length; i++)
+        {
+            System.out.println(item.getRecipe()[i]);
+        }
+        //creating a new line
+        System.out.println();
+
+        //Testing Drink Class
+        System.out.println("Testing Drink Class: ");
+        Drink classicCappuccino = new Drink("Cappuccino Classico", 3.99, "small", true);
+        classicCappuccino.addToRecipe("Double Espresso");
+        classicCappuccino.addToRecipe("Milk");
+        classicCappuccino.addToRecipe("Milk Foam");
+        classicCappuccino.setVolume(8);
+
+        for (int i = 0; i < classicCappuccino.getRecipe().length; i++)
+        {
+            System.out.println(classicCappuccino.getRecipe()[i]);
+        }
+
+        System.out.println(classicCappuccino + ", " + classicCappuccino.getVolume() + " oz.");
+
+        // ********** TESTING INGREDIENT CLASS ***********
+        System.out.println("\n\nMaking a new ingredient: \n");
+        Ingredient heavyCream = new Ingredient("Heavy Cream", 5.99, "March 12", true, true, false, false, false);
+
+        System.out.println("Ingredient name: " + heavyCream.getName());
+        System.out.println("Ingredient price: " + heavyCream.getUnitPrice());
+        System.out.println("Ingredient Expiry Date: " + heavyCream.getExpirationDate());
+        System.out.println("Ingredient is Liquid? " + heavyCream.getLiquid());
+        System.out.println("Ingredient is Organic? " + heavyCream.getOrganic());
+        System.out.println("Ingredient has Caffeine? " + heavyCream.getCaffeine());
+        System.out.println("Ingredient has Gluten? " + heavyCream.getGluten());
+        System.out.println("Ingredient is Vegan Friendly? " + heavyCream.getVeganFriendly());
+
+        // Testing Ingredient Mutators
+
+        System.out.println("\nTesting Ingredient Setter Methods: \n");
+        heavyCream.setName("Instant Coffee Mix");
+        heavyCream.setUnitPrice(8.79);
+        heavyCream.setExpirationDate("April 15");
+        heavyCream.setLiquid(false);
+        heavyCream.setOrganic(false);
+        heavyCream.setCaffeine(true);
+        heavyCream.setGluten(true);
+        heavyCream.setVeganFriendly(true);
+
+        // Printing Changed Information:
+
+        System.out.println("Ingredient name: " + heavyCream.getName());
+        System.out.println("Ingredient price: " + heavyCream.getUnitPrice());
+        System.out.println("Ingredient Expiry Date: " + heavyCream.getExpirationDate());
+        System.out.println("Ingredient is Liquid? " + heavyCream.getLiquid());
+        System.out.println("Ingredient is Organic? " + heavyCream.getOrganic());
+        System.out.println("Ingredient has Caffeine? " + heavyCream.getCaffeine());
+        System.out.println("Ingredient has Gluten? " + heavyCream.getGluten());
+        System.out.println("Ingredient is Vegan Friendly? " + heavyCream.getVeganFriendly());
+
+
+
+
+
 
 
 
