@@ -22,31 +22,20 @@ public class ArrayMenu {
         displayItems(items);
 
 
-        public static void displayItems (String[]items){
-            if (items.length == 0) {
-                System.out.println("No items added right now");
-                return;
-            }
 
-
-            for (String item : items) {
-                System.out.println(item);
-            }
-        }
 
 
         Scanner scanner = new Scanner(System.in);
         while (true) {
-            System.out.println("""
-                    1. Get value at index //inputs index and returns  the item menu
-                    2. Enter menu item and quantity //-enter the item menu and quanity
-                    3. Find index of value //-will find the index of what item is inputted
-                    4. Print all values //-print the menu
-                    5. Delete value at index //-will delete the item and quanity
-                    6. Restock item //- replaces the quantity
-                    7. Shrink array //-not inputted yet
-                    8. Quit
-                    """);
+            System.out.println("1. Get value at index"); //inputs index and returns  the item menu
+            System.out.println("2. Enter menu item and quantity"); //-enter the item menu and quanity
+            System.out.println("3. Find index of value"); //-will find the index of what item is inputted
+            System.out.println("4. Print all values"); //-print the menu
+            System.out.println("5. Delete value at index"); //-will delete the item and quanity
+            System.out.println("6. Restock item"); //- replaces the quantity
+            System.out.println("7. Shrink array"); //- Not inputted yet
+            System.out.println("8. Quit");
+
             System.out.print("Enter choice: ");
             String choice = scanner.nextLine();
             switch (choice) {
@@ -78,6 +67,18 @@ public class ArrayMenu {
                     System.out.println("Invalid choice, try again");
                     break;
             }
+        }
+    }
+
+    public static void displayItems (String[] items){
+        if (items.length == 0) {
+            System.out.println("No items added right now");
+            return;
+        }
+
+
+        for (String item : items) {
+            System.out.println(item);
         }
     }
 
