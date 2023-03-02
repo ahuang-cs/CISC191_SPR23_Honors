@@ -138,6 +138,20 @@ public class Client {
 
         System.out.println(classicCappuccino + ", " + classicCappuccino.getVolume() + " oz.");
 
+        // ********** TESTING INGREDIENT CLASS ***********
+        System.out.println("\n\nMaking a new ingredient: \n");
+        Ingredient heavyCream = new Ingredient("Heavy Cream", 5.99, "March 12", true, true, false, false, false);
+
+        System.out.println("Ingredient name: " + heavyCream.getName());
+        System.out.println("Ingredient price: " + heavyCream.getUnitPrice());
+        System.out.println("Ingredient Expiry Date: " + heavyCream.getExpirationDate());
+        System.out.println("Ingredient is Liquid? " + heavyCream.getLiquid());
+        System.out.println("Ingredient is Organic? " + heavyCream.getOrganic());
+        System.out.println("Ingredient has Caffeine? " + heavyCream.getCaffeine());
+        System.out.println("Ingredient has Gluten? " + heavyCream.getGluten());
+        System.out.println("Ingredient is Vegan Friendly? " + heavyCream.getVeganFriendly());
+
+
 
 
 
