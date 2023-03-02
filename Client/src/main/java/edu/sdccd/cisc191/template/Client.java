@@ -151,6 +151,29 @@ public class Client {
         System.out.println("Ingredient has Gluten? " + heavyCream.getGluten());
         System.out.println("Ingredient is Vegan Friendly? " + heavyCream.getVeganFriendly());
 
+        // Testing Ingredient Mutators
+
+        System.out.println("\nTesting Ingredient Setter Methods: \n");
+        heavyCream.setName("Instant Coffee Mix");
+        heavyCream.setUnitPrice(8.79);
+        heavyCream.setExpirationDate("April 15");
+        heavyCream.setLiquid(false);
+        heavyCream.setOrganic(false);
+        heavyCream.setCaffeine(true);
+        heavyCream.setGluten(true);
+        heavyCream.setVeganFriendly(true);
+
+        // Printing Changed Information:
+
+        System.out.println("Ingredient name: " + heavyCream.getName());
+        System.out.println("Ingredient price: " + heavyCream.getUnitPrice());
+        System.out.println("Ingredient Expiry Date: " + heavyCream.getExpirationDate());
+        System.out.println("Ingredient is Liquid? " + heavyCream.getLiquid());
+        System.out.println("Ingredient is Organic? " + heavyCream.getOrganic());
+        System.out.println("Ingredient has Caffeine? " + heavyCream.getCaffeine());
+        System.out.println("Ingredient has Gluten? " + heavyCream.getGluten());
+        System.out.println("Ingredient is Vegan Friendly? " + heavyCream.getVeganFriendly());
+
 
 
 

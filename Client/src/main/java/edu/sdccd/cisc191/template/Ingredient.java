@@ -116,6 +116,83 @@ public class Ingredient
     }
 
 
+    /**
+     * This method changes the name of this ingredient.
+     * @param name The new name for the ingredient.
+     */
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    /**
+     * This method sets the unit price of an ingredient.
+     * @param newPrice The new price per unit of ingredient.
+     */
+    public void setUnitPrice(double newPrice)
+    {
+        this.unitPrice = newPrice;
+    }
+
+    /**
+     * This method changes the expiration date of an ingredient.
+     * TODO: Determine an agreed upon format for date management (Data type, MM/DD/YYYY, etc.)
+     * @param expirationDate The new expiration date of the ingredient.
+     */
+    public void setExpirationDate(String expirationDate)
+    {
+        this.expirationDate = expirationDate;
+    }
+
+    /**
+     * Thie method specifies whether the ingredient is a liquid.
+     * @param isLiquid Input true if the ingredient is a liquid, false otherwise.
+     */
+    public void setLiquid(boolean isLiquid)
+    {
+        this.isLiquid = isLiquid;
+    }
+
+    /**
+     * This method specifies whether the ingredient is organic.
+     * @param isOrganic Input true if the ingredient is organic, false otherwise.
+     */
+    public void setOrganic(boolean isOrganic)
+    {
+        this.isOrganic = isOrganic;
+    }
+
+    /**
+     * This method specifies whether the ingredient has caffeine.
+     * @param hasCaffeine Input true if the ingredient has caffeine, false otherwise.
+     */
+    public void setCaffeine(boolean hasCaffeine)
+    {
+        this.hasCaffeine = hasCaffeine;
+    }
+
+    /**
+     * This method specifies whether the ingredient has gluten.
+     * @param hasGluten Input true if the ingredient has gluten, false otherwise.
+     */
+    public void setGluten(boolean hasGluten)
+    {
+        this.hasGluten = hasGluten;
+    }
+
+    /**
+     * This methhod specifies whether the ingredient is vegan friendly (contains no animal products).
+     * @param veganFriendly Input true if the ingredient uses no animal products, false otherwise.
+     */
+    public void setVeganFriendly(boolean veganFriendly)
+    {
+        this.veganFriendly = veganFriendly;
+    }
+
+
+
+
+
 
 
 
