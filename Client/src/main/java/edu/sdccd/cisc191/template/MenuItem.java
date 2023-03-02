@@ -21,6 +21,11 @@ import java.util.ArrayList;     // Allows for dynamic resizing of arrays
     We'll probably want our INGREDIENT class to have a null ingredient in order to allow for future stuff.
 
 
+    Ingredient idea:
+        Allowed Ingredients List
+
+
+
 
     TODO:   Create functional MenuItem Class
             Add subclasses of MenuItem
