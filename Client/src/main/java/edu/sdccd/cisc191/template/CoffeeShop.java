@@ -14,24 +14,21 @@ import java.util.Scanner;
 
 public class CoffeeShop extends Application {
 
-    Stage window;
-    Scene scene1, scene2;
-
-
     static ArrayList<String> itemName = new ArrayList<>(Arrays.asList("Coffee\t", "Donut\t", "Tea\t\t", "Cake\t", "Croissant", "Juice\t"));  // initialize an empty array
     static ArrayList<Integer> itemQuantity = new ArrayList<>(Arrays.asList(10, 25, 30, 16, 20, 15));
+    /*
     static final String[][] navMenu = new String[][] {  {"1","Display the menu"},
                                                         {"2", "Add item quantity"},
                                                         {"3", "Subtract item quantity"},
                                                         {"4", "Quit" }};
-
+    */
     public static void main(String[] args) {
         //if its the users first time using the program,we can make a method where if the array length
         //is less than 0, it would print out "no items added right now"
        launch(args);
 
     }
-
+/*
    static void displayMenu() {
         System.out.println("**************INVENTORY************");
         for (int i = 0; i < navMenu.length; i++) {
@@ -46,7 +43,7 @@ public class CoffeeShop extends Application {
        // int choice = scanner.nextInt();
        // return choice;
     }
-
+*/
     static void printAll() {
         System.out.println("Index\t" + "Name\t\t" + "Quantity\t" + "Note");
         for (int i = 0; i < itemName.size(); i++) {
