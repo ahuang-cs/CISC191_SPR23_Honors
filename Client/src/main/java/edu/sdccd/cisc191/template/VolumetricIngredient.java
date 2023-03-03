@@ -1,5 +1,13 @@
 package edu.sdccd.cisc191.template;
 
+/*
+ * This class is a subclass of Ingredient.java
+ *
+ * It allows for the conversion between volumetric units.
+ *
+ * It has a subclass: Syrup.java
+ */
+
 public class VolumetricIngredient extends Ingredient
 {
     // ********** CONSTANTS *********
