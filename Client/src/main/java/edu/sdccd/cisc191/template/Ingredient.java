@@ -194,6 +194,22 @@ public class Ingredient
         this.veganFriendly = veganFriendly;
     }
 
+    /**
+     *  Setter method for the refrigerated variable.
+     * @param refrigerated Input true if it is refrigerated or false if it is not.
+     */
+    public void setRefrigerated(boolean refrigerated) {
+        this.refrigerated = refrigerated;
+    }
+
+    /**
+     *  Getter method for refrigerated status.
+     * @return If the ingredient is refrigerated
+     */
+    public boolean getRefrigerated(){
+        return(refrigerated);
+    }
+
 
 
 
