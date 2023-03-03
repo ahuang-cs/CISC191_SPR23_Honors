@@ -15,6 +15,7 @@ public class Ingredient
     private boolean hasCaffeine;        // True if ingredient has caffeine, false otherwise
     private boolean hasGluten;          // True if ingredient has gluten, false otherwise
     private boolean veganFriendly;      // True if ingredient has no animal products, false if otherwise
+    private boolean refrigerated;
 
     // ********** END OF CLASS FIELDS **********
 
@@ -29,6 +30,7 @@ public class Ingredient
         this.hasCaffeine = false;
         this.hasGluten = false;
         this.veganFriendly = false;
+        this.refrigerated = false;
     }
     
     // Name-Only Constructor
@@ -38,7 +40,6 @@ public class Ingredient
         // Unknown values for other parameters,  set all fields to specified empty / null values
         this.unitPrice = 0.00;
         this.expirationDate = "";
-        this.isLiquid = false;
         this.isOrganic = false;
         this.hasCaffeine = false;
         this.hasGluten = false;
@@ -155,15 +156,6 @@ public class Ingredient
     public void setExpirationDate(String expirationDate)
     {
         this.expirationDate = expirationDate;
-    }
-
-    /**
-     * This method specifies whether the ingredient is a liquid.
-     * @param isLiquid Input true if the ingredient is a liquid, false otherwise.
-     */
-    public void setLiquid(boolean isLiquid)
-    {
-        this.isLiquid = isLiquid;
     }
 
     /**
