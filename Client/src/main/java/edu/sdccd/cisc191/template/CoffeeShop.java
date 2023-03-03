@@ -30,27 +30,6 @@ public class CoffeeShop extends Application {
         //is less than 0, it would print out "no items added right now"
        launch(args);
 
-//        int option = 0;
-//        while (true) {
-//            option = displayMenu();
-//            switch (option) {
-//                case 1:
-//                    printAll(); //Display the items
-//                    break;
-//                case 2:
-//                    addQuantity(); //add to the item quantity
-//                    break;
-//                case 3:
-//                    subtractQuantity(); //subtract the item quantity
-//                    break;
-//                case 4:
-//                    System.out.println("Exiting...");
-//                    System.exit(0);
-//                default:
-//                    System.out.println("Invalid choice, try again");
-//                    break;
-//            }
-//        }
     }
 
    static void displayMenu() {
@@ -139,37 +118,35 @@ public class CoffeeShop extends Application {
         } catch (Exception e){
             e.printStackTrace();
         }
-
-
-
+    }
+}
 
 
 
 
         /*
-        Stage window = new Stage();
-        displayMenu();
-
-        //Button 1
-        Label label1 = new Label("Display Menu");
-        Button button1 = new Button("Display Menu");
-        button1.setOnAction(e -> printAll()); //window.setScene(scene2); );//When we click on the button, the scene changes to scene
-       // button1.setOnAction(e-> window.setScene(scene2));
-//        if(button1.isPressed()) {
-//           // window.setScene(scene2);
-//            System.out.println("yes");
+        //        int option = 0;
+//        while (true) {
+//            option = displayMenu();-=
+//            switch (option) {
+//                case 1:
+//                    printAll(); //Display the items
+//                    break;
+//                case 2:
+//                    addQuantity(); //add to the item quantity
+//                    break;
+//                case 3:
+//                    subtractQuantity(); //subtract the item quantity
+//                    break;
+//                case 4:
+//                    System.out.println("Exiting...");
+//                    System.exit(0);
+//                default:
+//                    System.out.println("Invalid choice, try again");
+//                    break;
+//            }
 //        }
 
-        Button button2 = new Button("Add item quantity");
-        button2.setOnAction(e-> addQuantity());
-        Button button3 = new Button("Subtract item quantity");
-        button3.setOnAction(e-> subtractQuantity());
-        Button button4 = new Button("Ingredient");
-        button4.setOnAction(e-> window.setScene(scene2));
-
-        //Layout 1 - children are laid out in vertical column
-        HBox layout1 = new HBox(20);
-        layout1.getChildren().addAll(button1,button2,button3,button4);
 
         scene1 = new Scene(layout1, 800, 400);
 
@@ -196,5 +173,3 @@ public class CoffeeShop extends Application {
         window.show();
 
          */
-    }
-}
