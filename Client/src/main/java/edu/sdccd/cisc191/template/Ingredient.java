@@ -1,5 +1,10 @@
 package edu.sdccd.cisc191.template;
 
+/*
+Stuff to add:
+    - Calories?
+ */
+
 public class Ingredient
 {
     // ********** CLASS FIELDS **********
@@ -27,9 +32,25 @@ public class Ingredient
         this.hasGluten = false;
         this.veganFriendly = false;
     }
+    
+    // Name-Only Constructor
+    public Ingredient(String name) {
+        this.name = name;
+        // Unknown values for other parameters,  set all fields to specified empty / null values
+        this.unitPrice = 0.00;
+        this.expirationDate = "";
+        this.isLiquid = false;
+        this.isOrganic = false;
+        this.hasCaffeine = false;
+        this.hasGluten = false;
+        this.veganFriendly = false;
+    }
 
 
-    // Constructor
+    
+
+
+    // Full ParameterConstructor
     public Ingredient(String name, double price, String expirationDate, boolean isLiquid, boolean isOrganic, boolean hasCaffeine, boolean hasGluten, boolean veganFriendly)
     {
         this.name = name;
