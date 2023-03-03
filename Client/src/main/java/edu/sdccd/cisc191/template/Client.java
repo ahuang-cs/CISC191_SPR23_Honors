@@ -174,6 +174,27 @@ public class Client {
         System.out.println("Ingredient has Gluten? " + heavyCream.getGluten());
         System.out.println("Ingredient is Vegan Friendly? " + heavyCream.getVeganFriendly());
 
+        // Testing CountedIngredient Class
+        System.out.println("\nCreating a new Counted Ingredient... ");
+        CountedIngredient eggs = new CountedIngredient("Eggs", 12);
+
+        System.out.println("Ingredient Name: " + eggs.getName());
+        System.out.println("Ingredient Amount: " + eggs.getQuantity());
+
+        System.out.println("Adding two eggs...");
+        eggs.addQuantity(2);
+        System.out.println("Ingredient Amount: " + eggs.getQuantity());
+
+        System.out.println("Removing six eggs...");
+        eggs.removeQuantity(6);
+        System.out.println("Ingredient Amount: " + eggs.getQuantity());
+
+        System.out.println("Removing all eggs...");
+        eggs.setQuantity(0);
+        System.out.println("Ingredient Amount: " + eggs.getQuantity());
+
+
+
 
 
 
