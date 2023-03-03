@@ -145,7 +145,7 @@ public class Ingredient
     }
 
     /**
-     * Thie method specifies whether the ingredient is a liquid.
+     * This method specifies whether the ingredient is a liquid.
      * @param isLiquid Input true if the ingredient is a liquid, false otherwise.
      */
     public void setLiquid(boolean isLiquid)
@@ -181,7 +181,7 @@ public class Ingredient
     }
 
     /**
-     * This methhod specifies whether the ingredient is vegan friendly (contains no animal products).
+     * This method specifies whether the ingredient is vegan friendly (contains no animal products).
      * @param veganFriendly Input true if the ingredient uses no animal products, false otherwise.
      */
     public void setVeganFriendly(boolean veganFriendly)
