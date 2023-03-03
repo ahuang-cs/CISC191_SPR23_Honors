@@ -11,7 +11,6 @@ public class Ingredient
     private String name;                // The name of the ingredient
     private double unitPrice;           // The unit price of the ingredient
     private String expirationDate;      // The date at which this ingredient expires. (Perhaps change to shelf life?)
-    private boolean isLiquid;           // True if ingredient is liquid, false if solid / powder
     private boolean isOrganic;          // True if ingredient is organic, false otherwise
     private boolean hasCaffeine;        // True if ingredient has caffeine, false otherwise
     private boolean hasGluten;          // True if ingredient has gluten, false otherwise
@@ -26,7 +25,6 @@ public class Ingredient
         this.name = "";
         this.unitPrice = 0.00;
         this.expirationDate = "";
-        this.isLiquid = false;
         this.isOrganic = false;
         this.hasCaffeine = false;
         this.hasGluten = false;
@@ -34,7 +32,8 @@ public class Ingredient
     }
     
     // Name-Only Constructor
-    public Ingredient(String name) {
+    public Ingredient(String name)
+    {
         this.name = name;
         // Unknown values for other parameters,  set all fields to specified empty / null values
         this.unitPrice = 0.00;
@@ -44,24 +43,24 @@ public class Ingredient
         this.hasCaffeine = false;
         this.hasGluten = false;
         this.veganFriendly = false;
+        this.refrigerated = false;
     }
 
 
     
 
 
-    // Full ParameterConstructor
-    public Ingredient(String name, double price, String expirationDate, boolean isLiquid, boolean isOrganic, boolean hasCaffeine, boolean hasGluten, boolean veganFriendly)
+    /* Full ParameterConstructor
+    public Ingredient(String name, double price, String expirationDate, boolean isOrganic, boolean hasCaffeine, boolean hasGluten, boolean veganFriendly)
     {
         this.name = name;
         this.unitPrice = price;
         this.expirationDate = expirationDate;
-        this.isLiquid = isLiquid;
         this.isOrganic = isOrganic;
         this.hasCaffeine = hasCaffeine;
         this.hasGluten = hasGluten;
         this.veganFriendly = veganFriendly;
-    }
+    } */
 
     /**
      * This method returns the name of an ingredient.
@@ -90,14 +89,7 @@ public class Ingredient
         return expirationDate;
     }
 
-    /**
-     * This method returns information regarding whether this ingredient is a liquid.
-     * @return True if the ingredient is a liquid, false otherwise.
-     */
-    public boolean getLiquid()
-    {
-        return isLiquid;
-    }
+
 
     /**
      * Returns whether the ingredient is organic.
