@@ -13,7 +13,7 @@
             <Font name="Didot" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="addItem" alignment="CENTER" contentDisplay="CENTER" layoutX="141.0" layoutY="68.0" mnemonicParsing="false" onAction="#addItemQuantity" onMouseClicked="#addItemQuantity" text="Add Item Quantity" textAlignment="CENTER">
+      <Button fx:id="addItem" alignment="CENTER" contentDisplay="CENTER" layoutX="141.0" layoutY="68.0" mnemonicParsing="false" onAction="#addItemQuantity" text="Add Item Quantity" textAlignment="CENTER">
          <font>
             <Font name="Didot" size="16.0" />
          </font>

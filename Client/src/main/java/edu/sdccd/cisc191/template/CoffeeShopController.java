@@ -8,13 +8,13 @@ import java.util.Scanner;
 
 public class CoffeeShopController extends CoffeeShop {
 
-        public void displayMenu(ActionEvent a){
+        public void displayMenu(ActionEvent e){
                printAll();
         }
-        public void addItemQuantity(ActionEvent a) {
+        public void addItemQuantity(ActionEvent e) {
                 addQuantity();
         }
-        public void removeItemQuantity(ActionEvent a) {
+        public void removeItemQuantity(ActionEvent e) {
                 subtractQuantity();
         }
         public void displayIngredients(ActionEvent e){

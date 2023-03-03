@@ -16,6 +16,7 @@ public class CoffeeShop extends Application {
 
     static ArrayList<String> itemName = new ArrayList<>(Arrays.asList("Coffee\t", "Donut\t", "Tea\t\t", "Cake\t", "Croissant", "Juice\t"));  // initialize an empty array
     static ArrayList<Integer> itemQuantity = new ArrayList<>(Arrays.asList(10, 25, 30, 16, 20, 15));
+
     /*
     static final String[][] navMenu = new String[][] {  {"1","Display the menu"},
                                                         {"2", "Add item quantity"},
@@ -25,25 +26,26 @@ public class CoffeeShop extends Application {
     public static void main(String[] args) {
         //if its the users first time using the program,we can make a method where if the array length
         //is less than 0, it would print out "no items added right now"
-       launch(args);
+        launch(args);
 
     }
-/*
-   static void displayMenu() {
-        System.out.println("**************INVENTORY************");
-        for (int i = 0; i < navMenu.length; i++) {
-            for (int j = 0; j < navMenu[i].length; j++) {
-                System.out.print((navMenu[i][j]) + "\t");
+
+    /*
+       static void displayMenu() {
+            System.out.println("**************INVENTORY************");
+            for (int i = 0; i < navMenu.length; i++) {
+                for (int j = 0; j < navMenu[i].length; j++) {
+                    System.out.print((navMenu[i][j]) + "\t");
+                }
+                System.out.print("\n");
             }
-            System.out.print("\n");
+            System.out.println("********************************\n");
+            System.out.println("Enter choice");
+            //Scanner scanner = new Scanner(System.in);
+           // int choice = scanner.nextInt();
+           // return choice;
         }
-        System.out.println("********************************\n");
-        System.out.println("Enter choice");
-        //Scanner scanner = new Scanner(System.in);
-       // int choice = scanner.nextInt();
-       // return choice;
-    }
-*/
+    */
     static void printAll() {
         System.out.println("Index\t" + "Name\t\t" + "Quantity\t" + "Note");
         for (int i = 0; i < itemName.size(); i++) {
@@ -74,7 +76,7 @@ public class CoffeeShop extends Application {
             System.out.println("Invalid index. Please try again!");
         }
         //exception handling with the input which is not a number
-        catch(InputMismatchException ime) {
+        catch (InputMismatchException ime) {
             System.out.println("Your input is invalid, please try again");
         }
     }
@@ -89,16 +91,16 @@ public class CoffeeShop extends Application {
             System.out.print("Enter the quantity you would like to subtract: ");
             Scanner scanner2 = new Scanner(System.in);
             int quantity = scanner2.nextInt();
-            while ((quantity < 0) || quantity > itemQuantity.get(item - 1)){
+            if ((quantity < 0) || quantity > itemQuantity.get(item - 1)) {
                 System.out.println("Invalid value. Please try again or press 0 to go back to the inventory");
-                quantity = scanner2.nextInt();}
+                quantity = scanner2.nextInt();
+            }
             itemQuantity.set(item - 1, itemQuantity.get(item - 1) - quantity); //set the value at index of item-1
-
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
             System.out.println("Invalid index. Please try again!");
         }
         //exception handling with the input which is not a number
-        catch(InputMismatchException ime) {
+        catch (InputMismatchException ime) {
             System.out.println("Your input is invalid, please try again");
         }
     }
@@ -112,7 +114,7 @@ public class CoffeeShop extends Application {
             Scene scene = new Scene(shopMenu);
             stage.setScene(scene);
             stage.show();
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
