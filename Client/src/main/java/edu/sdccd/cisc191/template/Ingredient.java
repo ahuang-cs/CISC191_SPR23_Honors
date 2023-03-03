@@ -15,7 +15,7 @@ public class Ingredient
     private boolean hasCaffeine;        // True if ingredient has caffeine, false otherwise
     private boolean hasGluten;          // True if ingredient has gluten, false otherwise
     private boolean veganFriendly;      // True if ingredient has no animal products, false if otherwise
-    private boolean refrigerated;
+    private boolean refrigerated;       // True if ingredient needs to be refrigerated, false if otherwise
 
     // ********** END OF CLASS FIELDS **********
 

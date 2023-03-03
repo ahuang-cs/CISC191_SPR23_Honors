@@ -190,6 +190,10 @@ public class Client {
         eggs.setQuantity(0);
         System.out.println("Ingredient Amount: " + eggs.getQuantity());
 
+        System.out.println("Refrigeration... " + eggs.getRefrigerated());
+        eggs.setRefrigerated(true);
+        System.out.println("Refrigeration... " + eggs.getRefrigerated());
+
 
 
 
