@@ -17,12 +17,6 @@ public class CoffeeShop extends Application {
     static ArrayList<String> itemName = new ArrayList<>(Arrays.asList("Coffee\t", "Donut\t", "Tea\t\t", "Cake\t", "Croissant", "Juice\t"));  // initialize an empty array
     static ArrayList<Integer> itemQuantity = new ArrayList<>(Arrays.asList(10, 25, 30, 16, 20, 15));
 
-    /*
-    static final String[][] navMenu = new String[][] {  {"1","Display the menu"},
-                                                        {"2", "Add item quantity"},
-                                                        {"3", "Subtract item quantity"},
-                                                        {"4", "Quit" }};
-    */
     public static void main(String[] args) {
         //if its the users first time using the program,we can make a method where if the array length
         //is less than 0, it would print out "no items added right now"
@@ -30,22 +24,6 @@ public class CoffeeShop extends Application {
 
     }
 
-    /*
-       static void displayMenu() {
-            System.out.println("**************INVENTORY************");
-            for (int i = 0; i < navMenu.length; i++) {
-                for (int j = 0; j < navMenu[i].length; j++) {
-                    System.out.print((navMenu[i][j]) + "\t");
-                }
-                System.out.print("\n");
-            }
-            System.out.println("********************************\n");
-            System.out.println("Enter choice");
-            //Scanner scanner = new Scanner(System.in);
-           // int choice = scanner.nextInt();
-           // return choice;
-        }
-    */
     static void printAll() {
         System.out.println("Index\t" + "Name\t\t" + "Quantity\t" + "Note");
         for (int i = 0; i < itemName.size(); i++) {
@@ -122,53 +100,3 @@ public class CoffeeShop extends Application {
 
 
 
-
-        /*
-        //        int option = 0;
-//        while (true) {
-//            option = displayMenu();-=
-//            switch (option) {
-//                case 1:
-//                    printAll(); //Display the items
-//                    break;
-//                case 2:
-//                    addQuantity(); //add to the item quantity
-//                    break;
-//                case 3:
-//                    subtractQuantity(); //subtract the item quantity
-//                    break;
-//                case 4:
-//                    System.out.println("Exiting...");
-//                    System.exit(0);
-//                default:
-//                    System.out.println("Invalid choice, try again");
-//                    break;
-//            }
-//        }
-
-
-        scene1 = new Scene(layout1, 800, 400);
-
-        //Button 5, 6, 7, 8 in scene2
-        Button button5 = new Button("Back");
-        button5.setOnAction(e -> window.setScene(scene1));//When we click on the button, the scene changes to scene 1
-        Button button6 = new Button("Drink");
-       // button6.setOnAction(e -> new Drink());
-        Button button7 = new Button("Pastry");
-       // button7.setOnAction(e -> new Pastry());
-        Button button8 = new Button("exit");
-        button8.setOnAction(e -> window.close());
-
-        //Layout 2
-        Stage window2 = new Stage();
-        VBox layout2 = new VBox (20);
-        layout2.getChildren().addAll(button5,button6,button7,button8);
-
-        scene2 = new Scene(layout2,600, 300);
-
-        window.setScene(scene1);
-        window2.setScene(scene2);
-        window.setTitle("SDCCD CAFETERIA");
-        window.show();
-
-         */
