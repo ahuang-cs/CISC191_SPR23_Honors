@@ -24,6 +24,8 @@ Example:
                     -Vanilla
                     -Carmel
                     -Sweet Cream
+
+    TODO: Move all inner classes into separate class files which extend Coffee.
  */
 //Created a class for Coffee
 public class Coffee extends Drink{
