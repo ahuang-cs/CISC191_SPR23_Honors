@@ -61,80 +61,78 @@ public class Client {
         //creating a new line
         System.out.println();
 
+
+        Ingredient flour = new Ingredient ("Flour");
+        Ingredient sugar = new Ingredient ("Sugar");
+        Ingredient water = new Ingredient ("Water");
+        Ingredient escargot = new Ingredient ("Escargot");
+        Ingredient egg =  new Ingredient ("Egg");
+
         // Adding stuff to the recipe.
         System.out.println("Adding stuff to the recipe...");
-        item.addToRecipe("Flour");
-        item.addToRecipe("Flour");  //To test that you cannot add two of the same ingredient
-        item.addToRecipe("Sugar");
-        item.addToRecipe("Water");
-        item.addToRecipe("Escargot");
-        item.addToRecipe("Eggs");
+        Recipe itemRecipe = new Recipe(new Ingredient[]{
+                flour,
+                flour,
+                sugar,
+                water,
+                escargot,
+                egg
+        });
 
-        // Printing recipe
-        for (int i = 0; i < item.getRecipe().length; i++)
-        {
-            System.out.println(item.getRecipe()[i]);
-        }
+        item.setRecipe(itemRecipe);
+        itemRecipe.printIngredientList();
+
         //creating a new line
         System.out.println();
 
         // Removing items from recipe:
         System.out.println("Removing items from recipe:");
-        item.removeFromRecipe("Escargot");
+        item.getRecipe().removeIngredient(escargot);
 
-        // Printing recipe:
-        System.out.println("New Recipe: ");
-        for (int i = 0; i < item.getRecipe().length; i++)
-        {
-            System.out.println(item.getRecipe()[i]);
-        }
+        itemRecipe.printIngredientList();
+
         //creating a new line
         System.out.println();
 
         // Demonstrating one-way access capabilities
         System.out.println("Adding recipe from the accessor method:");
-        item.getRecipe()[2] = "Wine";
+        item.getRecipe().addIngredient(new Ingredient ("Wine"));
 
-        // Printing Recipe:
-        System.out.println("New Recipe: ");
-        for (int i = 0; i < item.getRecipe().length; i++)
-        {
-            System.out.println(item.getRecipe()[i]);
-        }
+        itemRecipe.printIngredientList();
+
         //creating a new line
         System.out.println();
 
         // Removing invalid items from recipe:
         System.out.println("Attempting to remove invalid items from recipe:");
-        item.removeFromRecipe("Gasoline");
+        itemRecipe.removeIngredient(new Ingredient ("Gasoline"));
+
         //creating a new line
         System.out.println();
 
         // Clearing recipe:
         System.out.println("Clearing Recipe: ");
-        item.clearRecipe();
+        itemRecipe.clearIngredients();
 
-        // Printing recipe:
-        System.out.println("New Recipe: ");
-        for (int i = 0; i < item.getRecipe().length; i++)
-        {
-            System.out.println(item.getRecipe()[i]);
-        }
+        itemRecipe.printIngredientList();
+
         //creating a new line
         System.out.println();
 
         //Testing Drink Class
         System.out.println("Testing Drink Class: ");
-        Drink classicCappuccino = new Drink("Cappuccino Classico", 3.99, "small", true);
-        classicCappuccino.addToRecipe("Double Espresso");
-        classicCappuccino.addToRecipe("Milk");
-        classicCappuccino.addToRecipe("Milk Foam");
+
+        Ingredient[] classicCappuccinoIngredients = {
+                new Ingredient("Coffee"),
+                new Ingredient("Milk"),
+                new Ingredient("Milk Foam")
+        };
+
+        Drink classicCappuccino = new Drink("Cappuccino Classico", 3.99, Size.small, true);
+        classicCappuccino.setRecipe(new Recipe(classicCappuccinoIngredients));
+        classicCappuccino.getRecipe().printIngredientList();
         classicCappuccino.setVolume(8);
 
-        for (int i = 0; i < classicCappuccino.getRecipe().length; i++)
-        {
-            System.out.println(classicCappuccino.getRecipe()[i]);
-        }
 
         System.out.println(classicCappuccino + ", " + classicCappuccino.getVolume() + " oz.");
 

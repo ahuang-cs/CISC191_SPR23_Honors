@@ -48,7 +48,7 @@ public class Coffee extends Drink{
          * @param milk The type of milk used in the drink.
          * @param drizzle The type of drizzle used on the drink.
          */
-        public Coffee(String name, double price, String size, boolean isHot, String creamer, String milk, String drizzle)
+        public Coffee(String name, double price, Size size, boolean isHot, String creamer, String milk, String drizzle)
         {
              super(name, price, size, isHot);
              this.creamer = creamer;

@@ -17,8 +17,9 @@ public class Recipe {
    public Recipe(Ingredient[] ingredients){
        // Iterates over array.
         for (int i =0; i < ingredients.length; i++) {
+
             // Adds ingredients to ingredients.
-            this.ingredients.add(ingredients[i]);
+            addIngredient(ingredients[i]);
 
        }
     }
@@ -39,6 +40,28 @@ public class Recipe {
     }
 
     /**
+     * Prints ingredient list.
+     */
+    public void printIngredientList() {
+        for (int i = 0; i < ingredients.size(); i++)
+        {
+            System.out.println(ingredients.get(i).getName());
+        }
+    }
+
+    /**
+     *  Add an array of ingredients.
+     * @param ingredients
+     */
+    public void addIngredients(Ingredient[] ingredients){
+        // Iterates over array.
+        for (int i =0; i < ingredients.length; i++) {
+            // Adds ingredients to ingredients.
+            this.ingredients.add(ingredients[i]);
+
+        }
+    }
+    /**
      * Removes an ingredient to the recipe list, avoids removing an ingredient if it is not in the list.
      * @param ingredient the ingredient to remove.
      */
@@ -55,7 +78,13 @@ public class Recipe {
      * @return
      */
     public ArrayList<Ingredient> getIngredientList(){
-        return this.ingredients;
+        return ingredients;
     }
+
+    public void clearIngredients()
+    {
+        ingredients.clear();
+    }
+
 
 }
