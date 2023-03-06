@@ -120,7 +120,7 @@ public class Drink extends MenuItem {
     {
         return isHot;
     }
-    
+
 
     /**
      * String representation of this drink object.
