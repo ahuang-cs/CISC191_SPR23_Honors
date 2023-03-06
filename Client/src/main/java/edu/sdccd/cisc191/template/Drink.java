@@ -30,10 +30,15 @@ package edu.sdccd.cisc191.template;
                      -Coconut
  */
 
-
+/**
+ * An enumeration to determine an objects size.
+ */
+enum Size {
+     small, medium, large
+}
 public class Drink extends MenuItem {
 
-    private String size;        // Drink size (Small, Medium, Large)
+    private Size size;        // Drink size (Small, Medium, Large)
     private int volume;         // Number of ounces that this drink contains.
     private boolean isHot;      // Whether the drink is hot (true) or cold (false).
 
@@ -41,7 +46,7 @@ public class Drink extends MenuItem {
     public Drink()
     {
         super();
-        this.size = "small";
+        this.size = Size.small;
         this.isHot = false;
     }
 
@@ -51,7 +56,7 @@ public class Drink extends MenuItem {
      * @param size The size of the drink (Small, Medium, Large)
      * @param isHot Whether the drink is hot (true) or cold (false).
      */
-    public Drink(String name, double salePrice, String size, boolean isHot){
+    public Drink(String name, double salePrice, Size size, boolean isHot){
         super(name, salePrice);
         this.size = size;
         this.isHot = isHot;
@@ -61,7 +66,7 @@ public class Drink extends MenuItem {
      * This method changes the size of the drink to a specified value (Small, Medium, Large).
      * @param newSize The new value for the size.
      */
-    public void setSize(String newSize)
+    public void setSize(Size newSize)
     {
         // TODO:    Validate user input for acceptable values (small, medium, large, etc.) (FOR REVIEW)
         //          Discard other values and throw error.
@@ -93,7 +98,7 @@ public class Drink extends MenuItem {
      * This method returns the size of a drink object.
      * @return The size of a drink object (Small, Medium, Large, etc.)
      */
-    public String getSize()
+    public Size getSize()
     {
         return size;
     }
@@ -115,11 +120,7 @@ public class Drink extends MenuItem {
     {
         return isHot;
     }
-
-
-
-
-
+    
 
     /**
      * String representation of this drink object.
