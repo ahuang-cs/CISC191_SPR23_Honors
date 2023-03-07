@@ -40,7 +40,7 @@ public class Client {
     public static void main(String[] args)
     {
         // Testing here (Will be deleted in future commit)
-        MenuItem item = new MenuItem();
+        Coffee item = new Coffee();
 
         // Testing default constructor:
         System.out.println("Default name: " + item.getName());
@@ -128,7 +128,7 @@ public class Client {
                 new Ingredient("Milk Foam")
         };
 
-        Drink classicCappuccino = new Drink("Cappuccino Classico", 3.99, Size.small, true);
+        Coffee classicCappuccino = new Coffee();
         classicCappuccino.setRecipe(new Recipe(classicCappuccinoIngredients));
         classicCappuccino.getRecipe().printIngredientList();
         classicCappuccino.setVolume(8);

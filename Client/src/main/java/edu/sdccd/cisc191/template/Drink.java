@@ -36,7 +36,7 @@ package edu.sdccd.cisc191.template;
 enum Size {
      small, medium, large
 }
-public class Drink extends MenuItem {
+public abstract class Drink extends MenuItem {
 
     private Size size;        // Drink size (Small, Medium, Large)
     private int volume;         // Number of ounces that this drink contains.

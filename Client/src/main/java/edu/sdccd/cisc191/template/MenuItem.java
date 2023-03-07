@@ -34,7 +34,7 @@ import java.util.ArrayList;     // Allows for dynamic resizing of arrays
 
 
 
-public class MenuItem
+public abstract class MenuItem
 {
     private String itemName;            // Name of this menuItem (Cannot be changed later)
     private double salePrice;           // Price of menu item
