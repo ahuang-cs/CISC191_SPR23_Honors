@@ -9,7 +9,7 @@ public interface CoffeeInterface {
     void makeIced(boolean hasMilk);
 }
 
-public class coffee extends Drink implements CoffeeInterface {
+class coffee implements CoffeeInterface {
 
     public void makeCoffee() {
         // implementation of our coffee recipe
