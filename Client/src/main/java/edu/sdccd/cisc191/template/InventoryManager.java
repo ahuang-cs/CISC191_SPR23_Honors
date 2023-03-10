@@ -101,6 +101,54 @@ public class InventoryManager
 
     // ******************** Ingredient Methods ********************
 
+    private int findIngredient(String target)
+    {
+        // Search ingredientList for an ingredient with a the name ingredientName.
+        // If it is found, return the index of the ingredient within ingredientList.
+        // If it is not found, return -1.
+
+
+        int targetIndex = 0;                            // Stores the index of the target ingredient.
+        String lowercaseTarget = target.toLowerCase();  // The target string in lowercase, to remove case sensitivity.
+
+
+        // Check whether ingredientList is empty
+        if (ingredientList.length == 0)
+        {
+            // If the ingredientList is empty, then the target cannot be present in the array.
+            targetIndex = -1;
+            return targetIndex;
+        }
+        else
+        {
+            // If there are elements in ingredientList, search each element.
+            for (int i = 0; i < ingredientList.length; i++)
+            {
+                // Compare each element with the target string.
+                if (lowercaseTarget.equals(ingredientList[i]))
+                {
+                    // If the target index matches this element, then we found our target.
+                    targetIndex = i;
+                    return targetIndex;
+                }
+            }
+
+            // If we've gone through all elements in the array without encountering the target, it isn't present.
+            targetIndex = -1;
+            return targetIndex;
+        }
+    }
+
+    public void addIngredient(String ingredient, int amount)
+    {
+        // If ingredient is not present in ingredientList, add it to ingredientList and create an inventory slot.
+        // If ingredient is present in ingredientList, add amount to the stored total.
+
+
+    }
+
+
+
     public String[] getIngredientList()
     {
         // Make a copy of ingredientList and return the copy to prevent unintentional edits to original array.
@@ -142,4 +190,18 @@ public class InventoryManager
     }
 
     // ******************** End of MenuItem Methods ********************
+
+
+
+    // ******************** Recipe Methods ********************
+
+    // ******************** End of Recipe Methods ********************
+
+
+
+    // ******************** Other Methods ********************
+
+
+
+    // ******************** End of Other Methods ********************
 }
