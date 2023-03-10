@@ -84,7 +84,7 @@ public class InventoryManager
     public InventoryManager()
     {
         // A new inventory should start with no ingredients or menuItems
-        ingredientList = new String[8];
+        ingredientList = new String[0];
         menuItemList = new MenuItem[0];
 
         // Initialize ingredientInventory and menuItemInventory arrays as 2D arrays with 2 columns

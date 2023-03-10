@@ -17,7 +17,9 @@ class InventoryManagerTest
         InventoryManager inventory = new InventoryManager();
 
         // A new InventoryManager object should have no ingredients, menu items, or recipes.
-
-
+        assertEquals(0, inventory.getIngredientList().length);
+        assertEquals(0, inventory.getMenuItemList().length);
     }
+
+
 }
