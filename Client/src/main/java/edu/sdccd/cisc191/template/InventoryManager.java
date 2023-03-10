@@ -111,7 +111,6 @@ public class InventoryManager
         int targetIndex = 0;                            // Stores the index of the target ingredient.
         String lowercaseTarget = target.toLowerCase();  // The target string in lowercase, to remove case sensitivity.
 
-
         // Check whether ingredientList is empty
         if (ingredientList.length == 0)
         {
@@ -144,7 +143,41 @@ public class InventoryManager
         // If ingredient is not present in ingredientList, add it to ingredientList and create an inventory slot.
         // If ingredient is present in ingredientList, add amount to the stored total.
 
+        // Make sure that the ingredient is already present in the array.
+        if (findIngredient(ingredient) == -1)
+        {
+            // The ingredient is not already present in the array; Space needs to be made.
 
+            // We cannot dynamically allocate space in these arrays, so we will move all data to a new, larger array
+            String[] newIngredientList = new String[ingredientList.length + 1];
+            int[][] newIngredientInventory = new int[ingredientList.length + 1][2];
+
+            // Copy all existing data to the new arrays.
+            for (int i = 0; i < ingredientList.length; i++)
+            {
+                newIngredientList[i] = ingredientList[i];
+                newIngredientInventory[i][0] = ingredientInventory[i][0];
+                newIngredientInventory[i][1] = ingredientInventory[i][0];
+            }
+
+            // Add the new ingredient in all lowercase to remove case sensitivity.
+            newIngredientList[newIngredientList.length - 1] = ingredient.toLowerCase();
+
+            // Map the index of the ingredient in the first element of the inventory row.
+            newIngredientInventory[newIngredientList.length - 1][0] = newIngredientList.length - 1;
+
+            // Store the amount of the ingredient in the second element of the inventory row.
+            newIngredientInventory[newIngredientList.length - 1][1] = amount;
+
+            // Replace the original arrays with the new arrays containing the new ingredient.
+            ingredientList = newIngredientList;
+            ingredientInventory = newIngredientInventory;
+
+        }
+        else
+        {
+            // The ingredient is not in the arra
+        }
     }
 
 

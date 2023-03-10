@@ -38,8 +38,8 @@ class InventoryManagerTest
         assertEquals(3, inventory.getIngredientList().length);
 
         // Test to ensure that the ingredientList array has been properly filled.
-        assertEquals("Flour", inventory.getIngredientList()[0]);
-        assertEquals("Coffee", inventory.getIngredientList()[1]);
-        assertEquals("Milk", inventory.getIngredientList()[2]);
+        assertEquals("flour", inventory.getIngredientList()[0]);
+        assertEquals("coffee", inventory.getIngredientList()[1]);
+        assertEquals("milk", inventory.getIngredientList()[2]);
     }
 }
