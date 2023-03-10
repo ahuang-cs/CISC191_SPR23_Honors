@@ -31,7 +31,7 @@ package edu.sdccd.cisc191.template;
  */
 
 
-public class Drink extends MenuItem {
+public class Drink extends MenuItem implements DrinksInterface {
 
     private String size;        // Drink size (Small, Medium, Large)
     private int volume;         // Number of ounces that this drink contains.

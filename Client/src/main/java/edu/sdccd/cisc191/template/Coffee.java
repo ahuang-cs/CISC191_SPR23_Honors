@@ -28,7 +28,7 @@ Example:
     TODO: Move all inner classes into separate class files which extend Coffee.
  */
 //Created a class for Coffee
-public class Coffee extends Drink{
+public class Coffee extends Drink implements CoffeeInterface{
         public String creamer;      //Flavor of Creamer(Hazelnut-Vanilla-Carmel-Sweet_Cream)
         public String milk;         //Alternate milk derivative(Almond-Coconut)
         public String drizzle;          //Flavor of drizzle(Vanilla-Carmel-Mocha)
@@ -58,7 +58,32 @@ public class Coffee extends Drink{
              this.drizzle = drizzle;
         }
 
-        //Created and inner Class for a Standard cup of coffee with the options of cream, sugar, black
+    @Override
+    public void makeCoffee() {
+
+    }
+
+    @Override
+    public void makeLatte(String espressoType, String milkType, boolean hasFoam, String flavor) {
+
+    }
+
+    @Override
+    public void makeCappuccino(int espresso, int steamedMilk, int foam, String flavor) {
+
+    }
+
+    @Override
+    public void makeFrozen(boolean isBlended, String flavor) {
+
+    }
+
+    @Override
+    public void makeIced(boolean hasMilk) {
+
+    }
+
+    //Created and inner Class for a Standard cup of coffee with the options of cream, sugar, black
         private class Standard extends Coffee{
                 private String roast;           //The type of roast of the Coffee being served
                 private boolean hasSugar;       //Determines if the coffee has sugars or not
