@@ -10,6 +10,9 @@ package edu.sdccd.cisc191.template;
  *  - int[][] ingredientInventory;  <-- Maps items from the ingredientList to the amount in stock
  *  - int[][] menuItemInventory;    <-- Maps items from the menuItemList to the amount in stock
  *  - int[][] recipeBook;           <-- Maps items from the ingredientList to each item on the menuItem list
+ *  - int numIngredients;           <-- The number of ingredients in ingredientList.
+ *  - int numMenuItems;             <-- The number of menu items in menuItemList.
+ *  - int maxRecipeLength;          <-- The number of ingredients in the longest recipe in recipeBook.
  *
  * Required Methods:
  * ********** INGREDIENT SPECIFIC METHODS **********
@@ -18,6 +21,9 @@ package edu.sdccd.cisc191.template;
  *  + void addIngredient(String ingredient, int amount);    <-- Adds ingredients to the ingredientList.
  *  + void deleteIngredient(String ingredient);             <-- Deletes an ingredient from ingredientList and recipes
  *  + void reduceIngredient(String ingredient, int amount); <-- Reduces the amount of an ingredient in ingredientList.
+ *
+ *  + String[] getIngredientList();                         <-- Returns a list of all ingredients in inventory
+ *  + int getIngredientAmount(String ingredient);           <-- Returns the amount of an ingredient in inventory
  * ********** END OF INGREDIENT SPECIFIC METHODS **********
  *
  * ********** MENUITEM SPECIFIC METHODS **********
@@ -25,12 +31,17 @@ package edu.sdccd.cisc191.template;
  *  + void setMenuItemAmount(String itemName, int amount);      <-- Directly sets the amount of an MenuItem.
  *  + void addMenuItem(MenuItem item, int amount);              <-- Adds ingredients to the menuItemList.
  *  + void deleteMenuItem(String itemName);                     <-- Deletes an MenuItem from menuItemList and recipes
- *  + void reduceMenuItem(String itemName, int amount);         <-- Reduces the amount of an MenuItem in menuItemList.
+ *  + void reduceMenuItem(String itemName, int amount);         <-- Reduces the amount of an MenuItem in menuItemList.4
+ *
+ *  + MenuItems[] getMenuItemList();                            <-- Returns a list of all menu items available.
+ *  + int getMenuItemAmount(String itemName);                   <-- Returns the amount of a menu item available.
  * ********** END OF MENUITEM SPECIFIC METHODS
  *
  * ********** RECIPE SPECIFIC METHODS **********
  *  + void addToRecipe(String itemName, String ingredient, int amount); <-- Adds an ingredient to a menuItem's recipe
  *  + void removeFromRecipe(String itemName, String ingredient);        <-- Removes an ingredient from menuItem recipe
+ *
+ *  + String[] getRecipe(String itemName);                              <-- Returns the recipe of a menu item.
  * ********** END OF RECIPE SPECIFIC METHODS **********
  *
  * ********** OTHER METHODS **********
@@ -49,8 +60,14 @@ public class InventoryManager
     // Holds a list of all ingredients as strings.
     private String[] ingredientList;
 
+    // Holds the number of ingredients in ingredientList.
+    private int numIngredients;
+
     // Holds a list of all menu items.
     private MenuItem[] menuItemList;
+
+    // Holds the number of menu items in menuItemList.
+    private int numMenuItems;
 
     // Maps all ingredients in ingredientList to the amount that is in storage.
     //      - Column 0 is ingredient index, column 1 is amount of that ingredient.
@@ -63,6 +80,11 @@ public class InventoryManager
     // Maps all MenuItems in MenuItemList to a set of ingredients in IngredientList.
     //      - Column 0 is the menuItem, odd and even columns alternate between ingredient index and amount.
     private int[][] recipeBook;
+
+    // Tracks the number of different ingredients in the longest recipe in recipeBook.
+    private int maxRecipeLength;
+
+
 
     // ******************** END OF DATA ********************
 
