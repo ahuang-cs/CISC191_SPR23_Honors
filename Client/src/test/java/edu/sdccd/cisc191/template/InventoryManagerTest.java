@@ -10,6 +10,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class InventoryManagerTest
 {
+
+    // Testing the InventoryManager constructor
     @Test
     void InventoryManagerConstructorTest()
     {
@@ -21,5 +23,23 @@ class InventoryManagerTest
         assertEquals(0, inventory.getMenuItemList().length);
     }
 
+    @Test
+    void addIngredientTest()
+    {
+        // Create a new InventoryManager object.
+        InventoryManager inventory = new InventoryManager();
 
+        // Add some test ingredients.
+        inventory.addIngredient("Flour", 8);
+        inventory.addIngredient("Coffee", 2);
+        inventory.addIngredient("Milk", 12);
+
+        // There should now be three ingredients in the ingredient array.
+        assertEquals(3, inventory.getIngredientList().length);
+
+        // Test to ensure that the ingredientList array has been properly filled.
+        assertEquals("Flour", inventory.getIngredientList()[0]);
+        assertEquals("Coffee", inventory.getIngredientList()[1]);
+        assertEquals("Milk", inventory.getIngredientList()[2]);
+    }
 }
