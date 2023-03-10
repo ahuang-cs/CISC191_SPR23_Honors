@@ -41,5 +41,7 @@ class InventoryManagerTest
         assertEquals("flour", inventory.getIngredientList()[0]);
         assertEquals("coffee", inventory.getIngredientList()[1]);
         assertEquals("milk", inventory.getIngredientList()[2]);
+
+        inventory.addIngredient("Milk", 24);
     }
 }

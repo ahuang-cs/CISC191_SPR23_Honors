@@ -176,7 +176,9 @@ public class InventoryManager
         }
         else
         {
-            // The ingredient is not in the arra
+            // The ingredient is already present in the array.
+            // Increment the quantity stored in the inventory array by amount.
+            ingredientInventory[findIngredient(ingredient)][1] += amount;
         }
     }
 
