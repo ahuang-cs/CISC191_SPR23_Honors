@@ -415,7 +415,7 @@ public class InventoryManager
         else
         {
             // The menu item is not present.
-            // Throw an ItemNotFound exception.\
+            // Throw an ItemNotFound exception.
             throw new ItemNotFoundException();
         }
 

@@ -114,7 +114,7 @@ class InventoryManagerTest
 
 
     @Test
-    void addMenuItemTest()
+    void addMenuItemTest() throws ItemNotFoundException
     {
         // Create a new InventoryManager object to test
         InventoryManager inventory = new InventoryManager();
@@ -140,5 +140,40 @@ class InventoryManagerTest
         assertEquals(3.99, inventory.getMenuItemList()[0].getSalePrice());
         assertEquals(4.99, inventory.getMenuItemList()[1].getSalePrice());
         assertEquals(3.00, inventory.getMenuItemList()[2].getSalePrice());
+
+        // Test to ensure that the 2D inventory array has been properly filled
+        assertEquals(8, inventory.getMenuItemAmount("Cake"));
+        assertEquals(20, inventory.getMenuItemAmount("Coffee"));
+        assertEquals(18, inventory.getMenuItemAmount("Tea"));
+
+        // Test that the method can alter the amounts of existing ingredients.
+        inventory.addMenuItem(cake, 32);
+
+        assertEquals(40, inventory.getMenuItemAmount("Cake"));
+    }
+
+    @Test
+    void getMenuItemAmountExceptionTest()
+    {
+        InventoryManager inv = new InventoryManager();
+
+        // Check searching for a menu item in an empty list.
+        assertThrows(ItemNotFoundException.class, () -> inv.getMenuItemAmount("Croissant"));
+
+        // Check searching for an menu item in a working inventory.
+
+        MenuItem cake = new MenuItem("Cake", 12.00);
+        MenuItem pie = new MenuItem("Pie", 16.99);
+        MenuItem lemonade = new MenuItem("Lemonade", 3.99);
+
+        inv.addMenuItem(cake, 2);
+        inv.addMenuItem(pie, 3);
+        inv.addMenuItem(lemonade, 20);
+
+        // Cheese is not an ingredient in the list, so it should throw an exception.
+        assertThrows(ItemNotFoundException.class, () -> inv.getMenuItemAmount("soda"));
+
+        // Rice is an ingredient in the list, so it should not throw an exception.
+        assertDoesNotThrow(() -> inv.getMenuItemAmount("pie"));
     }
 }
