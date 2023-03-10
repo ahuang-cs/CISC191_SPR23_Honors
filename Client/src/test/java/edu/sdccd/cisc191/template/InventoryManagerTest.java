@@ -110,10 +110,35 @@ class InventoryManagerTest
 
         // Verify that changing a nonexistent value does throw an exception
         assertThrows(ItemNotFoundException.class, () -> inventory.setIngredientAmount("Ice", 9));
+    }
 
 
+    @Test
+    void addMenuItemTest()
+    {
+        // Create a new InventoryManager object to test
+        InventoryManager inventory = new InventoryManager();
 
+        // Create menu items
+        MenuItem cake = new MenuItem("Cake", 3.99);
+        MenuItem coffee = new MenuItem("Coffee", 4.99);
+        MenuItem tea = new MenuItem("Tea", 3.00);
 
+        // Add menu items to the inventory
+        inventory.addMenuItem(cake, 8);
+        inventory.addMenuItem(coffee, 20);
+        inventory.addMenuItem(tea, 18);
 
+        // There should now be three menu items in the menu item array.
+        assertEquals(3, inventory.getMenuItemList().length);
+
+        // Test to ensure that the menu items in the menu item array have been properly set
+        assertEquals("Cake", inventory.getMenuItemList()[0].getName());
+        assertEquals("Coffee", inventory.getMenuItemList()[1].getName());
+        assertEquals("Tea", inventory.getMenuItemList()[2].getName());
+
+        assertEquals(3.99, inventory.getMenuItemList()[0].getSalePrice());
+        assertEquals(4.99, inventory.getMenuItemList()[1].getSalePrice());
+        assertEquals(3.00, inventory.getMenuItemList()[2].getSalePrice());
     }
 }

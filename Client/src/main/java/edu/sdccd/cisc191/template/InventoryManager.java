@@ -261,6 +261,7 @@ public class InventoryManager
 
         int targetIndex = 0;                            // Stores the index of the target menu Item.
         String targetName = itemName.toLowerCase();     // Stores target name in lowercase to remove case sensitivity
+        String currentItemName = "";                    // Used to compare menu item names when searching the array.
 
         // Check whether the menuItemList is empty.
         if (menuItemList.length == 0)
@@ -275,8 +276,11 @@ public class InventoryManager
             // If there are elements in the list, search each element.
             for (int i = 0; i < menuItemList.length; i++)
             {
+                // Make the menu item name lowercase to remove case sensitivity.
+                currentItemName = menuItemList[i].getName().toLowerCase();
+
                 // Compare each element with the target string.
-                if (targetName.equals(menuItemList[i]))
+                if (targetName.equals(currentItemName))
                 {
                     // If the target string matches this element in the array, return this element's index.
                     targetIndex = i;
@@ -289,6 +293,57 @@ public class InventoryManager
             targetIndex= -1;
             return targetIndex;
         }
+    }
+
+
+    public void addMenuItem(MenuItem item, int amount)
+    {
+        // There cannot be two menu items with the same name;
+        // Therefore, if a menu item with the same name is already present, add amount to the stored total.
+        // Otherwise, add the new menu item to the list.
+
+        int itemIndex= 0;     // Stores the index of the menu item (if it is already present).
+
+        // Search for the item in the array using its name.
+        itemIndex = findMenuItem(item.getName());
+
+        // Course of action depends on whether the menu item is present in the array.
+        if (itemIndex == -1)
+        {
+            // If the item is not already present in the array, space needs to be made.
+
+            // We cannot dynamically allocate space, so all data must be moved to a new, larger array.
+            MenuItem[] newMenuItemList = new MenuItem[menuItemList.length + 1];
+            int[][] newMenuItemInventory = new int[menuItemList.length + 1][2];
+
+            // Copy all existing data to the new arrays.
+            for (int i = 0; i < menuItemList.length; i++)
+            {
+                newMenuItemList[i] = menuItemList[i];
+                newMenuItemInventory[i][0] = menuItemInventory[i][0];
+                newMenuItemInventory[i][1] = menuItemInventory[i][1];
+            }
+
+            // Add the new menu item to the final slot.
+            newMenuItemList[newMenuItemList.length -1] = item;
+
+            // Map the index of the menu item in the first element of the inventory row.
+            newMenuItemInventory[newMenuItemList.length - 1][0] = newMenuItemList.length - 1;
+
+            // Store the amount of the menu item in teh second element of the inventory row.
+            newMenuItemInventory[newMenuItemList.length - 1][1] = amount;
+
+            // Replace the original arrays with the new arrays containing the new Menu Item.
+            menuItemList = newMenuItemList;
+            menuItemInventory = newMenuItemInventory;
+        }
+        else
+        {
+            // The menu item is already present in the array.
+            // Increment the quantity stored in the inventory array by that amount
+            menuItemInventory[itemIndex][1] += amount;
+        }
+
     }
 
     public MenuItem[] getMenuItemList()
