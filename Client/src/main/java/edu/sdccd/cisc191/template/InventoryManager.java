@@ -336,6 +336,41 @@ public class InventoryManager
             // Replace the original arrays with the new arrays containing the new Menu Item.
             menuItemList = newMenuItemList;
             menuItemInventory = newMenuItemInventory;
+
+            // Update the recipe book to include the new Menu Item.
+
+            // Check whether the recipe book is empty:
+            if (recipeBook.length == 0)
+            {
+                // There are no recipes in the recipe book.
+                // Create a new recipe book with one empty recipe, and map it to the new menu item.
+                int[][] newRecipeBook = new int[1][1];
+                newRecipeBook[0][0] = newMenuItemList.length - 1;
+
+                // Set recipeBook to have the new array.
+                recipeBook = newRecipeBook;
+            }
+            else
+            {
+                // There are existing recipes in the recipe book.
+                // Create a new recipe book with the same width as the original, but with enough slots for all items.
+                int[][] newRecipeBook = new int[recipeBook.length + 1][recipeBook[0].length];
+
+                // Copy all data from recipeBook into newRecipeBook.
+                for (int recipeIndex = 0; recipeIndex < menuItemList.length; recipeIndex++)
+                {
+                    for (int j = 0; j < recipeBook[0].length; j++)
+                    {
+                        newRecipeBook[recipeIndex][j] = recipeBook[recipeIndex][j];
+                    }
+                }
+
+                // Map the new menu item to the final recipe slot.
+                newRecipeBook[newRecipeBook.length - 1][0] = newRecipeBook.length - 1;
+
+                // Set recipeBook with the new size and data.
+                recipeBook = newRecipeBook;
+            }
         }
         else
         {
@@ -343,7 +378,6 @@ public class InventoryManager
             // Increment the quantity stored in the inventory array by that amount
             menuItemInventory[itemIndex][1] += amount;
         }
-
     }
 
     public MenuItem[] getMenuItemList()
