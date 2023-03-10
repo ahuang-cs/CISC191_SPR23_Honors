@@ -93,7 +93,6 @@ public class InventoryManager
         // If it is found, return the index of the ingredient within ingredientList.
         // If it is not found, return -1.
 
-
         int targetIndex = 0;                            // Stores the index of the target ingredient.
         String lowercaseTarget = target.toLowerCase();  // The target string in lowercase, to remove case sensitivity.
 
@@ -339,12 +338,12 @@ public class InventoryManager
 
             // Update the recipe book to include the new Menu Item.
 
-            // Check whether the recipe book is empty:
-            if (recipeBook.length == 0)
+            // Check whether the recipe book is empty (If there are no menu items):
+            if (menuItemList.length == 1)
             {
                 // There are no recipes in the recipe book.
                 // Create a new recipe book with one empty recipe, and map it to the new menu item.
-                int[][] newRecipeBook = new int[1][1];
+                int[][] newRecipeBook = new int[1][3];
                 newRecipeBook[0][0] = newMenuItemList.length - 1;
 
                 // Set recipeBook to have the new array.
@@ -357,7 +356,7 @@ public class InventoryManager
                 int[][] newRecipeBook = new int[recipeBook.length + 1][recipeBook[0].length];
 
                 // Copy all data from recipeBook into newRecipeBook.
-                for (int recipeIndex = 0; recipeIndex < menuItemList.length; recipeIndex++)
+                for (int recipeIndex = 0; recipeIndex < recipeBook.length; recipeIndex++)
                 {
                     for (int j = 0; j < recipeBook[0].length; j++)
                     {
@@ -394,6 +393,33 @@ public class InventoryManager
         }
 
         return menuItemListCopy;
+    }
+
+
+    public int getMenuItemAmount(String itemName) throws ItemNotFoundException
+    {
+        // There cannot be two menu items with the same name, so the item's name will be used for identification.
+        // Search for the target menu item in menuItemList.
+        // Return the corresponding amount stored in ingredientInventory using the ingredient's index.
+        // If the ingredient is not present, throw an ItemNotFoundException.
+
+        int amount = 0;                             // The amount of the item in the inventory
+        int itemIndex = findMenuItem(itemName);     // Stores the index of the ingredient in the inventory.
+
+        // Verify that the menu item is actually present in the array.
+        if (itemIndex != -1)
+        {
+            // The item is present, so set amount to the value stored in the inventory.
+            amount = menuItemInventory[itemIndex][1];
+        }
+        else
+        {
+            // The menu item is not present.
+            // Throw an ItemNotFound exception.\
+            throw new ItemNotFoundException();
+        }
+
+        return amount;
     }
 
     // ******************** End of MenuItem Methods ********************
