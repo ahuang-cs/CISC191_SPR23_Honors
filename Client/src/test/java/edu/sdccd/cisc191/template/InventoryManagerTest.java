@@ -74,4 +74,46 @@ class InventoryManagerTest
         // Rice is an ingredient in the list, so it should not throw an exception.
         assertDoesNotThrow(() -> inv.getIngredientAmount("Rice"));
     }
+
+
+    @Test
+    void setIngredientAmountTest() throws ItemNotFoundException
+    {
+        // Create a new inventory manager object
+        InventoryManager inventory = new InventoryManager();
+
+        // Attempt to set an ingredient amount for an empty inventory.
+        assertThrows(ItemNotFoundException.class, () -> inventory.setIngredientAmount("Beans", 9));
+
+        // Add ingredients to the inventoryManager.
+        inventory.addIngredient("Cheese", 10);
+        inventory.addIngredient("Celery", 100);
+        inventory.addIngredient("Avocados", 12);
+
+        // Verify initial amounts
+        assertEquals(10, inventory.getIngredientAmount("Cheese"));
+        assertEquals(100, inventory.getIngredientAmount("Celery"));
+        assertEquals(12, inventory.getIngredientAmount("Avocados"));
+
+        // Change the values of each ingredient.
+        inventory.setIngredientAmount("Cheese", 8);
+        inventory.setIngredientAmount("Celery", 80);
+        inventory.setIngredientAmount("Avocados", 20);
+
+        // Verify that each ingredient has a new value.
+        assertEquals(8, inventory.getIngredientAmount("Cheese"));
+        assertEquals(80, inventory.getIngredientAmount("Celery"));
+        assertEquals(20, inventory.getIngredientAmount("Avocados"));
+
+        // Verify that changing an existing value does not throw an exception.
+        assertDoesNotThrow(() -> inventory.setIngredientAmount("Avocados", 17));
+
+        // Verify that changing a nonexistent value does throw an exception
+        assertThrows(ItemNotFoundException.class, () -> inventory.setIngredientAmount("Ice", 9));
+
+
+
+
+
+    }
 }

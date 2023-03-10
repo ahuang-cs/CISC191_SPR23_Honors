@@ -176,9 +176,29 @@ public class InventoryManager
     }
 
 
-    public void setIngredientAmount(String ingredient, int amount)
+    public void setIngredientAmount(String ingredient, int amount) throws ItemNotFoundException
     {
+        // Search for the ingredient in ingredientList.
+        // If the ingredient is present, alter the ingredient amount stored in ingredientInventory.
+        // If the ingredient is not present, throw an ItemNotFoundException.
 
+        int ingredientIndex = 0;        // The index of the ingredient which we want to alter.
+
+        // Search for the ingredient in the ingredientList array.
+        ingredientIndex = findIngredient(ingredient);
+
+        // Verify that the ingredient we want to alter is actually in the array.
+        if (ingredientIndex != -1)
+        {
+            // If the ingredient is present, set the corresponding value in the inventory to amount.
+            ingredientInventory[ingredientIndex][1] = amount;
+        }
+        else
+        {
+            // The ingredient is not present in the array.
+            // Throw an ItemNotFound exception.
+            throw new ItemNotFoundException();
+        }
     }
 
 
