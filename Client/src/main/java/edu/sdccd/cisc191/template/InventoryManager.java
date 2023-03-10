@@ -41,7 +41,7 @@ package edu.sdccd.cisc191.template;
  *  + void addToRecipe(String itemName, String ingredient, int amount); <-- Adds an ingredient to a menuItem's recipe
  *  + void removeFromRecipe(String itemName, String ingredient);        <-- Removes an ingredient from menuItem recipe
  *
- *  + String[] getRecipe(String itemName);                              <-- Returns the recipe of a menu item.
+ *  + int[] getRecipe(String itemName);                                 <-- Returns the recipe of a menu item.
  * ********** END OF RECIPE SPECIFIC METHODS **********
  *
  * ********** OTHER METHODS **********
@@ -60,14 +60,8 @@ public class InventoryManager
     // Holds a list of all ingredients as strings.
     private String[] ingredientList;
 
-    // Holds the number of ingredients in ingredientList.
-    private int numIngredients;
-
     // Holds a list of all menu items.
     private MenuItem[] menuItemList;
-
-    // Holds the number of menu items in menuItemList.
-    private int numMenuItems;
 
     // Maps all ingredients in ingredientList to the amount that is in storage.
     //      - Column 0 is ingredient index, column 1 is amount of that ingredient.
@@ -78,20 +72,74 @@ public class InventoryManager
     private int[][] menuItemInventory;
 
     // Maps all MenuItems in MenuItemList to a set of ingredients in IngredientList.
+    //      - Each row corresponds to a MenuItem.
     //      - Column 0 is the menuItem, odd and even columns alternate between ingredient index and amount.
+    //
+    //          - Example: [menuItemOne] [ingredientOne] [ingredientOneAmount] [IngredientTwo] [ingredientTwoAmount]
+    //                     [menuItemTwo] [ingredientOne] [ingredientOneAmount] [IngredientTwo] [ingredientTwoAmount]
     private int[][] recipeBook;
-
-    // Tracks the number of different ingredients in the longest recipe in recipeBook.
-    private int maxRecipeLength;
 
     // ******************** END OF DATA ********************
 
     public InventoryManager()
     {
+        // A new inventory should start with no ingredients or menuItems
+        ingredientList = new String[8];
+        menuItemList = new MenuItem[0];
+
+        // Initialize ingredientInventory and menuItemInventory arrays as 2D arrays with 2 columns
+        //      - The first column is for specific items, and the second column is for amounts.
+        ingredientInventory = new int[0][2];
+        menuItemInventory = new int[0][2];
+
+        // Initialize the empty recipe book.
+        recipeBook = new int[0][0];
 
     }
 
 
 
+    // ******************** Ingredient Methods ********************
 
+    public String[] getIngredientList()
+    {
+        // Make a copy of ingredientList and return the copy to prevent unintentional edits to original array.
+
+        // Make an empty array with the same size as ingredientList.
+        String[] ingredientListCopy = new String[ingredientList.length];   // The actual array to be returned
+
+        // Copy all ingredients in ingredientList to the new array.
+        for (int i = 0; i < ingredientList.length; i++)
+        {
+            ingredientListCopy[i] = ingredientList[i];
+        }
+
+        return ingredientListCopy;
+    }
+
+
+
+    // ******************** End of Ingredient Methods ********************
+
+
+
+    // ******************** MenuItem Methods ********************
+
+    public MenuItem[] getMenuItemList()
+    {
+        // Make a copy of ingredientList and return the copy to prevent unintentional edits to original array.
+
+        // Make an empty array with the same size as ingredientList.
+        MenuItem[] menuItemListCopy = new MenuItem[menuItemList.length];   // The actual array to be returned
+
+        // Copy all ingredients in ingredientList to the new array.
+        for (int i = 0; i < menuItemList.length; i++)
+        {
+            menuItemListCopy[i] = menuItemList[i];
+        }
+
+        return menuItemListCopy;
+    }
+
+    // ******************** End of MenuItem Methods ********************
 }

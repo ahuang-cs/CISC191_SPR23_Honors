@@ -11,8 +11,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class InventoryManagerTest
 {
     @Test
-    void InventoryManager()
+    void InventoryManagerConstructorTest()
     {
+        // Create a new InventoryManager object called inventory
+        InventoryManager inventory = new InventoryManager();
+
+        // A new InventoryManager object should have no ingredients, menu items, or recipes.
+
 
     }
 }
