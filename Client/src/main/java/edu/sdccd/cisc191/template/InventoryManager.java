@@ -84,10 +84,12 @@ public class InventoryManager
     // Tracks the number of different ingredients in the longest recipe in recipeBook.
     private int maxRecipeLength;
 
-
-
     // ******************** END OF DATA ********************
 
+    public InventoryManager()
+    {
+
+    }
 
 
 
