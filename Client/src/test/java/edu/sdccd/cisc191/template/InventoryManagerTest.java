@@ -24,7 +24,7 @@ class InventoryManagerTest
     }
 
     @Test
-    void addIngredientTest()
+    void addIngredientTest() throws ItemNotFoundException
     {
         // Create a new InventoryManager object.
         InventoryManager inventory = new InventoryManager();
@@ -42,6 +42,15 @@ class InventoryManagerTest
         assertEquals("coffee", inventory.getIngredientList()[1]);
         assertEquals("milk", inventory.getIngredientList()[2]);
 
+        // Test to ensure that the ingredientInventory has been properly filled.
+        assertEquals(8, inventory.getIngredientAmount("Flour"));
+        assertEquals(2, inventory.getIngredientAmount("Coffee"));
+        assertEquals(12, inventory.getIngredientAmount("Milk"));
+
+        // Test that the method can alter the amounts of existing ingredients.
         inventory.addIngredient("Milk", 24);
+
+        assertEquals(36, inventory.getIngredientAmount("milk"));
+
     }
 }

@@ -10,9 +10,6 @@ package edu.sdccd.cisc191.template;
  *  - int[][] ingredientInventory;  <-- Maps items from the ingredientList to the amount in stock
  *  - int[][] menuItemInventory;    <-- Maps items from the menuItemList to the amount in stock
  *  - int[][] recipeBook;           <-- Maps items from the ingredientList to each item on the menuItem list
- *  - int numIngredients;           <-- The number of ingredients in ingredientList.
- *  - int numMenuItems;             <-- The number of menu items in menuItemList.
- *  - int maxRecipeLength;          <-- The number of ingredients in the longest recipe in recipeBook.
  *
  * Required Methods:
  * ********** INGREDIENT SPECIFIC METHODS **********
@@ -43,15 +40,6 @@ package edu.sdccd.cisc191.template;
  *
  *  + int[] getRecipe(String itemName);                                 <-- Returns the recipe of a menu item.
  * ********** END OF RECIPE SPECIFIC METHODS **********
- *
- * ********** OTHER METHODS **********
- *  - void increaseIngredientListCapacity();
- *  - void increase menuItemListCapacity();
- *  - void increaseIngredientInventoryCapacity();
- *  - void increaseMenuItemInventoryCapacity();
- *  - void increaseRecipeBookItemCapacity();
- *  - void increaseRecipeBookIngredientCapacity();
- * ********** END OF OTHER METHODS ***********
  */
 public class InventoryManager
 {
@@ -143,8 +131,12 @@ public class InventoryManager
         // If ingredient is not present in ingredientList, add it to ingredientList and create an inventory slot.
         // If ingredient is present in ingredientList, add amount to the stored total.
 
-        // Make sure that the ingredient is already present in the array.
-        if (findIngredient(ingredient) == -1)
+        int ingredientIndex = 0;        // Stores the index of the ingredient if present (-1 if not)
+
+        // Search for the ingredient in the array.
+        ingredientIndex = findIngredient(ingredient);
+
+        if (ingredientIndex == -1)
         {
             // The ingredient is not already present in the array; Space needs to be made.
 
@@ -157,7 +149,7 @@ public class InventoryManager
             {
                 newIngredientList[i] = ingredientList[i];
                 newIngredientInventory[i][0] = ingredientInventory[i][0];
-                newIngredientInventory[i][1] = ingredientInventory[i][0];
+                newIngredientInventory[i][1] = ingredientInventory[i][1];
             }
 
             // Add the new ingredient in all lowercase to remove case sensitivity.
@@ -178,8 +170,9 @@ public class InventoryManager
         {
             // The ingredient is already present in the array.
             // Increment the quantity stored in the inventory array by amount.
-            ingredientInventory[findIngredient(ingredient)][1] += amount;
+            ingredientInventory[ingredientIndex][1] += amount;
         }
+
     }
 
 
@@ -198,6 +191,34 @@ public class InventoryManager
         }
 
         return ingredientListCopy;
+    }
+
+    public int getIngredientAmount(String ingredient) throws ItemNotFoundException
+    {
+        // Search for the ingredient in ingredientList.
+        // Return the corresponding amount stored in ingredientInventory using the ingredient's index.
+        // If the ingredient is not present, throw an ItemNotFoundException.
+
+        int amount = 0;             // The value to be returned, contains the value of the ingredient (if present).
+        int ingredientIndex = 0;    // Stores the index of the ingredient specified in parameter.
+
+        // Search for the ingredient in the ingredientList array.
+        ingredientIndex = findIngredient(ingredient);
+
+        // Verify that the ingredient is actually present in the arrays.
+        if (ingredientIndex != -1)
+        {
+            // If the ingredient is present, set amount to the value stored in ingredientInventory
+            amount = ingredientInventory[ingredientIndex][1];
+        }
+        else
+        {
+            // The ingredient is not in the array.
+            // Throw an exception.
+            throw new ItemNotFoundException();
+        }
+
+        return amount;
     }
 
 
