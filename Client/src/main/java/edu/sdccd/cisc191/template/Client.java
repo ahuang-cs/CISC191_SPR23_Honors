@@ -174,6 +174,14 @@ public class Client {
         System.out.println("Ingredient has Gluten? " + heavyCream.getGluten());
         System.out.println("Ingredient is Vegan Friendly? " + heavyCream.getVeganFriendly());
 
+        InventoryManager inv = new InventoryManager();
+
+        for (int i = 0; i < inv.getMenuItemList().length; i++)
+        {
+            System.out.println("Next Menu Item: " + inv.getMenuItemList()[i]);
+        }
+
+
 
 
 
