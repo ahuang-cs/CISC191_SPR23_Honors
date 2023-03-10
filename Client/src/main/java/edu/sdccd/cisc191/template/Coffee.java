@@ -57,97 +57,122 @@ public class Coffee extends Drink implements CoffeeInterface{
              this.milk = milk;
              this.drizzle = drizzle;
         }
+// make setter and getter
 
     @Override
     public void makeCoffee() {
 
     }
 
-    @Override
-    public void makeLatte(String espressoType, String milkType, boolean hasFoam, String flavor) {
-
+    public String getCreamer() {
+        return creamer;
     }
 
-    @Override
-    public void makeCappuccino(int espresso, int steamedMilk, int foam, String flavor) {
-
+    public void setCreamer(String creamer) {
+        this.creamer = creamer;
     }
 
-    @Override
-    public void makeFrozen(boolean isBlended, String flavor) {
-
+    public String getMilk() {
+        return milk;
     }
 
-    @Override
-    public void makeIced(boolean hasMilk) {
-
+    public void setMilk(String milk) {
+        this.milk = milk;
     }
 
-    //Created and inner Class for a Standard cup of coffee with the options of cream, sugar, black
-        private class Standard extends Coffee{
-                private String roast;           //The type of roast of the Coffee being served
-                private boolean hasSugar;       //Determines if the coffee has sugars or not
+    public String getDrizzle() {
+        return drizzle;
+    }
 
-        }
-        //Created an inner Class for to place the Lattes recipe
-        private class Latte{
-            private String espressoType;   // The type of espresso used
-            private String milkType;       // The type of milk used
-            private boolean hasFoam;       // Whether or not the latte has foam
-            private String flavor;         // Any additional flavor added to the latte
+    public void setDrizzle(String drizzle) {
+        this.drizzle = drizzle;
+    }
 
-            public Latte(String espressoType, String milkType, boolean hasFoam, String flavor) {
-                this.espressoType = espressoType;
-                this.milkType = milkType;
-                this.hasFoam = hasFoam;
-                this.flavor = flavor;
-            }
-
-        }
-        //Created an inner Class for to place the Cappuccinos recipe
-        private class Cappuccino{
-            private int espresso;       // Amount of espresso shots used
-            private int steamedMilk;    // Amount of steamed milk used
-            private int foam;           // Amount of foam used
-            private String flavor;      // Optional flavoring
-
-            public Cappuccino(int espresso, int steamedMilk, int foam, String flavor) {
-                this.espresso = espresso;
-                this.steamedMilk = steamedMilk;
-                this.foam = foam;
-                this.flavor = flavor;
-            }
-
-        }
-        //Created an inner Class for to place the Frozen Coffees recipe
-        private class Frozen{
-            private boolean isBlended;  // Whether or not the frozen coffee is blended.
-            private String flavor;      // The flavor of the frozen coffee.
-
-            public Frozen() {
-                super();
-                this.isBlended = true;
-                this.flavor = "Vanilla";
-            }
-            public Frozen(String name, double price, String size, boolean isHot, boolean isBlended, String flavor) {
-                //super(name, price, size, isHot);
-                this.isBlended = isBlended;
-                this.flavor = flavor;
-            }
-
-
-        }
-        //Created an inner Class for to place the Iced Coffees recipe
-        private class Iced{
-            private boolean hasMilk;
-            public Iced(){
-                super();
-                this.hasMilk = true;
-
-                // im not too sure what i can do here...
-            }
-
-        }
-
-
-}
+//    @Override
+//    public void makeLatte(String espressoType, String milkType, boolean hasFoam, String flavor) {
+//
+//    }
+//
+//    @Override
+//    public void makeCappuccino(int espresso, int steamedMilk, int foam, String flavor) {
+//
+//    }
+//
+//    @Override
+//    public void makeFrozen(boolean isBlended, String flavor) {
+//
+//    }
+//
+//    @Override
+//    public void makeIced(boolean hasMilk) {
+//
+//    }
+//
+//    //Created and inner Class for a Standard cup of coffee with the options of cream, sugar, black
+//        private class Standard extends Coffee{
+//                private String roast;           //The type of roast of the Coffee being served
+//                private boolean hasSugar;       //Determines if the coffee has sugars or not
+//
+//        }
+//        //Created an inner Class for to place the Lattes recipe
+//        private class Latte{
+//            private String espressoType;   // The type of espresso used
+//            private String milkType;       // The type of milk used
+//            private boolean hasFoam;       // Whether or not the latte has foam
+//            private String flavor;         // Any additional flavor added to the latte
+//
+//            public Latte(String espressoType, String milkType, boolean hasFoam, String flavor) {
+//                this.espressoType = espressoType;
+//                this.milkType = milkType;
+//                this.hasFoam = hasFoam;
+//                this.flavor = flavor;
+//            }
+//
+//        }
+//        //Created an inner Class for to place the Cappuccinos recipe
+//        private class Cappuccino{
+//            private int espresso;       // Amount of espresso shots used
+//            private int steamedMilk;    // Amount of steamed milk used
+//            private int foam;           // Amount of foam used
+//            private String flavor;      // Optional flavoring
+//
+//            public Cappuccino(int espresso, int steamedMilk, int foam, String flavor) {
+//                this.espresso = espresso;
+//                this.steamedMilk = steamedMilk;
+//                this.foam = foam;
+//                this.flavor = flavor;
+//            }
+//
+//        }
+//        //Created an inner Class for to place the Frozen Coffees recipe
+//        private class Frozen{
+//            private boolean isBlended;  // Whether or not the frozen coffee is blended.
+//            private String flavor;      // The flavor of the frozen coffee.
+//
+//            public Frozen() {
+//                super();
+//                this.isBlended = true;
+//                this.flavor = "Vanilla";
+//            }
+//            public Frozen(String name, double price, String size, boolean isHot, boolean isBlended, String flavor) {
+//                //super(name, price, size, isHot);
+//                this.isBlended = isBlended;
+//                this.flavor = flavor;
+//            }
+//
+//
+//        }
+//        //Created an inner Class for to place the Iced Coffees recipe
+//        private class Iced{
+//            private boolean hasMilk;
+//            public Iced(){
+//                super();
+//                this.hasMilk = true;
+//
+//                // im not too sure what i can do here...
+//            }
+//
+//        }
+//
+//
+//}
