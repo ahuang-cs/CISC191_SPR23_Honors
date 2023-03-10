@@ -17,7 +17,6 @@ package edu.sdccd.cisc191.template;
  *  + void setIngredientAmount(String ingredient, int amount);- Directly sets the amount of an ingredient.
  *  + void addIngredient(String ingredient, int amount);    <-- Adds ingredients to the ingredientList.
  *  + void deleteIngredient(String ingredient);             <-- Deletes an ingredient from ingredientList and recipes
- *  + void reduceIngredient(String ingredient, int amount); <-- Reduces the amount of an ingredient in ingredientList.
  *
  *  + String[] getIngredientList();                         <-- Returns a list of all ingredients in inventory
  *  + int getIngredientAmount(String ingredient);           <-- Returns the amount of an ingredient in inventory
@@ -28,7 +27,6 @@ package edu.sdccd.cisc191.template;
  *  + void setMenuItemAmount(String itemName, int amount);      <-- Directly sets the amount of an MenuItem.
  *  + void addMenuItem(MenuItem item, int amount);              <-- Adds ingredients to the menuItemList.
  *  + void deleteMenuItem(String itemName);                     <-- Deletes an MenuItem from menuItemList and recipes
- *  + void reduceMenuItem(String itemName, int amount);         <-- Reduces the amount of an MenuItem in menuItemList.4
  *
  *  + MenuItems[] getMenuItemList();                            <-- Returns a list of all menu items available.
  *  + int getMenuItemAmount(String itemName);                   <-- Returns the amount of a menu item available.
@@ -91,7 +89,7 @@ public class InventoryManager
 
     private int findIngredient(String target)
     {
-        // Search ingredientList for an ingredient with a the name ingredientName.
+        // Search ingredientList for an ingredient with the name target.
         // If it is found, return the index of the ingredient within ingredientList.
         // If it is not found, return -1.
 
@@ -114,7 +112,7 @@ public class InventoryManager
                 // Compare each element with the target string.
                 if (lowercaseTarget.equals(ingredientList[i]))
                 {
-                    // If the target index matches this element, then we found our target.
+                    // If the target matches this element, return the index of this element.
                     targetIndex = i;
                     return targetIndex;
                 }
@@ -254,6 +252,44 @@ public class InventoryManager
 
 
     // ******************** MenuItem Methods ********************
+
+    private int findMenuItem(String itemName)
+    {
+        // Search ingredientList for an item with the name itemName.
+        // If it is found, return the index of the menu item within menuItemList.
+        // If it is not found, return -1.
+
+        int targetIndex = 0;                            // Stores the index of the target menu Item.
+        String targetName = itemName.toLowerCase();     // Stores target name in lowercase to remove case sensitivity
+
+        // Check whether the menuItemList is empty.
+        if (menuItemList.length == 0)
+        {
+            // If the list is empty, then the target cannot be present.
+            // Return -1.
+            targetIndex = -1;
+            return targetIndex;
+        }
+        else
+        {
+            // If there are elements in the list, search each element.
+            for (int i = 0; i < menuItemList.length; i++)
+            {
+                // Compare each element with the target string.
+                if (targetName.equals(menuItemList[i]))
+                {
+                    // If the target string matches this element in the array, return this element's index.
+                    targetIndex = i;
+                    return targetIndex;
+                }
+            }
+
+            // If we've gone through all elements in this array without encountering the target, it cannot be present.
+            // Return -1.
+            targetIndex= -1;
+            return targetIndex;
+        }
+    }
 
     public MenuItem[] getMenuItemList()
     {
