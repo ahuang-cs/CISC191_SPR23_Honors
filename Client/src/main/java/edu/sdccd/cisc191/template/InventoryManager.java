@@ -176,6 +176,12 @@ public class InventoryManager
     }
 
 
+    public void setIngredientAmount(String ingredient, int amount)
+    {
+
+    }
+
+
 
     public String[] getIngredientList()
     {

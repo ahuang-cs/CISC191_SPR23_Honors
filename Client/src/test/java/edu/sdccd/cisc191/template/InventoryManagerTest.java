@@ -51,6 +51,27 @@ class InventoryManagerTest
         inventory.addIngredient("Milk", 24);
 
         assertEquals(36, inventory.getIngredientAmount("milk"));
+    }
 
+
+    @Test
+    void getIngredientAmountExceptionTest()
+    {
+        InventoryManager inv = new InventoryManager();
+
+        // Check searching for an ingredient in an empty list.
+        assertThrows(ItemNotFoundException.class, () -> inv.getIngredientAmount("Beans"));
+
+        // Check searching for an ingredient in a working inventory.
+
+        inv.addIngredient("Beans", 2);
+        inv.addIngredient("Tomatoes", 3);
+        inv.addIngredient("Rice", 20);
+
+        // Cheese is not an ingredient in the list, so it should throw an exception.
+        assertThrows(ItemNotFoundException.class, () -> inv.getIngredientAmount("Cheese"));
+
+        // Rice is an ingredient in the list, so it should not throw an exception.
+        assertDoesNotThrow(() -> inv.getIngredientAmount("Rice"));
     }
 }
