@@ -504,6 +504,14 @@ public class InventoryManager
     // ******************** Recipe Methods ********************
 
 
+    /**
+     * Adds an ingredient from the inventory to a MenuItem's recipe.
+     * @param itemName The name of the menu item whose recipe is being changed.
+     * @param ingredient The name of the ingredient to be added to the recipe.
+     * @param amount The amount of the ingredient to be added to the recipe.
+     * @throws ItemNotFoundException    Thrown when attempting to add an ingredient that does not exist,
+     *                                  or change the recipe of a menu item that does not exist.
+     */
     public void addToRecipe(String itemName, String ingredient, int amount) throws ItemNotFoundException
     {
         // Maps an ingredient from the Ingredients Array to a MenuItem recipe & integer amount in the RecipeBook.
