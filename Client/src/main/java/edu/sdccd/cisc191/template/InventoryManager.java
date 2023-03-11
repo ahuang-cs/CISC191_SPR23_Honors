@@ -58,12 +58,10 @@ public class InventoryManager
     private int[][] menuItemInventory;
 
     // Maps all MenuItems in MenuItemList to a set of ingredients in IngredientList.
-    //      - Each row corresponds to a MenuItem.
-    //      - Column 0 is the menuItem, odd and even columns alternate between ingredient index and amount.
-    //
-    //          - Example: [menuItemOne] [ingredientOne] [ingredientOneAmount] [IngredientTwo] [ingredientTwoAmount]
-    //                     [menuItemTwo] [ingredientOne] [ingredientOneAmount] [IngredientTwo] [ingredientTwoAmount]
-    private int[][] recipeBook;
+    //      - [X][0][0]: The Menu Item that this recipe corresponds to
+    //      - [ ][X][0]: The Ingredients used in this recipe.
+    //      - [ ][X][1]: The amount of the ingredient with the same second dimensional index at [X][X][0].
+    private int[][][] recipeBook;
 
     // ******************** END OF DATA ********************
 
@@ -79,7 +77,7 @@ public class InventoryManager
         menuItemInventory = new int[0][2];
 
         // Initialize the empty recipe book.
-        recipeBook = new int[0][0];
+        recipeBook = new int[0][0][2];
 
     }
 
@@ -340,8 +338,8 @@ public class InventoryManager
             {
                 // There are no recipes in the recipe book.
                 // Create a new recipe book with one empty recipe, and map it to the new menu item.
-                int[][] newRecipeBook = new int[1][3];
-                newRecipeBook[0][0] = newMenuItemList.length - 1;
+                int[][][] newRecipeBook = new int[1][3][2];
+                newRecipeBook[0][0][0] = newMenuItemList.length - 1;
 
                 // Set recipeBook to have the new array.
                 recipeBook = newRecipeBook;
@@ -350,19 +348,20 @@ public class InventoryManager
             {
                 // There are existing recipes in the recipe book.
                 // Create a new recipe book with the same width as the original, but with enough slots for all items.
-                int[][] newRecipeBook = new int[recipeBook.length + 1][recipeBook[0].length];
+                int[][][] newRecipeBook = new int[recipeBook.length + 1][recipeBook[0].length][2];
 
                 // Copy all data from recipeBook into newRecipeBook.
                 for (int recipeIndex = 0; recipeIndex < recipeBook.length; recipeIndex++)
                 {
                     for (int j = 0; j < recipeBook[0].length; j++)
                     {
-                        newRecipeBook[recipeIndex][j] = recipeBook[recipeIndex][j];
+                        newRecipeBook[recipeIndex][j][0] = recipeBook[recipeIndex][j][0];
+                        newRecipeBook[recipeIndex][j][1] = recipeBook[recipeIndex][j][1];
                     }
                 }
 
                 // Map the new menu item to the final recipe slot.
-                newRecipeBook[newRecipeBook.length - 1][0] = newRecipeBook.length - 1;
+                newRecipeBook[newRecipeBook.length - 1][0][0] = newRecipeBook.length - 1;
 
                 // Set recipeBook with the new size and data.
                 recipeBook = newRecipeBook;
