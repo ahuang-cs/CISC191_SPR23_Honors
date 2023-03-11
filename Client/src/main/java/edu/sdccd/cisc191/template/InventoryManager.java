@@ -594,6 +594,14 @@ public class InventoryManager
         }
     }
 
+    /**
+     * Returns a 2D array representing a recipe for a menu item.
+     * @param menuItem The menu item whose recipe this method returns.
+     * @return  A 2D array of integers.
+     *          The first column represents an index in the Ingredients inventory (see getIngredientList()).
+     *          The second column represents the amount of that ingreedient to be used in the recipe.
+     * @throws ItemNotFoundException Thrown when attempting to access the recipe of a menu item that does not exist.
+     */
     public int[][] getRecipe(String menuItem) throws ItemNotFoundException
     {
         // Search for the target menuItem in menuItemList
