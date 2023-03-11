@@ -16,7 +16,6 @@ package edu.sdccd.cisc191.template;
  *  - int findIngredient(String ingredient);                <-- Returns the index of an ingredient in ingredientList.
  *  + void setIngredientAmount(String ingredient, int amount);- Directly sets the amount of an ingredient.
  *  + void addIngredient(String ingredient, int amount);    <-- Adds ingredients to the ingredientList.
- *  + void deleteIngredient(String ingredient);             <-- Deletes an ingredient from ingredientList and recipes
  *
  *  + String[] getIngredientList();                         <-- Returns a list of all ingredients in inventory
  *  + int getIngredientAmount(String ingredient);           <-- Returns the amount of an ingredient in inventory
@@ -26,7 +25,6 @@ package edu.sdccd.cisc191.template;
  *  - int findMenuItem(String itemName);                        <-- Returns the index of a menu item in menuItemList
  *  + void setMenuItemAmount(String itemName, int amount);      <-- Directly sets the amount of an MenuItem.
  *  + void addMenuItem(MenuItem item, int amount);              <-- Adds ingredients to the menuItemList.
- *  + void deleteMenuItem(String itemName);                     <-- Deletes an MenuItem from menuItemList and recipes
  *
  *  + MenuItems[] getMenuItemList();                            <-- Returns a list of all menu items available.
  *  + int getMenuItemAmount(String itemName);                   <-- Returns the amount of a menu item available.
@@ -34,8 +32,6 @@ package edu.sdccd.cisc191.template;
  *
  * ********** RECIPE SPECIFIC METHODS **********
  *  + void addToRecipe(String itemName, String ingredient, int amount); <-- Adds an ingredient to a menuItem's recipe
- *  + void removeFromRecipe(String itemName, String ingredient);        <-- Removes an ingredient from menuItem recipe
- *  + void editRecipeAmount(String itemName, String ingredient, int amount);    <-- Changes a quantity within a recipe
  *
  *  + int[][] getRecipe(String menuItem);                               <-- Returns the recipe of a menu item.
  * ********** END OF RECIPE SPECIFIC METHODS **********
