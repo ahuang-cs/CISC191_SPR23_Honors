@@ -176,4 +176,44 @@ class InventoryManagerTest
         // Rice is an ingredient in the list, so it should not throw an exception.
         assertDoesNotThrow(() -> inv.getMenuItemAmount("pie"));
     }
+
+    @Test
+    void setMenuItemAmountTest() throws ItemNotFoundException
+    {
+        // Create a new inventory manager object
+        InventoryManager inventory = new InventoryManager();
+
+        // Attempt to set an MenuItem amount for an empty inventory.
+        assertThrows(ItemNotFoundException.class, () -> inventory.setMenuItemAmount("Cake", 9));
+
+        // Add MenuItems to the inventoryManager.
+        MenuItem coffee = new MenuItem("Coffee", 5.99);
+        MenuItem tea = new MenuItem("Tea", 5.99);
+        MenuItem hotChocolate = new MenuItem("Hot Chocolate", 5.99);
+
+        inventory.addMenuItem(coffee, 10);
+        inventory.addMenuItem(tea, 100);
+        inventory.addMenuItem(hotChocolate, 12);
+
+        // Verify initial amounts
+        assertEquals(10, inventory.getMenuItemAmount(coffee.getName()));
+        assertEquals(100, inventory.getMenuItemAmount(tea.getName()));
+        assertEquals(12, inventory.getMenuItemAmount(hotChocolate.getName()));
+
+        // Change the values of each ingredient.
+        inventory.setMenuItemAmount(coffee.getName(), 8);
+        inventory.setMenuItemAmount(tea.getName(), 80);
+        inventory.setMenuItemAmount(hotChocolate.getName(), 20);
+
+        // Verify that each ingredient has a new value.
+        assertEquals(8, inventory.getMenuItemAmount(coffee.getName()));
+        assertEquals(80, inventory.getMenuItemAmount(tea.getName()));
+        assertEquals(20, inventory.getMenuItemAmount(hotChocolate.getName()));
+
+        // Verify that changing an existing value does not throw an exception.
+        assertDoesNotThrow(() -> inventory.setMenuItemAmount(tea.getName(), 17));
+
+        // Verify that changing a nonexistent value does throw an exception
+        assertThrows(ItemNotFoundException.class, () -> inventory.setMenuItemAmount("Yogurt", 9));
+    }
 }

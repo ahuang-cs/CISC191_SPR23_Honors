@@ -243,9 +243,6 @@ public class InventoryManager
 
         return amount;
     }
-
-
-
     // ******************** End of Ingredient Methods ********************
 
 
@@ -379,6 +376,31 @@ public class InventoryManager
         }
     }
 
+
+    public void setMenuItemAmount(String itemName, int amount) throws ItemNotFoundException
+    {
+        // Search for the menu item in MenuItemList.
+        // If the menu item is present, alter the amount stored in the menuItemInventory.
+        // If the item is not present, throw an ItemNotFound Exception.
+
+        // Search for the item in the menuItemList.
+        int itemIndex = findMenuItem(itemName);
+
+        // Verify that the item is actually in the array.
+        if (itemIndex != -1)
+        {
+            // If the item is present, set the corresponding inventory element to amount.
+            menuItemInventory[itemIndex][1] = amount;
+        }
+        else
+        {
+            // The item is not present in the array, so there is nothing to change.
+            // Throw an ItemNotFound exception.
+            throw new ItemNotFoundException();
+        }
+    }
+
+
     public MenuItem[] getMenuItemList()
     {
         // Make a copy of ingredientList and return the copy to prevent unintentional edits to original array.
@@ -429,12 +451,4 @@ public class InventoryManager
     // ******************** Recipe Methods ********************
 
     // ******************** End of Recipe Methods ********************
-
-
-
-    // ******************** Other Methods ********************
-
-
-
-    // ******************** End of Other Methods ********************
 }
