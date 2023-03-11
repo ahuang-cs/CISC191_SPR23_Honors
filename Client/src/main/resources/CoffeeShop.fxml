@@ -8,17 +8,17 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="615.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.sdccd.cisc191.template.CoffeeShopController">
    <children>
-      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="11.0" layoutY="68.0" mnemonicParsing="false" onAction="#displayMenu" text="Display Menu" textAlignment="CENTER">
+      <Button fx:id="displayMenuButton" alignment="CENTER" contentDisplay="CENTER" layoutX="11.0" layoutY="68.0" mnemonicParsing="false" onAction="#displayMenu" text="Display Menu" textAlignment="CENTER">
          <font>
             <Font name="Didot" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="addItem" alignment="CENTER" contentDisplay="CENTER" layoutX="141.0" layoutY="68.0" mnemonicParsing="false" onAction="#addItemQuantity" text="Add Item Quantity" textAlignment="CENTER">
+      <Button fx:id="addItemButton" alignment="CENTER" contentDisplay="CENTER" layoutX="141.0" layoutY="68.0" mnemonicParsing="false" onAction="#addItemQuantity" text="Add Item Quantity" textAlignment="CENTER">
          <font>
             <Font name="Didot" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="removeItem" alignment="CENTER" contentDisplay="CENTER" layoutX="307.0" layoutY="68.0" mnemonicParsing="false" onAction="#removeItemQuantity" text="Remove Item Quantity" textAlignment="CENTER">
+      <Button fx:id="removeItemButton" alignment="CENTER" contentDisplay="CENTER" layoutX="307.0" layoutY="68.0" mnemonicParsing="false" onAction="#removeItemQuantity" text="Remove Item Quantity" textAlignment="CENTER">
          <font>
             <Font name="Didot" size="16.0" />
          </font>
