@@ -184,7 +184,12 @@ public class InventoryManager
         }
     }
 
-
+    /**
+     * Directly sets the amount of an ingredient.
+     * @param ingredient The ingredient whose amount will be changed
+     * @param amount The new amount of the ingredient.
+     * @throws ItemNotFoundException Thrown when changing the amount of an ingredient that does not exist.
+     */
     public void setIngredientAmount(String ingredient, int amount) throws ItemNotFoundException
     {
         // Search for the ingredient in ingredientList.
@@ -211,7 +216,10 @@ public class InventoryManager
     }
 
 
-
+    /**
+     * Returns a list of all ingredients in the inventory
+     * @return a String[] containing all ingredients in chronological order
+     */
     public String[] getIngredientList()
     {
         // Make a copy of ingredientList and return the copy to prevent unintentional edits to original array.
@@ -228,6 +236,12 @@ public class InventoryManager
         return ingredientListCopy;
     }
 
+    /**
+     * Returns the amount of an ingredient in the inventory
+     * @param ingredient The name of the ingredient to be accessed
+     * @return The amount of the ingredient in the inventory
+     * @throws ItemNotFoundException Thrown when attempting to access an ingredient that does not exist.
+     */
     public int getIngredientAmount(String ingredient) throws ItemNotFoundException
     {
         // Search for the ingredient in ingredientList.
