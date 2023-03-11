@@ -450,5 +450,60 @@ public class InventoryManager
 
     // ******************** Recipe Methods ********************
 
+    /*
+    public void addToRecipe(String itemName, String ingredient, int amount) throws ItemNotFoundException
+    {
+        // Maps an ingredient from the Ingredients Array to a MenuItem recipe & integer amount in the RecipeBook.
+        // Will throw an ItemNotFoundException if:
+        //      - The MenuItem does not exist.
+        //      - The Ingredient does not exist.
+
+        // Search for the ingredient and menu item.
+        int ingredientIndex = findIngredient(ingredient);   // The index in IngredientList containing target ingredient
+        int recipeIndex = findMenuItem(itemName);           // The index of the recipe book containing target item.
+        boolean ingredientAlreadyPresent = false;           // Checks whether an ingredient is already in the recipe
+
+        // Verify that the ingredient and menu item are present in their respective arrays.
+        if ((ingredientIndex == -1) || (recipeIndex == -1))
+        {
+            // Either the ingredient or menu item does not exist. This is an error.
+            throw new ItemNotFoundException();
+        }
+        else
+        {
+            // Check whether the ingredient already exists in the recipe.
+            for (int i = 1; i < recipeBook[recipeIndex].length; i++)
+            {
+                // We start with i = 1 because recipeBook[x][0] will always access a menuItem index.
+                // The array also alternates between ingredients and amounts, so odd indices will specify ingredients.
+                if ((i % 2) == 1)
+                {
+                    if (ingredientIndex != recipeBook[recipeIndex][i])
+                    {
+                        ingredientAlreadyPresent = true;
+                    }
+                }
+            }
+
+            // If the ingredient is already present, do nothing.
+            if (!ingredientAlreadyPresent)
+            {
+                // If the ingredient is not already present, add it to the recipe.
+
+                // Locate insertion point
+                for (int i = 1; i < recipeBook[recipeIndex].length; i++)
+                {
+                    if (recipeBook[recipeIndex][i] == null)
+                    {
+
+                    }
+                }
+            }
+        }
+    }
+
+     */
+
+
     // ******************** End of Recipe Methods ********************
 }
