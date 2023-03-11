@@ -14,6 +14,8 @@ import java.util.Scanner;
 
 public class CoffeeShop extends Application {
 
+    static InventoryManager inventory;
+
     static ArrayList<String> itemName = new ArrayList<>(Arrays.asList("Coffee\t", "Donut\t", "Tea\t\t", "Cake\t", "Croissant", "Juice\t"));  // initialize an empty array
     static ArrayList<Integer> itemQuantity = new ArrayList<>(Arrays.asList(10, 25, 30, 16, 20, 15));
     /*
