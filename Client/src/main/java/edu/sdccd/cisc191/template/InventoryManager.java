@@ -275,6 +275,11 @@ public class InventoryManager
 
     // ******************** MenuItem Methods ********************
 
+    /**
+     * Returns the index of a menu item in the inventory, or -1 if the item does not exist.
+     * @param itemName The name of the menu item to be found.
+     * @return The index of the menu item within the menuItemList array, or -1 if the item does not exist.
+     */
     private int findMenuItem(String itemName)
     {
         // Search ingredientList for an item with the name itemName.
@@ -318,6 +323,12 @@ public class InventoryManager
     }
 
 
+    /**
+     * Adds a menu item to the inventory.
+     * If the menu item already exists, add the amount to the total stored in the inventory.
+     * @param item The MenuItem object to be stored.
+     * @param amount The amount of the MenuItem to be stored.
+     */
     public void addMenuItem(MenuItem item, int amount)
     {
         // There cannot be two menu items with the same name;
@@ -403,7 +414,12 @@ public class InventoryManager
         }
     }
 
-
+    /**
+     * Directly sets the amount of a MenuItem stored in the inventory.
+     * @param itemName The name of the MenuItem to be accessed.
+     * @param amount The new amount to be stored in the inventory.
+     * @throws ItemNotFoundException Thrown when attempting to access a MenuItem that does not exist.
+     */
     public void setMenuItemAmount(String itemName, int amount) throws ItemNotFoundException
     {
         // Search for the menu item in MenuItemList.
@@ -428,6 +444,10 @@ public class InventoryManager
     }
 
 
+    /**
+     * Returns a list of all menu items in the inventory.
+     * @return A MenuItem[] containing all menu items in the inventory in chronological order.
+     */
     public MenuItem[] getMenuItemList()
     {
         // Make a copy of ingredientList and return the copy to prevent unintentional edits to original array.
@@ -445,6 +465,12 @@ public class InventoryManager
     }
 
 
+    /**
+     * Returns the amount of a MenuItem in the inventory.
+     * @param itemName The name of the menu item to be accessed
+     * @return The amount of the MenuItem stored in the inventory.
+     * @throws ItemNotFoundException Thrown when attempting to access a menu item that does not exist.
+     */
     public int getMenuItemAmount(String itemName) throws ItemNotFoundException
     {
         // There cannot be two menu items with the same name, so the item's name will be used for identification.
