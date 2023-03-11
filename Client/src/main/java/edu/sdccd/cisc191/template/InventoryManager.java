@@ -66,7 +66,9 @@ public class InventoryManager
 
     // ******************** END OF DATA ********************
 
-    
+    /**
+     * Creates a new InventoryManager object
+     */
     public InventoryManager()
     {
         // A new inventory should start with no ingredients or menuItems
@@ -87,6 +89,11 @@ public class InventoryManager
 
     // ******************** Ingredient Methods ********************
 
+    /**
+     * Searches the IngredientList for a specific ingredient specified by target parameter.
+     * @param target The name of the ingredient to be found
+     * @return The index in IngredientList containing the target ingredient, or -1 if the target does not exist.
+     */
     private int findIngredient(String target)
     {
         // Search ingredientList for an ingredient with the name target.
@@ -123,6 +130,12 @@ public class InventoryManager
         }
     }
 
+    /**
+     * Adds an ingredient to ingredientList and ingredientInventory if it is not already present.
+     * If the ingredient is already there, it will just add the amount to the ingredientInventory.
+     * @param ingredient The ingredient to be added
+     * @param amount The amount of the ingredient to be added to the inventory.
+     */
     public void addIngredient(String ingredient, int amount)
     {
         // If ingredient is not present in ingredientList, add it to ingredientList and create an inventory slot.
