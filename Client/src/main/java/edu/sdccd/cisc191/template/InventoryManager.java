@@ -35,8 +35,9 @@ package edu.sdccd.cisc191.template;
  * ********** RECIPE SPECIFIC METHODS **********
  *  + void addToRecipe(String itemName, String ingredient, int amount); <-- Adds an ingredient to a menuItem's recipe
  *  + void removeFromRecipe(String itemName, String ingredient);        <-- Removes an ingredient from menuItem recipe
+ *  + void editRecipeAmount(String itemName, String ingredient, int amount);    <-- Changes a quantity within a recipe
  *
- *  + int[] getRecipe(String itemName);                                 <-- Returns the recipe of a menu item.
+ *  + int[][] getRecipe(String menuItem);                               <-- Returns the recipe of a menu item.
  * ********** END OF RECIPE SPECIFIC METHODS **********
  */
 public class InventoryManager
@@ -65,6 +66,7 @@ public class InventoryManager
 
     // ******************** END OF DATA ********************
 
+    
     public InventoryManager()
     {
         // A new inventory should start with no ingredients or menuItems
@@ -531,8 +533,31 @@ public class InventoryManager
         }
     }
 
+    public int[][] getRecipe(String menuItem) throws ItemNotFoundException
+    {
+        // Search for the target menuItem in menuItemList
+        int recipeIndex = findMenuItem(menuItem);
 
+        // Make sure the menu item is actually there
+        if (recipeIndex != -1)
+        {
+            // If the menu item does not exist, throw a ItemNotFoundException
+            throw new ItemNotFoundException();
+        }
+        else
+        {
+            // If the menu item does exist, return the recipe.
+            int[][] recipe = new int[recipeBook[recipeIndex].length][2];
 
+            // Copy Recipe to the 2D array
+            for (int i = 0; i < recipeBook[recipeIndex].length; i++)
+            {
+                recipe[i][0] = recipeBook[recipeIndex][i][0];
+                recipe[i][1] = recipeBook[recipeIndex][i][1];
+            }
 
+            return recipe;
+        }
+    }
     // ******************** End of Recipe Methods ********************
 }
