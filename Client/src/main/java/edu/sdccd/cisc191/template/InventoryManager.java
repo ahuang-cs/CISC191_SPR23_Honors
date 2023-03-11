@@ -9,7 +9,7 @@ package edu.sdccd.cisc191.template;
  *  - MenuItems[] menuItemList;     <-- Holds a list of all menu items
  *  - int[][] ingredientInventory;  <-- Maps items from the ingredientList to the amount in stock
  *  - int[][] menuItemInventory;    <-- Maps items from the menuItemList to the amount in stock
- *  - int[][] recipeBook;           <-- Maps items from the ingredientList to each item on the menuItem list
+ *  - int[][][] recipeBook;         <-- Maps items from the ingredientList to each item on the menuItem list
  *
  * Required Methods:
  * ********** INGREDIENT SPECIFIC METHODS **********
@@ -167,7 +167,6 @@ public class InventoryManager
             // Increment the quantity stored in the inventory array by amount.
             ingredientInventory[ingredientIndex][1] += amount;
         }
-
     }
 
 
@@ -449,7 +448,7 @@ public class InventoryManager
 
     // ******************** Recipe Methods ********************
 
-    /*
+
     public void addToRecipe(String itemName, String ingredient, int amount) throws ItemNotFoundException
     {
         // Maps an ingredient from the Ingredients Array to a MenuItem recipe & integer amount in the RecipeBook.
@@ -477,7 +476,7 @@ public class InventoryManager
                 // The array also alternates between ingredients and amounts, so odd indices will specify ingredients.
                 if ((i % 2) == 1)
                 {
-                    if (ingredientIndex != recipeBook[recipeIndex][i])
+                    if (ingredientIndex != recipeBook[recipeIndex][i][0])
                     {
                         ingredientAlreadyPresent = true;
                     }
@@ -490,18 +489,49 @@ public class InventoryManager
                 // If the ingredient is not already present, add it to the recipe.
 
                 // Locate insertion point
+                int insertionIndex = 0;
+
                 for (int i = 1; i < recipeBook[recipeIndex].length; i++)
                 {
-                    if (recipeBook[recipeIndex][i] == null)
+                    // First empty slot is when the recipe calls for 0 of an ingredient.
+                    if (recipeBook[recipeIndex][i][1] == 0)
                     {
-
+                        insertionIndex = i;
                     }
+                }
+
+                // If insertionIndex is 0, there is no space in the array. Make more space.
+                if (insertionIndex == 0)
+                {
+                    int[][][] newRecipeBook = new int[recipeBook.length][recipeBook[recipeIndex].length + 1][2];
+
+                    // Copy all data to the new recipe book.
+                    for (int i = 0; i < recipeBook.length; i++)
+                    {
+                        for (int j = 0; j < recipeBook[recipeIndex].length; j++)
+                        {
+                            newRecipeBook[i][j][0] = recipeBook[i][j][0];
+                            newRecipeBook[i][j][1] = recipeBook[i][j][1];
+                        }
+                    }
+
+                    // Add ingredient and amount to newly available space.
+                    newRecipeBook[recipeIndex][newRecipeBook[recipeIndex].length - 1][0] = ingredientIndex;
+                    newRecipeBook[recipeIndex][newRecipeBook[recipeIndex].length - 1][1] = amount;
+
+                    recipeBook = newRecipeBook;
+                }
+                else
+                {
+                    // If there is space in the array, insert the information in the empty space.
+                    recipeBook[recipeIndex][insertionIndex][0] = ingredientIndex;
+                    recipeBook[recipeIndex][insertionIndex][1] = amount;
                 }
             }
         }
     }
 
-     */
+
 
 
     // ******************** End of Recipe Methods ********************
