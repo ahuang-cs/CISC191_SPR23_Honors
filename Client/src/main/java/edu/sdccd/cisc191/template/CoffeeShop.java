@@ -14,7 +14,7 @@ import java.util.Scanner;
 
 public class CoffeeShop extends Application {
 
-    static InventoryManager inventory;
+    static InventoryManager inventory;      // Manages the inventory of Menu Items and Ingredients.
 
     static ArrayList<String> itemName = new ArrayList<>(Arrays.asList("Coffee\t", "Donut\t", "Tea\t\t", "Cake\t", "Croissant", "Juice\t"));  // initialize an empty array
     static ArrayList<Integer> itemQuantity = new ArrayList<>(Arrays.asList(10, 25, 30, 16, 20, 15));
@@ -25,6 +25,7 @@ public class CoffeeShop extends Application {
                                                         {"4", "Quit" }};
     */
     public static void main(String[] args) {
+
         //if its the users first time using the program,we can make a method where if the array length
         //is less than 0, it would print out "no items added right now"
        launch(args);
@@ -46,7 +47,25 @@ public class CoffeeShop extends Application {
        // return choice;
     }
 */
-    static void printAll() {
+    static void printAll()
+    {
+        /*
+        // NEW CODE:
+        String[] menuItems = inventory.getIngredientList();
+
+        if (menuItems.length == 0)
+        {
+            System.out.println("There are currently no menu items in the inventory.");
+        }
+        else
+        {
+            System.out.println("There are currently menu items in the inventory!");
+        }
+
+        // PREVIOUS CODE:
+
+         */
+
         System.out.println("Index\t" + "Name\t\t" + "Quantity\t" + "Note");
         for (int i = 0; i < itemName.size(); i++) {
             int value = itemQuantity.get(i);
@@ -54,6 +73,8 @@ public class CoffeeShop extends Application {
             System.out.println((i + 1) + "\t\t" + itemName.get(i) + "\t\t" + itemQuantity.get(i) + "\t" + note);
         }
         System.out.println("\n");
+
+
     }
 
     static void addQuantity() {
