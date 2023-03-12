@@ -27,6 +27,7 @@ public class CoffeeShop extends Application {
     public static void main(String[] args) {
 
         inventory = new InventoryManager();
+
         launch(args);
 
     }
@@ -62,38 +63,35 @@ public class CoffeeShop extends Application {
     static void addQuantity()
     {
         Scanner keyboard = new Scanner(System.in);
-        String userInput = "";
+        String userInputName = "";
+        int userInputAmount = 0;
+        boolean badInput = false;
 
-        System.out.println("Which menu item would you like to add?");
-        userInput = keyboard.nextLine();
+        do
+        {
+            System.out.print("Which menu item would you like to add? ");
+            userInputName = keyboard.nextLine();
+            System.out.print("How much of this item would you like to add? ");
+            userInputAmount = keyboard.nextInt();
 
-
-
-        /*
-        Scanner scanner1 = new Scanner(System.in);
-        System.out.print("Which item number would you like to add? ");
-        try {
-            int item = scanner1.nextInt();
-            System.out.println("Item " + item + " is " + itemName.get(item - 1).trim() + " which has a quantity of " + itemQuantity.get(item - 1));
-            System.out.print("Enter the quantity you would like to add: ");
-            Scanner scanner2 = new Scanner(System.in);
-            int quantity = scanner2.nextInt();
-            // when the user input a number, it must be greater than or equal zero.
-            // Otherwise the user has to input again or press 0 to go back to the menu
-            while (quantity < 0) {
-                System.out.println("Invalid value. Please try again or press 0 to go back to the inventory");
-                quantity = scanner2.nextInt();
+            try
+            {
+                inventory.setMenuItemAmount(userInputName, userInputAmount + inventory.getMenuItemAmount(userInputName));
             }
-            itemQuantity.set(item - 1, quantity + itemQuantity.get(item - 1));
-        } catch (IndexOutOfBoundsException | NumberFormatException e) {
-            System.out.println("Invalid index. Please try again!");
-        }
-        //exception handling with the input which is not a number
-        catch(InputMismatchException ime) {
-            System.out.println("Your input is invalid, please try again");
-        }
+            catch (ItemNotFoundException e)
+            {
+                System.out.println("That is an error: " + userInputName + " is not an item in the menu.");
+                badInput = true;
+            }
+            catch (Exception e)
+            {
+                System.out.println("An Error has occurred: Invalid Input");
+                badInput = true;
+            }
 
-         */
+        } while(badInput);
+
+        System.out.println("The amount of " + userInputName + " has successfully been increased by " + userInputAmount);
     }
 
     static void subtractQuantity() {
