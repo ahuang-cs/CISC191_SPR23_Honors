@@ -190,7 +190,6 @@ public class CoffeeShop extends Application {
         System.out.println("[4]: Miscellaneous Pastry");
         System.out.println("[5]: Other");
 
-
     }
 
     @Override
