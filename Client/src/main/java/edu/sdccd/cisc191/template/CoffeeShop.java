@@ -7,8 +7,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -16,14 +14,6 @@ public class CoffeeShop extends Application {
 
     static InventoryManager inventory;      // Manages the inventory of Menu Items and Ingredients.
 
-    static ArrayList<String> itemName = new ArrayList<>(Arrays.asList("Coffee\t", "Donut\t", "Tea\t\t", "Cake\t", "Croissant", "Juice\t"));  // initialize an empty array
-    static ArrayList<Integer> itemQuantity = new ArrayList<>(Arrays.asList(10, 25, 30, 16, 20, 15));
-    /*
-    static final String[][] navMenu = new String[][] {  {"1","Display the menu"},
-                                                        {"2", "Add item quantity"},
-                                                        {"3", "Subtract item quantity"},
-                                                        {"4", "Quit" }};
-    */
     public static void main(String[] args) {
 
         inventory = new InventoryManager();
@@ -46,17 +36,19 @@ public class CoffeeShop extends Application {
             String menuItemName = "";
             double menuItemPrice = 0.0;
 
-            System.out.println("*************** Menu Items ***************");
+            System.out.println("***************************** Menu Items *****************************");
 
-            System.out.println("Menu Item:             Quantity:  Price:  ");
+            System.out.println("Menu Item:                                         Quantity:  Price:  ");
 
             for (int i = 0; i < menuItems.length; i++)
             {
                 menuItemName = menuItems[i].getName();
                 menuItemPrice = menuItems[i].getSalePrice();
-                System.out.printf("%-22s %-10d %.2f\n", menuItemName, inventory.getMenuItemAmount(menuItemName), menuItemPrice);
+                System.out.printf("%-50s %-10d %.2f\n", menuItemName, inventory.getMenuItemAmount(menuItemName), menuItemPrice);
             }
-            System.out.println("");
+
+            System.out.println("**********************************************************************");
+            System.out.println("\n");
         }
     }
 
@@ -68,6 +60,7 @@ public class CoffeeShop extends Application {
             Scanner keyboard = new Scanner(System.in);
             String userInputName = "";
             int userInputAmount = 0;
+            int finalItemAmount = 0;
             boolean badInput = false;
 
             do
@@ -75,32 +68,47 @@ public class CoffeeShop extends Application {
                 System.out.print("Which menu item would you like to change? ");
                 userInputName = keyboard.nextLine();
                 System.out.print("How much of this item would you like to add? ");
-                userInputAmount = keyboard.nextInt();
+                badInput = false;
 
-                // Verify that the number input is not negative.
-                if (userInputAmount >= 0)
+                try
                 {
-                    badInput = false;
+                    userInputAmount = keyboard.nextInt();
+                    finalItemAmount = inventory.getMenuItemAmount(userInputName) + userInputAmount;
+                    inventory.setMenuItemAmount(userInputName, finalItemAmount);
+                }
+                catch (ItemNotFoundException e)
+                {
+                    System.out.println("That is an error: " + userInputName + " is not an item in the menu.");
+                    keyboard.nextLine();
+                    badInput = true;
+                }
+                catch (InputMismatchException e)
+                {
+                    System.out.println("The value you entered is not an integer. Please enter a positive integer value.");
+                    keyboard.nextLine();
+                    badInput = true;
+                }
+                catch (Exception e)
+                {
+                    System.out.println("An Error has occurred: Invalid Input");
+                    keyboard.nextLine();
+                    badInput = true;
+                }
 
+                if (!badInput && (userInputAmount < 0))
+                {
+                    // The user input a negative number
+                    // Undo the erroneous calculation
                     try
                     {
-                        inventory.setMenuItemAmount(userInputName, userInputAmount + inventory.getMenuItemAmount(userInputName));
+                        inventory.setMenuItemAmount(userInputName, finalItemAmount - userInputAmount);
                     }
                     catch (ItemNotFoundException e)
                     {
-                        System.out.println("That is an error: " + userInputName + " is not an item in the menu.");
-                        keyboard.nextLine();
-                        badInput = true;
+                        // Do nothing.
                     }
-                    catch (Exception e)
-                    {
-                        System.out.println("An Error has occurred: Invalid Input");
-                        keyboard.nextLine();
-                        badInput = true;
-                    }
-                }
-                else
-                {
+
+                    // Print out an error message
                     System.out.println("This is an error: You cannot add a negative amount of a menu item.");
                     keyboard.nextLine();
                     badInput = true;
@@ -122,6 +130,7 @@ public class CoffeeShop extends Application {
             Scanner keyboard = new Scanner(System.in);
             String userInputName = "";
             int userInputAmount = 0;
+            int finalItemAmount = 0;
             boolean badInput = false;
 
             do
@@ -136,7 +145,8 @@ public class CoffeeShop extends Application {
                 try
                 {
                     userInputAmount = keyboard.nextInt();
-                    inventory.setMenuItemAmount(userInputName, inventory.getMenuItemAmount(userInputName) - userInputAmount);
+                    finalItemAmount = inventory.getMenuItemAmount(userInputName) - userInputAmount;
+                    inventory.setMenuItemAmount(userInputName, finalItemAmount);
                 }
                 catch (ItemNotFoundException e)
                 {
@@ -157,9 +167,40 @@ public class CoffeeShop extends Application {
                     badInput = true;
                 }
 
-                if (!badInput && userInputAmount < 0) {
-                    // Do nothing yet
+                if (!badInput && userInputAmount < 0)
+                {
+                    // The user input a negative number, effectively adding the amount to the inventory.
+                    // Undo erroneous calculation.
+                    try
+                    {
+                        inventory.setMenuItemAmount(userInputName, finalItemAmount + userInputAmount);
+                    }
+                    catch (ItemNotFoundException e)
+                    {
+                        // Do nothing.
+                    }
+
+                    // Print out error message.
                     System.out.println("This is an error: You cannot remove a negative amount of a menu item.");
+                    keyboard.nextLine();
+                    badInput = true;
+                }
+                else if (!badInput && finalItemAmount < 0)
+                {
+                    // The user attempted to remove more of the menu item than there is present in the inventory.
+                    // Undo erroneous Calculation
+                    try
+                    {
+                        inventory.setMenuItemAmount(userInputName, finalItemAmount + userInputAmount);
+                    }
+                    catch (ItemNotFoundException e)
+                    {
+                        // Do nothing.
+                    }
+
+                    System.out.println("This is an error: You cannot remove " + userInputAmount + " of this item.");
+                    System.out.print("There are only " + (finalItemAmount + userInputAmount) + " of this item ");
+                    System.out.println("in the inventory.");
                     keyboard.nextLine();
                     badInput = true;
                 }
@@ -177,86 +218,137 @@ public class CoffeeShop extends Application {
     static void addMenuItem()
     {
         Scanner keyboard = new Scanner(System.in);
+        boolean badInput = false;
+        String itemName = "";
+        double itemPrice = 0.0;
+        int itemAmount = 0;
 
         // Prompt the user for input and store that input in userChoice.
         int userChoice = showMenuItemOptions();
+
+        // Prompt the user to enter the name of the menu item to be created.
+        System.out.print("Enter the name of this Menu Item: ");
+        itemName = keyboard.nextLine();
+
+        // Prompt the user to enter the price of the menu item to be created.
+        // Validate user input.
+        do
+        {
+            badInput = false;
+
+            System.out.print("Enter the sale price: ");
+            // Catch the item price
+            try
+            {
+                itemPrice = keyboard.nextDouble();
+            }
+            catch (InputMismatchException e)
+            {
+                System.out.println("ERROR: That is not a valid sale price. ");
+                System.out.println("Please enter a positive decimal value for the sale price.");
+                keyboard.nextLine();
+                badInput = true;
+            }
+            catch (Exception e)
+            {
+                System.out.println("ERROR: An error has occurred with your input.");
+                System.out.println("Please enter a positive decimal value for the sale price. ");
+                keyboard.nextLine();
+                badInput = true;
+            }
+
+            // Check whether the item price is negative.
+            if (itemPrice < 0)
+            {
+                System.out.println("ERROR: " + itemPrice + " is negative and is therefore not a valid item price.");
+                System.out.println("Please enter a positive decimal value for the sale price.");
+                keyboard.nextLine();
+                badInput = true;
+            }
+        } while (badInput);
+
+        // Prompt the user to enter the amount of the item to be added into the inventory.
+        // Validate user input.
+        do
+        {
+            badInput = false;
+
+            System.out.println("Enter the amount of this Menu Item to be added to the inventory: ");
+            // Catch the item price
+            try
+            {
+                itemAmount = keyboard.nextInt();
+            }
+            catch (InputMismatchException e)
+            {
+                System.out.println("ERROR: That is not a valid amount. ");
+                System.out.println("Please enter a positive integer value for the amount.");
+                keyboard.nextLine();
+                badInput = true;
+            }
+            catch (Exception e)
+            {
+                System.out.println("ERROR: An error has occurred with your input.");
+                System.out.println("Please enter a positive integer value for the amount.");
+                keyboard.nextLine();
+                badInput = true;
+            }
+
+            // Check whether the item price is negative.
+            if (itemAmount < 0)
+            {
+                System.out.println("ERROR: " + itemAmount + " is negative and is therefore not a valid input.");
+                System.out.println("Please enter a positive integer value for the amount to be added to the inventory.");
+                keyboard.nextLine();
+                badInput = true;
+            }
+        } while (badInput);
 
         // Process the user input
         switch (userChoice)
         {
             case 1:
             {
-                Coffee newCoffee = new Coffee();
-
-                System.out.print("Enter the name of this Menu Item: ");
-                newCoffee.setName(keyboard.nextLine());
-                System.out.print("Enter the sale price: ");
-                newCoffee.setSalePrice(keyboard.nextDouble());
-                System.out.println("Enter the amount of this Menu Item to be added to the inventory: ");
-
-                inventory.addMenuItem(newCoffee, keyboard.nextInt());
-
-                System.out.println(newCoffee.getName() + " has been successfully added to the inventory.");
-
+                Coffee newItem = new Coffee();
+                newItem.setName(itemName);
+                newItem.setSalePrice(itemPrice);
+                inventory.addMenuItem(newItem, itemAmount);
+                System.out.println(newItem.getName() + " has been successfully added to the inventory.");
                 break;
             }
             case 2:
             {
-                Donut newDonut = new Donut();
-
-                System.out.print("Enter the name of this Menu Item: ");
-                newDonut.setName(keyboard.nextLine());
-                System.out.print("Enter the sale price: ");
-                newDonut.setSalePrice(keyboard.nextDouble());
-                System.out.println("Enter the amount of this Menu Item to be added to the inventory: ");
-
-                inventory.addMenuItem(newDonut, keyboard.nextInt());
-
-                System.out.println(newDonut.getName() + " has been successfully added to the inventory.");
+                Donut newItem = new Donut();
+                newItem.setName(itemName);
+                newItem.setSalePrice(itemPrice);
+                inventory.addMenuItem(newItem, itemAmount);
+                System.out.println(newItem.getName() + " has been successfully added to the inventory.");
                 break;
             }
             case 3:
             {
-                Drink newDrink = new Drink();
-
-                System.out.print("Enter the name of this Menu Item: ");
-                newDrink.setName(keyboard.nextLine());
-                System.out.print("Enter the sale price: ");
-                newDrink.setSalePrice(keyboard.nextDouble());
-                System.out.println("Enter the amount of this Menu Item to be added to the inventory: ");
-
-                inventory.addMenuItem(newDrink, keyboard.nextInt());
-
-                System.out.println(newDrink.getName() + " has been successfully added to the inventory.");
+                Drink newItem = new Drink();
+                newItem.setName(itemName);
+                newItem.setSalePrice(itemPrice);
+                inventory.addMenuItem(newItem, itemAmount);
+                System.out.println(newItem.getName() + " has been successfully added to the inventory.");
                 break;
             }
             case 4:
             {
-                Pastry newPastry = new Pastry();
-
-                System.out.print("Enter the name of this Menu Item: ");
-                newPastry.setName(keyboard.nextLine());
-                System.out.print("Enter the sale price: ");
-                newPastry.setSalePrice(keyboard.nextDouble());
-                System.out.println("Enter the amount of this Menu Item to be added to the inventory: ");
-
-                inventory.addMenuItem(newPastry, keyboard.nextInt());
-
-                System.out.println(newPastry.getName() + " has been successfully added to the inventory.");
+                Pastry newItem = new Pastry();
+                newItem.setName(itemName);
+                newItem.setSalePrice(itemPrice);
+                inventory.addMenuItem(newItem, itemAmount);
+                System.out.println(newItem.getName() + " has been successfully added to the inventory.");
                 break;
             }
             case 5:
             {
                 MenuItem newItem = new MenuItem();
-
-                System.out.print("Enter the name of this Menu Item: ");
-                newItem.setName(keyboard.nextLine());
-                System.out.print("Enter the sale price: ");
-                newItem.setSalePrice(keyboard.nextDouble());
-                System.out.println("Enter the amount of this Menu Item to be added to the inventory: ");
-
-                inventory.addMenuItem(newItem, keyboard.nextInt());
-
+                newItem.setName(itemName);
+                newItem.setSalePrice(itemPrice);
+                inventory.addMenuItem(newItem, itemAmount);
                 System.out.println(newItem.getName() + " has been successfully added to the inventory.");
                 break;
             }
@@ -349,56 +441,3 @@ public class CoffeeShop extends Application {
         System.out.println("\n");
     }
 }
-
-
-
-
-        /*
-        //        int option = 0;
-//        while (true) {
-//            option = displayMenu();-=
-//            switch (option) {
-//                case 1:
-//                    printAll(); //Display the items
-//                    break;
-//                case 2:
-//                    addQuantity(); //add to the item quantity
-//                    break;
-//                case 3:
-//                    subtractQuantity(); //subtract the item quantity
-//                    break;
-//                case 4:
-//                    System.out.println("Exiting...");
-//                    System.exit(0);
-//                default:
-//                    System.out.println("Invalid choice, try again");
-//                    break;
-//            }
-//        }
-
-
-        scene1 = new Scene(layout1, 800, 400);
-
-        //Button 5, 6, 7, 8 in scene2
-        Button button5 = new Button("Back");
-        button5.setOnAction(e -> window.setScene(scene1));//When we click on the button, the scene changes to scene 1
-        Button button6 = new Button("Drink");
-       // button6.setOnAction(e -> new Drink());
-        Button button7 = new Button("Pastry");
-       // button7.setOnAction(e -> new Pastry());
-        Button button8 = new Button("exit");
-        button8.setOnAction(e -> window.close());
-
-        //Layout 2
-        Stage window2 = new Stage();
-        VBox layout2 = new VBox (20);
-        layout2.getChildren().addAll(button5,button6,button7,button8);
-
-        scene2 = new Scene(layout2,600, 300);
-
-        window.setScene(scene1);
-        window2.setScene(scene2);
-        window.setTitle("SDCCD CAFETERIA");
-        window.show();
-
-         */
