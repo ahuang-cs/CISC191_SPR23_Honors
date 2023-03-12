@@ -49,22 +49,12 @@ public class CoffeeShop extends Application {
 */
     static void printAll()
     {
-        /*
-        // NEW CODE:
-        String[] menuItems = inventory.getIngredientList();
 
-        if (menuItems.length == 0)
-        {
-            System.out.println("There are currently no menu items in the inventory.");
-        }
-        else
-        {
-            System.out.println("There are currently menu items in the inventory!");
-        }
+        // New code
+
 
         // PREVIOUS CODE:
-
-         */
+        /*
 
         System.out.println("Index\t" + "Name\t\t" + "Quantity\t" + "Note");
         for (int i = 0; i < itemName.size(); i++) {
@@ -73,6 +63,8 @@ public class CoffeeShop extends Application {
             System.out.println((i + 1) + "\t\t" + itemName.get(i) + "\t\t" + itemQuantity.get(i) + "\t" + note);
         }
         System.out.println("\n");
+
+          */
 
 
     }

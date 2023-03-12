@@ -40,8 +40,14 @@ public class InventoryManager
 {
     // ************************ DATA ***********************
 
+    // Holds the number of different ingredients stored in the inventory.
+    private int numIngredients;
+
     // Holds a list of all ingredients as strings.
     private String[] ingredientList;
+
+    // Holds the number of menu items stored in the Inventory.
+    private int numMenuItems;
 
     // Holds a list of all menu items.
     private MenuItem[] menuItemList;
@@ -70,6 +76,8 @@ public class InventoryManager
         // A new inventory should start with no ingredients or menuItems
         ingredientList = new String[0];
         menuItemList = new MenuItem[0];
+        numIngredients = 0;
+        numMenuItems = 0;
 
         // Initialize ingredientInventory and menuItemInventory arrays as 2D arrays with 2 columns
         //      - The first column is for specific items, and the second column is for amounts.
@@ -78,6 +86,7 @@ public class InventoryManager
 
         // Initialize the empty recipe book.
         recipeBook = new int[0][0][2];
+
 
     }
 
@@ -170,6 +179,9 @@ public class InventoryManager
             // Replace the original arrays with the new arrays containing the new ingredient.
             ingredientList = newIngredientList;
             ingredientInventory = newIngredientInventory;
+
+            // Increment the Ingredients counter.
+            numIngredients++;
 
         }
         else
@@ -365,6 +377,9 @@ public class InventoryManager
             // Replace the original arrays with the new arrays containing the new Menu Item.
             menuItemList = newMenuItemList;
             menuItemInventory = newMenuItemInventory;
+
+            // Increment the Menu Item Counter.
+            numMenuItems++;
 
             // Update the recipe book to include the new Menu Item.
 
@@ -625,6 +640,29 @@ public class InventoryManager
         }
     }
     // ******************** End of Recipe Methods ********************
+
+
+
+    // ******************** BASIC GETTER METHODS ********************
+
+    /**
+     * Returns the number of different ingredients stored in the inventory.
+     * @return The number of different ingredients stored in the inventory.
+     */
+    public int getNumIngredients()
+    {
+        return numIngredients;
+    }
+
+    /**
+     * Returns the number of different Menu Items stored in the inventory.
+     * @return The number of menu items stored.
+     */
+    public int getNumMenuItems() {
+        return numMenuItems;
+    }
+
+    // ******************** BASIC GETTER METHODS ********************
 }
 
 
