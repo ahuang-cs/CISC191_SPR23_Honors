@@ -58,7 +58,7 @@ public class CoffeeShop extends Application {
        // return choice;
     }
 */
-    static void printAll() throws ItemNotFoundException
+    static void printAllMenuItems() throws ItemNotFoundException
     {
         MenuItem[] menuItems = inventory.getMenuItemList();
 
@@ -72,6 +72,8 @@ public class CoffeeShop extends Application {
             String menuItemName = "";
             double menuItemPrice = 0.0;
 
+            System.out.println("*************** Menu Items ***************");
+
             System.out.println("Menu Item:             Quantity:  Price:  ");
 
             for (int i = 0; i < menuItems.length; i++)
@@ -80,6 +82,7 @@ public class CoffeeShop extends Application {
                 menuItemPrice = menuItems[i].getSalePrice();
                 System.out.printf("%-22s %-10d %.2f\n", menuItemName, inventory.getMenuItemAmount(menuItemName), menuItemPrice);
             }
+            System.out.println("");
         }
 
         // PREVIOUS CODE:

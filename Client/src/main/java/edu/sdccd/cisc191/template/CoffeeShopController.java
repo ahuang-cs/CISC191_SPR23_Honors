@@ -10,7 +10,7 @@ public class CoffeeShopController extends CoffeeShop {
 
         public void displayMenu(ActionEvent a) throws ItemNotFoundException
         {
-               printAll();
+               printAllMenuItems();
         }
         public void addItemQuantity(ActionEvent a) {
                 addQuantity();
