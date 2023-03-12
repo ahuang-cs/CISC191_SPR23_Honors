@@ -29,6 +29,9 @@ class InventoryManagerTest
         // Create a new InventoryManager object.
         InventoryManager inventory = new InventoryManager();
 
+        // There should be nothing in the Ingredient List.
+        assertEquals(0, inventory.getIngredientList().length);
+
         // Add some test ingredients.
         inventory.addIngredient("Flour", 8);
         inventory.addIngredient("Coffee", 2);
