@@ -35,7 +35,7 @@
             <Font name="Constantia" size="36.0" />
          </font>
       </Label>
-      <Button fx:id="showVendorDataButton" alignment="CENTER" contentDisplay="CENTER" layoutX="231.0" layoutY="133.0" mnemonicParsing="false" onAction="#displayMenu" text="Show Vendor Data" textAlignment="CENTER">
+      <Button fx:id="showVendorDataButton" alignment="CENTER" contentDisplay="CENTER" layoutX="231.0" layoutY="133.0" mnemonicParsing="false" onAction="#showVendorData" text="Show Vendor Data" textAlignment="CENTER">
          <font>
             <Font name="Didot" size="16.0" />
          </font>
