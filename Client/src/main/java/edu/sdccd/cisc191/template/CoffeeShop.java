@@ -94,6 +94,10 @@ public class CoffeeShop extends Application {
 
     static void addQuantity()
     {
+        Scanner keyboard = new Scanner(System.in);
+
+        System.out.println("Which menu item would you like to add?");
+
 
 
         /*
