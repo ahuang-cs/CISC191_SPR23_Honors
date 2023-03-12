@@ -26,6 +26,9 @@ public class CoffeeShop extends Application {
     */
     public static void main(String[] args) {
 
+        inventory = new InventoryManager();
+
+
         //if its the users first time using the program,we can make a method where if the array length
         //is less than 0, it would print out "no items added right now"
        launch(args);
@@ -49,9 +52,17 @@ public class CoffeeShop extends Application {
 */
     static void printAll()
     {
+        MenuItem[] menuItems = inventory.getMenuItemList();
 
         // New code
-
+        if (menuItems.length == 0)
+        {
+            System.out.println("There are no Menu Items in the inventory right now.");
+        }
+        else
+        {
+            System.out.println("There are Menu Items in the inventory right now.");
+        }
 
         // PREVIOUS CODE:
         /*
@@ -117,6 +128,8 @@ public class CoffeeShop extends Application {
             System.out.println("Your input is invalid, please try again");
         }
     }
+
+
 
 
     @Override
