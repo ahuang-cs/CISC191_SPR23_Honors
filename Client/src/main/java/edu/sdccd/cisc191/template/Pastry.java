@@ -1,17 +1,8 @@
 package edu.sdccd.cisc191.template;
 
-/*
-    Pastries should include:
-        - Gluten Free alternative
-
-
-
- */
-
-
 public class Pastry extends MenuItem {
 
-    private boolean hasGluten;      //Whether the pastry is gluten-free or not
+    private boolean hasGluten;
 
     //Default Constructor
     public Pastry()

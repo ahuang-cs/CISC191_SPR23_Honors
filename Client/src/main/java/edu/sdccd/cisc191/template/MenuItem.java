@@ -1,36 +1,9 @@
 package edu.sdccd.cisc191.template;
 
-import java.util.ArrayList;     // Allows for dynamic resizing of arrays
-
-/*
-    The MenuItem class will be an abstract class representing all menu items. Currently in progress.
-    Will serve as a framework for subclasses prior to abstraction and conversion.
-
-    All MenuItem objects should contain:
-        - Item Name (String)
-        - Item Recipe (Array of Ingredients)
-
-    Subclass Ideas:
-        - Drink sizes (affects ingredient requirements)
-        - Flavors / Variants
-        - Create Boolean for hot and cold drinks
-
-    Abstract Classes Ideas
-        - Subclasses will have tags that alter ingredients as needed (e.g. sugar free removes sugar, etc.)
-
-    We'll probably want our INGREDIENT class to have a null ingredient in order to allow for future stuff.
-
-
-
-    TODO:   Create functional MenuItem Class
-            Add subclasses of MenuItem
-            Make MenuItem an abstract class, adjust children accordingly
- */
-
 public class MenuItem
 {
-    private String itemName;            // Name of this menuItem (Cannot be changed later)
-    private double salePrice;           // Price of menu item
+    private String itemName;
+    private double salePrice;
 
     /**
      * Default Constructor
@@ -87,7 +60,6 @@ public class MenuItem
      */
     public void setSalePrice(double newPrice)
     {
-        // TODO: Consider adding input validation to prevent negative input.
         salePrice = newPrice;
     }
 
@@ -98,9 +70,6 @@ public class MenuItem
      */
     public String toString()
     {
-        // TODO: Print all relevant information (Ingredients, etc.).
         return itemName;
     }
-
-
 }
