@@ -16,14 +16,6 @@ public class CoffeeShop extends Application {
 
     static InventoryManager inventory;      // Manages the inventory of Menu Items and Ingredients.
 
-    static ArrayList<String> itemName = new ArrayList<>(Arrays.asList("Coffee\t", "Donut\t", "Tea\t\t", "Cake\t", "Croissant", "Juice\t"));  // initialize an empty array
-    static ArrayList<Integer> itemQuantity = new ArrayList<>(Arrays.asList(10, 25, 30, 16, 20, 15));
-    /*
-    static final String[][] navMenu = new String[][] {  {"1","Display the menu"},
-                                                        {"2", "Add item quantity"},
-                                                        {"3", "Subtract item quantity"},
-                                                        {"4", "Quit" }};
-    */
     public static void main(String[] args) {
 
         inventory = new InventoryManager();
@@ -228,16 +220,91 @@ public class CoffeeShop extends Application {
     static void addMenuItem()
     {
         Scanner keyboard = new Scanner(System.in);
+        boolean badInput = false;
+        String itemName = "";
+        double itemPrice = 0.0;
+        int itemAmount = 0;
 
         // Prompt the user for input and store that input in userChoice.
         int userChoice = showMenuItemOptions();
 
+        // Prompt the user to enter the name of the menu item to be created.
         System.out.print("Enter the name of this Menu Item: ");
-        String itemName = keyboard.nextLine();
-        System.out.print("Enter the sale price: ");
-        double itemPrice = keyboard.nextDouble();
-        System.out.println("Enter the amount of this Menu Item to be added to the inventory: ");
-        int itemAmount = keyboard.nextInt();
+        itemName = keyboard.nextLine();
+
+        // Prompt the user to enter the price of the menu item to be created.
+        // Validate user input.
+        do
+        {
+            badInput = false;
+
+            System.out.print("Enter the sale price: ");
+            // Catch the item price
+            try
+            {
+                itemPrice = keyboard.nextDouble();
+            }
+            catch (InputMismatchException e)
+            {
+                System.out.println("ERROR: That is not a valid sale price. ");
+                System.out.println("Please enter a positive decimal value for the sale price.");
+                keyboard.nextLine();
+                badInput = true;
+            }
+            catch (Exception e)
+            {
+                System.out.println("ERROR: An error has occurred with your input.");
+                System.out.println("Please enter a positive decimal value for the sale price. ");
+                keyboard.nextLine();
+                badInput = true;
+            }
+
+            // Check whether the item price is negative.
+            if (itemPrice < 0)
+            {
+                System.out.println("ERROR: " + itemPrice + " is negative and is therefore not a valid item price.");
+                System.out.println("Please enter a positive decimal value for the sale price.");
+                keyboard.nextLine();
+                badInput = true;
+            }
+        } while (badInput);
+
+        // Prompt the user to enter the amount of the item to be added into the inventory.
+        // Validate user input.
+        do
+        {
+            badInput = false;
+
+            System.out.println("Enter the amount of this Menu Item to be added to the inventory: ");
+            // Catch the item price
+            try
+            {
+                itemAmount = keyboard.nextInt();
+            }
+            catch (InputMismatchException e)
+            {
+                System.out.println("ERROR: That is not a valid amount. ");
+                System.out.println("Please enter a positive integer value for the amount.");
+                keyboard.nextLine();
+                badInput = true;
+            }
+            catch (Exception e)
+            {
+                System.out.println("ERROR: An error has occurred with your input.");
+                System.out.println("Please enter a positive integer value for the amount.");
+                keyboard.nextLine();
+                badInput = true;
+            }
+
+            // Check whether the item price is negative.
+            if (itemAmount < 0)
+            {
+                System.out.println("ERROR: " + itemAmount + " is negative and is therefore not a valid input.");
+                System.out.println("Please enter a positive integer value for the amount to be added to the inventory.");
+                keyboard.nextLine();
+                badInput = true;
+            }
+        } while (badInput);
 
         // Process the user input
         switch (userChoice)
