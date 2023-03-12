@@ -180,7 +180,17 @@ public class CoffeeShop extends Application {
 
     static void addMenuItem()
     {
-        System.out.println("Adding a new menu item...");
+        Scanner keyboard = new Scanner(System.in);
+
+        // Print out the MenuItem selection menu:
+        System.out.println("What type of Menu Item would you like to add?");
+        System.out.println("[1]: Coffee");
+        System.out.println("[2]: Donut");
+        System.out.println("[3]: Miscellaneous Drink");
+        System.out.println("[4]: Miscellaneous Pastry");
+        System.out.println("[5]: Other");
+
+
     }
 
     @Override
