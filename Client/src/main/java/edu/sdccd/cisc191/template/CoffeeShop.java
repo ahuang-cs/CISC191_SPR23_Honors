@@ -57,21 +57,6 @@ public class CoffeeShop extends Application {
             }
             System.out.println("");
         }
-
-        // PREVIOUS CODE:
-        /*
-
-        System.out.println("Index\t" + "Name\t\t" + "Quantity\t" + "Note");
-        for (int i = 0; i < itemName.size(); i++) {
-            int value = itemQuantity.get(i);
-            String note = value < 2 ? "need restock" : " "; // if the quantity is less then 2, leave a note "need restock"
-            System.out.println((i + 1) + "\t\t" + itemName.get(i) + "\t\t" + itemQuantity.get(i) + "\t" + note);
-        }
-        System.out.println("\n");
-
-          */
-
-
     }
 
     static void addQuantity()
@@ -80,6 +65,7 @@ public class CoffeeShop extends Application {
         String userInput = "";
 
         System.out.println("Which menu item would you like to add?");
+        userInput = keyboard.nextLine();
 
 
 
