@@ -1,36 +1,5 @@
 package edu.sdccd.cisc191.template;
 
-/*
-    The Drink class will be an abstract class representing all drinks.
-    Currently in progress.
-    Will serve as a framework for subclasses prior to abstraction and conversion.
-
-    Drinks should include:
-        - Type (Hot/Cold)
-        - Sizes (Large/ Medium/ Small)
-        - SugarFree (Contains Aspartame)
-
-    Example:
-        Coffee
-            TYPE
-                - Black
-                - Latte
-                - Cappuccino
-                - Frozen
-                - Iced
-
-            INGREDIENTS
-                - Sugar
-                - Drizzle
-                    -Carmel
-                    -Mocha
-                    -Vanilla
-                - Milk
-                     -Almond
-                     -Coconut
- */
-
-
 public class Drink extends MenuItem {
 
     private String size;        // Drink size (Small, Medium, Large)
@@ -99,7 +68,6 @@ public class Drink extends MenuItem {
      */
     public String toString()
     {
-        // TODO: Edit this as needed.
         return size + " " + this.getName();
     }
 }
