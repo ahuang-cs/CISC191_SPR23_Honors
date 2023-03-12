@@ -122,6 +122,7 @@ public class CoffeeShop extends Application {
             Scanner keyboard = new Scanner(System.in);
             String userInputName = "";
             int userInputAmount = 0;
+            int finalItemAmount = 0;
             boolean badInput = false;
 
             do
@@ -136,7 +137,8 @@ public class CoffeeShop extends Application {
                 try
                 {
                     userInputAmount = keyboard.nextInt();
-                    inventory.setMenuItemAmount(userInputName, inventory.getMenuItemAmount(userInputName) - userInputAmount);
+                    finalItemAmount = inventory.getMenuItemAmount(userInputName) - userInputAmount;
+                    inventory.setMenuItemAmount(userInputName, finalItemAmount);
                 }
                 catch (ItemNotFoundException e)
                 {
@@ -157,9 +159,40 @@ public class CoffeeShop extends Application {
                     badInput = true;
                 }
 
-                if (!badInput && userInputAmount < 0) {
-                    // Do nothing yet
+                if (!badInput && userInputAmount < 0)
+                {
+                    // The user input a negative number, effectively adding the amount to the inventory.
+                    // Undo erroneous calculation.
+                    try
+                    {
+                        inventory.setMenuItemAmount(userInputName, finalItemAmount + userInputAmount);
+                    }
+                    catch (ItemNotFoundException e)
+                    {
+                        // Do nothing.
+                    }
+
+                    // Print out error message.
                     System.out.println("This is an error: You cannot remove a negative amount of a menu item.");
+                    keyboard.nextLine();
+                    badInput = true;
+                }
+                else if (!badInput && finalItemAmount < 0)
+                {
+                    // The user attempted to remove more of the menu item than there is present in the inventory.
+                    // Undo erroneous Calculation
+                    try
+                    {
+                        inventory.setMenuItemAmount(userInputName, finalItemAmount + userInputAmount);
+                    }
+                    catch (ItemNotFoundException e)
+                    {
+                        // Do nothing.
+                    }
+
+                    System.out.println("This is an error: You cannot remove " + userInputAmount + " of this item.");
+                    System.out.print("There are only " + (finalItemAmount + userInputAmount) + " of this item ");
+                    System.out.println("in the inventory.");
                     keyboard.nextLine();
                     badInput = true;
                 }
