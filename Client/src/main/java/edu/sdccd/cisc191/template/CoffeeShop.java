@@ -28,6 +28,14 @@ public class CoffeeShop extends Application {
 
         inventory = new InventoryManager();
 
+        Coffee coffeeTest = new Coffee();
+        coffeeTest.setName("Coffee");
+        Coffee otherCoffee = new Coffee();
+        otherCoffee.setName("Coffee Premium");
+
+        inventory.addMenuItem(coffeeTest, 20);
+        inventory.addMenuItem(otherCoffee, 15);
+
 
         //if its the users first time using the program,we can make a method where if the array length
         //is less than 0, it would print out "no items added right now"
@@ -50,7 +58,7 @@ public class CoffeeShop extends Application {
        // return choice;
     }
 */
-    static void printAll()
+    static void printAll() throws ItemNotFoundException
     {
         MenuItem[] menuItems = inventory.getMenuItemList();
 
@@ -61,7 +69,17 @@ public class CoffeeShop extends Application {
         }
         else
         {
-            System.out.println("There are Menu Items in the inventory right now.");
+            String menuItemName = "";
+            double menuItemPrice = 0.0;
+
+            System.out.println("Menu Item:             Quantity:  Price:  ");
+
+            for (int i = 0; i < menuItems.length; i++)
+            {
+                menuItemName = menuItems[i].getName();
+                menuItemPrice = menuItems[i].getSalePrice();
+                System.out.printf("%-22s %-10d %.2f\n", menuItemName, inventory.getMenuItemAmount(menuItemName), menuItemPrice);
+            }
         }
 
         // PREVIOUS CODE:

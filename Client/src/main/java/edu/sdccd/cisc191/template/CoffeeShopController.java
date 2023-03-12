@@ -8,7 +8,8 @@ import java.util.Scanner;
 
 public class CoffeeShopController extends CoffeeShop {
 
-        public void displayMenu(ActionEvent a){
+        public void displayMenu(ActionEvent a) throws ItemNotFoundException
+        {
                printAll();
         }
         public void addItemQuantity(ActionEvent a) {
