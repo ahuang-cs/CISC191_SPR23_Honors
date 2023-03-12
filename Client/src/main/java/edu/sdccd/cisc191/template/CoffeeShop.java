@@ -28,6 +28,14 @@ public class CoffeeShop extends Application {
 
         inventory = new InventoryManager();
 
+        MenuItem cake = new MenuItem("Cake", 12.00);
+        MenuItem pie = new MenuItem("Pie", 16.99);
+        MenuItem lemonade = new MenuItem("Lemonade", 3.99);
+
+        inventory.addMenuItem(cake, 2);
+        inventory.addMenuItem(pie, 3);
+        inventory.addMenuItem(lemonade, 20);
+
         launch(args);
 
     }
@@ -77,15 +85,7 @@ public class CoffeeShop extends Application {
             try
             {
                 // Check to make sure that the user isn't trying to enter a negative amount.
-                if (userInputAmount >= 0)
-                {
-                    inventory.setMenuItemAmount(userInputName, userInputAmount + inventory.getMenuItemAmount(userInputName));
-                }
-                else
-                {
-                    System.out.println("That is an error; You cannot add a negative amount of a menu item.");
-                    badInput = true;
-                }
+                inventory.setMenuItemAmount(userInputName, userInputAmount + inventory.getMenuItemAmount(userInputName));
             }
             catch (ItemNotFoundException e)
             {
