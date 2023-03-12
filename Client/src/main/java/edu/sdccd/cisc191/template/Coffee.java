@@ -1,40 +1,31 @@
 package edu.sdccd.cisc191.template;
 
 //Created a class for Coffee
-public class Coffee extends Drink{
-        public String creamer;      //Flavor of Creamer(Hazelnut-Vanilla-Carmel-Sweet_Cream)
-        public String milk;         //Alternate milk derivative(Almond-Coconut)
-        public String drizzle;          //Flavor of drizzle(Vanilla-Carmel-Mocha)
+public class Coffee extends Drink
+{
+    private String roast;           //The type of roast of the Coffee being served
+    private boolean hasSugar;       //Determines if the coffee has sugars or not
 
-        // Default Constructor
-        public Coffee(){
-            super();
-            this.creamer = "Hazelnut";
-            this.milk = "Almond";
-            this.drizzle = "Mocha";
-        }
+    public Coffee()
+    {
+        super();
+        roast = "Dark";
+        hasSugar = false;
+    }
 
-        /**
-         * Constructor - creates an object of type Coffee
-         * @param name The name of the drink
-         * @param size The size of the drink (small, medium, large)
-         * @param isHot Whether or not the coffee is hot.
-         * @param creamer The type of creamer used.
-         * @param milk The type of milk used in the drink.
-         * @param drizzle The type of drizzle used on the drink.
-         */
-        public Coffee(String name, double price, String size, boolean isHot, String creamer, String milk, String drizzle)
-        {
-             super(name, price, size, isHot);
-             this.creamer = creamer;
-             this.milk = milk;
-             this.drizzle = drizzle;
-        }
+    public String getRoast() {
+        return roast;
+    }
 
-        //Created and inner Class for a Standard cup of coffee with the options of cream, sugar, black
-        private class Standard extends Coffee{
-                private String roast;           //The type of roast of the Coffee being served
-                private boolean hasSugar;       //Determines if the coffee has sugars or not
+    public void setRoast(String roast) {
+        this.roast = roast;
+    }
 
-        }
+    public boolean isHasSugar() {
+        return hasSugar;
+    }
+
+    public void setHasSugar(boolean hasSugar) {
+        this.hasSugar = hasSugar;
+    }
 }
