@@ -160,6 +160,23 @@ public class CoffeeShop extends Application {
                 }
 
                 // Validate userInputAmount
+                System.out.println("How much of this item would you like to remove?");
+                try
+                {
+                    userInputAmount = keyboard.nextInt();
+                }
+                catch(InputMismatchException e)
+                {
+                    System.out.println("The value you entered is not an integer. Please enter a positive integer value.");
+                    keyboard.nextLine();
+                    badInput = true;
+                }
+                catch(Exception e)
+                {
+                    System.out.println("An error has occurred. Please enter a positive integer.");
+                    keyboard.nextLine();
+                    badInput = true;
+                }
 
 
                 if (userInputAmount >= 0)
