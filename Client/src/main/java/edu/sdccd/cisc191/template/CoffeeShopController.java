@@ -17,7 +17,7 @@ public class CoffeeShopController extends CoffeeShop {
         public void removeItemQuantity(ActionEvent a) {
                 subtractQuantity();
         }
-        public void displayIngredients(ActionEvent e){
-                System.out.println("Test");
+        public void showVendorData(ActionEvent e){
+                printVendor();
         }
 }
