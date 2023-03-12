@@ -178,10 +178,10 @@ public class CoffeeShop extends Application {
 
     }
 
-
-
-
-
+    static void addMenuItem()
+    {
+        System.out.println("Adding a new menu item...");
+    }
 
     @Override
     public void start(Stage stage) throws Exception {
