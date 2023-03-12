@@ -68,6 +68,7 @@ public class CoffeeShop extends Application {
             Scanner keyboard = new Scanner(System.in);
             String userInputName = "";
             int userInputAmount = 0;
+            int finalItemAmount = 0;
             boolean badInput = false;
 
             do
@@ -75,32 +76,47 @@ public class CoffeeShop extends Application {
                 System.out.print("Which menu item would you like to change? ");
                 userInputName = keyboard.nextLine();
                 System.out.print("How much of this item would you like to add? ");
-                userInputAmount = keyboard.nextInt();
+                badInput = false;
 
-                // Verify that the number input is not negative.
-                if (userInputAmount >= 0)
+                try
                 {
-                    badInput = false;
+                    userInputAmount = keyboard.nextInt();
+                    finalItemAmount = inventory.getMenuItemAmount(userInputName) + userInputAmount;
+                    inventory.setMenuItemAmount(userInputName, finalItemAmount);
+                }
+                catch (ItemNotFoundException e)
+                {
+                    System.out.println("That is an error: " + userInputName + " is not an item in the menu.");
+                    keyboard.nextLine();
+                    badInput = true;
+                }
+                catch (InputMismatchException e)
+                {
+                    System.out.println("The value you entered is not an integer. Please enter a positive integer value.");
+                    keyboard.nextLine();
+                    badInput = true;
+                }
+                catch (Exception e)
+                {
+                    System.out.println("An Error has occurred: Invalid Input");
+                    keyboard.nextLine();
+                    badInput = true;
+                }
 
+                if (!badInput && (userInputAmount < 0))
+                {
+                    // The user input a negative number
+                    // Undo the erroneous calculation
                     try
                     {
-                        inventory.setMenuItemAmount(userInputName, userInputAmount + inventory.getMenuItemAmount(userInputName));
+                        inventory.setMenuItemAmount(userInputName, finalItemAmount - userInputAmount);
                     }
                     catch (ItemNotFoundException e)
                     {
-                        System.out.println("That is an error: " + userInputName + " is not an item in the menu.");
-                        keyboard.nextLine();
-                        badInput = true;
+                        // Do nothing.
                     }
-                    catch (Exception e)
-                    {
-                        System.out.println("An Error has occurred: Invalid Input");
-                        keyboard.nextLine();
-                        badInput = true;
-                    }
-                }
-                else
-                {
+
+                    // Print out an error message
                     System.out.println("This is an error: You cannot add a negative amount of a menu item.");
                     keyboard.nextLine();
                     badInput = true;
