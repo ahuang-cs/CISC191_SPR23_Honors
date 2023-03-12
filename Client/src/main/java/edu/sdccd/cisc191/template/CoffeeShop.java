@@ -27,15 +27,6 @@ public class CoffeeShop extends Application {
     public static void main(String[] args) {
 
         inventory = new InventoryManager();
-
-        MenuItem cake = new MenuItem("Cake", 12.00);
-        MenuItem pie = new MenuItem("Pie", 16.99);
-        MenuItem lemonade = new MenuItem("Lemonade", 3.99);
-
-        inventory.addMenuItem(cake, 2);
-        inventory.addMenuItem(pie, 3);
-        inventory.addMenuItem(lemonade, 20);
-
         launch(args);
 
     }
@@ -70,96 +61,112 @@ public class CoffeeShop extends Application {
 
     static void addQuantity()
     {
-        Scanner keyboard = new Scanner(System.in);
-        String userInputName = "";
-        int userInputAmount = 0;
-        boolean badInput = false;
-
-        do
+        // Verify that there exist menu items to modify
+        if (inventory.getMenuItemList().length > 0)
         {
-            System.out.print("Which menu item would you like to add? ");
-            userInputName = keyboard.nextLine();
-            System.out.print("How much of this item would you like to add? ");
-            userInputAmount = keyboard.nextInt();
+            Scanner keyboard = new Scanner(System.in);
+            String userInputName = "";
+            int userInputAmount = 0;
+            boolean badInput = false;
 
-            // Verify that the number input is not negative.
-            if (userInputAmount >= 0)
+            do
             {
-                badInput = false;
+                System.out.print("Which menu item would you like to add? ");
+                userInputName = keyboard.nextLine();
+                System.out.print("How much of this item would you like to add? ");
+                userInputAmount = keyboard.nextInt();
 
-                try
+                // Verify that the number input is not negative.
+                if (userInputAmount >= 0)
                 {
-                    inventory.setMenuItemAmount(userInputName, userInputAmount + inventory.getMenuItemAmount(userInputName));
+                    badInput = false;
+
+                    try
+                    {
+                        inventory.setMenuItemAmount(userInputName, userInputAmount + inventory.getMenuItemAmount(userInputName));
+                    }
+                    catch (ItemNotFoundException e)
+                    {
+                        System.out.println("That is an error: " + userInputName + " is not an item in the menu.");
+                        keyboard.nextLine();
+                        badInput = true;
+                    }
+                    catch (Exception e)
+                    {
+                        System.out.println("An Error has occurred: Invalid Input");
+                        keyboard.nextLine();
+                        badInput = true;
+                    }
                 }
-                catch (ItemNotFoundException e)
+                else
                 {
-                    System.out.println("That is an error: " + userInputName + " is not an item in the menu.");
+                    System.out.println("This is an error: You cannot add a negative amount of a menu item.");
                     keyboard.nextLine();
                     badInput = true;
                 }
-                catch (Exception e)
-                {
-                    System.out.println("An Error has occurred: Invalid Input");
-                    keyboard.nextLine();
-                    badInput = true;
-                }
-            }
-            else
-            {
-                System.out.println("This is an error: You cannot add a negative amount of a menu item.");
-                keyboard.nextLine();
-                badInput = true;
-            }
-        } while(badInput);
+            } while(badInput);
 
-        System.out.println("The amount of " + userInputName + " has successfully been increased by " + userInputAmount);
+            System.out.println("The amount of " + userInputName + " has successfully been increased by " + userInputAmount);
+        }
+        else
+        {
+            System.out.println("There are no Menu Items to modify.");
+        }
     }
 
     static void subtractQuantity()
     {
-        Scanner keyboard = new Scanner(System.in);
-        String userInputName = "";
-        int userInputAmount = 0;
-        boolean badInput = false;
-
-        do
+        if (inventory.getMenuItemList().length > 0)
         {
-            System.out.print("Which Menu Item would you like to change? ");
-            userInputName = keyboard.nextLine();
-            System.out.println("How much of this item would you like to remove?");
-            userInputAmount = keyboard.nextInt();
+            Scanner keyboard = new Scanner(System.in);
+            String userInputName = "";
+            int userInputAmount = 0;
+            boolean badInput = false;
 
-            // Verify that the number input is not negative.
-            if (userInputAmount >= 0)
+            do
             {
-                badInput = false;
+                System.out.print("Which Menu Item would you like to change? ");
+                userInputName = keyboard.nextLine();
+                System.out.println("How much of this item would you like to remove?");
+                userInputAmount = keyboard.nextInt();
 
-                try
+                // Verify that the number input is not negative.
+                if (userInputAmount >= 0)
                 {
-                    inventory.setMenuItemAmount(userInputName, inventory.getMenuItemAmount(userInputName) - userInputAmount);
+                    badInput = false;
+
+                    try
+                    {
+                        inventory.setMenuItemAmount(userInputName, inventory.getMenuItemAmount(userInputName) - userInputAmount);
+                    }
+                    catch (ItemNotFoundException e)
+                    {
+                        System.out.println("That is an error: " + userInputName + " is not an item in the menu.");
+                        keyboard.nextLine();
+                        badInput = true;
+                    }
+                    catch (Exception e)
+                    {
+                        System.out.println("An error has occurred: Invalid Input");
+                        keyboard.nextLine();
+                        badInput = true;
+                    }
                 }
-                catch (ItemNotFoundException e)
+                else
                 {
-                    System.out.println("That is an error: " + userInputName + " is not an item in the menu.");
+                    System.out.println("This is an error: You cannot remove a negative amount of a menu item.");
                     keyboard.nextLine();
                     badInput = true;
                 }
-                catch (Exception e)
-                {
-                    System.out.println("An error has occurred: Invalid Input");
-                    keyboard.nextLine();
-                    badInput = true;
-                }
-            }
-            else
-            {
-                System.out.println("This is an error: You cannot remove a negative amount of a menu item.");
-                keyboard.nextLine();
-                badInput = true;
-            }
-        } while(badInput);
+            } while(badInput);
 
-        System.out.println("The amount of " + userInputName + " has successfully been decreased by " + userInputAmount);
+            System.out.println("The amount of " + userInputName + " has successfully been decreased by " + userInputAmount);
+        }
+        else
+        {
+            System.out.println("There are no Menu Items to modify.");
+        }
+
     }
 
 
