@@ -26,7 +26,7 @@ public class Client {
         out = new PrintWriter(clientSocket.getOutputStream(), true);
         in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
     }
-
+    
     public CustomerResponse sendRequest() throws Exception {
         out.println(CustomerRequest.toJSON(new CustomerRequest(1)));
         return CustomerResponse.fromJSON(in.readLine());
