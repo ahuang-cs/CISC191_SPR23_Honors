@@ -21,4 +21,7 @@ public class CoffeeShopController extends CoffeeShop {
         public void showVendorData(ActionEvent e){
                 printVendor();
         }
+        public void addMenuItem(ActionEvent e) {
+                addMenuItem();
+        }
 }
