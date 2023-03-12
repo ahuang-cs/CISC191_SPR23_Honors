@@ -180,16 +180,67 @@ public class CoffeeShop extends Application {
 
     static void addMenuItem()
     {
+        // Prompt the user for input and store that input in userChoice.
+        int userChoice = showMenuItemOptions();
+
+        // Process the user input
+
+    }
+
+    /**
+     * Prompts the user to make a selection for a type of Menu Item to be added in addMenuItem().
+     * Validates user input and returns the selection.
+     * @return An integer corresponding to a specific menu option.
+     */
+    static int showMenuItemOptions()
+    {
         Scanner keyboard = new Scanner(System.in);
+        int userChoice = 0;
+        boolean badInput = false;
 
-        // Print out the MenuItem selection menu:
-        System.out.println("What type of Menu Item would you like to add?");
-        System.out.println("[1]: Coffee");
-        System.out.println("[2]: Donut");
-        System.out.println("[3]: Miscellaneous Drink");
-        System.out.println("[4]: Miscellaneous Pastry");
-        System.out.println("[5]: Other");
+        // Display the menu and retrieve user input until a proper value has been reached.
+        do
+        {
+            badInput = false;
 
+            System.out.println("What type of Menu Item would you like to add?");
+            System.out.println("[1]: Coffee");
+            System.out.println("[2]: Donut");
+            System.out.println("[3]: Miscellaneous Drink");
+            System.out.println("[4]: Miscellaneous Pastry");
+            System.out.println("[5]: Other");
+            System.out.print("Enter the number of your choice, then press <ENTER>: ");
+
+            // Receive and validate user input.
+            try
+            {
+                userChoice = keyboard.nextInt();
+            }
+            catch(InputMismatchException e)
+            {
+                System.out.println("The value you entered is not an integer. Please enter an integer from 1 - 5.");
+                keyboard.nextLine();
+                badInput = true;
+            }
+            catch(Exception e)
+            {
+                System.out.println("An error has occurred; Please enter an integer from 1-5.");
+                keyboard.nextLine();
+                badInput = true;
+            }
+
+            // Make sure the user input is from 1-5.
+            if (!badInput && ((userChoice < 1) || (userChoice > 5)))
+            {
+                System.out.println(userChoice + " is not a valid option.");
+                System.out.println("Please select a valid menu option from [1] to [5].");
+                keyboard.nextLine();
+                badInput = true;
+            }
+
+        } while (badInput);
+
+        return userChoice;
     }
 
     @Override
