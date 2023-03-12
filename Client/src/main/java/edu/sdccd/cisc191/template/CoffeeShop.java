@@ -134,19 +134,27 @@ public class CoffeeShop extends Application {
 
             do
             {
-                System.out.print("Which Menu Item would you like to change? ");
-                userInputName = keyboard.nextLine();
-
                 badInput = false;
 
-                // Validate userInputName input.
+                System.out.print("Which Menu Item would you like to change? ");
+                userInputName = keyboard.nextLine();
+                System.out.println("How much of this item would you like to remove?");
+
+                // Validate user input.
                 try
                 {
+                    userInputAmount = keyboard.nextInt();
                     inventory.setMenuItemAmount(userInputName, inventory.getMenuItemAmount(userInputName) - userInputAmount);
                 }
                 catch (ItemNotFoundException e)
                 {
                     System.out.println("That is an error: " + userInputName + " is not an item in the menu.");
+                    keyboard.nextLine();
+                    badInput = true;
+                }
+                catch(InputMismatchException e)
+                {
+                    System.out.println("The value you entered is not an integer. Please enter a positive integer value.");
                     keyboard.nextLine();
                     badInput = true;
                 }
@@ -157,27 +165,7 @@ public class CoffeeShop extends Application {
                     badInput = true;
                 }
 
-                // Validate userInputAmount
-                System.out.println("How much of this item would you like to remove?");
-                try
-                {
-                    userInputAmount = keyboard.nextInt();
-                }
-                catch(InputMismatchException e)
-                {
-                    System.out.println("The value you entered is not an integer. Please enter a positive integer value.");
-                    keyboard.nextLine();
-                    badInput = true;
-                }
-                catch(Exception e)
-                {
-                    System.out.println("An error has occurred. Please enter a positive integer.");
-                    keyboard.nextLine();
-                    badInput = true;
-                }
-
-
-                if (!badInput && userInputAmount <= 0) {
+                if (!badInput && userInputAmount < 0) {
                     // Do nothing yet
                     System.out.println("This is an error: You cannot remove a negative amount of a menu item.");
                     keyboard.nextLine();
