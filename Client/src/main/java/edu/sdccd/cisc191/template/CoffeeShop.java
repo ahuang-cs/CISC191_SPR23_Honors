@@ -139,27 +139,32 @@ public class CoffeeShop extends Application {
                 System.out.println("How much of this item would you like to remove?");
                 userInputAmount = keyboard.nextInt();
 
-                // Verify that the number input is not negative.
+                badInput = false;
+
+                // Validate userInputName input.
+                try
+                {
+                    inventory.setMenuItemAmount(userInputName, inventory.getMenuItemAmount(userInputName) - userInputAmount);
+                }
+                catch (ItemNotFoundException e)
+                {
+                    System.out.println("That is an error: " + userInputName + " is not an item in the menu.");
+                    keyboard.nextLine();
+                    badInput = true;
+                }
+                catch (Exception e)
+                {
+                    System.out.println("An error has occurred: Invalid Input");
+                    keyboard.nextLine();
+                    badInput = true;
+                }
+
+                // Validate userInputAmount
+
+
                 if (userInputAmount >= 0)
                 {
-                    badInput = false;
-
-                    try
-                    {
-                        inventory.setMenuItemAmount(userInputName, inventory.getMenuItemAmount(userInputName) - userInputAmount);
-                    }
-                    catch (ItemNotFoundException e)
-                    {
-                        System.out.println("That is an error: " + userInputName + " is not an item in the menu.");
-                        keyboard.nextLine();
-                        badInput = true;
-                    }
-                    catch (Exception e)
-                    {
-                        System.out.println("An error has occurred: Invalid Input");
-                        keyboard.nextLine();
-                        badInput = true;
-                    }
+                    // Do nothing yet
                 }
                 else
                 {
