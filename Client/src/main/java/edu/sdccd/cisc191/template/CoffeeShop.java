@@ -232,82 +232,58 @@ public class CoffeeShop extends Application {
         // Prompt the user for input and store that input in userChoice.
         int userChoice = showMenuItemOptions();
 
+        System.out.print("Enter the name of this Menu Item: ");
+        String itemName = keyboard.nextLine();
+        System.out.print("Enter the sale price: ");
+        double itemPrice = keyboard.nextDouble();
+        System.out.println("Enter the amount of this Menu Item to be added to the inventory: ");
+        int itemAmount = keyboard.nextInt();
+
         // Process the user input
         switch (userChoice)
         {
             case 1:
             {
-                Coffee newCoffee = new Coffee();
-
-                System.out.print("Enter the name of this Menu Item: ");
-                newCoffee.setName(keyboard.nextLine());
-                System.out.print("Enter the sale price: ");
-                newCoffee.setSalePrice(keyboard.nextDouble());
-                System.out.println("Enter the amount of this Menu Item to be added to the inventory: ");
-
-                inventory.addMenuItem(newCoffee, keyboard.nextInt());
-
-                System.out.println(newCoffee.getName() + " has been successfully added to the inventory.");
-
+                Coffee newItem = new Coffee();
+                newItem.setName(itemName);
+                newItem.setSalePrice(itemPrice);
+                inventory.addMenuItem(newItem, itemAmount);
+                System.out.println(newItem.getName() + " has been successfully added to the inventory.");
                 break;
             }
             case 2:
             {
-                Donut newDonut = new Donut();
-
-                System.out.print("Enter the name of this Menu Item: ");
-                newDonut.setName(keyboard.nextLine());
-                System.out.print("Enter the sale price: ");
-                newDonut.setSalePrice(keyboard.nextDouble());
-                System.out.println("Enter the amount of this Menu Item to be added to the inventory: ");
-
-                inventory.addMenuItem(newDonut, keyboard.nextInt());
-
-                System.out.println(newDonut.getName() + " has been successfully added to the inventory.");
+                Donut newItem = new Donut();
+                newItem.setName(itemName);
+                newItem.setSalePrice(itemPrice);
+                inventory.addMenuItem(newItem, itemAmount);
+                System.out.println(newItem.getName() + " has been successfully added to the inventory.");
                 break;
             }
             case 3:
             {
-                Drink newDrink = new Drink();
-
-                System.out.print("Enter the name of this Menu Item: ");
-                newDrink.setName(keyboard.nextLine());
-                System.out.print("Enter the sale price: ");
-                newDrink.setSalePrice(keyboard.nextDouble());
-                System.out.println("Enter the amount of this Menu Item to be added to the inventory: ");
-
-                inventory.addMenuItem(newDrink, keyboard.nextInt());
-
-                System.out.println(newDrink.getName() + " has been successfully added to the inventory.");
+                Drink newItem = new Drink();
+                newItem.setName(itemName);
+                newItem.setSalePrice(itemPrice);
+                inventory.addMenuItem(newItem, itemAmount);
+                System.out.println(newItem.getName() + " has been successfully added to the inventory.");
                 break;
             }
             case 4:
             {
-                Pastry newPastry = new Pastry();
-
-                System.out.print("Enter the name of this Menu Item: ");
-                newPastry.setName(keyboard.nextLine());
-                System.out.print("Enter the sale price: ");
-                newPastry.setSalePrice(keyboard.nextDouble());
-                System.out.println("Enter the amount of this Menu Item to be added to the inventory: ");
-
-                inventory.addMenuItem(newPastry, keyboard.nextInt());
-
-                System.out.println(newPastry.getName() + " has been successfully added to the inventory.");
+                Pastry newItem = new Pastry();
+                newItem.setName(itemName);
+                newItem.setSalePrice(itemPrice);
+                inventory.addMenuItem(newItem, itemAmount);
+                System.out.println(newItem.getName() + " has been successfully added to the inventory.");
                 break;
             }
             case 5:
             {
                 MenuItem newItem = new MenuItem();
-
-                System.out.print("Enter the name of this Menu Item: ");
-                newItem.setName(keyboard.nextLine());
-                System.out.print("Enter the sale price: ");
-                newItem.setSalePrice(keyboard.nextDouble());
-                System.out.println("Enter the amount of this Menu Item to be added to the inventory: ");
-
-                inventory.addMenuItem(newItem, keyboard.nextInt());
-
+                newItem.setName(itemName);
+                newItem.setSalePrice(itemPrice);
+                inventory.addMenuItem(newItem, itemAmount);
                 System.out.println(newItem.getName() + " has been successfully added to the inventory.");
                 break;
             }
