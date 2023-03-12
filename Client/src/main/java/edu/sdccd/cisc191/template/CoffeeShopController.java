@@ -13,10 +13,10 @@ public class CoffeeShopController extends CoffeeShop {
                printAllMenuItems();
         }
         public void addItemQuantity(ActionEvent a) {
-                addQuantity();
+                addItemQuantity();
         }
         public void removeItemQuantity(ActionEvent a) {
-                subtractQuantity();
+                subtractItemQuantity();
         }
         public void showVendorData(ActionEvent e){
                 printVendor();

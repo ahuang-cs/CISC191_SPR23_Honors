@@ -59,7 +59,7 @@ public class CoffeeShop extends Application {
         }
     }
 
-    static void addQuantity()
+    static void addItemQuantity()
     {
         // Verify that there exist menu items to modify
         if (inventory.getMenuItemList().length > 0)
@@ -114,7 +114,7 @@ public class CoffeeShop extends Application {
         }
     }
 
-    static void subtractQuantity()
+    static void subtractItemQuantity()
     {
         if (inventory.getMenuItemList().length > 0)
         {
@@ -168,6 +168,8 @@ public class CoffeeShop extends Application {
         }
 
     }
+
+
 
 
 
