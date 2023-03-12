@@ -27,6 +27,15 @@ public class CoffeeShop extends Application {
     public static void main(String[] args) {
 
         inventory = new InventoryManager();
+
+        MenuItem cake = new MenuItem("Cake", 12.00);
+        MenuItem pie = new MenuItem("Pie", 16.99);
+        MenuItem lemonade = new MenuItem("Lemonade", 3.99);
+
+        inventory.addMenuItem(cake, 2);
+        inventory.addMenuItem(pie, 3);
+        inventory.addMenuItem(lemonade, 20);
+
         launch(args);
 
     }
@@ -71,7 +80,7 @@ public class CoffeeShop extends Application {
 
             do
             {
-                System.out.print("Which menu item would you like to add? ");
+                System.out.print("Which menu item would you like to change? ");
                 userInputName = keyboard.nextLine();
                 System.out.print("How much of this item would you like to add? ");
                 userInputAmount = keyboard.nextInt();

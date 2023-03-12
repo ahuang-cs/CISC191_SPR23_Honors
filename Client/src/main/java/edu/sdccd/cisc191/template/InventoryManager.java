@@ -58,6 +58,10 @@ public class InventoryManager
 
     // Maps all MenuItems in MenuItemList to the amount that is available.
     //      - Column 0 is the menuItem index, column 1 is the amount of that menu item available.
+    //
+    //      [Index of Item 1] [Amount of Item 1]
+    //      [Index of Item 2] [Amount of Item 2]
+    //      [Index of Item 3] [Amount of Item 3]
     private int[][] menuItemInventory;
 
     // Maps all MenuItems in MenuItemList to a set of ingredients in IngredientList.
