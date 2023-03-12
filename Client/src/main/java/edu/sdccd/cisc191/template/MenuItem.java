@@ -31,7 +31,6 @@ public class MenuItem
 {
     private String itemName;            // Name of this menuItem (Cannot be changed later)
     private double salePrice;           // Price of menu item
-    private ArrayList<String> recipe;   // Holds ingredients to make this menuItem
 
     /**
      * Default Constructor
@@ -41,7 +40,7 @@ public class MenuItem
     {
         itemName = "";
         salePrice = 0.0;
-        recipe = new ArrayList<>();
+
     }
 
     /**
@@ -52,80 +51,7 @@ public class MenuItem
     {
         this.itemName = name;
         this.salePrice = salePrice;
-        recipe = new ArrayList<>();
     }
-
-    /**
-     * Adds an ingredient to a MenuItem's recipe
-     * @param ingredient The ingredient to be added to the menu item's recipe.
-     */
-    public void addToRecipe(String ingredient)
-    {
-        // Check whether the recipe already contains the specified ingredient.
-        if (!(recipe.contains(ingredient)))
-        {
-            // If the ingredient is not already in the array, add it.
-            recipe.add(ingredient);
-        }
-
-
-        // TODO:    Consider throwing an exception when trying to add ingredients that are already there.
-
-        // TODO:    Change this method to include Ingredient objects instead of Strings.
-    }
-
-    /**
-     * Removes an ingredient from the recipe.
-     * @param ingredient The ingredient to be removed.
-     */
-    public void removeFromRecipe(String ingredient)
-    {
-        // Check whether the ingredient is in the recipe array.
-        if (recipe.contains(ingredient))
-        {
-            // If the ingredient is in the recipe array, remove it.
-            recipe.remove(ingredient);
-        } else if (!(recipe.contains(ingredient))) {
-            System.out.println("This ingredient does not exist in this recipe.");
-        }
-
-        // TODO: Consider throwing an exception when trying to remove an ingredient that is not in the recipe
-
-        // TODO: Change this method to include Ingredient objects instead of Strings.
-    }
-
-    /**
-     * Deletes all ingredients within the Recipe ArrayList.
-     */
-    public void clearRecipe()
-    {
-        recipe.clear();
-    }
-
-    /**
-     * Returns a list of ingredients to make the menu item as an array.
-     * TODO: Review implementation (Do we want to return array, individual ingredients, etc.)
-     * @return An ArrayList of ingredients to make the menu item.
-     */
-    public String[] getRecipe()
-    {
-        // For security reasons, we want to limit other classes from having access to our recipe ArrayList.
-        // This method transfers the recipe into a separate array for access outside of this class.
-        // That way, this method can only read from the ArrayList.
-
-        // Create a new array
-        String[] ingredientList = new String[recipe.size()];
-
-        // Transfer each element of the recipe ArrayList to the corresponding index of the new array.
-        for (int i = 0; i < recipe.size(); i++)
-        {
-            ingredientList[i] = recipe.get(i);
-        }
-
-        // Return the new array.
-        return ingredientList;
-    }
-
 
 
     /**
