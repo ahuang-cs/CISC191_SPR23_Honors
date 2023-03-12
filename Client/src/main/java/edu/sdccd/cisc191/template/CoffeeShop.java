@@ -7,8 +7,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -50,7 +48,7 @@ public class CoffeeShop extends Application {
             }
 
             System.out.println("**********************************************************************");
-            System.out.println("");
+            System.out.println("\n");
         }
     }
 
@@ -443,56 +441,3 @@ public class CoffeeShop extends Application {
         System.out.println("\n");
     }
 }
-
-
-
-
-        /*
-        //        int option = 0;
-//        while (true) {
-//            option = displayMenu();-=
-//            switch (option) {
-//                case 1:
-//                    printAll(); //Display the items
-//                    break;
-//                case 2:
-//                    addQuantity(); //add to the item quantity
-//                    break;
-//                case 3:
-//                    subtractQuantity(); //subtract the item quantity
-//                    break;
-//                case 4:
-//                    System.out.println("Exiting...");
-//                    System.exit(0);
-//                default:
-//                    System.out.println("Invalid choice, try again");
-//                    break;
-//            }
-//        }
-
-
-        scene1 = new Scene(layout1, 800, 400);
-
-        //Button 5, 6, 7, 8 in scene2
-        Button button5 = new Button("Back");
-        button5.setOnAction(e -> window.setScene(scene1));//When we click on the button, the scene changes to scene 1
-        Button button6 = new Button("Drink");
-       // button6.setOnAction(e -> new Drink());
-        Button button7 = new Button("Pastry");
-       // button7.setOnAction(e -> new Pastry());
-        Button button8 = new Button("exit");
-        button8.setOnAction(e -> window.close());
-
-        //Layout 2
-        Stage window2 = new Stage();
-        VBox layout2 = new VBox (20);
-        layout2.getChildren().addAll(button5,button6,button7,button8);
-
-        scene2 = new Scene(layout2,600, 300);
-
-        window.setScene(scene1);
-        window2.setScene(scene2);
-        window.setTitle("SDCCD CAFETERIA");
-        window.show();
-
-         */
