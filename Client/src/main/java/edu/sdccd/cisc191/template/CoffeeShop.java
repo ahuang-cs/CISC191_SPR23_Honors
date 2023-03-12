@@ -27,28 +27,10 @@ public class CoffeeShop extends Application {
     public static void main(String[] args) {
 
         inventory = new InventoryManager();
-
-        //if its the users first time using the program,we can make a method where if the array length
-        //is less than 0, it would print out "no items added right now"
-       launch(args);
+        launch(args);
 
     }
-/*
-   static void displayMenu() {
-        System.out.println("**************INVENTORY************");
-        for (int i = 0; i < navMenu.length; i++) {
-            for (int j = 0; j < navMenu[i].length; j++) {
-                System.out.print((navMenu[i][j]) + "\t");
-            }
-            System.out.print("\n");
-        }
-        System.out.println("********************************\n");
-        System.out.println("Enter choice");
-        //Scanner scanner = new Scanner(System.in);
-       // int choice = scanner.nextInt();
-       // return choice;
-    }
-*/
+
     static void printAllMenuItems() throws ItemNotFoundException
     {
         MenuItem[] menuItems = inventory.getMenuItemList();
@@ -95,6 +77,7 @@ public class CoffeeShop extends Application {
     static void addQuantity()
     {
         Scanner keyboard = new Scanner(System.in);
+        String userInput = "";
 
         System.out.println("Which menu item would you like to add?");
 
