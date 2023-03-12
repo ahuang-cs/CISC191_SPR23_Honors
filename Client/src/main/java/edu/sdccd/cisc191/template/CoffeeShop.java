@@ -46,16 +46,18 @@ public class CoffeeShop extends Application {
             String menuItemName = "";
             double menuItemPrice = 0.0;
 
-            System.out.println("*************** Menu Items ***************");
+            System.out.println("***************************** Menu Items *****************************");
 
-            System.out.println("Menu Item:             Quantity:  Price:  ");
+            System.out.println("Menu Item:                                         Quantity:  Price:  ");
 
             for (int i = 0; i < menuItems.length; i++)
             {
                 menuItemName = menuItems[i].getName();
                 menuItemPrice = menuItems[i].getSalePrice();
-                System.out.printf("%-22s %-10d %.2f\n", menuItemName, inventory.getMenuItemAmount(menuItemName), menuItemPrice);
+                System.out.printf("%-50s %-10d %.2f\n", menuItemName, inventory.getMenuItemAmount(menuItemName), menuItemPrice);
             }
+
+            System.out.println("**********************************************************************");
             System.out.println("");
         }
     }
