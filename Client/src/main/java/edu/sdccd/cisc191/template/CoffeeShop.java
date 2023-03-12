@@ -28,15 +28,6 @@ public class CoffeeShop extends Application {
 
         inventory = new InventoryManager();
 
-        Coffee coffeeTest = new Coffee();
-        coffeeTest.setName("Coffee");
-        Coffee otherCoffee = new Coffee();
-        otherCoffee.setName("Coffee Premium");
-
-        inventory.addMenuItem(coffeeTest, 20);
-        inventory.addMenuItem(otherCoffee, 15);
-
-
         //if its the users first time using the program,we can make a method where if the array length
         //is less than 0, it would print out "no items added right now"
        launch(args);
@@ -101,7 +92,11 @@ public class CoffeeShop extends Application {
 
     }
 
-    static void addQuantity() {
+    static void addQuantity()
+    {
+
+
+        /*
         Scanner scanner1 = new Scanner(System.in);
         System.out.print("Which item number would you like to add? ");
         try {
@@ -124,6 +119,8 @@ public class CoffeeShop extends Application {
         catch(InputMismatchException ime) {
             System.out.println("Your input is invalid, please try again");
         }
+
+         */
     }
 
     static void subtractQuantity() {
