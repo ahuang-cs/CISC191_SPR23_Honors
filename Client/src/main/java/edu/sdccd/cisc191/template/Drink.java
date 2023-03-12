@@ -34,7 +34,6 @@ package edu.sdccd.cisc191.template;
 public class Drink extends MenuItem {
 
     private String size;        // Drink size (Small, Medium, Large)
-    private int volume;         // Number of ounces that this drink contains.
     private boolean isHot;      // Whether the drink is hot (true) or cold (false).
 
     // Default Constructor
@@ -63,20 +62,7 @@ public class Drink extends MenuItem {
      */
     public void setSize(String newSize)
     {
-        // TODO:    Validate user input for acceptable values (small, medium, large, etc.) (FOR REVIEW)
-        //          Discard other values and throw error.
-        // TODO:    Set volume of drink according to size (Perhaps based on a static final 2D array) (FOR REVIEW)
         size = newSize;
-    }
-
-    /**
-     * This method changes the volume of the drink to a specified numerical value (oz).
-     * @param newVolume The volume of the drink in ounces.
-     */
-    public void setVolume(int newVolume)
-    {
-        // TODO: Set size of drink if it matches a value in the table? (FOR REVIEW)
-        volume = newVolume;
     }
 
     /**
@@ -99,15 +85,6 @@ public class Drink extends MenuItem {
     }
 
     /**
-     * This method returns the volume in ounces of a drink object
-     * @return The volume of the drink in ounces.
-     */
-    public int getVolume()
-    {
-        return volume;
-    }
-
-    /**
      * This method returns true if the drink is hot, otherwise it will return false.
      * @return Boolean representing whether or not the drink is hot.
      */
@@ -115,11 +92,6 @@ public class Drink extends MenuItem {
     {
         return isHot;
     }
-
-
-
-
-
 
     /**
      * String representation of this drink object.
@@ -130,5 +102,4 @@ public class Drink extends MenuItem {
         // TODO: Edit this as needed.
         return size + " " + this.getName();
     }
-
 }
