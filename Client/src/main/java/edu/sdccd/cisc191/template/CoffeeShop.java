@@ -28,14 +28,6 @@ public class CoffeeShop extends Application {
 
         inventory = new InventoryManager();
 
-        MenuItem cake = new MenuItem("Cake", 12.00);
-        MenuItem pie = new MenuItem("Pie", 16.99);
-        MenuItem lemonade = new MenuItem("Lemonade", 3.99);
-
-        inventory.addMenuItem(cake, 2);
-        inventory.addMenuItem(pie, 3);
-        inventory.addMenuItem(lemonade, 20);
-
         launch(args);
 
     }
@@ -184,10 +176,91 @@ public class CoffeeShop extends Application {
 
     static void addMenuItem()
     {
+        Scanner keyboard = new Scanner(System.in);
+
         // Prompt the user for input and store that input in userChoice.
         int userChoice = showMenuItemOptions();
 
         // Process the user input
+        switch (userChoice)
+        {
+            case 1:
+            {
+                Coffee newCoffee = new Coffee();
+
+                System.out.print("Enter the name of this Menu Item: ");
+                newCoffee.setName(keyboard.nextLine());
+                System.out.print("Enter the sale price: ");
+                newCoffee.setSalePrice(keyboard.nextDouble());
+                System.out.println("Enter the amount of this Menu Item to be added to the inventory: ");
+
+                inventory.addMenuItem(newCoffee, keyboard.nextInt());
+
+                System.out.println(newCoffee.getName() + " has been successfully added to the inventory.");
+
+                break;
+            }
+            case 2:
+            {
+                Donut newDonut = new Donut();
+
+                System.out.print("Enter the name of this Menu Item: ");
+                newDonut.setName(keyboard.nextLine());
+                System.out.print("Enter the sale price: ");
+                newDonut.setSalePrice(keyboard.nextDouble());
+                System.out.println("Enter the amount of this Menu Item to be added to the inventory: ");
+
+                inventory.addMenuItem(newDonut, keyboard.nextInt());
+
+                System.out.println(newDonut.getName() + " has been successfully added to the inventory.");
+                break;
+            }
+            case 3:
+            {
+                Drink newDrink = new Drink();
+
+                System.out.print("Enter the name of this Menu Item: ");
+                newDrink.setName(keyboard.nextLine());
+                System.out.print("Enter the sale price: ");
+                newDrink.setSalePrice(keyboard.nextDouble());
+                System.out.println("Enter the amount of this Menu Item to be added to the inventory: ");
+
+                inventory.addMenuItem(newDrink, keyboard.nextInt());
+
+                System.out.println(newDrink.getName() + " has been successfully added to the inventory.");
+                break;
+            }
+            case 4:
+            {
+                Pastry newPastry = new Pastry();
+
+                System.out.print("Enter the name of this Menu Item: ");
+                newPastry.setName(keyboard.nextLine());
+                System.out.print("Enter the sale price: ");
+                newPastry.setSalePrice(keyboard.nextDouble());
+                System.out.println("Enter the amount of this Menu Item to be added to the inventory: ");
+
+                inventory.addMenuItem(newPastry, keyboard.nextInt());
+
+                System.out.println(newPastry.getName() + " has been successfully added to the inventory.");
+                break;
+            }
+            case 5:
+            {
+                MenuItem newItem = new MenuItem();
+
+                System.out.print("Enter the name of this Menu Item: ");
+                newItem.setName(keyboard.nextLine());
+                System.out.print("Enter the sale price: ");
+                newItem.setSalePrice(keyboard.nextDouble());
+                System.out.println("Enter the amount of this Menu Item to be added to the inventory: ");
+
+                inventory.addMenuItem(newItem, keyboard.nextInt());
+
+                System.out.println(newItem.getName() + " has been successfully added to the inventory.");
+                break;
+            }
+        }
 
     }
 
