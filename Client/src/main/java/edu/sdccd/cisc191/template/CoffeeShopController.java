@@ -3,9 +3,6 @@ package edu.sdccd.cisc191.template;
 
 import javafx.event.ActionEvent;
 
-import java.util.InputMismatchException;
-import java.util.Scanner;
-
 public class CoffeeShopController extends CoffeeShop {
 
         public void displayMenu(ActionEvent a) throws ItemNotFoundException
