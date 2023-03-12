@@ -76,7 +76,16 @@ public class CoffeeShop extends Application {
 
             try
             {
-                inventory.setMenuItemAmount(userInputName, userInputAmount + inventory.getMenuItemAmount(userInputName));
+                // Check to make sure that the user isn't trying to enter a negative amount.
+                if (userInputAmount >= 0)
+                {
+                    inventory.setMenuItemAmount(userInputName, userInputAmount + inventory.getMenuItemAmount(userInputName));
+                }
+                else
+                {
+                    System.out.println("That is an error; You cannot add a negative amount of a menu item.");
+                    badInput = true;
+                }
             }
             catch (ItemNotFoundException e)
             {
