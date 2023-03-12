@@ -14,8 +14,33 @@ package edu.sdccd.cisc191.template;
 public class Donut extends Pastry{
 
     public boolean hasSprinkles;        //Whether the donut has sprinkles or not
-    public boolean isGlazed;            //Whether the donut is glazed or not
-    public boolean hasFilling;          //Whether the donut has filled or not
-    public String fillingType;          //The type of the filling(Jelly, Boston Creme)
+    public boolean hasIcing;            //Whether the donut is glazed or not
 
+    // Default Constructor
+    public Donut()
+    {
+        super();
+        hasSprinkles = false;
+        hasIcing = false;
+    }
+
+    public boolean getHasSprinkles()
+    {
+        return hasSprinkles;
+    }
+
+    public void setHasSprinkles(boolean hasSprinkles)
+    {
+        this.hasSprinkles = hasSprinkles;
+    }
+
+    public boolean hasIcing()
+    {
+        return hasIcing;
+    }
+
+    public void setHasIcing(boolean iced)
+    {
+        hasIcing = iced;
+    }
 }
