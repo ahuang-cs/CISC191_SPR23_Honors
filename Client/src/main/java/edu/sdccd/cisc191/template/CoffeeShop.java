@@ -144,6 +144,22 @@ public class CoffeeShop extends Application {
             e.printStackTrace();
         }
     }
+    static void printVendor() {
+        System.out.println("Index\t" + "Vendor Name\t\t" + "Item Name\t\t" + "Unit\t" + "Quantity\t" + "Note");
+        Vendors costco = new Vendors("Costco");
+        VendorData costcoCSV = new VendorDataCSV(costco);
+        int count = 1;
+
+        for (VendorIngredientPrices vendorIngredientPrice : costcoCSV.importVendorIngredients()) {
+            System.out.println("\t" + count+ "\t" + vendorIngredientPrice.getVendor().getName() + "\t\t\t"
+                    + vendorIngredientPrice.getIngredient().getIngredientName() + "\t\t"
+                    + vendorIngredientPrice.getIngredient().getUnit() + "\t\t"
+                    + vendorIngredientPrice.getIngredient().getQuantity() + "\t\t");
+            count++;
+
+        }
+        System.out.println("\n");
+    }
 }
 
 
