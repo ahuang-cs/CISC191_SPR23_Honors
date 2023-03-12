@@ -136,8 +136,6 @@ public class CoffeeShop extends Application {
             {
                 System.out.print("Which Menu Item would you like to change? ");
                 userInputName = keyboard.nextLine();
-                System.out.println("How much of this item would you like to remove?");
-                userInputAmount = keyboard.nextInt();
 
                 badInput = false;
 
@@ -179,12 +177,8 @@ public class CoffeeShop extends Application {
                 }
 
 
-                if (userInputAmount >= 0)
-                {
+                if (!badInput && userInputAmount >= 0) {
                     // Do nothing yet
-                }
-                else
-                {
                     System.out.println("This is an error: You cannot remove a negative amount of a menu item.");
                     keyboard.nextLine();
                     badInput = true;
