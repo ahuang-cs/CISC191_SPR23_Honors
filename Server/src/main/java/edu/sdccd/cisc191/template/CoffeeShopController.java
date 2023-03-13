@@ -6,7 +6,7 @@ import javafx.event.ActionEvent;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class CoffeeShopController extends CoffeeShop {
+public class CoffeeShopController extends Server {
 
         public void displayMenu(ActionEvent a) throws ItemNotFoundException
         {
