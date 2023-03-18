@@ -1,11 +1,14 @@
 package edu.sdccd.cisc191.template;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * This will  be the base class that holds a Menu Objects Ingredient List.
  */
 public class Recipe {
     private ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
+
+    HashMap<Ingredient,Double> ingredientAmount = new HashMap<>();
 
     // Default constructor.
     public Recipe(){}
