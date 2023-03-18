@@ -5,6 +5,7 @@ public class MenuItem
     private String itemName;
     private double salePrice;
 
+
     /**
      * Default Constructor
      * Fills all fields with empty known values.
