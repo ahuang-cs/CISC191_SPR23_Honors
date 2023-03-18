@@ -21,4 +21,9 @@ public class CoffeeShopController extends CoffeeShop {
         public void addMenuItem(ActionEvent e) {
                 addMenuItem();
         }
+        public void displayIngredients(ActionEvent e) {System.out.println("Displaying ingredients");}
+        public void addNewIngredient(ActionEvent e) {System.out.println("Adding new ingredient...");}
+        public void removeIngredient(ActionEvent e) {
+                System.out.println("Removing ingredient...");
+        }
 }

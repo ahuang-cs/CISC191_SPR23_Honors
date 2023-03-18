@@ -40,5 +40,20 @@
             <Font name="Didot" size="16.0" />
          </font>
       </Button>
+      <Button fx:id="displayIngredients" alignment="CENTER" contentDisplay="CENTER" layoutX="11.0" layoutY="200.0" mnemonicParsing="false" onAction="#displayIngredients" text="Display Ingredients" textAlignment="CENTER">
+         <font>
+            <Font name="Didot" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="addNewIngredient" alignment="CENTER" contentDisplay="CENTER" layoutX="141.0" layoutY="200.0" mnemonicParsing="false" onAction="#addNewIngredient" text="Add New Ingredient" textAlignment="CENTER">
+         <font>
+            <Font name="Didot" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="removeIngredient" alignment="CENTER" contentDisplay="CENTER" layoutX="307.0" layoutY="200.0" mnemonicParsing="false" onAction="#removeIngredient" text="Remove Ingredient" textAlignment="CENTER">
+         <font>
+            <Font name="Didot" size="16.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
