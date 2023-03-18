@@ -1,5 +1,7 @@
 package edu.sdccd.cisc191.template;
 
+import java.util.ArrayList;
+
 public class InventoryManager
 {
     // ************************ DATA ***********************
@@ -34,6 +36,7 @@ public class InventoryManager
     public InventoryManager()
     {
         // A new inventory should start with no ingredients or menuItems
+        ingredientInventoryList = new ArrayList<>();
         ingredientList = new String[0];
         menuItemList = new MenuItem[0];
 
@@ -88,49 +91,16 @@ public class InventoryManager
     /**
      * Adds an ingredient to ingredientInventoryList and ingredientInventory if it is not already present.
      * @param ingredient The ingredient to be added
-     * @param amount The amount of the ingredient to be added to the inventory.
      */
     public void addIngredient(Ingredient ingredient)
     {
-        int ingredientIndex = 0;        // Stores the index of the ingredient if present (-1 if not)
-
-        // Search for the ingredient in the array.
-        ingredientIndex = findIngredient(ingredient);
-
-        if (ingredientIndex == -1)
+        if(!ingredientInventoryList.contains(ingredient))
         {
-            // The ingredient is not already present in the array; Space needs to be made.
-
-            // We cannot dynamically allocate space in these arrays, so we will move all data to a new, larger array
-            String[] newIngredientList = new String[ingredientList.length + 1];
-            int[][] newIngredientInventory = new int[ingredientList.length + 1][2];
-
-            // Copy all existing data to the new arrays.
-            for (int i = 0; i < ingredientList.length; i++)
-            {
-                newIngredientList[i] = ingredientList[i];
-                newIngredientInventory[i][0] = ingredientInventory[i][0];
-                newIngredientInventory[i][1] = ingredientInventory[i][1];
-            }
-
-            // Add the new ingredient in all lowercase to remove case sensitivity.
-            newIngredientList[newIngredientList.length - 1] = ingredient.toLowerCase();
-
-            // Map the index of the ingredient in the first element of the inventory row.
-            newIngredientInventory[newIngredientList.length - 1][0] = newIngredientList.length - 1;
-
-            // Store the amount of the ingredient in the second element of the inventory row.
-            newIngredientInventory[newIngredientList.length - 1][1] = amount;
-
-            // Replace the original arrays with the new arrays containing the new ingredient.
-            ingredientList = newIngredientList;
-            ingredientInventory = newIngredientInventory;
+            ingredientInventoryList.add(ingredient);
         }
         else
         {
-            // The ingredient is already present in the array.
-            // Increment the quantity stored in the inventory array by amount.
-            ingredientInventory[ingredientIndex][1] += amount;
+            System.out.println("Can't add ingredient " + ingredient.getIngredientName() + " ingredient already present.");
         }
     }
 
@@ -143,23 +113,12 @@ public class InventoryManager
      */
     public void setIngredientAmount(Ingredient ingredient, int amount) throws ItemNotFoundException
     {
-        int ingredientIndex = 0;        // The index of the ingredient which we want to alter.
+        // End goal: Change the stored amount of a menu item
 
-        // Search for the ingredient in the ingredientList array.
-        ingredientIndex = findIngredient(ingredient);
-
-        // Verify that the ingredient we want to alter is actually in the array.
-        if (ingredientIndex != -1)
-        {
-            // If the ingredient is present, set the corresponding value in the inventory to amount.
-            ingredientInventory[ingredientIndex][1] = amount;
-        }
-        else
-        {
-            // The ingredient is not present in the array.
-            // Throw an ItemNotFound exception.
-            throw new ItemNotFoundException();
-        }
+        // Step 1:
+        // Step 2:
+        // Step 3:
+        // Step 4:
     }
 
 
