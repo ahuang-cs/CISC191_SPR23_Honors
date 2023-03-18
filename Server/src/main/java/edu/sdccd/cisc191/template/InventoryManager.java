@@ -4,7 +4,10 @@ public class InventoryManager
 {
     // ************************ DATA ***********************
 
+    // Change to array list.
     // Holds a list of all ingredients as strings.
+    public ArrayList<Ingredient> ingredientInventoryList;
+
     private String[] ingredientList;
 
     // Holds a list of all menu items.
@@ -12,6 +15,7 @@ public class InventoryManager
 
     // Maps all ingredients in ingredientList to the amount that is in storage.
     //      - Column 0 is ingredient index, column 1 is amount of that ingredient.
+    // remove this and everything that uses it
     private int[][] ingredientInventory;
 
     // Maps all MenuItems in MenuItemList to the amount that is available.
@@ -41,6 +45,7 @@ public class InventoryManager
 
 
 
+    // change this to work with the array list
     // ******************** Ingredient Methods ********************
 
     /**
@@ -81,12 +86,11 @@ public class InventoryManager
     }
 
     /**
-     * Adds an ingredient to ingredientList and ingredientInventory if it is not already present.
-     * If the ingredient is already there, it will just add the amount to the ingredientInventory.
+     * Adds an ingredient to ingredientInventoryList and ingredientInventory if it is not already present.
      * @param ingredient The ingredient to be added
      * @param amount The amount of the ingredient to be added to the inventory.
      */
-    public void addIngredient(String ingredient, int amount)
+    public void addIngredient(Ingredient ingredient)
     {
         int ingredientIndex = 0;        // Stores the index of the ingredient if present (-1 if not)
 
@@ -130,13 +134,14 @@ public class InventoryManager
         }
     }
 
+    //change to work with the array list
     /**
      * Directly sets the amount of an ingredient.
      * @param ingredient The ingredient whose amount will be changed
      * @param amount The new amount of the ingredient.
      * @throws ItemNotFoundException Thrown when changing the amount of an ingredient that does not exist.
      */
-    public void setIngredientAmount(String ingredient, int amount) throws ItemNotFoundException
+    public void setIngredientAmount(Ingredient ingredient, int amount) throws ItemNotFoundException
     {
         int ingredientIndex = 0;        // The index of the ingredient which we want to alter.
 
@@ -158,6 +163,7 @@ public class InventoryManager
     }
 
 
+    //change to work with al
     /**
      * Returns a list of all ingredients in the inventory
      * @return a String[] containing all ingredients in chronological order
@@ -176,6 +182,7 @@ public class InventoryManager
         return ingredientListCopy;
     }
 
+    //change
     /**
      * Returns the amount of an ingredient in the inventory
      * @param ingredient The name of the ingredient to be accessed

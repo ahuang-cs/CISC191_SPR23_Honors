@@ -439,5 +439,49 @@ public class CoffeeShop extends Application {
 
         }
         System.out.println("\n");
+
     }
+
+
+
+
+
+
+
+
+
+
+    public void addNewIngredient(){
+        Scanner keyboard = new Scanner(System.in);
+
+        String ingredientName;
+        double quantity;
+
+        System.out.println("Ingredient name: ");
+
+        ingredientName = keyboard.nextLine();
+
+        System.out.println("Enter the amount of this ingredient in storage: ");
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

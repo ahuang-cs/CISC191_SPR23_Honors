@@ -6,17 +6,14 @@ import java.util.HashMap;
  * This will  be the base class that holds a Menu Objects Ingredient List.
  */
 public class Recipe {
-    private ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
 
-    HashMap<Ingredient,Double> ingredientAmount = new HashMap<>();
+    private ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
+    private HashMap<Ingredient,Double> ingredientAmount = new HashMap<Ingredient,Double>();
+
 
     // Default constructor.
     public Recipe(){}
 
-    /**
-     * Create an instance of Recipe with an array.
-     * @param ingredients
-     */
     public Recipe(Ingredient[] ingredients){
         // Iterates over array.
         for (int i =0; i < ingredients.length; i++) {
@@ -76,6 +73,8 @@ public class Recipe {
         }
     }
 
+
+
     /**
      * Get the list of ingredients for this recipe.
      * @return
@@ -88,6 +87,7 @@ public class Recipe {
     {
         ingredients.clear();
     }
+
 
 
 }
