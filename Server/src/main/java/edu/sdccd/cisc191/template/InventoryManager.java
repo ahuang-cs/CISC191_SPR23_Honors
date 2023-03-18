@@ -28,12 +28,6 @@ public class InventoryManager
     //      [Index of Item 3] [Amount of Item 3]
     private int[][] menuItemInventory;
 
-    // Maps all MenuItems in MenuItemList to a set of ingredients in IngredientList.
-    //      - [X][0][0]: The Menu Item that this recipe corresponds to
-    //      - [ ][X][0]: The Ingredients used in this recipe.
-    //      - [ ][X][1]: The amount of the ingredient with the same second dimensional index at [X][X][0].
-    private int[][][] recipeBook;
-
     // ******************** END OF DATA ********************
 
     /**
@@ -51,11 +45,6 @@ public class InventoryManager
         //      - The first column is for specific items, and the second column is for amounts.
         ingredientInventory = new int[0][2];
         menuItemInventory = new int[0][2];
-
-        // Initialize the empty recipe book.
-        recipeBook = new int[0][0][2];
-
-
     }
 
 
@@ -323,42 +312,6 @@ public class InventoryManager
 
             // Increment the Menu Item Counter.
             numMenuItems++;
-
-            // Update the recipe book to include the new Menu Item.
-
-            // Check whether the recipe book is empty (If there are no menu items):
-            if (menuItemList.length == 1)
-            {
-                // There are no recipes in the recipe book.
-                // Create a new recipe book with one empty recipe, and map it to the new menu item.
-                int[][][] newRecipeBook = new int[1][3][2];
-                newRecipeBook[0][0][0] = newMenuItemList.length - 1;
-
-                // Set recipeBook to have the new array.
-                recipeBook = newRecipeBook;
-            }
-            else
-            {
-                // There are existing recipes in the recipe book.
-                // Create a new recipe book with the same width as the original, but with enough slots for all items.
-                int[][][] newRecipeBook = new int[recipeBook.length + 1][recipeBook[0].length][2];
-
-                // Copy all data from recipeBook into newRecipeBook.
-                for (int recipeIndex = 0; recipeIndex < recipeBook.length; recipeIndex++)
-                {
-                    for (int j = 0; j < recipeBook[0].length; j++)
-                    {
-                        newRecipeBook[recipeIndex][j][0] = recipeBook[recipeIndex][j][0];
-                        newRecipeBook[recipeIndex][j][1] = recipeBook[recipeIndex][j][1];
-                    }
-                }
-
-                // Map the new menu item to the final recipe slot.
-                newRecipeBook[newRecipeBook.length - 1][0][0] = newRecipeBook.length - 1;
-
-                // Set recipeBook with the new size and data.
-                recipeBook = newRecipeBook;
-            }
         }
         else
         {
@@ -441,134 +394,6 @@ public class InventoryManager
     }
 
     // ******************** End of MenuItem Methods ********************
-
-
-
-    // ******************** Recipe Methods ********************
-
-
-    /**
-     * Adds an ingredient from the inventory to a MenuItem's recipe.
-     * @param itemName The name of the menu item whose recipe is being changed.
-     * @param ingredient The name of the ingredient to be added to the recipe.
-     * @param amount The amount of the ingredient to be added to the recipe.
-     * @throws ItemNotFoundException    Thrown when attempting to add an ingredient that does not exist,
-     *                                  or change the recipe of a menu item that does not exist.
-     */
-    public void addToRecipe(String itemName, String ingredient, int amount) throws ItemNotFoundException
-    {
-        // Search for the ingredient and menu item.
-        int ingredientIndex = findIngredient(ingredient);   // The index in IngredientList containing target ingredient
-        int recipeIndex = findMenuItem(itemName);           // The index of the recipe book containing target item.
-        boolean ingredientAlreadyPresent = false;           // Checks whether an ingredient is already in the recipe
-
-        // Verify that the ingredient and menu item are present in their respective arrays.
-        if ((ingredientIndex == -1) || (recipeIndex == -1))
-        {
-            // Either the ingredient or menu item does not exist. This is an error.
-            throw new ItemNotFoundException();
-        }
-        else
-        {
-            // Check whether the ingredient already exists in the recipe.
-            for (int i = 1; i < recipeBook[recipeIndex].length; i++)
-            {
-                // We start with i = 1 because recipeBook[x][0] will always access a menuItem index.
-                // The array also alternates between ingredients and amounts, so odd indices will specify ingredients.
-                if ((i % 2) == 1)
-                {
-                    if (ingredientIndex != recipeBook[recipeIndex][i][0])
-                    {
-                        ingredientAlreadyPresent = true;
-                    }
-                }
-            }
-
-            // If the ingredient is already present, do nothing.
-            if (!ingredientAlreadyPresent)
-            {
-                // If the ingredient is not already present, add it to the recipe.
-
-                // Locate insertion point
-                int insertionIndex = 0;
-
-                for (int i = 1; i < recipeBook[recipeIndex].length; i++)
-                {
-                    // First empty slot is when the recipe calls for 0 of an ingredient.
-                    if (recipeBook[recipeIndex][i][1] == 0)
-                    {
-                        insertionIndex = i;
-                    }
-                }
-
-                // If insertionIndex is 0, there is no space in the array. Make more space.
-                if (insertionIndex == 0)
-                {
-                    int[][][] newRecipeBook = new int[recipeBook.length][recipeBook[recipeIndex].length + 1][2];
-
-                    // Copy all data to the new recipe book.
-                    for (int i = 0; i < recipeBook.length; i++)
-                    {
-                        for (int j = 0; j < recipeBook[recipeIndex].length; j++)
-                        {
-                            newRecipeBook[i][j][0] = recipeBook[i][j][0];
-                            newRecipeBook[i][j][1] = recipeBook[i][j][1];
-                        }
-                    }
-
-                    // Add ingredient and amount to newly available space.
-                    newRecipeBook[recipeIndex][newRecipeBook[recipeIndex].length - 1][0] = ingredientIndex;
-                    newRecipeBook[recipeIndex][newRecipeBook[recipeIndex].length - 1][1] = amount;
-
-                    recipeBook = newRecipeBook;
-                }
-                else
-                {
-                    // If there is space in the array, insert the information in the empty space.
-                    recipeBook[recipeIndex][insertionIndex][0] = ingredientIndex;
-                    recipeBook[recipeIndex][insertionIndex][1] = amount;
-                }
-            }
-        }
-    }
-
-    /**
-     * Returns a 2D array representing a recipe for a menu item.
-     * @param menuItem The menu item whose recipe this method returns.
-     * @return  A 2D array of integers.
-     *          The first column represents an index in the Ingredients inventory (see getIngredientList()).
-     *          The second column represents the amount of that ingreedient to be used in the recipe.
-     * @throws ItemNotFoundException Thrown when attempting to access the recipe of a menu item that does not exist.
-     */
-    public int[][] getRecipe(String menuItem) throws ItemNotFoundException
-    {
-        // Search for the target menuItem in menuItemList
-        int recipeIndex = findMenuItem(menuItem);
-
-        // Make sure the menu item is actually there
-        if (recipeIndex != -1)
-        {
-            // If the menu item does not exist, throw a ItemNotFoundException
-            throw new ItemNotFoundException();
-        }
-        else
-        {
-            // If the menu item does exist, return the recipe.
-            int[][] recipe = new int[recipeBook[recipeIndex].length][2];
-
-            // Copy Recipe to the 2D array
-            for (int i = 0; i < recipeBook[recipeIndex].length; i++)
-            {
-                recipe[i][0] = recipeBook[recipeIndex][i][0];
-                recipe[i][1] = recipeBook[recipeIndex][i][1];
-            }
-
-            return recipe;
-        }
-    }
-    // ******************** End of Recipe Methods ********************
-
-
 
     // ******************** BASIC GETTER METHODS ********************
 
