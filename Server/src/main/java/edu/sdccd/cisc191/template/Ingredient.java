@@ -5,11 +5,14 @@ public class Ingredient {
     Units unit;
     double quantity;
 
+    boolean refrigerated;
+
     public Ingredient(){};
     public Ingredient(String ingredientName, Units unit,double quantity) {
         this.ingredientName = ingredientName;
         this.unit = unit;
         this.quantity = quantity;
+        refrigerated = false;
     }
 
 
@@ -36,10 +39,13 @@ public class Ingredient {
         this.quantity = quantity;
     }
 
+    public boolean isRefrigerated() {
+        return refrigerated;
+    }
 
-
-
-
+    public void setRefrigerated(boolean refrigerated) {
+        this.refrigerated = refrigerated;
+    }
 
     public static enum Units {
         OZ,
