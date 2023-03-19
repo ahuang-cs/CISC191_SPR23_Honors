@@ -8,19 +8,26 @@ import java.util.HashMap;
 public class Recipe {
 
     private ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
-    private HashMap<Ingredient,Double> ingredientAmount = new HashMap<Ingredient,Double>();
+    private HashMap<Ingredient,Double> ingredientAmounts = new HashMap<Ingredient,Double>();
 
     // TODO: Update class to have an array list, setIngredientAmount, getIngredientAmount, searchForIngredient
 
     // Default constructor.
     public Recipe(){}
 
+
     public void addIngredient(Ingredient ingredient, double amount)
     {
-       ingredientAmount.put(ingredient, amount);
+       ingredientAmounts.put(ingredient, amount);
     }
 
+    public void setIngredientAmount(Ingredient ingredient, Double amount) {
+        ingredientAmounts.put(ingredient, amount);
+    }
 
+    public Double getIngredientAmount(Ingredient ingredient) {
+        return ingredientAmounts.containsKey(ingredient) ? ingredientAmounts.get(ingredient) : 0.0;
+    }
     public Boolean hasIngredientNamed(String name) {
 
         ArrayList<String> ingredientNames = new  ArrayList<String>();
