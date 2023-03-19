@@ -61,9 +61,14 @@ public class Recipe {
         }
     }
 
-    /**
-     * Prints ingredient list.
-     */
+    public void addIngredient(Ingredient ingredient, Double amount) {
+        addIngredient(ingredient);
+        setIngredientAmount(ingredient, amount);
+    }
+
+        /**
+         * Prints ingredient list.
+         */
     public void printIngredientList() {
         for (int i = 0; i < ingredients.size(); i++)
         {
