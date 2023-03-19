@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.sdccd.cisc191.template.CoffeeShopController">
+<AnchorPane prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.sdccd.cisc191.template.CoffeeShopController">
    <children>
       <Button fx:id="displayMenuButton" alignment="CENTER" contentDisplay="CENTER" layoutX="11.0" layoutY="68.0" mnemonicParsing="false" onAction="#displayMenu" text="Display Menu" textAlignment="CENTER">
          <font>
@@ -40,17 +40,17 @@
             <Font name="Didot" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="displayIngredients" alignment="CENTER" contentDisplay="CENTER" layoutX="11.0" layoutY="200.0" mnemonicParsing="false" onAction="#displayIngredients" text="Display Ingredients" textAlignment="CENTER">
+      <Button fx:id="displayIngredients" alignment="CENTER" contentDisplay="CENTER" layoutX="25.0" layoutY="200.0" mnemonicParsing="false" onAction="#displayIngredients" text="Display Ingredients" textAlignment="CENTER">
          <font>
             <Font name="Didot" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="addNewIngredient" alignment="CENTER" contentDisplay="CENTER" layoutX="141.0" layoutY="200.0" mnemonicParsing="false" onAction="#addNewIngredient" text="Add New Ingredient" textAlignment="CENTER">
+      <Button fx:id="addNewIngredient" alignment="CENTER" contentDisplay="CENTER" layoutX="225.0" layoutY="200.0" mnemonicParsing="false" onAction="#addNewIngredient" text="Add New Ingredient" textAlignment="CENTER">
          <font>
             <Font name="Didot" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="removeIngredient" alignment="CENTER" contentDisplay="CENTER" layoutX="307.0" layoutY="200.0" mnemonicParsing="false" onAction="#removeIngredient" text="Remove Ingredient" textAlignment="CENTER">
+      <Button fx:id="removeIngredient" alignment="CENTER" contentDisplay="CENTER" layoutX="436.0" layoutY="200.0" mnemonicParsing="false" onAction="#removeIngredient" text="Remove Ingredient" textAlignment="CENTER">
          <font>
             <Font name="Didot" size="16.0" />
          </font>
