@@ -7,7 +7,6 @@ public class Ingredient {
     /// amount of ingredient in inventory
     double inventoryQuantity;
 
-
     public Ingredient(){};
 
     // Re-add units

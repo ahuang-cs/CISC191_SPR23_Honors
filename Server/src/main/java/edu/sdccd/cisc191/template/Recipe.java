@@ -10,6 +10,7 @@ public class Recipe {
     private ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
     private HashMap<Ingredient,Double> ingredientAmount = new HashMap<Ingredient,Double>();
 
+    // TODO: Update class to have an array list, setIngredientAmount, getIngredientAmount, searchForIngredient
 
     // Default constructor.
     public Recipe(){}
@@ -19,6 +20,24 @@ public class Recipe {
        ingredientAmount.put(ingredient, amount);
     }
 
+
+    public Boolean hasIngredientNamed(String name) {
+
+        ArrayList<String> ingredientNames = new  ArrayList<String>();
+
+        int index = 0;
+        for (int i = 0; i < ingredients.size(); i++) {
+           ingredientNames.add(ingredients.get(i).ingredientName);
+           index = i;
+        }
+
+        return ingredientNames.contains(name);
+    }
+
+    //
+    public  Boolean recipeHasIngredient(Ingredient ingredient) {
+        return ingredients.contains(ingredient);
+    }
 
     //Recipe([sugar, milk, blackcoffee]);
     // new recipe
