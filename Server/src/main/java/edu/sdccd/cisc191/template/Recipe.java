@@ -64,8 +64,8 @@ public class Recipe {
     public void addIngredient(Ingredient ingredient, Double amount) {
         addIngredient(ingredient);
         setIngredientAmount(ingredient, amount);
-    }
 
+    }
         /**
          * Prints ingredient list.
          */
