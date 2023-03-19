@@ -5,6 +5,8 @@ public class MenuItem
     private String itemName;
     private double salePrice;
 
+    // TODO: add a recipe variable to menu item
+    // add method to access recipe
 
     /**
      * Default Constructor

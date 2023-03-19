@@ -25,6 +25,7 @@ public class Recipe {
        ingredients.put(ingredient, amount);
     }
 
+
     /**
      * sets the amount of an ingredient. if an ingredient does not exist it will add it to the recipe
      * @param ingredient the ingredient to add

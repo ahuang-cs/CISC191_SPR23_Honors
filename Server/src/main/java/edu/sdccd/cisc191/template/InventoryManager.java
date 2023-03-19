@@ -10,6 +10,7 @@ public class InventoryManager
     // Holds a list of all ingredients as strings.
     public ArrayList<Ingredient> ingredientInventoryList;
 
+    //
     private String[] ingredientList;
 
     // Holds a list of all menu items.
@@ -18,6 +19,8 @@ public class InventoryManager
     // Maps all ingredients in ingredientList to the amount that is in storage.
     //      - Column 0 is ingredient index, column 1 is amount of that ingredient.
     // remove this and everything that uses it
+
+
     private int[][] ingredientInventory;
 
     // Maps all MenuItems in MenuItemList to the amount that is available.
