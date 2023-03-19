@@ -454,14 +454,26 @@ public class CoffeeShop extends Application {
     public void addNewIngredient(){
         Scanner keyboard = new Scanner(System.in);
 
-        String ingredientName;
-        double quantity;
+        String ingredientName = "Ingredient";
+        double quantity = 0;
+        boolean refrigerated = false;
+        String temp;
 
         System.out.println("Ingredient name: ");
 
         ingredientName = keyboard.nextLine();
 
         System.out.println("Enter the amount of this ingredient in storage: ");
+
+        quantity = keyboard.nextDouble();
+
+        System.out.println("Is this ingredient refrigerated? Y/N");
+
+        temp = keyboard.nextLine();
+
+        refrigerated = (temp.toLowerCase() == "y") ? true : false;
+
+        Ingredient ingredient = new Ingredient();
 
     }
 

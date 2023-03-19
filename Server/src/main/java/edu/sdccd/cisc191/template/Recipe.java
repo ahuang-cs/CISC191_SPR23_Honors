@@ -14,15 +14,11 @@ public class Recipe {
     // Default constructor.
     public Recipe(){}
 
-    public Recipe(Ingredient[] ingredients){
-        // Iterates over array.
-        for (int i =0; i < ingredients.length; i++) {
-
-            // Adds ingredients to ingredients.
-            addIngredient(ingredients[i]);
-
-        }
+    public void addIngredient(Ingredient ingredient, double amount)
+    {
+       ingredientAmount.put(ingredient, amount);
     }
+
 
     //Recipe([sugar, milk, blackcoffee]);
     // new recipe

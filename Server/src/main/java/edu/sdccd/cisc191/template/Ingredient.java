@@ -3,18 +3,19 @@ package edu.sdccd.cisc191.template;
 public class Ingredient {
     String ingredientName;
     Units unit;
-    double quantity;
 
-    boolean refrigerated;
+    /// amount of ingredient in inventory
+    double inventoryQuantity;
+
 
     public Ingredient(){};
-    public Ingredient(String ingredientName, Units unit,double quantity) {
+
+    // Re-add units
+    public Ingredient(String ingredientName, Units unit, double quantity) {
         this.ingredientName = ingredientName;
         this.unit = unit;
-        this.quantity = quantity;
-        refrigerated = false;
+        this.inventoryQuantity = quantity;
     }
-
 
     public String getIngredientName() {
         return ingredientName;
@@ -32,20 +33,13 @@ public class Ingredient {
         this.unit = unit;
     }
     public double getQuantity() {
-        return quantity;
+        return inventoryQuantity;
     }
 
     public void setQuantity(double quantity) {
-        this.quantity = quantity;
+        this.inventoryQuantity = quantity;
     }
 
-    public boolean isRefrigerated() {
-        return refrigerated;
-    }
-
-    public void setRefrigerated(boolean refrigerated) {
-        this.refrigerated = refrigerated;
-    }
 
     public static enum Units {
         OZ,

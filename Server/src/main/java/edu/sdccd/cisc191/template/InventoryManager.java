@@ -114,11 +114,8 @@ public class InventoryManager
     public void setIngredientAmount(Ingredient ingredient, int amount) throws ItemNotFoundException
     {
         // End goal: Change the stored amount of a menu item
-
-        // Step 1:
-        // Step 2:
-        // Step 3:
-        // Step 4:
+        int index = getIndex(ingredient.getIngredientName());
+        ingredientInventoryList.get(index).inventoryQuantity = amount;
     }
 
 
@@ -343,6 +340,12 @@ public class InventoryManager
 
         return amount;
     }
+
+        public int getIndex(String ingredient)
+        {
+            return ingredientInventoryList.indexOf(ingredient);
+        }
+
 
     // ******************** End of MenuItem Methods ********************
 }
