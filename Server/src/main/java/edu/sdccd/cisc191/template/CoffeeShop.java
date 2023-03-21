@@ -425,18 +425,58 @@ public class CoffeeShop extends Application {
         }
     }
     static void printVendor() {
-        System.out.println("Index\t" + "Vendor Name\t\t" + "Item Name\t\t" + "Unit\t" + "Quantity\t" + "Note");
+        //updated print vendor to only print vendors for items in the menu.
+        // Also added new ingredients for new items.
         Vendors costco = new Vendors("Costco");
         VendorData costcoCSV = new VendorDataCSV(costco);
-        int count = 1;
+        MenuItem[] menuItems = inventory.getMenuItemList();
+        if(menuItems.length>0) {
+            System.out.println("Menu Item\t" + "Vendor\t\t" + "Item\t\t\t" + "Purchased Quantity\t");
+            //loop though every menu item
+            for (int i = 0; i < menuItems.length; i++) {
+                //check if menu item is one with added ingredients
+                if (menuItems[i].getClass().toString().contains("Coffee")) {
+                    //loop though every ingredient and print information
+                    for (VendorIngredientPrices vendorIngredientPrice : costcoCSV.importVendorIngredients()) {
+                        if (vendorIngredientPrice.getItem().equals("coffee")) {
+                            System.out.println("Coffee\t\t" + vendorIngredientPrice.getVendor().getName() + "\t\t"
+                                    + vendorIngredientPrice.getIngredient().getIngredientName() + "\t\t"
+                                    + vendorIngredientPrice.getIngredient().getQuantity() + " "
+                                    + vendorIngredientPrice.getIngredient().getUnit() + "\t\t"
 
-        for (VendorIngredientPrices vendorIngredientPrice : costcoCSV.importVendorIngredients()) {
-            System.out.println("\t" + count+ "\t" + vendorIngredientPrice.getVendor().getName() + "\t\t\t"
-                    + vendorIngredientPrice.getIngredient().getIngredientName() + "\t\t"
-                    + vendorIngredientPrice.getIngredient().getUnit() + "\t\t"
-                    + vendorIngredientPrice.getIngredient().getQuantity() + "\t\t");
-            count++;
+                            );
+                        }
+                    }
+                }
+                if (menuItems[i].getClass().toString().contains("Donut")) {
+                    for (VendorIngredientPrices vendorIngredientPrice : costcoCSV.importVendorIngredients()) {
+                        if (vendorIngredientPrice.getItem().equals("donut")) {
 
+                            System.out.println("Donut\t\t" + vendorIngredientPrice.getVendor().getName() + "\t\t"
+                                    + vendorIngredientPrice.getIngredient().getIngredientName() + "\t\t"+
+                                    + vendorIngredientPrice.getIngredient().getQuantity() + " "
+                                    + vendorIngredientPrice.getIngredient().getUnit() + "\t\t"
+
+                            );
+                        }
+                    }
+                }
+                if (menuItems[i].getName().toString().toLowerCase().contains("sandwich")) {
+                    for (VendorIngredientPrices vendorIngredientPrice : costcoCSV.importVendorIngredients()) {
+                        if (vendorIngredientPrice.getItem().equals("sandwich")) {
+                            System.out.println("Sandwich\t" + vendorIngredientPrice.getVendor().getName() + "\t\t"
+                                    + vendorIngredientPrice.getIngredient().getIngredientName() + "\t\t"
+                                    + vendorIngredientPrice.getIngredient().getQuantity() + " "
+                                    + vendorIngredientPrice.getIngredient().getUnit() + "\t\t"
+
+                            );
+                        }
+                    }
+                }
+            }
+        }
+        else{
+            System.out.println("No menu items");
         }
         System.out.println("\n");
     }

@@ -25,8 +25,6 @@ public class MenuItem
         this.itemName = name;
         this.salePrice = salePrice;
     }
-
-
     /**
      * This method returns the name of a menu item.
      * @return String representing name of menu item.
