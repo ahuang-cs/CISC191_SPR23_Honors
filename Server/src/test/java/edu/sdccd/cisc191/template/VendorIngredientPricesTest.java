@@ -2,13 +2,12 @@ package edu.sdccd.cisc191.template;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 class VendorIngredientPricesTest
 {
     @Test
     public void vendorIngredientPricesTest() {
-        Vendors vendor = new Vendors();
+        Vendor vendor = new Vendor();
 
         Ingredient ingredient = new Ingredient();
         vendor.name = "Kirkland";
@@ -26,8 +25,8 @@ class VendorIngredientPricesTest
     }
 
     public void vendorsTest() {
-        Vendors vendors = new Vendors("Target");
-        assertEquals("Target", vendors.getName());
+        Vendor vendor = new Vendor("Target");
+        assertEquals("Target", vendor.getName());
     }
   
 }

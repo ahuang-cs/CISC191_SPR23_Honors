@@ -3,7 +3,7 @@ package edu.sdccd.cisc191.template;
 public class Ingredient {
     String ingredientName;
     Units unit;
-    double quantity;
+    double quantity;     /// amount of ingredient in inventory
 
     public Ingredient(){};
     public Ingredient(String ingredientName, Units unit,double quantity) {

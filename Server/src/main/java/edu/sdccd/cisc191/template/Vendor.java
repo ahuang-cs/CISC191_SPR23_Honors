@@ -1,14 +1,18 @@
 package edu.sdccd.cisc191.template;
 
-public class Vendors {
+public class Vendor {
     String name;
 
-    public Vendors(){};
+    public Vendor(){};
 
 
-    public Vendors(String newName) {
+    public Vendor(String newName) {
         setName(newName);
 
+    }
+    public static Vendor valueOf(String str) {
+        String strname = String.valueOf(str);
+        return new Vendor(strname);
     }
 
     public String getName() {

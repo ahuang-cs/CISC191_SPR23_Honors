@@ -1,51 +1,125 @@
 package edu.sdccd.cisc191.template;
 
+//import com.opencsv.CSVReader;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.opencsv.CSVReader;
+import com.opencsv.CSVReaderBuilder;
+import com.opencsv.bean.CsvToBeanBuilder;
+import com.opencsv.exceptions.CsvException;
+import com.opencsv.exceptions.CsvValidationException;
+
+import java.io.*;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
 public class VendorDataCSV implements VendorData {
-    private Vendors vendor;
-    public VendorDataCSV(Vendors newVendor) {
+    private Vendor vendor;
+
+    public VendorDataCSV(Vendor newVendor) {
         vendor = newVendor;
     }
 
     @Override
-    public List<VendorIngredientPrices> importVendorIngredients() {
-        //Create a list of  different vendor name, product and cost
+    public List<VendorIngredientPrices> importVendorIngredients () throws URISyntaxException, IOException {
+        CSVReader csvReader = new CSVReaderBuilder(new InputStreamReader(new URL("VendorData.CSV").openStream()))
+                .withSkipLines(1) // skip header row
+                .build();
 
-        List<VendorIngredientPrices> newIngredientPrices = new ArrayList<>();
-        Ingredient ingredient = new Ingredient("Sugar      ", Ingredient.Units.LB,30.0);
-        VendorIngredientPrices vendorIngredientPrices = new VendorIngredientPrices(vendor, ingredient, 9.99, "coffee");
-        newIngredientPrices.add(vendorIngredientPrices);
+        List<CostcoCSV> costcoCSVList = new CsvToBeanBuilder<CostcoCSV>(csvReader)
+                .withType(CostcoCSV.class)
+                .build()
+                .parse(); //parse the file into CostcoCSV class
 
-
-        Ingredient ingredient1 = new Ingredient("Coffee Bean", Ingredient.Units.LB,55.0);
-        VendorIngredientPrices vendorIngredientPrices1 = new VendorIngredientPrices(vendor, ingredient1, 6.99, "coffee");
-        newIngredientPrices.add(vendorIngredientPrices1);
-
-        Ingredient ingredient2 = new Ingredient("Milk     ", Ingredient.Units.GAL,25.0);
-        VendorIngredientPrices vendorIngredientPrices2 = new VendorIngredientPrices(vendor, ingredient2,3.99, "coffee");
-        newIngredientPrices.add(vendorIngredientPrices2);
-
-        Ingredient ingredient3 = new Ingredient("Flour     ", Ingredient.Units.LB,10.0);
-        VendorIngredientPrices vendorIngredientPrices3 = new VendorIngredientPrices(vendor, ingredient3,1.99, "donut");
-        newIngredientPrices.add(vendorIngredientPrices3);
-
-        Ingredient ingredient4 = new Ingredient("Sprinkles", Ingredient.Units.GAL,2.0);
-        VendorIngredientPrices vendorIngredientPrices4 = new VendorIngredientPrices(vendor, ingredient4,4.99, "donut");
-        newIngredientPrices.add(vendorIngredientPrices4);
-
-        Ingredient ingredient5 = new Ingredient("Ham     ", Ingredient.Units.LB,5.0);
-        VendorIngredientPrices vendorIngredientPrices5 = new VendorIngredientPrices(vendor, ingredient5,10.99, "sandwich");
-        newIngredientPrices.add(vendorIngredientPrices5);
-
-        Ingredient ingredient6 = new Ingredient("Bread     ", Ingredient.Units.LB,10.0);
-        VendorIngredientPrices vendorIngredientPrices6 = new VendorIngredientPrices(vendor, ingredient6,2.99, "sandwich");
-        newIngredientPrices.add(vendorIngredientPrices6);
-
-        Ingredient ingredient7 = new Ingredient("Cheese     ", Ingredient.Units.LB,10.0);
-        VendorIngredientPrices vendorIngredientPrices7 = new VendorIngredientPrices(vendor, ingredient7,5.99, "sandwich");
-        newIngredientPrices.add(vendorIngredientPrices7);
-        return newIngredientPrices;
+        List<VendorIngredientPrices> vendorIngredientPriceList = new ArrayList<>();
+        for (CostcoCSV costcoCSV : costcoCSVList) {
+            VendorIngredientPrices vendorIngredientPrice = new VendorIngredientPrices(vendor, new Ingredient(costcoCSV.getIngredientName(), costcoCSV.getUnit(), costcoCSV.getQuantity()), costcoCSV.getPrice());
+            vendorIngredientPriceList.add(vendorIngredientPrice);
+        }
+        return vendorIngredientPriceList;
     }
 }
+
+
+
+//        BufferedReader reader;
+//
+//    {
+//        try {
+//            reader = new BufferedReader(new FileReader("VendorData.CSV"));
+//            Scanner scanner = new Scanner(reader);
+//            String nextLine = scanner.nextLine();
+//
+//            //split the file into parts
+//            String[] vendorIngredientPrice = nextLine.split(",");
+//
+//            //get the component of our vendor data
+//            String strVendor = vendorIngredientPrice[1];
+//            String strIngredientName = vendorIngredientPrice[2];
+//            String strIngredientUnit = vendorIngredientPrice[3];
+//            String strIngredientQuantity = vendorIngredientPrice[4];
+//            String strCostPerUnit = vendorIngredientPrice[5];
+//
+//            //create a vendor data
+//            VendorIngredientPrices vendorIngredientPrices = new VendorIngredientPrices();
+//
+//            Vendors vendor = Vendors.valueOf(strVendor);
+//
+//            String ingredientName = new String(strIngredientName);
+//            Ingredient.Units ingredientUnit = Ingredient.Units.valueOf(strIngredientUnit);
+//            double ingredientQuantity = Double.parseDouble(strIngredientQuantity);
+//            Ingredient ingredient = new Ingredient(ingredientName, ingredientUnit, ingredientQuantity);
+//
+//            double costPerUnit = Double.parseDouble(strCostPerUnit);
+//
+//            //set the values to the collection list
+//            vendorIngredientPrices.setVendor(vendor);
+//            vendorIngredientPrices.setIngredient(ingredient);
+//            vendorIngredientPrices.setCostPerUnit(costPerUnit);
+//
+//            System.out.println("cost per unit before move: " +  vendorIngredientPrices.toString());
+//            //move the vendor
+//
+//
+//            System.out.println("Next Line: " + nextLine);
+//        } catch (FileNotFoundException e) {
+//            Logger.getLogger(VendorDataCSV.class.getName()).log(Level.SEVERE, null,e); //if something went wrong
+//            throw new RuntimeException(e);
+//        }
+//    }
+
+
+// Path path = Paths.get(ClassLoader.getSystemResource("VendorData.csv").toURI());
+// public List<VendorIngredientPrices> readVendorData(Path filePath) throws URISyntaxException {
+
+
+
+//        //public static void writeVendorData() {
+//        Vendors costco = new Vendors("Costco");
+//        VendorData costcoCSV = new VendorDataCSV(costco);
+//        int count = 1;
+//        try {
+//            BufferedWriter writer = new BufferedWriter(new FileWriter("VendorData.CSV"));
+//            writer.write("Index\t" + "Vendor Name\t\t" + "Item Name\t\t" + "Unit\t" + "Quantity\t" + "Note" + "\n");
+//            for (VendorIngredientPrices vendorIngredientPrice : costcoCSV.importVendorIngredients()) {
+//                writer.write("\t" + count + "\t" + vendorIngredientPrice.getVendor().getName() + "\t\t\t"
+//                        + vendorIngredientPrice.getIngredient().getIngredientName() + "\t\t"
+//                        + vendorIngredientPrice.getIngredient().getUnit() + "\t\t"
+//                        + vendorIngredientPrice.getIngredient().getQuantity() + "\t\t");
+//                count++;
+//                writer.write("\n");
+//            }
+//            writer.close();
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+
+
+
+
+
