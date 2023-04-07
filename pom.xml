@@ -5,6 +5,14 @@
     <artifactId>FinalProject</artifactId>
     <packaging>pom</packaging>
     <version>1.0.1-SNAPSHOT</version>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.0.5</version>
+        <relativePath/>
+    </parent>
+
     <modules>
         <module>Common</module>
         <module>Server</module>

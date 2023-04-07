@@ -1,29 +1,20 @@
 
 package edu.sdccd.cisc191.template;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.*;
 
-public class CoffeeShop extends Application {
+public class CoffeeShop {
 
     static InventoryManager inventory;      // Manages the inventory of Menu Items and Ingredients.
 
     public static void main(String[] args) {
 
         inventory = new InventoryManager();
-
-        launch(args);
 
     }
 
@@ -345,19 +336,6 @@ public class CoffeeShop extends Application {
         } while (badInput);
 
         return userChoice;
-    }
-
-    @Override
-    public void start(Stage stage) throws Exception {
-
-        try {
-            Parent shopMenu = FXMLLoader.load(getClass().getResource("/CoffeeShop.fxml"));
-            Scene scene = new Scene(shopMenu);
-            stage.setScene(scene);
-            stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     static void printVendor() throws IOException {

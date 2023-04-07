@@ -1,5 +1,6 @@
 package edu.sdccd.cisc191.template;
 
+import edu.sdccd.cisc191.template.entities.Vendor;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -7,10 +8,9 @@ class VendorIngredientPricesTest
 {
     @Test
     public void vendorIngredientPricesTest() {
-        Vendor vendor = new Vendor();
+        Vendor vendor = new Vendor("Kirkland");
 
         Ingredient ingredient = new Ingredient();
-        vendor.name = "Kirkland";
         ingredient.ingredientName = "flour";
         ingredient.unit = Ingredient.Units.LB;
         double costPerUnit = 4.99;

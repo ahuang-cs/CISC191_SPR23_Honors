@@ -1,11 +1,10 @@
 package edu.sdccd.cisc191.template;
 
+import edu.sdccd.cisc191.template.entities.Vendor;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class VendorDataCSVTest {
     @Test

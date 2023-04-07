@@ -1,6 +1,8 @@
 package edu.sdccd.cisc191.template;
 
-public class VendorIngredientPrices extends Vendor{
+import edu.sdccd.cisc191.template.entities.Vendor;
+
+public class VendorIngredientPrices extends Vendor {
     private Vendor vendor;
     private Ingredient ingredient;
     private double costPerUnit;
