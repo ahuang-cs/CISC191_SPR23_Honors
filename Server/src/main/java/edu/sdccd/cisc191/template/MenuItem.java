@@ -13,7 +13,6 @@ public class MenuItem
     {
         itemName = "";
         salePrice = 0.0;
-
     }
 
     /**
