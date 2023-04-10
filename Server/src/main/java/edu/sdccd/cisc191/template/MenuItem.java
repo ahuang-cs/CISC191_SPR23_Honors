@@ -1,9 +1,15 @@
 package edu.sdccd.cisc191.template;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
 public class MenuItem
 {
     private String itemName;
     private double salePrice;
+    @Id
+    private Long id;
 
     /**
      * Default Constructor
@@ -68,5 +74,13 @@ public class MenuItem
     public String toString()
     {
         return itemName;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
     }
 }
