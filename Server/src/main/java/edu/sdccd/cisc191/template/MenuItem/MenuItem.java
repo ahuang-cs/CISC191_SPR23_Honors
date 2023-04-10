@@ -1,14 +1,15 @@
-package edu.sdccd.cisc191.template;
+package edu.sdccd.cisc191.template.MenuItem;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 @Entity
 public class MenuItem
 {
     private String itemName;
     private double salePrice;
-    @Id
+    @Id @GeneratedValue
     private Long id;
 
     /**

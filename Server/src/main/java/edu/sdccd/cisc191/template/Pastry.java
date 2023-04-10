@@ -1,5 +1,7 @@
 package edu.sdccd.cisc191.template;
 
+import edu.sdccd.cisc191.template.MenuItem.MenuItem;
+
 public class Pastry extends MenuItem {
 
     private boolean hasGluten;

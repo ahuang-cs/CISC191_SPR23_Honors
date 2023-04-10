@@ -1,6 +1,7 @@
 
 package edu.sdccd.cisc191.template;
 
+import edu.sdccd.cisc191.template.MenuItem.MenuItem;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,26 +14,13 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-public class CoffeeShop extends Application {
-
+public class CoffeeShop{
     static InventoryManager inventory;      // Manages the inventory of Menu Items and Ingredients.
 
     public static void main(String[] args) {
         inventory = new InventoryManager();
-        launch(args);
     }
-    @Override
-    public void start(Stage stage) throws Exception {
 
-        try {
-            Parent shopMenu = FXMLLoader.load(getClass().getResource("/CoffeeShop.fxml"));
-            Scene scene = new Scene(shopMenu);
-            stage.setScene(scene);
-            stage.show();
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-    }
     static void printAllMenuItems() throws ItemNotFoundException
     {
         MenuItem[] menuItems = inventory.getMenuItemList();

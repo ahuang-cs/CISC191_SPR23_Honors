@@ -1,5 +1,9 @@
 package edu.sdccd.cisc191.template;
 
+import edu.sdccd.cisc191.template.MenuItem.MenuItem;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
+
 public class InventoryManager
 {
     // ************************ DATA ***********************
@@ -41,9 +45,15 @@ public class InventoryManager
      */
     public InventoryManager()
     {
-        // A new inventory should start with no ingredients or menuItems
-        ingredientList = new String[0];
+        //inventory gets MenuItems from MenuItemController
+
+        RestTemplate restTemplate = new RestTemplate();
+        String menuItemSourceUrl = "http://localhost:8080/MenuItems";
+        ResponseEntity<String> response = restTemplate.getForEntity(menuItemSourceUrl, String.class);
+        System.out.println(response);
+
         menuItemList = new MenuItem[0];
+        ingredientList = new String[0];
         numIngredients = 0;
         numMenuItems = 0;
 

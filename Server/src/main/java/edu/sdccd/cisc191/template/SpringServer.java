@@ -1,19 +1,23 @@
 package edu.sdccd.cisc191.template;
 
+import edu.sdccd.cisc191.template.MenuItem.MenuItem;
+import edu.sdccd.cisc191.template.MenuItem.MenuItemRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-public class ServerApplication {
+public class SpringServer {
     public static void main(String[] args){
-        SpringApplication.run(ServerApplication.class, args);
+        SpringApplication.run(SpringServer.class, args);
     }
     @Bean
     CommandLineRunner initDatabase(MenuItemRepository repository) {
-        repository.save(new MenuItem("Coffee", 10.0));
-        repository.save(new MenuItem("Bagel", 5.0));
-
+        return args -> {
+            repository.save(new MenuItem("Coffee", 10.0));
+            repository.save(new MenuItem("Bagel", 5.0));
+            System.out.println("saved data");
+        };
     }
 }

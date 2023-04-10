@@ -1,8 +1,7 @@
-package edu.sdccd.cisc191.template;
+package edu.sdccd.cisc191.template.MenuItem;
 
+import edu.sdccd.cisc191.template.MenuItem.MenuItem;
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import java.awt.*;
 
 public interface MenuItemRepository extends JpaRepository<MenuItem, Long> {
 }
