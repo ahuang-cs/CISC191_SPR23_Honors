@@ -7,7 +7,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class CoffeeShop extends Application {
@@ -423,18 +426,26 @@ public class CoffeeShop extends Application {
 
     static void printVendor() {
         System.out.println("Index\t" + "Vendor Name\t\t" + "Item Name\t\t" + "Unit\t" + "Quantity\t" + "Note");
-        Vendors costco = new Vendors("Costco");
+        Vendor costco = new Vendor("Costco");
         VendorData costcoCSV = new VendorDataCSV(costco);
         int count = 1;
+        try {
+            List<VendorIngredientPrices> allVendorIngredients = costcoCSV.importVendorIngredients();
+            for (VendorIngredientPrices vendorIngredientPrice : allVendorIngredients) {
+                System.out.println("\t" + count+ "\t" + vendorIngredientPrice.getVendor().getName() + "\t\t\t"
+                        + vendorIngredientPrice.getIngredient().getIngredientName() + "\t\t"
+                        + vendorIngredientPrice.getIngredient().getUnit() + "\t\t"
+                        + vendorIngredientPrice.getIngredient().getQuantity() + "\t\t");
+                count++;
 
-        for (VendorIngredientPrices vendorIngredientPrice : costcoCSV.importVendorIngredients()) {
-            System.out.println("\t" + count+ "\t" + vendorIngredientPrice.getVendor().getName() + "\t\t\t"
-                    + vendorIngredientPrice.getIngredient().getIngredientName() + "\t\t"
-                    + vendorIngredientPrice.getIngredient().getUnit() + "\t\t"
-                    + vendorIngredientPrice.getIngredient().getQuantity() + "\t\t");
-            count++;
-
+            }
+            System.out.println("\n");
+        }catch (URISyntaxException e){
+            System.out.println("URI Error importing"+e);
         }
-        System.out.println("\n");
+        catch (IOException e){
+            System.out.println("IO Error importing "+e);
+        }
+
     }
 }
