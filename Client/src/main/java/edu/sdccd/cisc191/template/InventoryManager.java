@@ -1,8 +1,11 @@
 package edu.sdccd.cisc191.template;
 
 import edu.sdccd.cisc191.template.MenuItem.MenuItem;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.List;
 
 public class InventoryManager
 {
@@ -49,10 +52,9 @@ public class InventoryManager
 
         RestTemplate restTemplate = new RestTemplate();
         String menuItemSourceUrl = "http://localhost:8080/MenuItems";
-        ResponseEntity<String> response = restTemplate.getForEntity(menuItemSourceUrl, String.class);
-        System.out.println(response);
+        ResponseEntity<MenuItem[]> response = restTemplate.getForEntity(menuItemSourceUrl, MenuItem[].class, new ParameterizedTypeReference<List<MenuItem>>() {});
+        menuItemList = response.getBody();
 
-        menuItemList = new MenuItem[0];
         ingredientList = new String[0];
         numIngredients = 0;
         numMenuItems = 0;

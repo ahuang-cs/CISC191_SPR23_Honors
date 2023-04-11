@@ -24,7 +24,6 @@ public class CoffeeShop{
     static void printAllMenuItems() throws ItemNotFoundException
     {
         MenuItem[] menuItems = inventory.getMenuItemList();
-
         // New code
         if (menuItems.length == 0)
         {
@@ -43,7 +42,9 @@ public class CoffeeShop{
             {
                 menuItemName = menuItems[i].getName();
                 menuItemPrice = menuItems[i].getSalePrice();
-                System.out.printf("%-50s %-10d %.2f\n", menuItemName, inventory.getMenuItemAmount(menuItemName), menuItemPrice);
+                //.getMenuItemAmount not working
+                //System.out.printf("%-50s %-10d %.2f\n", menuItemName, inventory.getMenuItemAmount(menuItemName), menuItemPrice);
+                System.out.printf("%-50s %-10d %.2f\n", menuItemName, 1, menuItemPrice);
             }
 
             System.out.println("**********************************************************************");

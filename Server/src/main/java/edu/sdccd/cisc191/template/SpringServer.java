@@ -15,9 +15,7 @@ public class SpringServer {
     @Bean
     CommandLineRunner initDatabase(MenuItemRepository repository) {
         return args -> {
-            repository.save(new MenuItem("Coffee", 10.0));
-            repository.save(new MenuItem("Bagel", 5.0));
-            System.out.println("saved data");
+
         };
     }
 }
