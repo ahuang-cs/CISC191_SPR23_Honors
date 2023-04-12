@@ -15,7 +15,7 @@ public class MenuItemController {
         return repository.findAll();
     }
     @PostMapping("/MenuItems")
-    MenuItem newEmployee(@RequestBody MenuItem newMenuItem) {
+    MenuItem newMenuItem(@RequestBody MenuItem newMenuItem) {
         return repository.save(newMenuItem);
     }
     @GetMapping("/MenuItems/{id}")

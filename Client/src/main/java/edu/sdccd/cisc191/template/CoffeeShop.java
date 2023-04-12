@@ -423,8 +423,7 @@ public class CoffeeShop{
             for (VendorIngredientPrices vendorIngredientPrice : allVendorIngredients) {
                 System.out.println("\t" + count+ "\t" + vendorIngredientPrice.getVendor().getName() + "\t\t\t"
                         + vendorIngredientPrice.getIngredient().getIngredientName() + "\t\t"
-                        + vendorIngredientPrice.getIngredient().getUnit() + "\t\t"
-                        + vendorIngredientPrice.getIngredient().getQuantity() + "\t\t");
+                        + vendorIngredientPrice.getIngredient().getUnit() + "\t\t");
                 count++;
 
             }

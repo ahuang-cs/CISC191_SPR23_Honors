@@ -1,12 +1,20 @@
 package edu.sdccd.cisc191.template.MenuItem;
 
+import edu.sdccd.cisc191.template.Ingredient.Ingredient;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import java.util.List;
+
 
 @Entity
 public class MenuItem
 {
+    //for use if recipe is stored in menuItem Object.
+    @OneToMany
+    private List<Ingredient> recipe;
     private String itemName;
     private double salePrice;
     @Id @GeneratedValue
@@ -66,7 +74,6 @@ public class MenuItem
     {
         salePrice = newPrice;
     }
-
 
     /**
      * This method prints out a string representing this menuItem object.

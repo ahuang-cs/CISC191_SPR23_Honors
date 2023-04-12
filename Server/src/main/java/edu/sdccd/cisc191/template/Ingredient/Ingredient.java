@@ -1,9 +1,16 @@
-package edu.sdccd.cisc191.template;
+package edu.sdccd.cisc191.template.Ingredient;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Ingredient {
     String ingredientName;
     Units unit;
     double quantity;     /// amount of ingredient in inventory
+    @Id
+    private Long id;
 
     public Ingredient(){};
     public Ingredient(String ingredientName, Units unit,double quantity) {
@@ -12,12 +19,11 @@ public class Ingredient {
         this.quantity = quantity;
     }
 
-
     public String getIngredientName() {
         return ingredientName;
     }
 
-    public void setIngredientName(String ingredientName) {
+    public void setName(String ingredientName) {
         this.ingredientName = ingredientName;
     }
 
@@ -28,6 +34,7 @@ public class Ingredient {
     public void setUnit(Units unit) {
         this.unit = unit;
     }
+
     public double getQuantity() {
         return quantity;
     }
@@ -36,10 +43,13 @@ public class Ingredient {
         this.quantity = quantity;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-
-
-
+    public Long getId() {
+        return id;
+    }
 
     public static enum Units {
         OZ,
