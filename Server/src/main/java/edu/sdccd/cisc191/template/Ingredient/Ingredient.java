@@ -7,16 +7,14 @@ import javax.persistence.Id;
 @Entity
 public class Ingredient {
     String ingredientName;
-    Units unit;
-    double quantity;     /// amount of ingredient in inventory
+    Units unit;/// amount of ingredient in inventory
     @Id
     private Long id;
 
     public Ingredient(){};
-    public Ingredient(String ingredientName, Units unit,double quantity) {
+    public Ingredient(String ingredientName, Units unit) {
         this.ingredientName = ingredientName;
         this.unit = unit;
-        this.quantity = quantity;
     }
 
     public String getIngredientName() {
@@ -33,14 +31,6 @@ public class Ingredient {
 
     public void setUnit(Units unit) {
         this.unit = unit;
-    }
-
-    public double getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(double quantity) {
-        this.quantity = quantity;
     }
 
     public void setId(Long id) {

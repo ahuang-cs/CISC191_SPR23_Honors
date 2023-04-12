@@ -33,7 +33,7 @@ public class VendorDataCSV implements VendorData {
 
         List<VendorIngredientPrices> vendorIngredientPriceList = new ArrayList<>();
         for (CostcoCSV costcoCSV : costcoCSVList) {
-            VendorIngredientPrices vendorIngredientPrice = new VendorIngredientPrices(vendor, new Ingredient(costcoCSV.getIngredientName(), costcoCSV.getUnit(), costcoCSV.getQuantity()), costcoCSV.getPrice());
+            VendorIngredientPrices vendorIngredientPrice = new VendorIngredientPrices(vendor, new Ingredient(costcoCSV.getIngredientName(), costcoCSV.getUnit()), costcoCSV.getPrice());
             vendorIngredientPriceList.add(vendorIngredientPrice);
         }
         return vendorIngredientPriceList;
