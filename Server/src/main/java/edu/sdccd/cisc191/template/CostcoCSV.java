@@ -1,5 +1,7 @@
 package edu.sdccd.cisc191.template;
 
+import edu.sdccd.cisc191.template.Ingredient.Ingredient;
+
 public class CostcoCSV {
     private String ingredientName;
 

@@ -11,30 +11,34 @@ public class InventoryManager
 {
     // ************************ DATA ***********************
 
+    // TO UPDATE: not sure what the point of this is, just use menuItemList.length
     // Holds the number of different ingredients stored in the inventory.
     private int numIngredients;
 
-    // Holds a list of all ingredients as strings.
+    // Holds a list of all stocked ingredients as strings.
     private String[] ingredientList;
 
+    // TO UPDATE: not sure what the point of this is, just use menuItemList.length
     // Holds the number of menu items stored in the Inventory.
     private int numMenuItems;
 
     // Holds a list of all menu items.
     private MenuItem[] menuItemList;
 
+    // TO UPDATE: delete this, store amount in ingredient object
     // Maps all ingredients in ingredientList to the amount that is in storage.
     //      - Column 0 is ingredient index, column 1 is amount of that ingredient.
+    //      [Index of Item 1] [Amount of Item 1]
     private int[][] ingredientInventory;
 
+    // TO UPDATE: delete this,store amount in menuItem object
     // Maps all MenuItems in MenuItemList to the amount that is available.
     //      - Column 0 is the menuItem index, column 1 is the amount of that menu item available.
-    //
     //      [Index of Item 1] [Amount of Item 1]
-    //      [Index of Item 2] [Amount of Item 2]
-    //      [Index of Item 3] [Amount of Item 3]
     private int[][] menuItemInventory;
 
+    //TO UPDATE: can be converted into 2d array with MenuItem on one dimension, and ingredients on the other dimension
+    //IDEA: store recipe with menuitem
     // Maps all MenuItems in MenuItemList to a set of ingredients in IngredientList.
     //      - [X][0][0]: The Menu Item that this recipe corresponds to
     //      - [ ][X][0]: The Ingredients used in this recipe.
@@ -67,10 +71,7 @@ public class InventoryManager
         // Initialize the empty recipe book.
         recipeBook = new int[0][0][2];
 
-
     }
-
-
 
     // ******************** Ingredient Methods ********************
 

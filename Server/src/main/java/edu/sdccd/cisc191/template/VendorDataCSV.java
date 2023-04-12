@@ -2,19 +2,14 @@ package edu.sdccd.cisc191.template;
 
 //import com.opencsv.CSVReader;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 import com.opencsv.bean.CsvToBeanBuilder;
-import com.opencsv.exceptions.CsvException;
-import com.opencsv.exceptions.CsvValidationException;
+import edu.sdccd.cisc191.template.Ingredient.Ingredient;
 
 import java.io.*;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +33,7 @@ public class VendorDataCSV implements VendorData {
 
         List<VendorIngredientPrices> vendorIngredientPriceList = new ArrayList<>();
         for (CostcoCSV costcoCSV : costcoCSVList) {
-            VendorIngredientPrices vendorIngredientPrice = new VendorIngredientPrices(vendor, new Ingredient(costcoCSV.getIngredientName(), costcoCSV.getUnit(), costcoCSV.getQuantity()), costcoCSV.getPrice());
+            VendorIngredientPrices vendorIngredientPrice = new VendorIngredientPrices(vendor, new Ingredient(costcoCSV.getIngredientName(), costcoCSV.getUnit()), costcoCSV.getPrice());
             vendorIngredientPriceList.add(vendorIngredientPrice);
         }
         return vendorIngredientPriceList;
