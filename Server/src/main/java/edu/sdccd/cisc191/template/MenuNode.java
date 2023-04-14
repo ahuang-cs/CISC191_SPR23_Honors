@@ -11,10 +11,10 @@ public class MenuNode
 
     /**
      * Constructor for MenuNode objects.
-     * @param addedItem     The Menu Item that this node represents.
+     * @param menuItem     The Menu Item that this node represents.
      */
-    public MenuNode(MenuItem addedItem)
+    public MenuNode(MenuItem menuItem)
     {
-        item  = addedItem;
+        item  = menuItem;
     }
 }
