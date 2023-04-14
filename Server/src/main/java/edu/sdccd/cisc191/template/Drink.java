@@ -22,7 +22,9 @@ public class Drink extends MenuItem {
      * @param isHot Whether the drink is hot (true) or cold (false).
      */
     public Drink(String name, double salePrice, String size, boolean isHot){
-        super(name, salePrice);
+        super();
+        this.setName(name);
+        this.setSalePrice(salePrice);
         this.size = size;
         this.isHot = isHot;
     }

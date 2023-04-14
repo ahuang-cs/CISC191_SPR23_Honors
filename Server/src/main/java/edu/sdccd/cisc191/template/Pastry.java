@@ -20,7 +20,9 @@ public class Pastry extends MenuItem {
      */
     public Pastry(String name, double salePrice,String icingFlavor, boolean hasGluten)
     {
-        super(name, salePrice);
+        super();
+        this.setName(name);
+        this.setSalePrice(salePrice);
         this.hasGluten = hasGluten;
     }
     /**
