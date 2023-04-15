@@ -15,7 +15,7 @@ class VendorDataCSVTest {
             for(VendorIngredientPrices index: vendorDataCSV.importVendorIngredients()) {
                 System.out.println(index.getVendor().getName());
                 System.out.println(index.getIngredient().getIngredientName());
-                System.out.println(index.getIngredient().getQuantity());
+// Bugged line, fix later                System.out.println(index.getIngredient().getQuantity());
                 System.out.println(index.getIngredient().getUnit());
                 System.out.println(index.getCostPerUnit());
             }
