@@ -22,7 +22,6 @@ public class MenuItemList
         size = 0;
     }
 
-
     /**
      * Adds a MenuNode to the beginning of this linked list.
      * @param item The MenuItem to be stored in the new node.
@@ -45,7 +44,6 @@ public class MenuItemList
         // Increment size counter
         size++;
     }
-
 
     /**
      * Sets the quantity of a menu item in the list to a new value.
@@ -91,6 +89,32 @@ public class MenuItemList
             if (currentNode.item.getName().compareToIgnoreCase(itemName) == 0)
             {
                 currentNode.item.setSalePrice(price);
+                return true;
+            }
+            else
+            {
+                currentNode = currentNode.nextNode;
+            }
+        }
+
+        return false;
+    }
+
+
+    /**
+     * Returns whether a menu item is present in the list.
+     * @param name The name of the menu item to search for.
+     *             There cannot be two menu items with the same name.
+     * @return True if the menu item is present in the list, false otherwise.
+     */
+    public boolean contains(String name)
+    {
+        MenuNode currentNode = head;
+
+        while (currentNode != null)
+        {
+            if (currentNode.item.getName().compareToIgnoreCase(name) == 0)
+            {
                 return true;
             }
             else
@@ -160,8 +184,6 @@ public class MenuItemList
 
         return getList();
     }
-
-
 
     // ******************** PRIVATE METHODS ********************
 
@@ -283,10 +305,6 @@ public class MenuItemList
                 }
             }
         }
-
         return itemList;
     }
-
-
-
 }
