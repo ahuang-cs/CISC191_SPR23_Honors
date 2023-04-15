@@ -49,6 +49,146 @@ public class MenuItemList
     }
 
 
+    public MenuItem[] getList()
+    {
+        MenuItem[] itemList = new MenuItem[size];
+        MenuNode currentNode = head;
+        int index = 0;
+
+        while (currentNode != null)
+        {
+            itemList[index] = currentNode.item;
+            currentNode = currentNode.nextNode;
+            index++;
+        }
+
+        return itemList;
+    }
+
+
+    public MenuItem[] getAlphabeticallySortedList()
+    {
+        // Integer parameter sortOption is 0 to indicate alphabetical sort.
+        sortList(0);
+
+        return getList();
+    }
+
+
+    public MenuItem[] getPriceSortedList()
+    {
+        // Integer parameter sortOption is 0 to indicate alphabetical sort.
+        sortList(1);
+
+        return getList();
+    }
+
+
+
+    // ******************** PRIVATE METHODS ********************
+
+    private void deleteList()
+    {
+        head = null;
+        tail = null;
+        size = 0;
+    }
+
+    private void sortList(int sortOption)
+    {
+        // Make sure there is more than one element in the list
+        if (size > 1)
+        {
+            // Copy list into array
+            MenuItem[] itemList = getList();
+
+            // Sort the array
+            if (sortOption == 0)
+            {
+                itemList = sortAlphabetically(itemList);
+            }
+            else if (sortOption == 1)
+            {
+                itemList = sortByPrice(itemList);
+            }
+
+            // Delete current list
+            deleteList();
+
+            // Insert each node from array into current list
+            for (int i = itemList.length - 1; i >= 0; i--)
+            {
+                addMenuItem(itemList[i]);
+            }
+        }
+    }
+
+    private MenuItem[] sortAlphabetically(MenuItem[] itemList)
+    {
+        boolean listSorted = false;
+        String nameOne = "";
+        String nameTwo = "";
+        MenuItem temp;
+
+        for (int i = 1; i < itemList.length && !listSorted; i++)
+        {
+            // If the list is not sorted, we can change that later.
+            listSorted = true;
+
+            for (int j = 0; j < itemList.length - i; j++)
+            {
+                // Compare the names of each item with the item directly after it.
+                nameOne = itemList[j].getName();
+                nameTwo = itemList[j + 1].getName();
+
+                if (nameOne.compareToIgnoreCase(nameTwo) > 0)
+                {
+                    listSorted = false;
+                    // Swap the two items.
+                    temp = itemList[j];
+                    itemList[j] = itemList[j+1];
+                    itemList[j+1] = temp;
+                }
+            }
+        }
+
+        return itemList;
+    }
+
+
+
+    private MenuItem[] sortByPrice(MenuItem[] itemList)
+    {
+        boolean listSorted = false;
+        double priceOne = 0.0;
+        double priceTwo = 0.0;
+        MenuItem temp;
+
+        for (int i = 1; i < itemList.length && !listSorted; i++)
+        {
+            // If the list is not sorted, we can change that later.
+            listSorted = true;
+
+            for (int j = 0; j < itemList.length - i; j++)
+            {
+                // Compare the names of each item with the item directly after it.
+                priceOne = itemList[j].getSalePrice();
+                priceTwo = itemList[j + 1].getSalePrice();
+
+                if (priceOne > priceTwo)
+                {
+                    listSorted = false;
+                    // Swap the two items.
+                    temp = itemList[j];
+                    itemList[j] = itemList[j+1];
+                    itemList[j+1] = temp;
+                }
+            }
+        }
+
+        return itemList;
+    }
+
 
 
 }
