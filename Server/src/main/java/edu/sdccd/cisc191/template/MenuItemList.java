@@ -23,6 +23,10 @@ public class MenuItemList
     }
 
 
+    /**
+     * Adds a MenuNode to the beginning of this linked list.
+     * @param item The MenuItem to be stored in the new node.
+     */
     public void addMenuItem(MenuItem item)
     {
         MenuNode newNode = new MenuNode(item);      // The new node to be added to the list
@@ -43,12 +47,76 @@ public class MenuItemList
     }
 
 
+    /**
+     * Sets the quantity of a menu item in the list to a new value.
+     * @param itemName The name of the menu item to be changed.
+     * @param amount The new amount of the menu item present in the inventory.
+     * @return True if the item was successfully changed, false if the item is not present in the list.
+     */
+    public boolean setMenuItemQuantity(String itemName, int amount)
+    {
+        MenuNode currentNode = head;
+
+        while (currentNode != null)
+        {
+            // Check whether this node contains the target menu item
+            if (currentNode.item.getName().compareToIgnoreCase(itemName) == 0)
+            {
+                currentNode.item.setQuantity(amount);
+                return true;
+            }
+            else
+            {
+                currentNode = currentNode.nextNode;
+            }
+        }
+
+        return false;
+    }
+
+
+    /**
+     * Sets the sale price of a menu item in the list to a new value.
+     * @param itemName The name of the item to be edited.
+     * @param price The new sale price of the menu item to be edited.
+     * @return True if the menu item was successfully changed, false if the menu item was not present in the list.
+     */
+    public boolean setMenuItemPrice(String itemName, double price)
+    {
+        MenuNode currentNode = head;
+
+        while (currentNode != null)
+        {
+            // Check whether this node contains the target menu item
+            if (currentNode.item.getName().compareToIgnoreCase(itemName) == 0)
+            {
+                currentNode.item.setSalePrice(price);
+                return true;
+            }
+            else
+            {
+                currentNode = currentNode.nextNode;
+            }
+        }
+
+        return false;
+    }
+
+
+    /**
+     * Returns the number of different menu items stored in the inventory.
+     * @return The number of nodes in the linked list, which corresponds to the number of different menu items.
+     */
     public int getNumMenuItems()
     {
         return size;
     }
 
 
+    /**
+     * Returns a list of all menu item objects stored in this list.
+     * @return An array of all menu items in this list's nodes.
+     */
     public MenuItem[] getList()
     {
         MenuItem[] itemList = new MenuItem[size];
@@ -66,6 +134,11 @@ public class MenuItemList
     }
 
 
+    /**
+     * Returns a list of all menu items in the inventory in alphabetical order.
+     * This is not case-sensitive.
+     * @return An alphabetically sorted list of menu items.
+     */
     public MenuItem[] getAlphabeticallySortedList()
     {
         // Integer parameter sortOption is 0 to indicate alphabetical sort.
@@ -75,6 +148,11 @@ public class MenuItemList
     }
 
 
+    /**
+     * Returns a list of all menu items in the inventory.
+     * The list is sorted based on the prices of each menu item, in ascending order.
+     * @return A sorted list of menu items by price.
+     */
     public MenuItem[] getPriceSortedList()
     {
         // Integer parameter sortOption is 0 to indicate alphabetical sort.
@@ -87,6 +165,9 @@ public class MenuItemList
 
     // ******************** PRIVATE METHODS ********************
 
+    /**
+     * Deletes all nodes in this list.
+     */
     private void deleteList()
     {
         head = null;
@@ -94,6 +175,12 @@ public class MenuItemList
         size = 0;
     }
 
+    /**
+     * Sorts the nodes of this list alphabetically or by price, depending on the value of sortOption parameter.
+     * @param sortOption Set this parameter to [0] to sort alphabetically.
+     *                   Set this parameter to [1] to sort by price.
+     *                   Other values will not change the list.
+     */
     private void sortList(int sortOption)
     {
         // Make sure there is more than one element in the list
@@ -123,6 +210,12 @@ public class MenuItemList
         }
     }
 
+    /**
+     * Sorts an array of menu items alphabetically.
+     * This method implements a BUBBLE SORT. More efficient algorithms are possible and should be considered.
+     * @param itemList The array of menu items to be sorted.
+     * @return The sorted array of menu items.
+     */
     private MenuItem[] sortAlphabetically(MenuItem[] itemList)
     {
         boolean listSorted = false;
@@ -156,7 +249,12 @@ public class MenuItemList
     }
 
 
-
+    /**
+     * Sorts an array of menu items by price from low to high.
+     * This method implements a BUBBLE SORT. More efficient algorithms are possible and should be considered.
+     * @param itemList The array of menu items to be sorted.
+     * @return The sorted array of menu items.
+     */
     private MenuItem[] sortByPrice(MenuItem[] itemList)
     {
         boolean listSorted = false;
