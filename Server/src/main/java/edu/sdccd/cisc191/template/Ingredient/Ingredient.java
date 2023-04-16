@@ -50,8 +50,10 @@ public class Ingredient {
     }
 
     public static enum Units {
+        NUM,
         OZ,
         fluidOZ,
+        CUP,
         LB,
         GAL,
         PINT,

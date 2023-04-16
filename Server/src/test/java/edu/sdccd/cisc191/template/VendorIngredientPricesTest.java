@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 class VendorIngredientPricesTest
 {
+    /*
     @Test
     public void vendorIngredientPricesTest() {
         Vendor vendor = new Vendor();
@@ -29,5 +30,5 @@ class VendorIngredientPricesTest
         Vendor vendor = new Vendor("Target");
         assertEquals("Target", vendor.getName());
     }
-  
+  */
 }

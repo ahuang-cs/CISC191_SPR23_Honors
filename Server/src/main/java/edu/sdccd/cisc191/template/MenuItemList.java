@@ -1,5 +1,6 @@
 package edu.sdccd.cisc191.template;
 
+import edu.sdccd.cisc191.template.Ingredient.Ingredient;
 import edu.sdccd.cisc191.template.MenuNode;
 import edu.sdccd.cisc191.template.MenuItem.MenuItem;
 
@@ -120,6 +121,33 @@ public class MenuItemList
         return false;
     }
 
+    public boolean addToRecipe(String itemName, Ingredient ingredient){
+        MenuNode currentNode = head;
+
+        while (currentNode != null)
+        {
+            // Check whether this node contains the target menu item
+            if (currentNode.item.getName().compareToIgnoreCase(itemName) == 0)
+            {
+                List<Ingredient> recipe = currentNode.item.getRecipe();
+               //checks if ingredient already exists
+                for(Ingredient recipeIngredient: recipe){
+                    if(recipeIngredient.getIngredientName().equalsIgnoreCase(itemName)){
+                        return false;
+                    }
+                }
+                currentNode.item.addToRecipe(ingredient);
+                return true;
+
+            }
+            else
+            {
+                currentNode = currentNode.nextNode;
+            }
+        }
+
+        return false;
+    }
 
     /**
      * Returns whether a menu item is present in the list.
@@ -163,7 +191,7 @@ public class MenuItemList
      */
     public List<MenuItem> getList()
     {
-        List<MenuItem> itemList;
+        List<MenuItem> itemList = new ArrayList<>();
         MenuNode currentNode = head;
         int index = 0;
         while (currentNode != null)

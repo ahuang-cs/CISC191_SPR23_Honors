@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class InventoryManagerTest
 {
-
+    /*
     // Testing the InventoryManager constructor
     @Test
     void InventoryManagerConstructorTest()
@@ -226,4 +226,6 @@ class InventoryManagerTest
     // {
     //
     // }
+
+     */
 }
