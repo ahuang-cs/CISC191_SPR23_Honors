@@ -1,49 +1,23 @@
 package edu.sdccd.cisc191.template;
 
+import edu.sdccd.cisc191.template.Ingredient.Ingredient;
 import edu.sdccd.cisc191.template.MenuItem.MenuItem;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class InventoryManager
 {
     // ************************ DATA ***********************
 
-    // TO UPDATE: not sure what the point of this is, just use menuItemList.length
-    // Holds the number of different ingredients stored in the inventory.
-    private int numIngredients;
-
-    // Holds a list of all stocked ingredients as strings.
-    private String[] ingredientList;
-
-    // TO UPDATE: not sure what the point of this is, just use menuItemList.length
-    // Holds the number of menu items stored in the Inventory.
-    private int numMenuItems;
+    // Holds a list of all stocked ingredients.
+    private List<Ingredient> ingredientList;
 
     // Holds a list of all menu items.
-    private MenuItem[] menuItemList;
-
-    // TO UPDATE: delete this, store amount in ingredient object
-    // Maps all ingredients in ingredientList to the amount that is in storage.
-    //      - Column 0 is ingredient index, column 1 is amount of that ingredient.
-    //      [Index of Item 1] [Amount of Item 1]
-    private int[][] ingredientInventory;
-
-    // TO UPDATE: delete this,store amount in menuItem object
-    // Maps all MenuItems in MenuItemList to the amount that is available.
-    //      - Column 0 is the menuItem index, column 1 is the amount of that menu item available.
-    //      [Index of Item 1] [Amount of Item 1]
-    private int[][] menuItemInventory;
-
-    //TO UPDATE: can be converted into 2d array with MenuItem on one dimension, and ingredients on the other dimension
-    //IDEA: store recipe with menuitem
-    // Maps all MenuItems in MenuItemList to a set of ingredients in IngredientList.
-    //      - [X][0][0]: The Menu Item that this recipe corresponds to
-    //      - [ ][X][0]: The Ingredients used in this recipe.
-    //      - [ ][X][1]: The amount of the ingredient with the same second dimensional index at [X][X][0].
-    private int[][][] recipeBook;
+    private MenuItemList menuItemList;
 
     // ******************** END OF DATA ********************
 
@@ -53,24 +27,14 @@ public class InventoryManager
     public InventoryManager()
     {
         //inventory gets MenuItems from MenuItemController
-
+        //TO UPDATE: For now, menu items will be stored on memory, and not saved. Ingredients will be stored on the database.
         RestTemplate restTemplate = new RestTemplate();
         String menuItemSourceUrl = "http://localhost:8080/MenuItems";
         ResponseEntity<MenuItem[]> response = restTemplate.getForEntity(menuItemSourceUrl, MenuItem[].class, new ParameterizedTypeReference<List<MenuItem>>() {});
-        menuItemList = response.getBody();
 
-        ingredientList = new String[0];
-        numIngredients = 0;
-        numMenuItems = 0;
+        menuItemList = new MenuItemList();
 
-        // Initialize ingredientInventory and menuItemInventory arrays as 2D arrays with 2 columns
-        //      - The first column is for specific items, and the second column is for amounts.
-        ingredientInventory = new int[0][2];
-        menuItemInventory = new int[0][2];
-
-        // Initialize the empty recipe book.
-        recipeBook = new int[0][0][2];
-
+        ingredientList = new ArrayList<Ingredient>();
     }
 
     // ******************** Ingredient Methods ********************
@@ -86,7 +50,7 @@ public class InventoryManager
         String lowercaseTarget = target.toLowerCase();  // The target string in lowercase, to remove case sensitivity.
 
         // Check whether ingredientList is empty
-        if (ingredientList.length == 0)
+        if (ingredientList.size() == 0)
         {
             // If the ingredientList is empty, then the target cannot be present in the array.
             targetIndex = -1;
@@ -95,10 +59,10 @@ public class InventoryManager
         else
         {
             // If there are elements in ingredientList, search each element.
-            for (int i = 0; i < ingredientList.length; i++)
+            for (int i = 0; i < ingredientList.size(); i++)
             {
                 // Compare each element with the target string.
-                if (lowercaseTarget.equals(ingredientList[i]))
+                if (lowercaseTarget.equals(ingredientList.get(i).toString().toLowerCase()))
                 {
                     // If the target matches this element, return the index of this element.
                     targetIndex = i;
@@ -299,7 +263,7 @@ public class InventoryManager
      */
     public void addMenuItem(MenuItem item, int amount)
     {
-        int itemIndex= 0;     // Stores the index of the menu item (if it is already present).
+        int itemIndex= 0; // Stores the index of the menu item (if it is already present).
 
         // Search for the item in the array using its name.
         itemIndex = findMenuItem(item.getName());
@@ -389,21 +353,11 @@ public class InventoryManager
      */
     public void setMenuItemAmount(String itemName, int amount) throws ItemNotFoundException
     {
-        // Search for the item in the menuItemList.
-        int itemIndex = findMenuItem(itemName);
-
         // Verify that the item is actually in the array.
-        if (itemIndex != -1)
-        {
-            // If the item is present, set the corresponding inventory element to amount.
-            menuItemInventory[itemIndex][1] = amount;
-        }
-        else
-        {
-            // The item is not present in the array, so there is nothing to change.
-            // Throw an ItemNotFound exception.
+        if (!menuItemList.setMenuItemQuantity(itemName, amount)){
             throw new ItemNotFoundException();
         }
+       //TODO: subtract quantity from menuItem recipe from the ingredients stock
     }
 
 
@@ -411,18 +365,9 @@ public class InventoryManager
      * Returns a list of all menu items in the inventory.
      * @return A MenuItem[] containing all menu items in the inventory in chronological order.
      */
-    public MenuItem[] getMenuItemList()
+    public List<MenuItem> getMenuItemList()
     {
-        // Make an empty array with the same size as ingredientList.
-        MenuItem[] menuItemListCopy = new MenuItem[menuItemList.length];   // The actual array to be returned
-
-        // Copy all ingredients in ingredientList to the new array.
-        for (int i = 0; i < menuItemList.length; i++)
-        {
-            menuItemListCopy[i] = menuItemList[i];
-        }
-
-        return menuItemListCopy;
+        return menuItemList.getList();
     }
 
 
@@ -434,17 +379,11 @@ public class InventoryManager
      */
     public int getMenuItemAmount(String itemName) throws ItemNotFoundException
     {
-        int amount = 0;                             // The amount of the item in the inventory
-        int itemIndex = findMenuItem(itemName);     // Stores the index of the ingredient in the inventory.
+        int amount = 0;   // The amount of the item in the inventory
 
         // Verify that the menu item is actually present in the array.
-        if (itemIndex != -1)
-        {
-            // The item is present, so set amount to the value stored in the inventory.
-            amount = menuItemInventory[itemIndex][1];
-        }
-        else
-        {
+        amount = menuItemList.getMenuItemQuantity(itemName);
+        if(amount==-1){
             // The menu item is not present.
             // Throw an ItemNotFound exception.
             throw new ItemNotFoundException();

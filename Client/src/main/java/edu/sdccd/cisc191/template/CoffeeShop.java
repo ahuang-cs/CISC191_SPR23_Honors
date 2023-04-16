@@ -1,6 +1,7 @@
 
 package edu.sdccd.cisc191.template;
 
+import edu.sdccd.cisc191.template.Ingredient.Ingredient;
 import edu.sdccd.cisc191.template.MenuItem.MenuItem;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -8,8 +9,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -23,9 +26,9 @@ public class CoffeeShop{
 
     static void printAllMenuItems() throws ItemNotFoundException
     {
-        MenuItem[] menuItems = inventory.getMenuItemList();
+        List<MenuItem> menuItems = inventory.getMenuItemList();
         // New code
-        if (menuItems.length == 0)
+        if (menuItems.size() == 0)
         {
             System.out.println("There are no Menu Items in the inventory right now.");
         }
@@ -38,10 +41,9 @@ public class CoffeeShop{
 
             System.out.println("Menu Item:                                         Quantity:  Price:  ");
 
-            for (int i = 0; i < menuItems.length; i++)
-            {
-                menuItemName = menuItems[i].getName();
-                menuItemPrice = menuItems[i].getSalePrice();
+            for (MenuItem menuItem : menuItems) {
+                menuItemName = menuItem.getName();
+                menuItemPrice = menuItem.getSalePrice();
                 //.getMenuItemAmount not working
                 //System.out.printf("%-50s %-10d %.2f\n", menuItemName, inventory.getMenuItemAmount(menuItemName), menuItemPrice);
                 System.out.printf("%-50s %-10d %.2f\n", menuItemName, 1, menuItemPrice);
@@ -55,7 +57,7 @@ public class CoffeeShop{
     static void addItemQuantity()
     {
         // Verify that there exist menu items to modify
-        if (inventory.getMenuItemList().length > 0)
+        if (inventory.getMenuItemList().size() > 0)
         {
             Scanner keyboard = new Scanner(System.in);
             String userInputName = "";
@@ -125,7 +127,7 @@ public class CoffeeShop{
 
     static void subtractItemQuantity()
     {
-        if (inventory.getMenuItemList().length > 0)
+        if (inventory.getMenuItemList().size() > 0)
         {
             Scanner keyboard = new Scanner(System.in);
             String userInputName = "";
@@ -305,54 +307,36 @@ public class CoffeeShop{
         } while (badInput);
 
         // Process the user input
+        MenuItem newItem = new MenuItem();
+        List<Ingredient> recipe = new ArrayList<>();
         switch (userChoice)
         {
-            case 1:
+            case 1: //coffee
             {
-                Coffee newItem = new Coffee();
                 newItem.setName(itemName);
                 newItem.setSalePrice(itemPrice);
-                inventory.addMenuItem(newItem, itemAmount);
-                System.out.println(newItem.getName() + " has been successfully added to the inventory.");
+                recipe.add(new Ingredient("Coffee beans", Ingredient.Units.OZ, 0.4));
+                recipe.add(new Ingredient("Creamer", Ingredient.Units.fluidOZ, 0.5));
+                newItem.setRecipe();
                 break;
             }
-            case 2:
+            case 2: //donut
             {
-                Donut newItem = new Donut();
                 newItem.setName(itemName);
                 newItem.setSalePrice(itemPrice);
-                inventory.addMenuItem(newItem, itemAmount);
-                System.out.println(newItem.getName() + " has been successfully added to the inventory.");
-                break;
+
+
             }
-            case 3:
+            case 3: //other
             {
-                Drink newItem = new Drink();
                 newItem.setName(itemName);
                 newItem.setSalePrice(itemPrice);
-                inventory.addMenuItem(newItem, itemAmount);
-                System.out.println(newItem.getName() + " has been successfully added to the inventory.");
                 break;
             }
-            case 4:
-            {
-                Pastry newItem = new Pastry();
-                newItem.setName(itemName);
-                newItem.setSalePrice(itemPrice);
-                inventory.addMenuItem(newItem, itemAmount);
-                System.out.println(newItem.getName() + " has been successfully added to the inventory.");
-                break;
-            }
-            case 5:
-            {
-                MenuItem newItem = new MenuItem();
-                newItem.setName(itemName);
-                newItem.setSalePrice(itemPrice);
-                inventory.addMenuItem(newItem, itemAmount);
-                System.out.println(newItem.getName() + " has been successfully added to the inventory.");
-                break;
-            }
+
         }
+        inventory.addMenuItem(newItem, itemAmount);
+        System.out.println(newItem.getName() + " has been successfully added to the inventory.");
 
     }
 
@@ -375,9 +359,7 @@ public class CoffeeShop{
             System.out.println("What type of Menu Item would you like to add?");
             System.out.println("[1]: Coffee");
             System.out.println("[2]: Donut");
-            System.out.println("[3]: Miscellaneous Drink");
-            System.out.println("[4]: Miscellaneous Pastry");
-            System.out.println("[5]: Other");
+            System.out.println("[3]: Other");
             System.out.print("Enter the number of your choice, then press <ENTER>: ");
 
             // Receive and validate user input.
@@ -399,7 +381,7 @@ public class CoffeeShop{
             }
 
             // Make sure the user input is from 1-5.
-            if (!badInput && ((userChoice < 1) || (userChoice > 5)))
+            if (!badInput && ((userChoice < 1) || (userChoice > 3)))
             {
                 System.out.println(userChoice + " is not a valid option.");
                 System.out.println("Please select a valid menu option from [1] to [5].");

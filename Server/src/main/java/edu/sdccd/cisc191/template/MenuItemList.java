@@ -3,6 +3,9 @@ package edu.sdccd.cisc191.template;
 import edu.sdccd.cisc191.template.MenuNode;
 import edu.sdccd.cisc191.template.MenuItem.MenuItem;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MenuItemList
 {
     // ********** Variable and Object Creation ***********
@@ -70,6 +73,23 @@ public class MenuItemList
         }
 
         return false;
+    }
+    public int getMenuItemQuantity(String itemName){
+        MenuNode currentNode = head;
+        while (currentNode != null)
+        {
+            // Check whether this node contains the target menu item
+            if (currentNode.item.getName().compareToIgnoreCase(itemName) == 0)
+            {
+                return currentNode.item.getQuantity();
+            }
+            else
+            {
+                currentNode = currentNode.nextNode;
+            }
+        }
+
+        return -1;
     }
 
 
@@ -141,15 +161,14 @@ public class MenuItemList
      * Returns a list of all menu item objects stored in this list.
      * @return An array of all menu items in this list's nodes.
      */
-    public MenuItem[] getList()
+    public List<MenuItem> getList()
     {
-        MenuItem[] itemList = new MenuItem[size];
+        List<MenuItem> itemList;
         MenuNode currentNode = head;
         int index = 0;
-
         while (currentNode != null)
         {
-            itemList[index] = currentNode.item;
+            itemList.set(index, currentNode.item);
             currentNode = currentNode.nextNode;
             index++;
         }
@@ -163,7 +182,7 @@ public class MenuItemList
      * This is not case-sensitive.
      * @return An alphabetically sorted list of menu items.
      */
-    public MenuItem[] getAlphabeticallySortedList()
+    public List<MenuItem> getAlphabeticallySortedList()
     {
         // Integer parameter sortOption is 0 to indicate alphabetical sort.
         sortList(0);
@@ -177,7 +196,7 @@ public class MenuItemList
      * The list is sorted based on the prices of each menu item, in ascending order.
      * @return A sorted list of menu items by price.
      */
-    public MenuItem[] getPriceSortedList()
+    public List<MenuItem> getPriceSortedList()
     {
         // Integer parameter sortOption is 0 to indicate alphabetical sort.
         sortList(1);
