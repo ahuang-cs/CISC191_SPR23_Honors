@@ -256,7 +256,7 @@ public class MenuItemList
         if (size > 1)
         {
             // Copy list into array
-            MenuItem[] itemList = getList();
+            MenuItemList itemList = getList();
 
             // Sort the array
             if (sortOption == 0)
