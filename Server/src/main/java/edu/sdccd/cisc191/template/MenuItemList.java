@@ -4,6 +4,7 @@ import edu.sdccd.cisc191.template.Ingredient.Ingredient;
 import edu.sdccd.cisc191.template.MenuNode;
 import edu.sdccd.cisc191.template.MenuItem.MenuItem;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,6 +76,7 @@ public class MenuItemList
 
         return false;
     }
+
     public int getMenuItemQuantity(String itemName){
         MenuNode currentNode = head;
         while (currentNode != null)
@@ -148,7 +150,33 @@ public class MenuItemList
 
         return false;
     }
+    public List<Ingredient> getRecipe(String itemName){
+        MenuNode currentNode = head;
 
+        while (currentNode != null)
+        {
+            // Check whether this node contains the target menu item
+            if (currentNode.item.getName().compareToIgnoreCase(itemName) == 0)
+            {
+                return(currentNode.item.getRecipe());
+            }
+            else
+            {
+                currentNode = currentNode.nextNode;
+            }
+        }
+        return new ArrayList<>();
+    }
+
+    //Uses recursion to see if menuitem exists
+    private boolean containSearch(MenuNode head, String name){
+        if(head==null)
+            return false;
+        if(head.item.getName().equalsIgnoreCase(name)){
+            return true;
+        }
+        return containSearch(head.nextNode, name);
+    }
     /**
      * Returns whether a menu item is present in the list.
      * @param name The name of the menu item to search for.
@@ -158,20 +186,8 @@ public class MenuItemList
     public boolean contains(String name)
     {
         MenuNode currentNode = head;
+        return containSearch(currentNode, name);
 
-        while (currentNode != null)
-        {
-            if (currentNode.item.getName().compareToIgnoreCase(name) == 0)
-            {
-                return true;
-            }
-            else
-            {
-                currentNode = currentNode.nextNode;
-            }
-        }
-
-        return false;
     }
 
 
@@ -256,7 +272,7 @@ public class MenuItemList
         if (size > 1)
         {
             // Copy list into array
-            MenuItemList itemList = getList();
+            List<MenuItem> itemList = getList();
 
             // Sort the array
             if (sortOption == 0)
@@ -272,9 +288,9 @@ public class MenuItemList
             deleteList();
 
             // Insert each node from array into current list
-            for (int i = itemList.length - 1; i >= 0; i--)
+            for (int i = itemList.size() - 1; i >= 0; i--)
             {
-                addMenuItem(itemList[i]);
+                addMenuItem(itemList.get(i));
             }
         }
     }
@@ -285,31 +301,32 @@ public class MenuItemList
      * @param itemList The array of menu items to be sorted.
      * @return The sorted array of menu items.
      */
-    private MenuItem[] sortAlphabetically(MenuItem[] itemList)
+    private List<MenuItem> sortAlphabetically(List<MenuItem> itemList)
     {
         boolean listSorted = false;
         String nameOne = "";
         String nameTwo = "";
         MenuItem temp;
 
-        for (int i = 1; i < itemList.length && !listSorted; i++)
+        for (int i = 1; i < itemList.size() && !listSorted; i++)
         {
             // If the list is not sorted, we can change that later.
             listSorted = true;
 
-            for (int j = 0; j < itemList.length - i; j++)
+            for (int j = 0; j < itemList.size() - i; j++)
             {
                 // Compare the names of each item with the item directly after it.
-                nameOne = itemList[j].getName();
-                nameTwo = itemList[j + 1].getName();
+                nameOne = itemList.get(j).getName();
+                nameTwo = itemList.get(j+1).getName();
 
                 if (nameOne.compareToIgnoreCase(nameTwo) > 0)
                 {
                     listSorted = false;
                     // Swap the two items.
-                    temp = itemList[j];
-                    itemList[j] = itemList[j+1];
-                    itemList[j+1] = temp;
+
+                    temp = itemList.get(j);
+                    itemList.set(j, itemList.get(j+1));
+                    itemList.set(j+1, temp);
                 }
             }
         }
@@ -324,31 +341,31 @@ public class MenuItemList
      * @param itemList The array of menu items to be sorted.
      * @return The sorted array of menu items.
      */
-    private MenuItem[] sortByPrice(MenuItem[] itemList)
+    private List<MenuItem>  sortByPrice(List<MenuItem> itemList)
     {
         boolean listSorted = false;
         double priceOne = 0.0;
         double priceTwo = 0.0;
         MenuItem temp;
 
-        for (int i = 1; i < itemList.length && !listSorted; i++)
+        for (int i = 1; i < itemList.size() && !listSorted; i++)
         {
             // If the list is not sorted, we can change that later.
             listSorted = true;
 
-            for (int j = 0; j < itemList.length - i; j++)
+            for (int j = 0; j < itemList.size() - i; j++)
             {
                 // Compare the names of each item with the item directly after it.
-                priceOne = itemList[j].getSalePrice();
-                priceTwo = itemList[j + 1].getSalePrice();
+                priceOne = itemList.get(j).getSalePrice();
+                priceTwo = itemList.get(j+1).getSalePrice();
 
                 if (priceOne > priceTwo)
                 {
                     listSorted = false;
                     // Swap the two items.
-                    temp = itemList[j];
-                    itemList[j] = itemList[j+1];
-                    itemList[j+1] = temp;
+                    temp = itemList.get(j);
+                    itemList.set(j, itemList.get(j+1));
+                    itemList.set(j+1, temp);
                 }
             }
         }

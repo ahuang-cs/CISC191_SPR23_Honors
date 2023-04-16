@@ -255,60 +255,26 @@ public class InventoryManager
 
     /**
      * Returns a 2D array representing a recipe for a menu item.
-     * @param menuItem The menu item whose recipe this method returns.
+     * @param itemName The menu item whose recipe this method returns.
      * @return  A 2D array of integers.
      *          The first column represents an index in the Ingredients inventory (see getIngredientList()).
      *          The second column represents the amount of that ingreedient to be used in the recipe.
      * @throws ItemNotFoundException Thrown when attempting to access the recipe of a menu item that does not exist.
      */
-    public int[][] getRecipe(String menuItem) throws ItemNotFoundException
+    public List<Ingredient> getRecipe(String itemName) throws ItemNotFoundException
     {
-        // Search for the target menuItem in menuItemList
-        int recipeIndex = findMenuItem(menuItem);
 
         // Make sure the menu item is actually there
-        if (recipeIndex != -1)
+        if (!menuItemList.contains(itemName))
         {
             // If the menu item does not exist, throw a ItemNotFoundException
             throw new ItemNotFoundException();
         }
         else
         {
-            // If the menu item does exist, return the recipe.
-            int[][] recipe = new int[recipeBook[recipeIndex].length][2];
-
-            // Copy Recipe to the 2D array
-            for (int i = 0; i < recipeBook[recipeIndex].length; i++)
-            {
-                recipe[i][0] = recipeBook[recipeIndex][i][0];
-                recipe[i][1] = recipeBook[recipeIndex][i][1];
-            }
-
-            return recipe;
+            return menuItemList.getRecipe(itemName);
         }
     }
     // ******************** End of Recipe Methods ********************
 
-
-
-    // ******************** BASIC GETTER METHODS ********************
-
-    /**
-     * Returns the number of different ingredients stored in the inventory.
-     * @return The number of different ingredients stored in the inventory.
-     */
-    public int getNumIngredients()
-    {
-        return numIngredients;
-    }
-
-    /**
-     * Returns the number of different Menu Items stored in the inventory.
-     * @return The number of menu items stored.
-     */
-    public int getNumMenuItems() {
-        return numMenuItems;
-    }
-
-    // ******************** BASIC GETTER METHODS ********************
 }
