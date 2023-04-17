@@ -156,16 +156,6 @@ public class InventoryManager
 
     // ******************** MenuItem Methods ********************
 
-    /**
-     * Returns the index of a menu item in the inventory, or -1 if the item does not exist.
-     * @param itemName The name of the menu item to be found.
-     * @return The index of the menu item within the menuItemList array, or -1 if the item does not exist.
-     */
-    private void findMenuItem(String itemName)
-    {
-
-    }
-
 
     /**
      * Adds a menu item to the inventory.
@@ -174,7 +164,7 @@ public class InventoryManager
      */
     public void addMenuItem(MenuItem item)
     {
-       menuItemList.addMenuItem(item);
+        menuItemList.addMenuItem(item);
     }
 
     /**
@@ -191,7 +181,6 @@ public class InventoryManager
         }
        //TODO: subtract quantity from menuItem recipe from the ingredients stock
     }
-
 
     /**
      * Returns a list of all menu items in the inventory.

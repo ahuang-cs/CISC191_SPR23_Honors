@@ -36,7 +36,7 @@ public class CoffeeShop{
         {
             String menuItemName = "";
             double menuItemPrice = 0.0;
-
+            int menuItemQuantity;
             System.out.println("***************************** Menu Items *****************************");
 
             System.out.println("Menu Item:                                         Quantity:  Price:  ");
@@ -44,9 +44,10 @@ public class CoffeeShop{
             for (MenuItem menuItem : menuItems) {
                 menuItemName = menuItem.getName();
                 menuItemPrice = menuItem.getSalePrice();
+                menuItemQuantity = menuItem.getQuantity();
                 //.getMenuItemAmount not working
                 //System.out.printf("%-50s %-10d %.2f\n", menuItemName, inventory.getMenuItemAmount(menuItemName), menuItemPrice);
-                System.out.printf("%-50s %-10d %.2f\n", menuItemName, 1, menuItemPrice);
+                System.out.printf("%-50s %-10d %.2f\n", menuItemName, menuItemQuantity, menuItemPrice);
             }
 
             System.out.println("**********************************************************************");
@@ -343,7 +344,6 @@ public class CoffeeShop{
         }
         inventory.addMenuItem(newItem);
         System.out.println(newItem.getName() + " has been successfully added to the inventory.");
-
     }
 
     /**

@@ -167,7 +167,6 @@ public class MenuItemList
         }
         return new ArrayList<>();
     }
-
     //Uses recursion to see if menuitem exists
     private boolean containSearch(MenuNode head, String name){
         if(head==null)
@@ -209,12 +208,12 @@ public class MenuItemList
     {
         List<MenuItem> itemList = new ArrayList<>();
         MenuNode currentNode = head;
-        int index = 0;
+
         while (currentNode != null)
         {
-            itemList.set(index, currentNode.item);
+            itemList.add(currentNode.item);
             currentNode = currentNode.nextNode;
-            index++;
+
         }
 
         return itemList;

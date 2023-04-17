@@ -10,15 +10,19 @@ public class Ingredient {
     Units unit;
     // amount of ingredient in inventory
     double quantity;
-    @Id
+    @Id @GeneratedValue
     private Long id;
-
-    public Ingredient(){};
 
     public Ingredient(String ingredientName, Units unit, double quantity) {
         this.ingredientName = ingredientName;
         this.unit = unit;
         this.quantity = quantity;
+    }
+
+    public Ingredient() {
+        this.ingredientName = "";
+        this.unit = Units.NUM;
+        this.quantity = 0;
     }
 
     public String getIngredientName() {

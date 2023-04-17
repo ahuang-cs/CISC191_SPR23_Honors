@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -14,10 +15,10 @@ public class MenuItem
 {
     //for use if recipe is stored in menuItem Object.
     @OneToMany
-    private List<Ingredient> recipe;
-    private String itemName;
-    private double salePrice;
-    private int quantity;
+    private List<Ingredient> recipe = new ArrayList<>();
+    private String itemName = "";
+    private double salePrice = 0.0;
+    private int quantity = 0;
     @Id @GeneratedValue
     private Long id;
 
@@ -32,11 +33,9 @@ public class MenuItem
         this.recipe = recipe;
         this.quantity = quantity;
     }
+    public MenuItem(){
 
-    public MenuItem() {
-        this.itemName = "";
     }
-
     public List<Ingredient> getRecipe(){
         return this.recipe;
     }
