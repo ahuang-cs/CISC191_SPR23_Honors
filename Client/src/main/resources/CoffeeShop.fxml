@@ -40,5 +40,10 @@
             <Font name="Didot" size="16.0" />
          </font>
       </Button>
+      <Button fx:id="showIngredientsButton" alignment="CENTER" contentDisplay="CENTER" layoutX="231.0" layoutY="333.0" mnemonicParsing="false" onAction="#printIngredientStock" text="Show Ingredient Stock" textAlignment="CENTER">
+         <font>
+            <Font name="Didot" size="16.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

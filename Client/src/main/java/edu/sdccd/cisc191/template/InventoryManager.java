@@ -32,10 +32,13 @@ public class InventoryManager
         RestTemplate restTemplate = new RestTemplate();
         String menuItemSourceUrl = "http://localhost:8080/MenuItems";
         ResponseEntity<Ingredient[]> response = restTemplate.getForEntity(menuItemSourceUrl, Ingredient[].class, new ParameterizedTypeReference<List<MenuItem>>() {});
-
+        Ingredient[] responseArr = response.getBody();
+        for(Ingredient ingredient:responseArr){
+            addIngredient(ingredient);
+        }
+        ingredientList = new ArrayList<>();
         menuItemList = new MenuItemList();
 
-        ingredientList = new ArrayList<>();
     }
 
     // ******************** Ingredient Methods ********************
@@ -43,6 +46,11 @@ public class InventoryManager
     {
         return ingredientList;
     }
+    public void addIngredient(Ingredient ingredient)
+    {
+        ingredientList.add(ingredient);
+    }
+
     /**
      * Searches the IngredientList for a specific ingredient specified by target parameter.
      * @param target The name of the ingredient to be found
@@ -85,10 +93,6 @@ public class InventoryManager
      * If the ingredient is already there, it will just add the amount to the ingredientInventory.
      * @param ingredient The ingredient to be added
      */
-    public void addIngredient(Ingredient ingredient)
-    {
-        ingredientList.add(ingredient);
-    }
 
     /**
      * Directly sets the amount of an ingredient.
@@ -150,6 +154,15 @@ public class InventoryManager
         }
 
         return amount;
+    }
+
+    public void printAllIngredients(){
+        System.out.println("************Current Ingredient Stock**********");
+        System.out.println("Name, Quantity");
+        for(Ingredient ingredient: ingredientList){
+            System.out.println(ingredient.getIngredientName()+", "+ingredient.getQuantity()+ingredient.getUnit());
+        }
+
     }
     // ******************** End of Ingredient Methods ********************
 

@@ -455,4 +455,8 @@ public class CoffeeShop{
             System.out.printf("%-15s%-10s%-10s%-10s\n", e.getIngredientName(),e.getQuantity(),e.getUnit(), e.getPrice());
         });
     }
+
+    static void printIngredients(){
+        inventory.printAllIngredients();
+    }
 }
