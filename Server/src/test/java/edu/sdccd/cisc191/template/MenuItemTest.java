@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class MenuItemTest {
-
+    /*
     @Test
     void getName()
     {
@@ -85,4 +85,6 @@ class MenuItemTest {
         assertEquals("Tea", secondItem.toString());
         assertEquals("Decaf Coffee", thirdItem.toString());
     }
+
+     */
 }

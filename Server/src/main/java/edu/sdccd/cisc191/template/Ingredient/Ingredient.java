@@ -7,14 +7,25 @@ import javax.persistence.Id;
 @Entity
 public class Ingredient {
     String ingredientName;
-    Units unit;/// amount of ingredient in inventory
-    @Id
+    Units unit;
+    // amount of ingredient in inventory
+    double quantity;
+    @Id @GeneratedValue
     private Long id;
 
-    public Ingredient(){};
-    public Ingredient(String ingredientName, Units unit) {
+    public Ingredient(String ingredientName, Units unit, double quantity) {
         this.ingredientName = ingredientName;
         this.unit = unit;
+        this.quantity = quantity;
+    }
+
+    public Ingredient() {
+        this.ingredientName = "";
+        this.unit = Units.NUM;
+        this.quantity = 0;
+    }
+
+    public Ingredient(String ingredientName, Units unit) {
     }
 
     public String getIngredientName() {
@@ -32,6 +43,10 @@ public class Ingredient {
     public void setUnit(Units unit) {
         this.unit = unit;
     }
+    public void setQuantity(double quantity){this.quantity = quantity;}
+
+    public double getQuantity(){return quantity;}
+
 
     public void setId(Long id) {
         this.id = id;
@@ -42,7 +57,10 @@ public class Ingredient {
     }
 
     public static enum Units {
+        NUM,
         OZ,
+        fluidOZ,
+        CUP,
         LB,
         GAL,
         PINT,

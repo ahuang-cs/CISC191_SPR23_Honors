@@ -18,6 +18,9 @@ public class VendorIngredientPrices extends Vendor{
         setCostPerUnit(costPerUnit);
     }
 
+    public VendorIngredientPrices(Vendor vendor, Ingredient ingredient) {
+    }
+
     public Vendor getVendor() {
         return vendor;
     }

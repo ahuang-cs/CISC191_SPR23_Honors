@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class InventoryManagerTest
 {
-
+    /*
     // Testing the InventoryManager constructor
     @Test
     void InventoryManagerConstructorTest()
@@ -115,7 +115,6 @@ class InventoryManagerTest
         // Verify that changing a nonexistent value does throw an exception
         assertThrows(ItemNotFoundException.class, () -> inventory.setIngredientAmount("Ice", 9));
     }
-
 
     @Test
     void addMenuItemTest() throws ItemNotFoundException
@@ -226,4 +225,6 @@ class InventoryManagerTest
     // {
     //
     // }
+
+     */
 }

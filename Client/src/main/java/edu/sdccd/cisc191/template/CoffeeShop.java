@@ -1,6 +1,10 @@
 
 package edu.sdccd.cisc191.template;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import edu.sdccd.cisc191.template.Ingredient.Ingredient;
 import edu.sdccd.cisc191.template.MenuItem.MenuItem;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -8,11 +12,16 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
+
+import java.io.File;
+import java.util.*;
 
 public class CoffeeShop{
     static InventoryManager inventory;      // Manages the inventory of Menu Items and Ingredients.
@@ -23,9 +32,9 @@ public class CoffeeShop{
 
     static void printAllMenuItems() throws ItemNotFoundException
     {
-        MenuItem[] menuItems = inventory.getMenuItemList();
+        List<MenuItem> menuItems = inventory.getMenuItemList();
         // New code
-        if (menuItems.length == 0)
+        if (menuItems.size() == 0)
         {
             System.out.println("There are no Menu Items in the inventory right now.");
         }
@@ -33,18 +42,18 @@ public class CoffeeShop{
         {
             String menuItemName = "";
             double menuItemPrice = 0.0;
-
+            int menuItemQuantity;
             System.out.println("***************************** Menu Items *****************************");
 
             System.out.println("Menu Item:                                         Quantity:  Price:  ");
 
-            for (int i = 0; i < menuItems.length; i++)
-            {
-                menuItemName = menuItems[i].getName();
-                menuItemPrice = menuItems[i].getSalePrice();
+            for (MenuItem menuItem : menuItems) {
+                menuItemName = menuItem.getName();
+                menuItemPrice = menuItem.getSalePrice();
+                menuItemQuantity = menuItem.getQuantity();
                 //.getMenuItemAmount not working
                 //System.out.printf("%-50s %-10d %.2f\n", menuItemName, inventory.getMenuItemAmount(menuItemName), menuItemPrice);
-                System.out.printf("%-50s %-10d %.2f\n", menuItemName, 1, menuItemPrice);
+                System.out.printf("%-50s %-10d %.2f\n", menuItemName, menuItemQuantity, menuItemPrice);
             }
 
             System.out.println("**********************************************************************");
@@ -55,7 +64,7 @@ public class CoffeeShop{
     static void addItemQuantity()
     {
         // Verify that there exist menu items to modify
-        if (inventory.getMenuItemList().length > 0)
+        if (inventory.getMenuItemList().size() > 0)
         {
             Scanner keyboard = new Scanner(System.in);
             String userInputName = "";
@@ -125,7 +134,7 @@ public class CoffeeShop{
 
     static void subtractItemQuantity()
     {
-        if (inventory.getMenuItemList().length > 0)
+        if (inventory.getMenuItemList().size() > 0)
         {
             Scanner keyboard = new Scanner(System.in);
             String userInputName = "";
@@ -305,55 +314,42 @@ public class CoffeeShop{
         } while (badInput);
 
         // Process the user input
+        MenuItem newItem = new MenuItem();
+        List<Ingredient> recipe = new ArrayList<>();
         switch (userChoice)
         {
-            case 1:
+            case 1: //coffee
             {
-                Coffee newItem = new Coffee();
                 newItem.setName(itemName);
                 newItem.setSalePrice(itemPrice);
-                inventory.addMenuItem(newItem, itemAmount);
-                System.out.println(newItem.getName() + " has been successfully added to the inventory.");
+                newItem.setQuantity(itemAmount);
+                recipe.add(new Ingredient("Coffee beans", Ingredient.Units.OZ, 0.4));
+                recipe.add(new Ingredient("Creamer", Ingredient.Units.fluidOZ, 0.5));
+                newItem.setRecipe();
                 break;
             }
-            case 2:
+            case 2: //donut
             {
-                Donut newItem = new Donut();
                 newItem.setName(itemName);
                 newItem.setSalePrice(itemPrice);
-                inventory.addMenuItem(newItem, itemAmount);
-                System.out.println(newItem.getName() + " has been successfully added to the inventory.");
-                break;
+                newItem.setQuantity(itemAmount);
+                recipe.add(new Ingredient("Milk", Ingredient.Units.CUP, 1.25/12));
+                recipe.add(new Ingredient("Yeast", Ingredient.Units.TSP, 2.25/12));
+                recipe.add(new Ingredient("Eggs", Ingredient.Units.NUM, 2/12));
+                recipe.add(new Ingredient("Butter",Ingredient.Units.TSP, 4));
+                recipe.add(new Ingredient("Flour",Ingredient.Units.CUP, 4.25/12));
             }
-            case 3:
+            case 3: //other
             {
-                Drink newItem = new Drink();
                 newItem.setName(itemName);
                 newItem.setSalePrice(itemPrice);
-                inventory.addMenuItem(newItem, itemAmount);
-                System.out.println(newItem.getName() + " has been successfully added to the inventory.");
+                newItem.setQuantity(itemAmount);
                 break;
             }
-            case 4:
-            {
-                Pastry newItem = new Pastry();
-                newItem.setName(itemName);
-                newItem.setSalePrice(itemPrice);
-                inventory.addMenuItem(newItem, itemAmount);
-                System.out.println(newItem.getName() + " has been successfully added to the inventory.");
-                break;
-            }
-            case 5:
-            {
-                MenuItem newItem = new MenuItem();
-                newItem.setName(itemName);
-                newItem.setSalePrice(itemPrice);
-                inventory.addMenuItem(newItem, itemAmount);
-                System.out.println(newItem.getName() + " has been successfully added to the inventory.");
-                break;
-            }
-        }
 
+        }
+        inventory.addMenuItem(newItem);
+        System.out.println(newItem.getName() + " has been successfully added to the inventory.");
     }
 
     /**
@@ -375,9 +371,7 @@ public class CoffeeShop{
             System.out.println("What type of Menu Item would you like to add?");
             System.out.println("[1]: Coffee");
             System.out.println("[2]: Donut");
-            System.out.println("[3]: Miscellaneous Drink");
-            System.out.println("[4]: Miscellaneous Pastry");
-            System.out.println("[5]: Other");
+            System.out.println("[3]: Other");
             System.out.print("Enter the number of your choice, then press <ENTER>: ");
 
             // Receive and validate user input.
@@ -399,7 +393,7 @@ public class CoffeeShop{
             }
 
             // Make sure the user input is from 1-5.
-            if (!badInput && ((userChoice < 1) || (userChoice > 5)))
+            if (!badInput && ((userChoice < 1) || (userChoice > 3)))
             {
                 System.out.println(userChoice + " is not a valid option.");
                 System.out.println("Please select a valid menu option from [1] to [5].");
@@ -412,28 +406,53 @@ public class CoffeeShop{
         return userChoice;
     }
 
+    //Module 7: Still need to write unit test
+    static void printVendor() throws IOException {
 
-    static void printVendor() {
-        System.out.println("Index\t" + "Vendor Name\t\t" + "Item Name\t\t" + "Unit\t" + "Quantity\t" + "Note");
-        Vendor costco = new Vendor("Costco");
-        VendorData costcoCSV = new VendorDataCSV(costco);
-        int count = 1;
-        try {
-            List<VendorIngredientPrices> allVendorIngredients = costcoCSV.importVendorIngredients();
-            for (VendorIngredientPrices vendorIngredientPrice : allVendorIngredients) {
-                System.out.println("\t" + count+ "\t" + vendorIngredientPrice.getVendor().getName() + "\t\t\t"
-                        + vendorIngredientPrice.getIngredient().getIngredientName() + "\t\t"
-                        + vendorIngredientPrice.getIngredient().getUnit() + "\t\t");
-                count++;
+/** convert a list/JAVA into JSON format **/
+        ObjectMapper mapper = new ObjectMapper();
+        List<CostcoCSV> list = new ArrayList<>();
 
-            }
-            System.out.println("\n");
-        }catch (URISyntaxException e){
-            System.out.println("URI Error importing"+e);
-        }
-        catch (IOException e){
-            System.out.println("IO Error importing "+e);
-        }
+        //Add the ingredients to the list
+        CostcoCSV costco1 = new CostcoCSV("Cream", 25, Ingredient.Units.GAL, 5.99);
+        list.add(costco1);
 
+        CostcoCSV costco2 = new CostcoCSV("Coffee Beans", 2.0, Ingredient.Units.LB, 14.99);
+        list.add(costco2);
+
+        CostcoCSV costco3 = new CostcoCSV("Sugar", 20, Ingredient.Units.LB, 29.99);
+        list.add(costco3);
+
+        CostcoCSV costco4 = new CostcoCSV("Milk", 15, Ingredient.Units.GAL, 5.99);
+        list.add(costco4);
+
+        CostcoCSV costco5 = new CostcoCSV("Yeast", 17, Ingredient.Units.LB, 4.99);
+        list.add(costco5);
+
+        CostcoCSV costco6 = new CostcoCSV("Eggs", 20, Ingredient.Units.NUM, 0.99);
+        list.add(costco6);
+
+        CostcoCSV costco7 = new CostcoCSV("Butter", 10, Ingredient.Units.LB, 4.99);
+        list.add(costco7);
+
+        CostcoCSV costco8 = new CostcoCSV("Flour", 30, Ingredient.Units.LB, 1.99);
+        list.add(costco8);
+
+        //convert these ingredient data into Jason format and write to a new file
+        String jsonData = mapper.writeValueAsString(list); //convert our Object into Jason data
+        mapper.writeValue(new File("data.json"), list); //write to a Jason file
+
+
+        /** convert a JSON format into JAVA **/
+        ObjectMapper mapper1 = new ObjectMapper();
+
+        /**convert JSON format into Object**/
+        List<CostcoCSV> list2 = mapper1.readValue(jsonData, new TypeReference<List<CostcoCSV>>() {
+        });
+        //System.out.println(list2.size()); //check see if the JSON data map to the list
+        System.out.printf("%-15s%-10s%-10s%-10s\n","NAME", "QUANTITY", "UNIT", "PRICE");
+        list2.forEach(e-> {
+            System.out.printf("%-15s%-10s%-10s%-10s\n", e.getIngredientName(),e.getQuantity(),e.getUnit(), e.getPrice());
+        });
     }
 }
