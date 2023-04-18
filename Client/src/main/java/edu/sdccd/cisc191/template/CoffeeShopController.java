@@ -23,4 +23,6 @@ public class CoffeeShopController extends CoffeeShop {
                 addMenuItem();
         }
         public void printIngredientStock(ActionEvent e){printIngredients();}
+        public void addIngredient(ActionEvent e){}
+        public void removeIngredient(ActionEvent e){}
 }
