@@ -30,13 +30,14 @@ public class InventoryManager
         //inventory gets MenuItems from MenuItemController
         //TO UPDATE: For now, menu items will be stored on memory, and not saved. Ingredients will be stored on the database.
         RestTemplate restTemplate = new RestTemplate();
-        String menuItemSourceUrl = "http://localhost:8080/MenuItems";
+        String menuItemSourceUrl = "http://localhost:8080/Ingredients";
         ResponseEntity<Ingredient[]> response = restTemplate.getForEntity(menuItemSourceUrl, Ingredient[].class, new ParameterizedTypeReference<List<MenuItem>>() {});
         Ingredient[] responseArr = response.getBody();
+        ingredientList = new ArrayList<>();
         for(Ingredient ingredient:responseArr){
             addIngredient(ingredient);
         }
-        ingredientList = new ArrayList<>();
+
         menuItemList = new MenuItemList();
 
     }
