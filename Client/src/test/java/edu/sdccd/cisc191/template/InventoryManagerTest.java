@@ -116,7 +116,6 @@ class InventoryManagerTest
         assertThrows(ItemNotFoundException.class, () -> inventory.setIngredientAmount("Ice", 9));
     }
 
-
     @Test
     void addMenuItemTest() throws ItemNotFoundException
     {

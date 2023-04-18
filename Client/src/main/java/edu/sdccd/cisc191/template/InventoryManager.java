@@ -26,11 +26,12 @@ public class InventoryManager
      */
     public InventoryManager()
     {
+        //Module 8, still need to add gui to interface with ingredients and write unit test
         //inventory gets MenuItems from MenuItemController
         //TO UPDATE: For now, menu items will be stored on memory, and not saved. Ingredients will be stored on the database.
         RestTemplate restTemplate = new RestTemplate();
         String menuItemSourceUrl = "http://localhost:8080/MenuItems";
-        ResponseEntity<MenuItem[]> response = restTemplate.getForEntity(menuItemSourceUrl, MenuItem[].class, new ParameterizedTypeReference<List<MenuItem>>() {});
+        ResponseEntity<Ingredient[]> response = restTemplate.getForEntity(menuItemSourceUrl, Ingredient[].class, new ParameterizedTypeReference<List<MenuItem>>() {});
 
         menuItemList = new MenuItemList();
 

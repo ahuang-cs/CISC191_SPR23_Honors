@@ -167,7 +167,8 @@ public class MenuItemList
         }
         return new ArrayList<>();
     }
-    //Uses recursion to see if menuitem exists
+
+    //Module 10: Uses recursion to see if menuitem exists in linked list, still need to write unit test
     private boolean containSearch(MenuNode head, String name){
         if(head==null)
             return false;
@@ -294,6 +295,7 @@ public class MenuItemList
         }
     }
 
+    //Module 11: Searching/sorting, unit test complete
     /**
      * Sorts an array of menu items alphabetically.
      * This method implements a BUBBLE SORT. More efficient algorithms are possible and should be considered.
@@ -340,7 +342,7 @@ public class MenuItemList
      * @param itemList The array of menu items to be sorted.
      * @return The sorted array of menu items.
      */
-    private List<MenuItem>  sortByPrice(List<MenuItem> itemList)
+    private List<MenuItem> sortByPrice(List<MenuItem> itemList)
     {
         boolean listSorted = false;
         double priceOne = 0.0;
