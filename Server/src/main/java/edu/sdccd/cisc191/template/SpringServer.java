@@ -21,14 +21,13 @@ public class SpringServer {
     CommandLineRunner initDatabase(IngredientRepository repository) {
         return args -> {
             List<Ingredient> ingredientList= new ArrayList<>();
-            ingredientList.add(new Ingredient("Coffee Beans", Ingredient.Units.LB, 4));
-            ingredientList.add(new Ingredient("Creamer", Ingredient.Units.OZ, 4));
-            ingredientList.add(new Ingredient("Sugar", Ingredient.Units.LB, 4));
-            ingredientList.add(new Ingredient("Flour", Ingredient.Units.LB, 4));
-            ingredientList.add(new Ingredient("Butter", Ingredient.Units.LB, 4));
+            ingredientList.add(new Ingredient("Coffee Beans", Ingredient.Units.LB, 40));
+            ingredientList.add(new Ingredient("Creamer", Ingredient.Units.OZ, 40));
+            ingredientList.add(new Ingredient("Sugar", Ingredient.Units.LB, 40));
+            ingredientList.add(new Ingredient("Flour", Ingredient.Units.LB, 40));
+            ingredientList.add(new Ingredient("Butter", Ingredient.Units.LB, 40));
             for(int i=0;i<ingredientList.size();i++) {
                 Ingredient ingredientToAdd = ingredientList.get(i);
-                ingredientToAdd.setId(new Long(i));
                 repository.save(ingredientToAdd);
             }
         };

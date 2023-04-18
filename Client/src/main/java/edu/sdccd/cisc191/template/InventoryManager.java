@@ -59,34 +59,19 @@ public class InventoryManager
      */
     private int findIngredient(String target)
     {
-        int targetIndex = 0;                            // Stores the index of the target ingredient.
-        String lowercaseTarget = target.toLowerCase();  // The target string in lowercase, to remove case sensitivity.
+        int targetIndex = -1;    // Stores the index of the target ingredient.
 
-        // Check whether ingredientList is empty
-        if (ingredientList.size() == 0)
+        // If there are elements in ingredientList, search each element.
+        for (int i = 0; i < ingredientList.size(); i++)
         {
-            // If the ingredientList is empty, then the target cannot be present in the array.
-            targetIndex = -1;
-            return targetIndex;
-        }
-        else
-        {
-            // If there are elements in ingredientList, search each element.
-            for (int i = 0; i < ingredientList.size(); i++)
+            // Compare each element with the target string.
+            if (target.equalsIgnoreCase(ingredientList.get(i).getIngredientName()))
             {
-                // Compare each element with the target string.
-                if (lowercaseTarget.equals(ingredientList.get(i).toString().toLowerCase()))
-                {
-                    // If the target matches this element, return the index of this element.
-                    targetIndex = i;
-                    return targetIndex;
-                }
+                // If the target matches this element, return the index of this element.
+                targetIndex = i;
             }
-
-            // If we've gone through all elements in the array without encountering the target, it isn't present.
-            targetIndex = -1;
-            return targetIndex;
         }
+        return targetIndex;
     }
 
     /**
@@ -113,6 +98,7 @@ public class InventoryManager
             // If the ingredient is present, set the corresponding value in the inventory to amount.
             Ingredient newIngredient = ingredientList.get(ingredientIndex);
             newIngredient.setQuantity(amount);
+            System.out.println("new ingredient quantity: "+newIngredient);
             ingredientList.set(ingredientIndex, newIngredient);
         }
         else
@@ -140,7 +126,6 @@ public class InventoryManager
 
         // Search for the ingredient in the ingredientList array.
         int ingredientIndex = findIngredient(ingredientName);
-
         // Verify that the ingredient is actually present in the arrays.
         if (ingredientIndex != -1)
         {
@@ -182,8 +167,9 @@ public class InventoryManager
         menuItemList.addMenuItem(item);
     }
 
+    //NOT WORKING: ingredient inventory does not decrease
     /**
-     * Directly sets the amount of a MenuItem stored in the inventory.
+     * Sets the amount of a MenuItem stored in the inventory if ingredient inventory has enough stock
      * @param itemName The name of the MenuItem to be accessed.
      * @param amount The new amount to be stored in the inventory.
      * @throws ItemNotFoundException Thrown when attempting to access a MenuItem that does not exist.
@@ -191,18 +177,48 @@ public class InventoryManager
     public void setMenuItemAmount(String itemName, int amount) throws ItemNotFoundException
     {
         // Verify that the item is actually in the array.
-
         if(menuItemList.contains(itemName)){
             List<Ingredient> recipe = menuItemList.getRecipe(itemName);
+            //only subtract if adding to inventory
             if(amount>0){
-                for(Ingredient ingredient:recipe){
-                    if(ingredient.getQuantity()*amount<getIngredientAmount(ingredient.getIngredientName())){
-
+                boolean canAdd = true;
+                for(Ingredient recipeIngredient:recipe){
+                    //check if there is enough ingredient quantity to make the item
+                    boolean isInStock = false;
+                    for(Ingredient stockIngredient : ingredientList){
+                        if(stockIngredient.getIngredientName().equalsIgnoreCase(recipeIngredient.getIngredientName())) {
+                            isInStock = true;
+                        }
+                    }
+                    if(isInStock){
+                        double quantityInStock = getIngredientAmount(recipeIngredient.getIngredientName());
+                        double quantityInRecipe = recipeIngredient.getQuantity()*amount;
+                        if(quantityInRecipe>quantityInStock){
+                            canAdd = false;
+                            System.out.println("Not enough "+recipeIngredient.getIngredientName()+" in stock");
+                            System.out.println("In stock: "+getIngredientAmount(recipeIngredient.getIngredientName())+" "+recipeIngredient.getUnit());
+                            System.out.println("Quantity needed: "+recipeIngredient.getQuantity()*amount+" "+recipeIngredient.getUnit());
+                        }
+                    }
+                    else{
+                        canAdd = false;
+                        System.out.println("Ingredient "+recipeIngredient.getIngredientName()+" does not exist in the inventory");
                     }
                 }
+                if(canAdd){
+                    for(Ingredient recipeIngredient:recipe) {
+                        double quantityInStock = getIngredientAmount(recipeIngredient.getIngredientName());
+                        double quantityInRecipe = recipeIngredient.getQuantity()*amount;
+                        setIngredientAmount(recipeIngredient.getIngredientName(), quantityInStock - quantityInRecipe);
+                    }
+                    menuItemList.setMenuItemQuantity(itemName, amount);
+                    System.out.println("The amount of " + itemName + " has successfully been increased to " + amount);
+                }
             }
-
-            menuItemList.setMenuItemQuantity(itemName, amount);
+            else{
+                System.out.println("The amount of " + itemName + " has successfully been decreased to " + amount);
+                menuItemList.setMenuItemQuantity(itemName, amount);
+            }
         }
         else{
             throw new ItemNotFoundException();

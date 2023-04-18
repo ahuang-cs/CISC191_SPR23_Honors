@@ -124,7 +124,6 @@ public class CoffeeShop{
                 }
             } while(badInput);
 
-            System.out.println("The amount of " + userInputName + " has successfully been increased by " + userInputAmount);
         }
         else
         {
@@ -325,7 +324,7 @@ public class CoffeeShop{
                 newItem.setQuantity(itemAmount);
                 recipe.add(new Ingredient("Coffee beans", Ingredient.Units.OZ, 0.4));
                 recipe.add(new Ingredient("Creamer", Ingredient.Units.fluidOZ, 0.5));
-                newItem.setRecipe();
+                newItem.setRecipe(recipe);
                 break;
             }
             case 2: //donut
@@ -338,6 +337,7 @@ public class CoffeeShop{
                 recipe.add(new Ingredient("Eggs", Ingredient.Units.NUM, 2/12));
                 recipe.add(new Ingredient("Butter",Ingredient.Units.TSP, 4));
                 recipe.add(new Ingredient("Flour",Ingredient.Units.CUP, 4.25/12));
+                newItem.setRecipe(recipe);
             }
             case 3: //other
             {
@@ -348,6 +348,7 @@ public class CoffeeShop{
             }
 
         }
+
         inventory.addMenuItem(newItem);
         System.out.println(newItem.getName() + " has been successfully added to the inventory.");
     }

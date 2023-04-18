@@ -39,9 +39,7 @@ public class MenuItem
     public List<Ingredient> getRecipe(){
         return this.recipe;
     }
-    public List<Ingredient> setRecipe(){
-        return this.recipe;
-    }
+    public void setRecipe(List<Ingredient> recipe){this.recipe = recipe;}
     public void addToRecipe(Ingredient ingredient){recipe.add(ingredient);}
     public int getQuantity(){
         return this.quantity;
