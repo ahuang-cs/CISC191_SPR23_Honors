@@ -25,6 +25,9 @@ public class Ingredient {
         this.quantity = 0;
     }
 
+    public Ingredient(String ingredientName, Units unit) {
+    }
+
     public String getIngredientName() {
         return ingredientName;
     }

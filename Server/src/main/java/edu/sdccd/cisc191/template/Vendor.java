@@ -2,9 +2,7 @@ package edu.sdccd.cisc191.template;
 
 public class Vendor {
     String name;
-
     public Vendor(){};
-
 
     public Vendor(String newName) {
         setName(newName);
