@@ -130,16 +130,16 @@ public class InventoryManager
      */
     /**
      * Returns the amount of an ingredient in the inventory
-     * @param ingredient The name of the ingredient to be accessed
+     * @param ingredientName The name of the ingredient to be accessed
      * @return The amount of the ingredient in the inventory
      * @throws ItemNotFoundException Thrown when attempting to access an ingredient that does not exist.
      */
-    public double getIngredientAmount(Ingredient ingredient) throws ItemNotFoundException
+    public double getIngredientAmount(String ingredientName) throws ItemNotFoundException
     {
         double amount = 0;             // The value to be returned, contains the value of the ingredient (if present).
 
         // Search for the ingredient in the ingredientList array.
-        int ingredientIndex = findIngredient(ingredient.getIngredientName());
+        int ingredientIndex = findIngredient(ingredientName);
 
         // Verify that the ingredient is actually present in the arrays.
         if (ingredientIndex != -1)
@@ -191,10 +191,23 @@ public class InventoryManager
     public void setMenuItemAmount(String itemName, int amount) throws ItemNotFoundException
     {
         // Verify that the item is actually in the array.
-        if (!menuItemList.setMenuItemQuantity(itemName, amount)){
+
+        if(menuItemList.contains(itemName)){
+            List<Ingredient> recipe = menuItemList.getRecipe(itemName);
+            if(amount>0){
+                for(Ingredient ingredient:recipe){
+                    if(ingredient.getQuantity()*amount<getIngredientAmount(ingredient.getIngredientName())){
+
+                    }
+                }
+            }
+
+            menuItemList.setMenuItemQuantity(itemName, amount);
+        }
+        else{
             throw new ItemNotFoundException();
         }
-       //TODO: subtract quantity from menuItem recipe from the ingredients stock
+
     }
 
     /**
