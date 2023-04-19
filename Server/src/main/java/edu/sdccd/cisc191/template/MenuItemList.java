@@ -187,7 +187,6 @@ public class MenuItemList
     {
         MenuNode currentNode = head;
         return containSearch(currentNode, name);
-
     }
 
 

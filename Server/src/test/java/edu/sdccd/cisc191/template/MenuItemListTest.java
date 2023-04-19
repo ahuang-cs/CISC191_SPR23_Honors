@@ -6,10 +6,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import edu.sdccd.cisc191.template.MenuItem.MenuItem;
 
+import java.awt.*;
 import java.util.List;
 
 class MenuItemListTest {
-    /*
+
     @Test
     void addMenuItem()
     {
@@ -33,12 +34,12 @@ class MenuItemListTest {
         list.addMenuItem(donut);
         assertEquals(3, list.getNumMenuItems());
 
-        MenuItem[] itemList = list.getList();
+        List<MenuItem> itemList = list.getList();
 
-        assertEquals(3, itemList.length);
-        assertEquals("Donut", itemList[0].getName());
-        assertEquals("coffee", itemList[1].getName());
-        assertEquals("Cake", itemList[2].getName());
+        assertEquals(3, itemList.size());
+        assertEquals("Donut", itemList.get(0).getName());
+        assertEquals("coffee", itemList.get(1).getName());
+        assertEquals("Cake", itemList.get(2).getName());
     }
 
     @Test
@@ -69,8 +70,8 @@ class MenuItemListTest {
         itemList = list.getList();
         assertEquals(3, list.getNumMenuItems());
         assertEquals("Cake", itemList.get(0).getName());
-        assertEquals("coffee", itemList.get(0).getName());
-        assertEquals("Donut", itemList.get(0).getName());
+        assertEquals("coffee", itemList.get(1).getName());
+        assertEquals("Donut", itemList.get(2).getName());
     }
 
     @Test
@@ -94,15 +95,15 @@ class MenuItemListTest {
 
         // Coffee is not capitalized to verify lack of case sensitivity.
         assertEquals(1.99, itemList.get(0).getSalePrice());
-        assertEquals(2.50, itemList.get(0).getSalePrice());
-        assertEquals(3.99, itemList.get(0).getSalePrice());
+        assertEquals(2.50, itemList.get(1).getSalePrice());
+        assertEquals(3.99, itemList.get(2).getSalePrice());
 
         // Verify that the list remains sorted
         itemList = list.getList();
         assertEquals(3, list.getNumMenuItems());
-        assertEquals(1.99, itemList[0].getSalePrice());
-        assertEquals(2.50, itemList[1].getSalePrice());
-        assertEquals(3.99, itemList[2].getSalePrice());
+        assertEquals(1.99, itemList.get(0).getSalePrice());
+        assertEquals(2.50, itemList.get(1).getSalePrice());
+        assertEquals(3.99, itemList.get(2).getSalePrice());
     }
 
     @Test
@@ -125,13 +126,13 @@ class MenuItemListTest {
         list.addMenuItem(coffee);
         list.addMenuItem(cake);
 
-        MenuItem[] itemList = list.getList();
-        assertEquals("Cake", itemList[0].getName());
-        assertEquals(10, itemList[0].getQuantity());
-        assertEquals("Coffee", itemList[1].getName());
-        assertEquals(50, itemList[1].getQuantity());
-        assertEquals("Donut", itemList[2].getName());
-        assertEquals(30, itemList[2].getQuantity());
+        List<MenuItem> itemList = list.getList();
+        assertEquals("Cake", itemList.get(0).getName());
+        assertEquals(10, itemList.get(0).getQuantity());
+        assertEquals("Coffee", itemList.get(1).getName());
+        assertEquals(50, itemList.get(1).getQuantity());
+        assertEquals("Donut", itemList.get(2).getName());
+        assertEquals(30, itemList.get(2).getQuantity());
 
         // Ensure that the method is not case-sensitive
         list.setMenuItemQuantity("cake", 500);
@@ -139,12 +140,12 @@ class MenuItemListTest {
         list.setMenuItemQuantity("DONUT", 200);
 
         itemList = list.getList();
-        assertEquals("Cake", itemList[0].getName());
-        assertEquals(500, itemList[0].getQuantity());
-        assertEquals("Coffee", itemList[1].getName());
-        assertEquals(300, itemList[1].getQuantity());
-        assertEquals("Donut", itemList[2].getName());
-        assertEquals(200, itemList[2].getQuantity());
+        assertEquals("Cake", itemList.get(0).getName());
+        assertEquals(500, itemList.get(0).getQuantity());
+        assertEquals("Coffee", itemList.get(1).getName());
+        assertEquals(300, itemList.get(1).getQuantity());
+        assertEquals("Donut", itemList.get(2).getName());
+        assertEquals(200, itemList.get(2).getQuantity());
     }
 
     @Test
@@ -167,14 +168,14 @@ class MenuItemListTest {
         list.addMenuItem(coffee);
         list.addMenuItem(cake);
 
-        MenuItem[] itemList = list.getList();
+        List<MenuItem> itemList = list.getList();
 
-        assertEquals("Cake", itemList[0].getName());
-        assertEquals(3.99, itemList[0].getSalePrice());
-        assertEquals("Coffee", itemList[1].getName());
-        assertEquals(1.99, itemList[1].getSalePrice());
-        assertEquals("Donut", itemList[2].getName());
-        assertEquals(2.50, itemList[2].getSalePrice());
+        assertEquals("Cake", itemList.get(0).getName());
+        assertEquals(3.99, itemList.get(0).getSalePrice());
+        assertEquals("Coffee", itemList.get(1).getName());
+        assertEquals(1.99, itemList.get(1).getSalePrice());
+        assertEquals("Donut", itemList.get(2).getName());
+        assertEquals(2.50, itemList.get(2).getSalePrice());
 
         // Ensure that the method is not case-sensitive
         list.setMenuItemPrice("cake", 5.00);
@@ -183,13 +184,13 @@ class MenuItemListTest {
 
         itemList = list.getList();
 
-        assertEquals("Cake", itemList[0].getName());
-        assertEquals(5.00, itemList[0].getSalePrice());
-        assertEquals("Coffee", itemList[1].getName());
-        assertEquals(3.00, itemList[1].getSalePrice());
-        assertEquals("Donut", itemList[2].getName());
-        assertEquals(3.99, itemList[2].getSalePrice());
+        assertEquals("Cake", itemList.get(0).getName());
+        assertEquals(5.00, itemList.get(0).getSalePrice());
+        assertEquals("Coffee", itemList.get(1).getName());
+        assertEquals(3.00, itemList.get(1).getSalePrice());
+        assertEquals("Donut", itemList.get(2).getName());
+        assertEquals(3.99, itemList.get(2).getSalePrice());
     }
 
-     */
+
 }
