@@ -26,6 +26,7 @@ public class SpringServer {
             ingredientList.add(new Ingredient("Sugar", Ingredient.Units.LB, 40));
             ingredientList.add(new Ingredient("Flour", Ingredient.Units.LB, 40));
             ingredientList.add(new Ingredient("Butter", Ingredient.Units.LB, 40));
+            ingredientList.add(new Ingredient("Eggs", Ingredient.Units.NUM, 9000));
             for(int i=0;i<ingredientList.size();i++) {
                 Ingredient ingredientToAdd = ingredientList.get(i);
                 repository.save(ingredientToAdd);
