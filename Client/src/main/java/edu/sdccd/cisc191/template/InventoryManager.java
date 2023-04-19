@@ -93,18 +93,20 @@ public class InventoryManager
         // Search for the ingredient in the ingredientList array.
         ingredientIndex = findIngredient(ingredient);
         // Verify that the ingredient we want to alter is actually in the array.
+        System.out.println(ingredientIndex);
         if (ingredientIndex != -1)
         {
             // If the ingredient is present, set the corresponding value in the inventory to amount.
             Ingredient newIngredient = ingredientList.get(ingredientIndex);
             newIngredient.setQuantity(amount);
-            System.out.println("new ingredient quantity: "+newIngredient);
+            System.out.println("new ingredient quantity: "+newIngredient.getQuantity());
             ingredientList.set(ingredientIndex, newIngredient);
         }
         else
         {
             // The ingredient is not present in the array.
             // Throw an ItemNotFound exception.
+            System.out.println("error in set ingredient");
             throw new ItemNotFoundException();
         }
     }
@@ -136,6 +138,7 @@ public class InventoryManager
         {
             // The ingredient is not in the array.
             // Throw an exception.
+            System.out.println("error in get ingredient amount");
             throw new ItemNotFoundException();
         }
 
@@ -177,6 +180,7 @@ public class InventoryManager
     public void setMenuItemAmount(String itemName, int amount) throws ItemNotFoundException
     {
         // Verify that the item is actually in the array.
+
         if(menuItemList.contains(itemName)){
             List<Ingredient> recipe = menuItemList.getRecipe(itemName);
             //only subtract if adding to inventory
@@ -221,6 +225,7 @@ public class InventoryManager
             }
         }
         else{
+            System.out.println("error in setMenuItemAmount");
             throw new ItemNotFoundException();
         }
 
@@ -251,6 +256,7 @@ public class InventoryManager
         if(amount==-1){
             // The menu item is not present.
             // Throw an ItemNotFound exception.
+            System.out.println("error in getMenuItemAmount");
             throw new ItemNotFoundException();
         }
 
