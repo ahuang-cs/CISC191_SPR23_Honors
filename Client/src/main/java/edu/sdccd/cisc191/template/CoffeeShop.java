@@ -559,7 +559,7 @@ public class CoffeeShop{
                 {
                     userInputAmount = keyboard.nextInt();
                     finalItemAmount = inventory.getIngredientAmount(userInputName) - userInputAmount;
-                    inventory.setMenuItemAmount(userInputName, (int) finalItemAmount);
+                    inventory.setIngredientAmount(userInputName, (int) finalItemAmount);
                 }
                 catch (ItemNotFoundException e)
                 {
