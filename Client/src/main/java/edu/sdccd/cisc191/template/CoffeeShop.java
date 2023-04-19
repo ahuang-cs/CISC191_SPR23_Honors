@@ -321,7 +321,7 @@ public class CoffeeShop{
             {
                 newItem.setName(itemName);
                 newItem.setSalePrice(itemPrice);
-                newItem.setQuantity(itemAmount);
+                newItem.setQuantity(0);
                 recipe.add(new Ingredient("Coffee beans", Ingredient.Units.OZ, 0.4));
                 recipe.add(new Ingredient("Creamer", Ingredient.Units.fluidOZ, 0.5));
                 newItem.setRecipe(recipe);
@@ -331,7 +331,7 @@ public class CoffeeShop{
             {
                 newItem.setName(itemName);
                 newItem.setSalePrice(itemPrice);
-                newItem.setQuantity(itemAmount);
+                newItem.setQuantity(0);
                 recipe.add(new Ingredient("Milk", Ingredient.Units.CUP, 1.25/12));
                 recipe.add(new Ingredient("Yeast", Ingredient.Units.TSP, 2.25/12));
                 recipe.add(new Ingredient("Eggs", Ingredient.Units.NUM, 2/12));
@@ -343,13 +343,20 @@ public class CoffeeShop{
             {
                 newItem.setName(itemName);
                 newItem.setSalePrice(itemPrice);
-                newItem.setQuantity(itemAmount);
+                newItem.setQuantity(0);
                 break;
             }
 
         }
 
         inventory.addMenuItem(newItem);
+        try{
+            inventory.setMenuItemAmount(newItem.getName(), itemAmount);
+        }
+        catch(Exception e){
+
+        }
+
         System.out.println(newItem.getName() + " has been successfully added to the inventory.");
     }
 
