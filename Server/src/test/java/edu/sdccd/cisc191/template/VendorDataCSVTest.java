@@ -8,17 +8,16 @@ import java.net.URISyntaxException;
 import static org.junit.jupiter.api.Assertions.*;
 
 class VendorDataCSVTest {
-    /*
+
     @Test
     public void vendorDataCSVTest() {
-        VendorDataCSV vendorDataCSV = new VendorDataCSV(new Vendor("Costco"));
+        VendorDataCSV vendorDataCSV = new VendorDataCSV();
+
         try {
-            for(VendorIngredientPrices index: vendorDataCSV.importVendorIngredients()) {
-                System.out.println(index.getVendor().getName());
-                System.out.println(index.getIngredient().getIngredientName());
-// Bugged line, fix later                System.out.println(index.getIngredient().getQuantity());
-                System.out.println(index.getIngredient().getUnit());
-                System.out.println(index.getCostPerUnit());
+            for(CostcoCSV index: vendorDataCSV.importVendorIngredients()) {
+                System.out.println(index.getIngredientName());
+                System.out.println(index.getUnit());
+                System.out.println(index.getPrice());
             }
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
@@ -27,5 +26,5 @@ class VendorDataCSVTest {
         }
 
     }
-    */
+
 }

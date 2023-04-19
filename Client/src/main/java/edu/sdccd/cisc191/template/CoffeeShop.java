@@ -410,50 +410,17 @@ public class CoffeeShop{
     //Module 7: Still need to write unit test
     static void printVendor() throws IOException {
 
-/** convert a list/JAVA into JSON format **/
-        ObjectMapper mapper = new ObjectMapper();
-        List<CostcoCSV> list = new ArrayList<>();
+        VendorDataCSV exportList = new VendorDataCSV();
+        List<CostcoCSV> list = null;
+        try {
+            list = exportList.importVendorIngredients();
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
 
-        //Add the ingredients to the list
-        CostcoCSV costco1 = new CostcoCSV("Cream", 25, Ingredient.Units.GAL, 5.99);
-        list.add(costco1);
-
-        CostcoCSV costco2 = new CostcoCSV("Coffee Beans", 2.0, Ingredient.Units.LB, 14.99);
-        list.add(costco2);
-
-        CostcoCSV costco3 = new CostcoCSV("Sugar", 20, Ingredient.Units.LB, 29.99);
-        list.add(costco3);
-
-        CostcoCSV costco4 = new CostcoCSV("Milk", 15, Ingredient.Units.GAL, 5.99);
-        list.add(costco4);
-
-        CostcoCSV costco5 = new CostcoCSV("Yeast", 17, Ingredient.Units.LB, 4.99);
-        list.add(costco5);
-
-        CostcoCSV costco6 = new CostcoCSV("Eggs", 20, Ingredient.Units.NUM, 0.99);
-        list.add(costco6);
-
-        CostcoCSV costco7 = new CostcoCSV("Butter", 10, Ingredient.Units.LB, 4.99);
-        list.add(costco7);
-
-        CostcoCSV costco8 = new CostcoCSV("Flour", 30, Ingredient.Units.LB, 1.99);
-        list.add(costco8);
-
-        //convert these ingredient data into Jason format and write to a new file
-        String jsonData = mapper.writeValueAsString(list); //convert our Object into Jason data
-        mapper.writeValue(new File("data.json"), list); //write to a Jason file
-
-
-        /** convert a JSON format into JAVA **/
-        ObjectMapper mapper1 = new ObjectMapper();
-
-        /**convert JSON format into Object**/
-        List<CostcoCSV> list2 = mapper1.readValue(jsonData, new TypeReference<List<CostcoCSV>>() {
-        });
-        //System.out.println(list2.size()); //check see if the JSON data map to the list
-        System.out.printf("%-15s%-10s%-10s%-10s\n","NAME", "QUANTITY", "UNIT", "PRICE");
-        list2.forEach(e-> {
-            System.out.printf("%-15s%-10s%-10s%-10s\n", e.getIngredientName(),e.getQuantity(),e.getUnit(), e.getPrice());
+        System.out.printf("%-15s%-10s%-10s\n","NAME", "UNIT", "PRICE");
+        list.forEach(e-> {
+            System.out.printf("%-15s%-10s%-10s\n", e.getIngredientName(),e.getUnit(), e.getPrice());
         });
     }
 

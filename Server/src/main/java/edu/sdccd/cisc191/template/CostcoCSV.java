@@ -12,7 +12,7 @@ public class CostcoCSV {
     private double price;
     public CostcoCSV(){}
 
-    public CostcoCSV(String ingredientName, double quantity, Ingredient.Units unit, double price) {
+    public CostcoCSV(String ingredientName, Ingredient.Units unit, double price) {
         this.ingredientName = ingredientName;
         this.quantity = quantity;
         this.unit = unit;
