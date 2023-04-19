@@ -170,8 +170,7 @@ public class InventoryManager
     }
 
 
-    public boolean canAddMenuItem(String itemName, int amount){
-        List<Ingredient> recipe = menuItemList.getRecipe(itemName);
+    public boolean canAddMenuItem(List<Ingredient> recipe, int amount){
 
         boolean canAdd = true;
         for(Ingredient recipeIngredient:recipe){
@@ -219,7 +218,7 @@ public class InventoryManager
         if(menuItemList.contains(itemName)){
             //only subtract ingredients if adding to inventory
             if(amount>0){
-                boolean canAdd = canAddMenuItem(itemName,amount);
+                boolean canAdd = canAddMenuItem(recipe,amount);
                 if(canAdd){
                     for(Ingredient recipeIngredient:recipe) {
                         double quantityInStock = getIngredientAmount(recipeIngredient.getIngredientName());
