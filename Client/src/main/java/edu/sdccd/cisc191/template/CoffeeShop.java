@@ -322,7 +322,7 @@ public class CoffeeShop{
                 newItem.setName(itemName);
                 newItem.setSalePrice(itemPrice);
                 newItem.setQuantity(0);
-                recipe.add(new Ingredient("Coffee beans", Ingredient.Units.OZ, 0.4));
+                recipe.add(new Ingredient("Coffee beans", Ingredient.Units.LB, 0.4));
                 recipe.add(new Ingredient("Creamer", Ingredient.Units.fluidOZ, 0.5));
                 newItem.setRecipe(recipe);
                 break;
@@ -335,8 +335,8 @@ public class CoffeeShop{
                 recipe.add(new Ingredient("Milk", Ingredient.Units.CUP, 1.25/12));
                 recipe.add(new Ingredient("Yeast", Ingredient.Units.TSP, 2.25/12));
                 recipe.add(new Ingredient("Eggs", Ingredient.Units.NUM, 2/12));
-                recipe.add(new Ingredient("Butter",Ingredient.Units.TSP, 4));
-                recipe.add(new Ingredient("Flour",Ingredient.Units.CUP, 4.25/12));
+                recipe.add(new Ingredient("Butter",Ingredient.Units.LB, 0.5/12));
+                recipe.add(new Ingredient("Flour",Ingredient.Units.LB, 2/12));
                 newItem.setRecipe(recipe);
             }
             case 3: //other

@@ -22,11 +22,14 @@ public class SpringServer {
         return args -> {
             List<Ingredient> ingredientList= new ArrayList<>();
             ingredientList.add(new Ingredient("Coffee Beans", Ingredient.Units.LB, 40));
-            ingredientList.add(new Ingredient("Creamer", Ingredient.Units.OZ, 40));
+            ingredientList.add(new Ingredient("Creamer", Ingredient.Units.fluidOZ, 40));
             ingredientList.add(new Ingredient("Sugar", Ingredient.Units.LB, 40));
             ingredientList.add(new Ingredient("Flour", Ingredient.Units.LB, 40));
             ingredientList.add(new Ingredient("Butter", Ingredient.Units.LB, 40));
-            ingredientList.add(new Ingredient("Eggs", Ingredient.Units.NUM, 9000));
+            ingredientList.add(new Ingredient("Eggs", Ingredient.Units.NUM, 40));
+            ingredientList.add(new Ingredient("Yeast", Ingredient.Units.TSP, 40));
+            ingredientList.add(new Ingredient("Milk", Ingredient.Units.CUP, 40));
+
             for(int i=0;i<ingredientList.size();i++) {
                 Ingredient ingredientToAdd = ingredientList.get(i);
                 repository.save(ingredientToAdd);

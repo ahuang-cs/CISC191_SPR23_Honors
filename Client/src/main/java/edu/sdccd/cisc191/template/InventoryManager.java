@@ -98,14 +98,13 @@ public class InventoryManager
             // If the ingredient is present, set the corresponding value in the inventory to amount.
             Ingredient newIngredient = ingredientList.get(ingredientIndex);
             newIngredient.setQuantity(amount);
-            System.out.println("new ingredient quantity: "+newIngredient.getQuantity());
+            System.out.printf("new "+newIngredient.getIngredientName()+" quantity: "+"%.2f"+" "+newIngredient.getUnit()+"%n", newIngredient.getQuantity());
             ingredientList.set(ingredientIndex, newIngredient);
         }
         else
         {
             // The ingredient is not present in the array.
             // Throw an ItemNotFound exception.
-            System.out.println("error in set ingredient");
             throw new ItemNotFoundException();
         }
     }
@@ -137,7 +136,6 @@ public class InventoryManager
         {
             // The ingredient is not in the array.
             // Throw an exception.
-            System.out.println("error in get ingredient amount");
             throw new ItemNotFoundException();
         }
 
@@ -148,7 +146,12 @@ public class InventoryManager
         System.out.println("************Current Ingredient Stock**********");
         System.out.println("Name, Quantity");
         for(Ingredient ingredient: ingredientList){
-            System.out.println(ingredient.getIngredientName()+", "+ingredient.getQuantity()+ingredient.getUnit());
+            if(ingredient.getUnit()!= Ingredient.Units.NUM){
+                System.out.println(ingredient.getIngredientName()+", "+ingredient.getQuantity()+" "+ingredient.getUnit());
+            }
+            else{
+                System.out.println(ingredient.getIngredientName()+", "+ingredient.getQuantity());
+            }
         }
 
     }
@@ -235,7 +238,6 @@ public class InventoryManager
             }
         }
         else{
-            System.out.println("error in setMenuItemAmount");
             throw new ItemNotFoundException();
         }
 
@@ -266,7 +268,6 @@ public class InventoryManager
         if(amount==-1){
             // The menu item is not present.
             // Throw an ItemNotFound exception.
-            System.out.println("error in getMenuItemAmount");
             throw new ItemNotFoundException();
         }
 
