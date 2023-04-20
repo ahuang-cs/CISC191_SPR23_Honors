@@ -30,8 +30,9 @@ public class MenuItemList
     /**
      * Adds a MenuNode to the beginning of this linked list.
      * @param item The MenuItem to be stored in the new node.
+     * @return True if the item was succesfully added, false otherwise
      */
-    public void addMenuItem(MenuItem item)
+    public boolean addMenuItem(MenuItem item)
     {
         if (!contains(item.getName()))
         {
@@ -51,6 +52,14 @@ public class MenuItemList
 
             // Increment size counter
             size++;
+
+            // Return true to indicate successful addition of item.
+            return true;
+        }
+        else
+        {
+            // Item could not be added due to naming conflicts. Return "false" error flag.
+            return false;
         }
     }
 
