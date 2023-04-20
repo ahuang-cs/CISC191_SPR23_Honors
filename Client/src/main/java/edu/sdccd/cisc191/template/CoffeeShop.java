@@ -348,19 +348,26 @@ public class CoffeeShop{
             }
 
         }
-        if(inventory.canAddMenuItem(newItem.getRecipe(),itemAmount)){
-            inventory.addMenuItem(newItem);
-            try{
-                inventory.setMenuItemAmount(newItem.getName(), itemAmount);
+        if(!inventory.menuListContains(newItem.getName())){
+            if(inventory.canAddMenuItem(newItem.getRecipe(),itemAmount)){
+                inventory.addMenuItem(newItem);
+                try{
+                    inventory.setMenuItemAmount(newItem.getName(), itemAmount);
+                }
+                catch(Exception ItemNotFoundException){
+                    System.out.println("could not find item on menu");
+                }
+                System.out.println(newItem.getName() + " has been successfully added to the inventory.");
             }
-            catch(Exception ItemNotFoundException){
-                System.out.println("could not find item on menu");
+            else{
+                System.out.println("could not add menu item");
             }
-            System.out.println(newItem.getName() + " has been successfully added to the inventory.");
         }
         else{
-            System.out.println("could not add menu item");
+            System.out.println("could not add menu item: menu item already exists");
         }
+
+
 
     }
 

@@ -172,7 +172,9 @@ public class InventoryManager
         menuItemList.addMenuItem(item);
     }
 
-
+    public boolean menuListContains(String itemName){
+        return menuItemList.contains(itemName);
+    }
     public boolean canAddMenuItem(List<Ingredient> recipe, int amount){
 
         boolean canAdd = true;
