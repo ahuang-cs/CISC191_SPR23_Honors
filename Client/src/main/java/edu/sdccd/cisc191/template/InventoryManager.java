@@ -98,7 +98,7 @@ public class InventoryManager
             // If the ingredient is present, set the corresponding value in the inventory to amount.
             Ingredient newIngredient = ingredientList.get(ingredientIndex);
             newIngredient.setQuantity(amount);
-            System.out.println("new ingredient quantity: "+newIngredient);
+            System.out.printf("new "+newIngredient.getIngredientName()+" quantity: "+"%.2f"+" "+newIngredient.getUnit()+"%n", newIngredient.getQuantity());
             ingredientList.set(ingredientIndex, newIngredient);
         }
         else
@@ -146,7 +146,12 @@ public class InventoryManager
         System.out.println("************Current Ingredient Stock**********");
         System.out.println("Name, Quantity");
         for(Ingredient ingredient: ingredientList){
-            System.out.println(ingredient.getIngredientName()+", "+ingredient.getQuantity()+ingredient.getUnit());
+            if(ingredient.getUnit()!= Ingredient.Units.NUM){
+                System.out.println(ingredient.getIngredientName()+", "+ingredient.getQuantity()+" "+ingredient.getUnit());
+            }
+            else{
+                System.out.println(ingredient.getIngredientName()+", "+ingredient.getQuantity());
+            }
         }
 
     }
@@ -167,6 +172,43 @@ public class InventoryManager
         menuItemList.addMenuItem(item);
     }
 
+    public boolean menuListContains(String itemName){
+        return menuItemList.contains(itemName);
+    }
+    public boolean canAddMenuItem(List<Ingredient> recipe, int amount){
+
+        boolean canAdd = true;
+        for(Ingredient recipeIngredient:recipe){
+            //check if there is enough ingredient quantity to make the item
+            boolean isInStock = false;
+            for(Ingredient stockIngredient : ingredientList){
+                if(stockIngredient.getIngredientName().equalsIgnoreCase(recipeIngredient.getIngredientName())) {
+                    isInStock = true;
+                }
+            }
+            if(isInStock){
+                double quantityInStock = 0;
+                try{
+                    quantityInStock = getIngredientAmount(recipeIngredient.getIngredientName());
+                }
+                catch(Exception ItemNotFoundException){
+                    System.out.println("Could not add menu item, required ingredient not found");
+                }
+                double quantityInRecipe = recipeIngredient.getQuantity()*amount;
+                if(quantityInRecipe>quantityInStock){
+                    canAdd = false;
+                    System.out.println("Not enough "+recipeIngredient.getIngredientName()+" in stock");
+                    System.out.println("In stock: "+quantityInStock+" "+recipeIngredient.getUnit());
+                    System.out.println("Quantity needed: "+recipeIngredient.getQuantity()*amount+" "+recipeIngredient.getUnit());
+                }
+            }
+            else{
+                canAdd = false;
+                System.out.println("Ingredient "+recipeIngredient.getIngredientName()+" does not exist in the inventory");
+            }
+        }
+        return canAdd;
+    }
     //NOT WORKING: ingredient inventory does not decrease
     /**
      * Sets the amount of a MenuItem stored in the inventory if ingredient inventory has enough stock
@@ -177,34 +219,11 @@ public class InventoryManager
     public void setMenuItemAmount(String itemName, int amount) throws ItemNotFoundException
     {
         // Verify that the item is actually in the array.
+        List<Ingredient> recipe = menuItemList.getRecipe(itemName);
         if(menuItemList.contains(itemName)){
-            List<Ingredient> recipe = menuItemList.getRecipe(itemName);
-            //only subtract if adding to inventory
+            //only subtract ingredients if adding to inventory
             if(amount>0){
-                boolean canAdd = true;
-                for(Ingredient recipeIngredient:recipe){
-                    //check if there is enough ingredient quantity to make the item
-                    boolean isInStock = false;
-                    for(Ingredient stockIngredient : ingredientList){
-                        if(stockIngredient.getIngredientName().equalsIgnoreCase(recipeIngredient.getIngredientName())) {
-                            isInStock = true;
-                        }
-                    }
-                    if(isInStock){
-                        double quantityInStock = getIngredientAmount(recipeIngredient.getIngredientName());
-                        double quantityInRecipe = recipeIngredient.getQuantity()*amount;
-                        if(quantityInRecipe>quantityInStock){
-                            canAdd = false;
-                            System.out.println("Not enough "+recipeIngredient.getIngredientName()+" in stock");
-                            System.out.println("In stock: "+getIngredientAmount(recipeIngredient.getIngredientName())+" "+recipeIngredient.getUnit());
-                            System.out.println("Quantity needed: "+recipeIngredient.getQuantity()*amount+" "+recipeIngredient.getUnit());
-                        }
-                    }
-                    else{
-                        canAdd = false;
-                        System.out.println("Ingredient "+recipeIngredient.getIngredientName()+" does not exist in the inventory");
-                    }
-                }
+                boolean canAdd = canAddMenuItem(recipe,amount);
                 if(canAdd){
                     for(Ingredient recipeIngredient:recipe) {
                         double quantityInStock = getIngredientAmount(recipeIngredient.getIngredientName());
