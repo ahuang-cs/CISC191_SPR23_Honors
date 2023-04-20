@@ -19,7 +19,7 @@ public class VendorDataCSV implements VendorData {
     }
 
     @Override
-    public List<CostcoCSV> importVendorIngredients () throws URISyntaxException, IOException {
+    public List<CostcoCSV> importCostcoVendor() throws URISyntaxException, IOException {
 
         /** convert a list/JAVA into JSON format **/
         ObjectMapper mapper = new ObjectMapper();
@@ -52,13 +52,58 @@ public class VendorDataCSV implements VendorData {
 
         //convert these ingredient data into Jason format and write to a new file
         String jsonData = mapper.writeValueAsString(list); //convert our Object into Jason data
-        mapper.writeValue(new File("data.json"), list); //write to a Jason file
+        mapper.writeValue(new File("Costco.json"), list); //write to a Jason file
 
         /** convert a JSON format into JAVA **/
         ObjectMapper mapper1 = new ObjectMapper();
 
         /**convert JSON format into Object**/
         List<CostcoCSV> list2 = mapper1.readValue(jsonData, new TypeReference<List<CostcoCSV>>() {
+        });
+
+        return list2;
+    }
+
+    public List<WalmartCSV> importWalmartVendor () throws URISyntaxException, IOException {
+
+        /** convert a list/JAVA into JSON format **/
+        ObjectMapper mapper = new ObjectMapper();
+        List<WalmartCSV> list = new ArrayList<>();
+
+        //Add the ingredients to the list
+        WalmartCSV costco1 = new WalmartCSV("Cream", Ingredient.Units.GAL, 5.99);
+        list.add(costco1);
+
+        WalmartCSV costco2 = new WalmartCSV("Coffee Beans", Ingredient.Units.LB, 12.99);
+        list.add(costco2);
+
+        WalmartCSV costco3 = new WalmartCSV("Sugar", Ingredient.Units.LB, 28.99);
+        list.add(costco3);
+
+        WalmartCSV costco4 = new WalmartCSV("Milk", Ingredient.Units.GAL, 6.99);
+        list.add(costco4);
+
+        WalmartCSV costco5 = new WalmartCSV("Yeast", Ingredient.Units.LB, 5.99);
+        list.add(costco5);
+
+        WalmartCSV costco6 = new WalmartCSV("Eggs", Ingredient.Units.NUM, 0.99);
+        list.add(costco6);
+
+        WalmartCSV costco7 = new WalmartCSV("Butter", Ingredient.Units.LB, 4.99);
+        list.add(costco7);
+
+        WalmartCSV costco8 = new WalmartCSV("Flour", Ingredient.Units.LB, 1.99);
+        list.add(costco8);
+
+        //convert these ingredient data into Jason format and write to a new file
+        String jsonData = mapper.writeValueAsString(list); //convert our Object into Jason data
+        mapper.writeValue(new File("Walmart.json"), list); //write to a Jason file
+
+        /** convert a JSON format into JAVA **/
+        ObjectMapper mapper1 = new ObjectMapper();
+
+        /**convert JSON format into Object**/
+        List<WalmartCSV> list2 = mapper1.readValue(jsonData, new TypeReference<List<WalmartCSV>>() {
         });
 
         return list2;

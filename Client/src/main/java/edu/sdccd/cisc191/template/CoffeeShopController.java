@@ -10,7 +10,7 @@ public class CoffeeShopController extends CoffeeShop {
 
         public void displayMenu(ActionEvent a) throws ItemNotFoundException
         {
-               printAllMenuItems();
+                printAllMenuItems();
         }
         public void addItemQuantity(ActionEvent a) {
                 addItemQuantity();
@@ -18,12 +18,13 @@ public class CoffeeShopController extends CoffeeShop {
         public void removeItemQuantity(ActionEvent a) {
                 subtractItemQuantity();
         }
-        public void showVendorData(ActionEvent e) throws IOException {printVendor();}
+        public void showCostcoVendorData(ActionEvent e) throws IOException {costcoVendor();}
+        public void showWalmartVendorData(ActionEvent e) throws IOException {walmartVendor();}
         public void addMenuItem(ActionEvent e) {
                 addMenuItem();
         }
         public void printIngredientStock(ActionEvent e){printIngredients();}
-        public void addIngredientQuantity(ActionEvent e){}
-        public void removeIngredientQuantity(ActionEvent e){}
+        public void addIngredientQuantity(ActionEvent e){addIngredientQuantity();}
+        public void removeIngredientQuantity(ActionEvent e){removeIngredientQuantity();}
         public void addIngredientItem(ActionEvent e){}
 }

@@ -5,5 +5,6 @@ import java.net.URISyntaxException;
 import java.util.List;
 
 public interface VendorData {
-    public List<CostcoCSV> importVendorIngredients() throws URISyntaxException, IOException;
+    public List<CostcoCSV> importCostcoVendor() throws URISyntaxException, IOException;
+    public List<WalmartCSV> importWalmartVendor() throws URISyntaxException, IOException;
 }

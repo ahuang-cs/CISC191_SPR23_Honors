@@ -321,8 +321,8 @@ public class CoffeeShop{
             {
                 newItem.setName(itemName);
                 newItem.setSalePrice(itemPrice);
-                newItem.setQuantity(itemAmount);
-                recipe.add(new Ingredient("Coffee beans", Ingredient.Units.OZ, 0.4));
+                newItem.setQuantity(0);
+                recipe.add(new Ingredient("Coffee beans", Ingredient.Units.LB, 0.4));
                 recipe.add(new Ingredient("Creamer", Ingredient.Units.fluidOZ, 0.5));
                 newItem.setRecipe(recipe);
                 break;
@@ -331,26 +331,37 @@ public class CoffeeShop{
             {
                 newItem.setName(itemName);
                 newItem.setSalePrice(itemPrice);
-                newItem.setQuantity(itemAmount);
+                newItem.setQuantity(0);
                 recipe.add(new Ingredient("Milk", Ingredient.Units.CUP, 1.25/12));
                 recipe.add(new Ingredient("Yeast", Ingredient.Units.TSP, 2.25/12));
                 recipe.add(new Ingredient("Eggs", Ingredient.Units.NUM, 2/12));
-                recipe.add(new Ingredient("Butter",Ingredient.Units.TSP, 4));
-                recipe.add(new Ingredient("Flour",Ingredient.Units.CUP, 4.25/12));
+                recipe.add(new Ingredient("Butter",Ingredient.Units.LB, 0.5/12));
+                recipe.add(new Ingredient("Flour",Ingredient.Units.LB, 2/12));
                 newItem.setRecipe(recipe);
             }
             case 3: //other
             {
                 newItem.setName(itemName);
                 newItem.setSalePrice(itemPrice);
-                newItem.setQuantity(itemAmount);
+                newItem.setQuantity(0);
                 break;
             }
 
         }
+        if(inventory.canAddMenuItem(newItem.getRecipe(),itemAmount)){
+            inventory.addMenuItem(newItem);
+            try{
+                inventory.setMenuItemAmount(newItem.getName(), itemAmount);
+            }
+            catch(Exception ItemNotFoundException){
+                System.out.println("could not find item on menu");
+            }
+            System.out.println(newItem.getName() + " has been successfully added to the inventory.");
+        }
+        else{
+            System.out.println("could not add menu item");
+        }
 
-        inventory.addMenuItem(newItem);
-        System.out.println(newItem.getName() + " has been successfully added to the inventory.");
     }
 
     /**
@@ -408,16 +419,34 @@ public class CoffeeShop{
     }
 
     //Module 7: Still need to write unit test
-    static void printVendor() throws IOException {
+    static void costcoVendor() throws IOException {
 
         VendorDataCSV exportList = new VendorDataCSV();
         List<CostcoCSV> list = null;
         try {
-            list = exportList.importVendorIngredients();
+            list = exportList.importCostcoVendor();
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
+        System.out.println("*******************************");
+        System.out.println("COSTCO VENDOR");
+        System.out.printf("%-15s%-10s%-10s\n","NAME", "UNIT", "PRICE");
+        list.forEach(e-> {
+            System.out.printf("%-15s%-10s%-10s\n", e.getIngredientName(),e.getUnit(), e.getPrice());
+        });
+    }
 
+    static void walmartVendor() throws IOException {
+
+        VendorDataCSV exportList = new VendorDataCSV();
+        List<WalmartCSV> list = null;
+        try {
+            list = exportList.importWalmartVendor();
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println("*******************************");
+        System.out.println("WALMART VENDOR");
         System.out.printf("%-15s%-10s%-10s\n","NAME", "UNIT", "PRICE");
         list.forEach(e-> {
             System.out.printf("%-15s%-10s%-10s\n", e.getIngredientName(),e.getUnit(), e.getPrice());
@@ -427,4 +456,166 @@ public class CoffeeShop{
     static void printIngredients(){
         inventory.printAllIngredients();
     }
+    static void addIngredientQuantity()
+    {
+        // Verify that there exist Ingredients to modify
+        if (inventory.getIngredientList().size() > 0)
+        {
+            Scanner keyboard = new Scanner(System.in);
+            String userInputName = "";
+            double userInputAmount = 0;
+            double finalItemAmount = 0;
+            boolean badInput = false;
+
+            do
+            {
+                System.out.print("Which ingredient would you like to change? ");
+                userInputName = keyboard.nextLine();
+                System.out.print("How much of this ingredient would you like to add? ");
+                badInput = false;
+
+                try
+                {
+                    userInputAmount = keyboard.nextInt();
+                    finalItemAmount = inventory.getIngredientAmount(userInputName) + userInputAmount;
+                    inventory.setIngredientAmount(userInputName, (int) finalItemAmount);
+                }
+                catch (ItemNotFoundException e)
+                {
+                    System.out.println("That is an error: " + userInputName + " is not an ingredient in the recipe.");
+                    keyboard.nextLine();
+                    badInput = true;
+                }
+                catch (InputMismatchException e)
+                {
+                    System.out.println("The value you entered is not an integer. Please enter a positive integer value.");
+                    keyboard.nextLine();
+                    badInput = true;
+                }
+                catch (Exception e)
+                {
+                    System.out.println("An Error has occurred: Invalid Input");
+                    keyboard.nextLine();
+                    badInput = true;
+                }
+
+                if (!badInput && (userInputAmount < 0))
+                {
+                    // The user input a negative number
+                    // Undo the erroneous calculation
+                    try
+                    {
+                        inventory.setIngredientAmount(userInputName, finalItemAmount - userInputAmount);
+                    }
+                    catch (ItemNotFoundException e)
+                    {
+                        // Do nothing.
+                    }
+
+                    // Print out an error message
+                    System.out.println("This is an error: You cannot add a negative amount of a ingredient.");
+                    keyboard.nextLine();
+                    badInput = true;
+                }
+            } while(badInput);
+
+        }
+        else
+        {
+            System.out.println("There are no Ingredients to modify.");
+        }
+    }
+    static void removeIngredientQuantity()
+    {
+        if (inventory.getIngredientList().size() > 0)
+        {
+            Scanner keyboard = new Scanner(System.in);
+            String userInputName = "";
+            double userInputAmount = 0;
+            double finalItemAmount = 0;
+            boolean badInput = false;
+
+            do
+            {
+                badInput = false;
+
+                System.out.print("Which ingredient would you like to change? ");
+                userInputName = keyboard.nextLine();
+                System.out.println("What quantity of this ingredient would you like to remove?");
+
+                // Validate user input.
+                try
+                {
+                    userInputAmount = keyboard.nextInt();
+                    finalItemAmount = inventory.getIngredientAmount(userInputName) - userInputAmount;
+                    inventory.setIngredientAmount(userInputName, (int) finalItemAmount);
+                }
+                catch (ItemNotFoundException e)
+                {
+                    System.out.println("That is an error: " + userInputName + " is not an item in the ingredients inventory.");
+                    keyboard.nextLine();
+                    badInput = true;
+                }
+                catch(InputMismatchException e)
+                {
+                    System.out.println("The value you entered is not an integer. Please enter a positive integer value.");
+                    keyboard.nextLine();
+                    badInput = true;
+                }
+                catch (Exception e)
+                {
+                    System.out.println("An error has occurred: Invalid Input");
+                    keyboard.nextLine();
+                    badInput = true;
+                }
+
+                if (!badInput && userInputAmount < 0)
+                {
+                    // The user input a negative number, effectively adding the amount to the inventory.
+                    // Undo erroneous calculation.
+                    try
+                    {
+                        inventory.setIngredientAmount(userInputName, finalItemAmount + userInputAmount);
+                    }
+                    catch (ItemNotFoundException e)
+                    {
+                        // Do nothing.
+                    }
+
+                    // Print out error message.
+                    System.out.println("This is an error: You cannot remove a negative amount of a ingredient.");
+                    keyboard.nextLine();
+                    badInput = true;
+                }
+                else if (!badInput && finalItemAmount < 0)
+                {
+                    // The user attempted to remove more of the ingredient than there is present in the inventory.
+                    // Undo erroneous Calculation
+                    try
+                    {
+                        inventory.setIngredientAmount(userInputName, finalItemAmount + userInputAmount);
+                    }
+                    catch (ItemNotFoundException e)
+                    {
+                        // Do nothing.
+                    }
+
+                    System.out.println("This is an error: You cannot remove " + userInputAmount + " of this ingredient.");
+                    System.out.print("There are only " + (finalItemAmount + userInputAmount) + " of this ingredient ");
+                    System.out.println("in the inventory.");
+                    keyboard.nextLine();
+                    badInput = true;
+                }
+            } while(badInput);
+
+            System.out.println("The amount of " + userInputName + " has successfully been decreased by " + userInputAmount);
+        }
+        else
+        {
+            System.out.println("There are no Ingredients to modify.");
+        }
+
+    }
 }
+
+

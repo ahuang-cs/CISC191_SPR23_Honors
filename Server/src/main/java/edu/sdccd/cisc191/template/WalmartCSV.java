@@ -2,7 +2,7 @@ package edu.sdccd.cisc191.template;
 
 import edu.sdccd.cisc191.template.Ingredient.Ingredient;
 
-public class CostcoCSV {
+public class WalmartCSV {
     private String ingredientName;
 
     //private double quantity;
@@ -10,9 +10,9 @@ public class CostcoCSV {
     private Ingredient.Units unit;
 
     private double price;
-    public CostcoCSV(){}
+    public WalmartCSV(){}
 
-    public CostcoCSV(String ingredientName, Ingredient.Units unit, double price) {
+    public WalmartCSV(String ingredientName, Ingredient.Units unit, double price) {
         this.ingredientName = ingredientName;
        // this.quantity = quantity;
         this.unit = unit;
