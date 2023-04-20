@@ -40,6 +40,14 @@ class MenuItemListTest {
         assertEquals("Donut", itemList.get(0).getName());
         assertEquals("coffee", itemList.get(1).getName());
         assertEquals("Cake", itemList.get(2).getName());
+
+        // Test whether you can add duplicate items
+        MenuItem duplicateCake = new MenuItem();
+        duplicateCake.setName("Donut");
+
+        itemList = list.getList();
+
+        assertEquals(3, itemList.size());
     }
 
     @Test
@@ -82,10 +90,13 @@ class MenuItemListTest {
         // Create menu items to be added to the list.
         MenuItem cake = new MenuItem();
         cake.setSalePrice(3.99);
+        cake.setName("Cake");
         MenuItem coffee = new MenuItem();
         coffee.setSalePrice(1.99);
+        coffee.setName("Coffee");
         MenuItem donut = new MenuItem();
         donut.setSalePrice(2.50);
+        donut.setName("Donut");
 
         list.addMenuItem(cake);
         list.addMenuItem(coffee);

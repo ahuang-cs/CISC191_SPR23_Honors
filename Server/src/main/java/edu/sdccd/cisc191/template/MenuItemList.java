@@ -33,21 +33,25 @@ public class MenuItemList
      */
     public void addMenuItem(MenuItem item)
     {
-        MenuNode newNode = new MenuNode(item);      // The new node to be added to the list
-
-        // Add the new node to the beginning of the list.
-        newNode.nextNode = head;
-        head = newNode;
-
-        // Check if this is the only node in the list.
-        if (tail == null)
+        if (!contains(item.getName()))
         {
-            // There were no nodes before this one; this node is now both the head and the tail.
-            tail = head;
-        }
+            MenuNode newNode = new MenuNode(item);      // The new node to be added to the list
 
-        // Increment size counter
-        size++;
+            // Add the new node to the beginning of the list.
+
+            newNode.nextNode = head;
+            head = newNode;
+
+            // Check if this is the only node in the list.
+            if (tail == null)
+            {
+                // There were no nodes before this one; this node is now both the head and the tail.
+                tail = head;
+            }
+
+            // Increment size counter
+            size++;
+        }
     }
 
     /**
