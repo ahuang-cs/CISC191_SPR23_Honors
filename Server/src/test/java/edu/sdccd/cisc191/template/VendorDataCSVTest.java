@@ -17,7 +17,7 @@ class VendorDataCSVTest {
         //List<CostcoCSV> list = new List<>(vendorDataCSV.importVendorIngredients());
 
         try {
-            for(CostcoCSV index: vendorDataCSV.importVendorIngredients()) {
+            for(CostcoCSV index: vendorDataCSV.importCostcoVendor()) {
                 System.out.println(index.getIngredientName());
                 System.out.println(index.getUnit());
                 System.out.println(index.getPrice());
