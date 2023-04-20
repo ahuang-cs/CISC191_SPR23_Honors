@@ -321,8 +321,8 @@ public class CoffeeShop{
             {
                 newItem.setName(itemName);
                 newItem.setSalePrice(itemPrice);
-                newItem.setQuantity(itemAmount);
-                recipe.add(new Ingredient("Coffee beans", Ingredient.Units.OZ, 0.4));
+                newItem.setQuantity(0);
+                recipe.add(new Ingredient("Coffee beans", Ingredient.Units.LB, 0.4));
                 recipe.add(new Ingredient("Creamer", Ingredient.Units.fluidOZ, 0.5));
                 newItem.setRecipe(recipe);
                 break;
@@ -331,26 +331,37 @@ public class CoffeeShop{
             {
                 newItem.setName(itemName);
                 newItem.setSalePrice(itemPrice);
-                newItem.setQuantity(itemAmount);
+                newItem.setQuantity(0);
                 recipe.add(new Ingredient("Milk", Ingredient.Units.CUP, 1.25/12));
                 recipe.add(new Ingredient("Yeast", Ingredient.Units.TSP, 2.25/12));
                 recipe.add(new Ingredient("Eggs", Ingredient.Units.NUM, 2/12));
-                recipe.add(new Ingredient("Butter",Ingredient.Units.TSP, 4));
-                recipe.add(new Ingredient("Flour",Ingredient.Units.CUP, 4.25/12));
+                recipe.add(new Ingredient("Butter",Ingredient.Units.LB, 0.5/12));
+                recipe.add(new Ingredient("Flour",Ingredient.Units.LB, 2/12));
                 newItem.setRecipe(recipe);
             }
             case 3: //other
             {
                 newItem.setName(itemName);
                 newItem.setSalePrice(itemPrice);
-                newItem.setQuantity(itemAmount);
+                newItem.setQuantity(0);
                 break;
             }
 
         }
+        if(inventory.canAddMenuItem(newItem.getRecipe(),itemAmount)){
+            inventory.addMenuItem(newItem);
+            try{
+                inventory.setMenuItemAmount(newItem.getName(), itemAmount);
+            }
+            catch(Exception ItemNotFoundException){
+                System.out.println("could not find item on menu");
+            }
+            System.out.println(newItem.getName() + " has been successfully added to the inventory.");
+        }
+        else{
+            System.out.println("could not add menu item");
+        }
 
-        inventory.addMenuItem(newItem);
-        System.out.println(newItem.getName() + " has been successfully added to the inventory.");
     }
 
     /**
@@ -552,7 +563,7 @@ public class CoffeeShop{
                 {
                     userInputAmount = keyboard.nextInt();
                     finalItemAmount = inventory.getIngredientAmount(userInputName) - userInputAmount;
-                    inventory.setMenuItemAmount(userInputName, (int) finalItemAmount);
+                    inventory.setIngredientAmount(userInputName, (int) finalItemAmount);
                 }
                 catch (ItemNotFoundException e)
                 {
