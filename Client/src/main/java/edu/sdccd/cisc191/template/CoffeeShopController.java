@@ -18,7 +18,8 @@ public class CoffeeShopController extends CoffeeShop {
         public void removeItemQuantity(ActionEvent a) {
                 subtractItemQuantity();
         }
-        public void showVendorData(ActionEvent e) throws IOException {printVendor();}
+        public void showCostcoVendorData(ActionEvent e) throws IOException {printVendor();}
+        public void showWalmartVendorData(ActionEvent e) throws IOException {printVendor();}
         public void addMenuItem(ActionEvent e) {
                 addMenuItem();
         }
