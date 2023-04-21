@@ -20,6 +20,7 @@ public class CoffeeShopController extends CoffeeShop {
         }
         public void showCostcoVendorData(ActionEvent e) throws IOException {costcoVendor();}
         public void showWalmartVendorData(ActionEvent e) throws IOException {walmartVendor();}
+        public void getLowestIngredientPrices(ActionEvent e) throws IOException {getLowestIngredientPrices();}
         public void addMenuItem(ActionEvent e) {
                 addMenuItem();
         }

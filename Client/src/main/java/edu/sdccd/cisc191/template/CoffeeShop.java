@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.sdccd.cisc191.template.Ingredient.Ingredient;
 import edu.sdccd.cisc191.template.MenuItem.MenuItem;
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -435,7 +436,6 @@ public class CoffeeShop{
             System.out.printf("%-15s%-10s%-10s\n", e.getIngredientName(),e.getUnit(), e.getPrice());
         });
     }
-
     static void walmartVendor() throws IOException {
 
         VendorDataCSV exportList = new VendorDataCSV();
@@ -452,7 +452,49 @@ public class CoffeeShop{
             System.out.printf("%-15s%-10s%-10s\n", e.getIngredientName(),e.getUnit(), e.getPrice());
         });
     }
+    @FXML
+    static void getLowestIngredientPrices() throws IOException{
+        VendorDataCSV exportList = new VendorDataCSV();
+        List<WalmartCSV> walmartList;
+        List<CostcoCSV> costcoList;
+        try {
+            walmartList = exportList.importWalmartVendor();
+            costcoList = exportList.importCostcoVendor();
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println("************************************");
+        System.out.println("CHEAPEST PRICES");
+        System.out.printf("%-15s%-10s%-10s\n","Ingredient","Price","Vendor");
+        List<Ingredient> allIngredients = inventory.getIngredientList();
+        for(Ingredient ingredient:allIngredients){
+            double costcoPrice = Double.MAX_VALUE;
+            double walmartPrice = Double.MAX_VALUE;
+            for(CostcoCSV costcoIngredient: costcoList){
+                if(ingredient.getIngredientName().equalsIgnoreCase(costcoIngredient.getIngredientName())){
+                    costcoPrice = costcoIngredient.getPrice();
+                }
+            }
+            for(WalmartCSV walmartIngredient: walmartList){
+                if(ingredient.getIngredientName().equalsIgnoreCase(walmartIngredient.getIngredientName())){
+                    walmartPrice = walmartIngredient.getPrice();
+                }
+            }
+            if(costcoPrice==Double.MAX_VALUE&&walmartPrice==Double.MAX_VALUE) {
+                System.out.printf("%-15s%-10s\n", ingredient.getIngredientName(),"could not find price in vendors");
+            }
+            else if(costcoPrice==walmartPrice){
+                System.out.printf("%-15s%-10s%-10s\n", ingredient.getIngredientName(),costcoPrice,"Same price");
+            }
+            else if(costcoPrice<walmartPrice){
+                System.out.printf("%-15s%-10s%-10s\n", ingredient.getIngredientName(),costcoPrice,"Costco");
+            }
+            else if(walmartPrice<costcoPrice){
+                System.out.printf("%-15s%-10s%-10s\n", ingredient.getIngredientName(),costcoPrice,"Walmart");
+            }
+        }
 
+    }
     static void printIngredients(){
         inventory.printAllIngredients();
     }

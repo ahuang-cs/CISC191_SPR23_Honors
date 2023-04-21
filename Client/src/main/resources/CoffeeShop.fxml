@@ -35,16 +35,22 @@
             <Font name="Constantia" size="36.0" />
          </font>
       </Label>
-      <Button fx:id="showCostcoDataButton" alignment="CENTER" contentDisplay="CENTER" layoutX="158.0" layoutY="220.0" mnemonicParsing="false" onAction="#showCostcoVendorData" prefHeight="35.0" prefWidth="248.0" text="Show Costco Vendor Data" textAlignment="CENTER">
+      <Button fx:id="showCostcoDataButton" alignment="CENTER" contentDisplay="CENTER" layoutX="28.0" layoutY="220.0" mnemonicParsing="false" onAction="#showCostcoVendorData" prefHeight="35.0" prefWidth="218.0" text="Show Costco Vendor Data" textAlignment="CENTER">
          <font>
             <Font name="Didot" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="showWalmartDataButton" alignment="CENTER" contentDisplay="CENTER" layoutX="428.0" layoutY="220.0" mnemonicParsing="false" onAction="#showWalmartVendorData" prefHeight="35.0" prefWidth="248.0" text="Show Walmart Vendor Data" textAlignment="CENTER">
+      <Button fx:id="showWalmartDataButton" alignment="CENTER" contentDisplay="CENTER" layoutX="268.0" layoutY="220.0" mnemonicParsing="false" onAction="#showWalmartVendorData" prefHeight="35.0" prefWidth="238.0" text="Show Walmart Vendor Data" textAlignment="CENTER">
          <font>
             <Font name="Didot" size="16.0" />
          </font>
       </Button>
+      <Button fx:id="getLowestIngredientPrices" alignment="CENTER" contentDisplay="CENTER" layoutX="518.0" layoutY="220.0" mnemonicParsing="false" onAction="#getLowestIngredientPrices" prefHeight="35.0" prefWidth="248.0" text="Get lowest ingredient prices" textAlignment="CENTER">
+         <font>
+            <Font name="Didot" size="16.0" />
+         </font>
+      </Button>
+
       <Button fx:id="displayIngredientsButton" alignment="CENTER" contentDisplay="CENTER" layoutX="11.0" layoutY="137.0" mnemonicParsing="false" onAction="#printIngredientStock" text="Display Ingredients" textAlignment="CENTER">
          <font>
             <Font name="Didot" size="16.0" />
