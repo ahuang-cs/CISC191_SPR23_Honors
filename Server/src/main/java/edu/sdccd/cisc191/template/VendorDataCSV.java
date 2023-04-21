@@ -26,7 +26,7 @@ public class VendorDataCSV implements VendorData {
         List<CostcoCSV> list = new ArrayList<>();
 
         //Add the ingredients to the list
-        CostcoCSV costco1 = new CostcoCSV("Cream", Ingredient.Units.GAL, 5.99);
+        CostcoCSV costco1 = new CostcoCSV("Creamer", Ingredient.Units.GAL, 5.99);
         list.add(costco1);
 
         CostcoCSV costco2 = new CostcoCSV("Coffee Beans", Ingredient.Units.LB, 14.99);
@@ -71,29 +71,29 @@ public class VendorDataCSV implements VendorData {
         List<WalmartCSV> list = new ArrayList<>();
 
         //Add the ingredients to the list
-        WalmartCSV costco1 = new WalmartCSV("Cream", Ingredient.Units.GAL, 5.99);
-        list.add(costco1);
+        WalmartCSV walmart1 = new WalmartCSV("Creamer", Ingredient.Units.GAL, 5.99);
+        list.add(walmart1);
 
-        WalmartCSV costco2 = new WalmartCSV("Coffee Beans", Ingredient.Units.LB, 12.99);
-        list.add(costco2);
+        WalmartCSV walmart2 = new WalmartCSV("Coffee Beans", Ingredient.Units.LB, 12.99);
+        list.add(walmart2);
 
-        WalmartCSV costco3 = new WalmartCSV("Sugar", Ingredient.Units.LB, 28.99);
-        list.add(costco3);
+        WalmartCSV walmart3 = new WalmartCSV("Sugar", Ingredient.Units.LB, 28.99);
+        list.add(walmart3);
 
-        WalmartCSV costco4 = new WalmartCSV("Milk", Ingredient.Units.GAL, 6.99);
-        list.add(costco4);
+        WalmartCSV walmart4 = new WalmartCSV("Milk", Ingredient.Units.GAL, 6.99);
+        list.add(walmart4);
 
-        WalmartCSV costco5 = new WalmartCSV("Yeast", Ingredient.Units.LB, 5.99);
-        list.add(costco5);
+        WalmartCSV walmart5 = new WalmartCSV("Yeast", Ingredient.Units.LB, 5.99);
+        list.add(walmart5);
 
-        WalmartCSV costco6 = new WalmartCSV("Eggs", Ingredient.Units.NUM, 0.99);
-        list.add(costco6);
+        WalmartCSV walmart6 = new WalmartCSV("Eggs", Ingredient.Units.NUM, 0.99);
+        list.add(walmart6);
 
-        WalmartCSV costco7 = new WalmartCSV("Butter", Ingredient.Units.LB, 4.99);
-        list.add(costco7);
+        WalmartCSV walmart7 = new WalmartCSV("Butter", Ingredient.Units.LB, 4.99);
+        list.add(walmart7);
 
-        WalmartCSV costco8 = new WalmartCSV("Flour", Ingredient.Units.LB, 1.99);
-        list.add(costco8);
+        WalmartCSV walmart8 = new WalmartCSV("Flour", Ingredient.Units.LB, 1.99);
+        list.add(walmart8);
 
         //convert these ingredient data into Jason format and write to a new file
         String jsonData = mapper.writeValueAsString(list); //convert our Object into Jason data
