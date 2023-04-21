@@ -480,7 +480,7 @@ public class CoffeeShop{
                     walmartPrice = walmartIngredient.getPrice();
                 }
             }
-            if(costcoPrice==Double.MAX_VALUE && walmartPrice==Double.MAX_VALUE) {
+            if(costcoPrice==Double.MAX_VALUE&&walmartPrice==Double.MAX_VALUE) {
                 System.out.printf("%-15s%-10s\n", ingredient.getIngredientName(),"could not find price in vendors");
             }
             else if(costcoPrice==walmartPrice){

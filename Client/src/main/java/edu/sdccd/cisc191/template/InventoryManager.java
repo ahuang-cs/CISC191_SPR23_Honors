@@ -6,10 +6,7 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class InventoryManager
@@ -158,8 +155,6 @@ public class InventoryManager
         }
 
     }
-
-
     // ******************** End of Ingredient Methods ********************
 
 
