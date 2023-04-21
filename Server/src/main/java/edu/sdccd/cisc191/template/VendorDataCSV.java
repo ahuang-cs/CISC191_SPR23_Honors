@@ -26,7 +26,7 @@ public class VendorDataCSV implements VendorData {
         List<CostcoCSV> list = new ArrayList<>();
 
         //Add the ingredients to the list
-        CostcoCSV costco1 = new CostcoCSV("Cream", Ingredient.Units.GAL, 5.99);
+        CostcoCSV costco1 = new CostcoCSV("Creamer", Ingredient.Units.GAL, 5.99);
         list.add(costco1);
 
         CostcoCSV costco2 = new CostcoCSV("Coffee Beans", Ingredient.Units.LB, 14.99);
@@ -71,7 +71,7 @@ public class VendorDataCSV implements VendorData {
         List<WalmartCSV> list = new ArrayList<>();
 
         //Add the ingredients to the list
-        WalmartCSV costco1 = new WalmartCSV("Cream", Ingredient.Units.GAL, 5.99);
+        WalmartCSV costco1 = new WalmartCSV("Creamer", Ingredient.Units.GAL, 5.99);
         list.add(costco1);
 
         WalmartCSV costco2 = new WalmartCSV("Coffee Beans", Ingredient.Units.LB, 12.99);
