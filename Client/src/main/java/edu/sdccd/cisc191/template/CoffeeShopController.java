@@ -31,4 +31,5 @@ public class CoffeeShopController extends CoffeeShop {
         public void sortAlphabetically(ActionEvent e){inventory.menuItemList.getAlphabeticallySortedList();}
         public void sortByPrice(ActionEvent e){inventory.menuItemList.getPriceSortedList();}
         public void addIngredientItem(ActionEvent e){}
+
 }
