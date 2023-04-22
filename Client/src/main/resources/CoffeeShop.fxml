@@ -73,6 +73,6 @@
          </font>
       </Button>
       <Button fx:id="sortByNameButton" layoutX="218.0" layoutY="127.0" mnemonicParsing="false" onAction="#sortAlphabetically" text="Sort Item by Name" />
-      <Button fx:id="sortByPriceButton" layoutX="412.0" layoutY="127.0" mnemonicParsing="false" onAction="#sortByPrice" text="Sort Item By Price" />
+      <Button fx:id="sortByPriceButton" layoutX="412.0" layoutY="127.0" mnemonicParsing="false" onAction="#sortByPrice" text="Sort Item By Lowest Price" />
    </children>
 </AnchorPane>

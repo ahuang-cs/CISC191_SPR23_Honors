@@ -11,6 +11,7 @@ import java.util.List;
 
 public class InventoryManager
 {
+
     // ************************ DATA ***********************
 
     // Holds a list of all stocked ingredients.
