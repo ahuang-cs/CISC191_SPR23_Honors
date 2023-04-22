@@ -28,7 +28,7 @@ public class CoffeeShopController extends CoffeeShop {
         public void printIngredientStock(ActionEvent e){printIngredients();}
         public void addIngredientQuantity(ActionEvent e){addIngredientQuantity();}
         public void removeIngredientQuantity(ActionEvent e){removeIngredientQuantity();}
-        public void sortAlphabetically(ActionEvent e){inventory.menuItemList.sortAlphabetically();}
-        public void sortByPrice(ActionEvent e){inventory.menuItemList.sortByPrice();}
+        public void sortAlphabetically(ActionEvent e){inventory.menuItemList.getAlphabeticallySortedList();}
+        public void sortByPrice(ActionEvent e){inventory.menuItemList.getPriceSortedList();}
         public void addIngredientItem(ActionEvent e){}
 }

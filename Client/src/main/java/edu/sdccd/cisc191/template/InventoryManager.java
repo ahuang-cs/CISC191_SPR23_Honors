@@ -14,10 +14,10 @@ public class InventoryManager
     // ************************ DATA ***********************
 
     // Holds a list of all stocked ingredients.
-    private List<Ingredient> ingredientList;
+    public List<Ingredient> ingredientList;
 
     // Holds a list of all menu items.
-    private MenuItemList menuItemList;
+    public MenuItemList menuItemList;
 
     // ******************** END OF DATA ********************
 
