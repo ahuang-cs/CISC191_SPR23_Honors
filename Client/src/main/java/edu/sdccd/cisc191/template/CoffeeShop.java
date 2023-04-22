@@ -394,22 +394,22 @@ public class CoffeeShop{
             }
             catch(InputMismatchException e)
             {
-                System.out.println("The value you entered is not an integer. Please enter an integer from 1 - 5.");
+                System.out.println("The value you entered is not an integer. Please enter an integer from 1 - 3.");
                 keyboard.nextLine();
                 badInput = true;
             }
             catch(Exception e)
             {
-                System.out.println("An error has occurred; Please enter an integer from 1-5.");
+                System.out.println("An error has occurred; Please enter an integer from 1-3.");
                 keyboard.nextLine();
                 badInput = true;
             }
 
-            // Make sure the user input is from 1-5.
+            // Make sure the user input is from 1-3.
             if (!badInput && ((userChoice < 1) || (userChoice > 3)))
             {
                 System.out.println(userChoice + " is not a valid option.");
-                System.out.println("Please select a valid menu option from [1] to [5].");
+                System.out.println("Please select a valid menu option from [1] to [3].");
                 keyboard.nextLine();
                 badInput = true;
             }
