@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="355.0" prefWidth="798.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.sdccd.cisc191.template.CoffeeShopController">
+<AnchorPane prefHeight="355.0" prefWidth="798.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.sdccd.cisc191.template.CoffeeShopController">
    <children>
       <Button fx:id="displayMenuButton" alignment="CENTER" contentDisplay="CENTER" layoutX="73.0" layoutY="68.0" mnemonicParsing="false" onAction="#displayMenu" text="Display Menu" textAlignment="CENTER">
          <font>
@@ -28,49 +28,51 @@
             <Font name="Didot" size="16.0" />
          </font>
       </Button>
-      <Separator layoutX="12.0" layoutY="112.0" prefHeight="10.0" prefWidth="773.0" />
+      <Separator layoutX="12.0" layoutY="178.0" prefHeight="10.0" prefWidth="773.0" />
       <Separator layoutX="12.0" layoutY="53.0" prefHeight="10.0" prefWidth="773.0" />
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="301.0" layoutY="14.0" text="SDCCD Cafe" textAlignment="CENTER">
          <font>
             <Font name="Constantia" size="36.0" />
          </font>
       </Label>
-      <Button fx:id="showCostcoDataButton" alignment="CENTER" contentDisplay="CENTER" layoutX="28.0" layoutY="220.0" mnemonicParsing="false" onAction="#showCostcoVendorData" prefHeight="35.0" prefWidth="218.0" text="Show Costco Vendor Data" textAlignment="CENTER">
+      <Button fx:id="showCostcoDataButton" alignment="CENTER" contentDisplay="CENTER" layoutX="28.0" layoutY="272.0" mnemonicParsing="false" onAction="#showCostcoVendorData" prefHeight="35.0" prefWidth="218.0" text="Show Costco Vendor Data" textAlignment="CENTER">
          <font>
             <Font name="Didot" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="showWalmartDataButton" alignment="CENTER" contentDisplay="CENTER" layoutX="268.0" layoutY="220.0" mnemonicParsing="false" onAction="#showWalmartVendorData" prefHeight="35.0" prefWidth="238.0" text="Show Walmart Vendor Data" textAlignment="CENTER">
+      <Button fx:id="showWalmartDataButton" alignment="CENTER" contentDisplay="CENTER" layoutX="268.0" layoutY="272.0" mnemonicParsing="false" onAction="#showWalmartVendorData" prefHeight="35.0" prefWidth="238.0" text="Show Walmart Vendor Data" textAlignment="CENTER">
          <font>
             <Font name="Didot" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="getLowestIngredientPrices" alignment="CENTER" contentDisplay="CENTER" layoutX="518.0" layoutY="220.0" mnemonicParsing="false" onAction="#getLowestIngredientPrices" prefHeight="35.0" prefWidth="248.0" text="Get lowest ingredient prices" textAlignment="CENTER">
+      <Button fx:id="getLowestIngredientPrices" alignment="CENTER" contentDisplay="CENTER" layoutX="518.0" layoutY="272.0" mnemonicParsing="false" onAction="#getLowestIngredientPrices" prefHeight="35.0" prefWidth="248.0" text="Get lowest ingredient prices" textAlignment="CENTER">
          <font>
             <Font name="Didot" size="16.0" />
          </font>
       </Button>
 
-      <Button fx:id="displayIngredientsButton" alignment="CENTER" contentDisplay="CENTER" layoutX="11.0" layoutY="137.0" mnemonicParsing="false" onAction="#printIngredientStock" text="Display Ingredients" textAlignment="CENTER">
+      <Button fx:id="displayIngredientsButton" alignment="CENTER" contentDisplay="CENTER" layoutX="11.0" layoutY="203.0" mnemonicParsing="false" onAction="#printIngredientStock" text="Display Ingredients" textAlignment="CENTER">
          <font>
             <Font name="Didot" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="addIngredientQuantityButton" alignment="CENTER" contentDisplay="CENTER" layoutX="178.0" layoutY="137.0" mnemonicParsing="false" onAction="#addIngredientQuantity" text=" Add Ingredient Quantity" textAlignment="CENTER">
+      <Button fx:id="addIngredientQuantityButton" alignment="CENTER" contentDisplay="CENTER" layoutX="178.0" layoutY="203.0" mnemonicParsing="false" onAction="#addIngredientQuantity" text=" Add Ingredient Quantity" textAlignment="CENTER">
          <font>
             <Font name="Didot" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="removeIngredientQuantityButton" alignment="CENTER" contentDisplay="CENTER" layoutX="386.0" layoutY="137.0" mnemonicParsing="false" onAction="#removeIngredientQuantity" text="Remove Ingredient Quantity" textAlignment="CENTER">
+      <Button fx:id="removeIngredientQuantityButton" alignment="CENTER" contentDisplay="CENTER" layoutX="386.0" layoutY="203.0" mnemonicParsing="false" onAction="#removeIngredientQuantity" text="Remove Ingredient Quantity" textAlignment="CENTER">
          <font>
             <Font name="Didot" size="16.0" />
          </font>
       </Button>
-      <Separator layoutX="13.0" layoutY="191.0" prefHeight="10.0" prefWidth="773.0" />
-      <Button fx:id="addIngredientItemButton" alignment="CENTER" contentDisplay="CENTER" layoutX="619.0" layoutY="137.0" mnemonicParsing="false" onAction="#addIngredientItem" text="Add Ingredient Item" textAlignment="CENTER">
+      <Separator layoutX="13.0" layoutY="243.0" prefHeight="10.0" prefWidth="773.0" />
+      <Button fx:id="addIngredientItemButton" alignment="CENTER" contentDisplay="CENTER" layoutX="619.0" layoutY="203.0" mnemonicParsing="false" onAction="#addIngredientItem" text="Add Ingredient Item" textAlignment="CENTER">
          <font>
             <Font name="Didot" size="16.0" />
          </font>
       </Button>
+      <Button fx:id="sortByNameButton" layoutX="218.0" layoutY="127.0" mnemonicParsing="false" onAction="#sortAlphabetically" text="Sort Item by Name" />
+      <Button fx:id="sortByPriceButton" layoutX="412.0" layoutY="127.0" mnemonicParsing="false" onAction="#sortByPrice" text="Sort Item By Price" />
    </children>
 </AnchorPane>

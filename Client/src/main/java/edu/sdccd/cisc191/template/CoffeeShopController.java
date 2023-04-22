@@ -1,6 +1,7 @@
 package edu.sdccd.cisc191.template;
 
 
+import edu.sdccd.cisc191.template.MenuItem.MenuItem;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
@@ -27,5 +28,7 @@ public class CoffeeShopController extends CoffeeShop {
         public void printIngredientStock(ActionEvent e){printIngredients();}
         public void addIngredientQuantity(ActionEvent e){addIngredientQuantity();}
         public void removeIngredientQuantity(ActionEvent e){removeIngredientQuantity();}
+        public void sortAlphabetically(ActionEvent e){inventory.menuItemList.sortAlphabetically();}
+        public void sortByPrice(ActionEvent e){inventory.menuItemList.sortByPrice();}
         public void addIngredientItem(ActionEvent e){}
 }
