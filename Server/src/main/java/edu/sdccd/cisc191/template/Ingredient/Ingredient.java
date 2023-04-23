@@ -66,5 +66,8 @@ public class Ingredient {
         PINT,
         TSP
     }
+    public String toString(){
+        return ingredientName+" "+quantity+" "+unit;
+    }
 
 }
