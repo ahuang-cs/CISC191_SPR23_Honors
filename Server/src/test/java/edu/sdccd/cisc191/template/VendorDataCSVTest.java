@@ -6,7 +6,8 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
+import edu.sdccd.cisc191.template.Ingredient.Ingredient;
 import static org.junit.jupiter.api.Assertions.*;
 
 class VendorDataCSVTest {
@@ -30,4 +31,37 @@ class VendorDataCSVTest {
 
     }
 
+    @Test
+    public void importCostcoVendorTest() throws URISyntaxException, IOException
+    {
+        
+
+    }
+
+
+    @Test
+    public void testCostcoVendorData()throws IOException, URISyntaxException {
+        VendorDataCSV exportList = new VendorDataCSV();
+
+
+        List<CostcoCSV> list = exportList.importCostcoVendor();
+
+        CostcoCSV expectedData = new CostcoCSV("Eggs", Ingredient.Units.NUM, 0.99);
+
+        boolean containsExpectedData = false;
+
+        for (CostcoCSV item : list) {
+            if (item.getIngredientName().equals(expectedData.getIngredientName())
+                    && item.getUnit().equals(expectedData.getUnit())
+                    && item.getPrice() == expectedData.getPrice()) {
+                containsExpectedData = true;
+                break;
+
+
+            }
+        }
+        assertEquals(true, containsExpectedData);
+    }
 }
+
+
