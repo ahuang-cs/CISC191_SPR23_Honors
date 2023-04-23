@@ -11,13 +11,14 @@ import java.util.List;
 
 public class InventoryManager
 {
+
     // ************************ DATA ***********************
 
     // Holds a list of all stocked ingredients.
-    private List<Ingredient> ingredientList;
+    public List<Ingredient> ingredientList;
 
     // Holds a list of all menu items.
-    private MenuItemList menuItemList;
+    public MenuItemList menuItemList;
 
     // ******************** END OF DATA ********************
 
@@ -26,20 +27,20 @@ public class InventoryManager
      */
     public InventoryManager()
     {
-        //Module 8, still need to add gui to interface with ingredients and write unit test
-        //inventory gets MenuItems from MenuItemController
-        //TO UPDATE: For now, menu items will be stored on memory, and not saved. Ingredients will be stored on the database.
-        RestTemplate restTemplate = new RestTemplate();
-        String menuItemSourceUrl = "http://localhost:8080/Ingredients";
-        ResponseEntity<Ingredient[]> response = restTemplate.getForEntity(menuItemSourceUrl, Ingredient[].class, new ParameterizedTypeReference<List<MenuItem>>() {});
-        Ingredient[] responseArr = response.getBody();
+        //Module 8
+        //For now, menu items will be stored on memory, and not saved. Ingredients will be stored on the database.
+        Ingredient[] responseArr = getIngredientData();
         ingredientList = new ArrayList<>();
         for(Ingredient ingredient:responseArr){
             addIngredient(ingredient);
         }
-
         menuItemList = new MenuItemList();
-
+    }
+    public Ingredient[] getIngredientData(){
+        RestTemplate restTemplate = new RestTemplate();
+        String menuItemSourceUrl = "http://localhost:8080/Ingredients";
+        ResponseEntity<Ingredient[]> response = restTemplate.getForEntity(menuItemSourceUrl, Ingredient[].class, new ParameterizedTypeReference<List<MenuItem>>() {});
+        return response.getBody();
     }
 
     // ******************** Ingredient Methods ********************
