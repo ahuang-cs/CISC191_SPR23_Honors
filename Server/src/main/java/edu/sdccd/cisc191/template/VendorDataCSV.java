@@ -19,7 +19,7 @@ public class VendorDataCSV implements VendorData {
         //vendor = newVendor;
     }
 
-    public void writeToCostcoFile() throws IOException {
+    public static void writeToCostcoFile() throws IOException {
         /** convert a list/JAVA into JSON format **/
         ObjectMapper mapper = new ObjectMapper();
         List<CostcoCSV> list = new ArrayList<>();
@@ -50,9 +50,7 @@ public class VendorDataCSV implements VendorData {
         list.add(costco8);
 
         //convert these ingredient data into Jason format and write to a new file
-        String jsonData = mapper.writeValueAsString(list); //convert our Object into Jason data
         mapper.writeValue(new File("Costco.json"), list); //write to a Jason file
-
     }
 
     @Override
@@ -72,7 +70,7 @@ public class VendorDataCSV implements VendorData {
         return costcoList;
     }
 
-    public void writeToWalmartFile() throws IOException {
+    public static void writeToWalmartFile() throws IOException {
         /** convert a list/JAVA into JSON format **/
         ObjectMapper mapper = new ObjectMapper();
         List<WalmartCSV> list = new ArrayList<>();

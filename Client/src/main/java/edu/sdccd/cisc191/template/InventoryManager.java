@@ -208,7 +208,6 @@ public class InventoryManager
         }
         return canAdd;
     }
-    //NOT WORKING: ingredient inventory does not decrease
     /**
      * Sets the amount of a MenuItem stored in the inventory if ingredient inventory has enough stock
      * @param itemName The name of the MenuItem to be accessed.

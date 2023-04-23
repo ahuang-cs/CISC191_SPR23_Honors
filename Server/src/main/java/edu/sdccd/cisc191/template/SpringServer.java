@@ -9,12 +9,15 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootApplication
 public class SpringServer {
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException {
+        VendorDataCSV.writeToWalmartFile();
+        VendorDataCSV.writeToCostcoFile();
         SpringApplication.run(SpringServer.class, args);
     }
     @Bean

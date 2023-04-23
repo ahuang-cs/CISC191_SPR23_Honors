@@ -37,17 +37,6 @@ class InventoryManagerTest
         ingredientList.add(new Ingredient("Milk", Ingredient.Units.CUP, 40));
         assertEquals(actualList.toString(), ingredientList.toString());
     }
-    // Testing the InventoryManager constructor
-    @Test
-    void InventoryManagerConstructorTest()
-    {
-        // Create a new InventoryManager object called inventory
-        InventoryManager inventory = new InventoryManager();
-
-        // A new InventoryManager object should have menu items but 8 recipes (prepopulated ingredient database)
-        assertEquals(8, inventory.getIngredientList().size());
-        assertEquals(0, inventory.getMenuItemList().size());
-    }
     //Module 9: collections test
     //ingredients are stored in a list, and is manipulated through inventory manager methods which perform actions on the list
     //Connected with JavaFX
@@ -81,8 +70,11 @@ class InventoryManagerTest
         // Verify that changing a nonexistent value does throw an exception
         assertThrows(ItemNotFoundException.class, () -> inventory.setIngredientAmount("Ice", 9));
     }
-    //Module 9: linked list test
-    //
+    //Module 10: linked list test and recursion
+    //uses the inventory addMenuItem method which manipulates the linked list which stores menu items,
+    //and uses a recursive contains method to check if there is already and item with the same name
+
+    //integrated with javaFX
     @Test
     void addMenuItemTest() throws ItemNotFoundException
     {
@@ -125,6 +117,20 @@ class InventoryManagerTest
         assertEquals(20, inventory.getMenuItemAmount("Coffee"));
         assertEquals(18, inventory.getMenuItemAmount("Tea"));
     }
+
+    // Testing the InventoryManager constructor
+    @Test
+    void InventoryManagerConstructorTest()
+    {
+        // Create a new InventoryManager object called inventory
+        InventoryManager inventory = new InventoryManager();
+
+        // A new InventoryManager object should have menu items but 8 recipes (prepopulated ingredient database)
+        assertEquals(8, inventory.getIngredientList().size());
+        assertEquals(0, inventory.getMenuItemList().size());
+    }
+
+
 
     @Test
     void getMenuItemAmountExceptionTest()

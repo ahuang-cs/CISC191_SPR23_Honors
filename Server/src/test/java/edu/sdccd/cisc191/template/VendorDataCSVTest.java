@@ -1,9 +1,7 @@
 package edu.sdccd.cisc191.template;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import edu.sdccd.cisc191.template.Ingredient.Ingredient;
-import jdk.nashorn.internal.parser.JSONParser;
+import edu.sdccd.cisc191.template.CostcoCSV;
+import edu.sdccd.cisc191.template.VendorDataCSV;
 import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
 import org.junit.jupiter.api.Test;
@@ -24,7 +22,31 @@ import edu.sdccd.cisc191.template.Ingredient.Ingredient;
 import static org.junit.jupiter.api.Assertions.*;
 
 class VendorDataCSVTest {
+    //Module 7: I/O streams
+    //uses the importCostcoVendor method to load in the data from the Costco.json file, and checks if it contains an expected ingredient.
+    //Integrated with the JavaFX interface.
+    @Test
+    public void importCostcoVendorDataTest()throws IOException, URISyntaxException {
+        VendorDataCSV exportList = new VendorDataCSV();
 
+        List<CostcoCSV> list = exportList.importCostcoVendor();
+
+        CostcoCSV expectedData = new CostcoCSV("Eggs", Ingredient.Units.NUM, 0.99);
+
+        boolean containsExpectedData = false;
+
+        for (CostcoCSV item : list) {
+            if (item.getIngredientName().equals(expectedData.getIngredientName())
+                    && item.getUnit().equals(expectedData.getUnit())
+                    && item.getPrice() == expectedData.getPrice()) {
+                containsExpectedData = true;
+                break;
+
+
+            }
+        }
+        assertEquals(true, containsExpectedData);
+    }
     @Test
     public void vendorDataCSVTest() throws IOException, URISyntaxException {
 //        ObjectMapper mapper = new ObjectMapper();
@@ -54,37 +76,6 @@ class VendorDataCSVTest {
 
     }
 
-    @Test
-    public void importCostcoVendorTest() throws URISyntaxException, IOException
-    {
-        
-
-    }
 
 
-    @Test
-    public void testCostcoVendorData()throws IOException, URISyntaxException {
-        VendorDataCSV exportList = new VendorDataCSV();
-
-
-        List<CostcoCSV> list = exportList.importCostcoVendor();
-
-        CostcoCSV expectedData = new CostcoCSV("Eggs", Ingredient.Units.NUM, 0.99);
-
-        boolean containsExpectedData = false;
-
-        for (CostcoCSV item : list) {
-            if (item.getIngredientName().equals(expectedData.getIngredientName())
-                    && item.getUnit().equals(expectedData.getUnit())
-                    && item.getPrice() == expectedData.getPrice()) {
-                containsExpectedData = true;
-                break;
-
-
-            }
-        }
-        assertEquals(true, containsExpectedData);
-    }
 }
-
-

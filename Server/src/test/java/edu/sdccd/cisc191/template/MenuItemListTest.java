@@ -50,6 +50,9 @@ class MenuItemListTest {
         assertEquals(3, itemList.size());
     }
 
+    //Module 11: Searching and sorting
+    //the list is sorted alphabetically using a bubble sort
+    //integrated with javaFX
     @Test
     void alphabeticalSortTest()
     {
