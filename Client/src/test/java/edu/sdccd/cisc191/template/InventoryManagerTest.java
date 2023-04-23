@@ -8,12 +8,35 @@ import edu.sdccd.cisc191.template.Ingredient.Ingredient;
 import edu.sdccd.cisc191.template.MenuItem.MenuItem;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class InventoryManagerTest
 {
-
-
+    //Module 8: networking test
+    //a request is made to the server in the getIngredientData() method, and the response is converted to a list
+    // Integrated with collections
+    @Test
+    void networkingTest(){
+        InventoryManager inventory = new InventoryManager();
+        Ingredient[] serverIngredients = inventory.getIngredientData();
+        List<Ingredient> actualList = new ArrayList<>();
+        for(Ingredient ingredient:serverIngredients){
+            actualList.add(ingredient);
+        }
+        List<Ingredient> ingredientList= new ArrayList<>();
+        ingredientList.add(new Ingredient("Coffee Beans", Ingredient.Units.LB, 40));
+        ingredientList.add(new Ingredient("Creamer", Ingredient.Units.fluidOZ, 40));
+        ingredientList.add(new Ingredient("Sugar", Ingredient.Units.LB, 40));
+        ingredientList.add(new Ingredient("Flour", Ingredient.Units.LB, 40));
+        ingredientList.add(new Ingredient("Butter", Ingredient.Units.LB, 40));
+        ingredientList.add(new Ingredient("Eggs", Ingredient.Units.NUM, 40));
+        ingredientList.add(new Ingredient("Yeast", Ingredient.Units.TSP, 40));
+        ingredientList.add(new Ingredient("Milk", Ingredient.Units.CUP, 40));
+        assertEquals(actualList.toString(), ingredientList.toString());
+    }
     // Testing the InventoryManager constructor
     @Test
     void InventoryManagerConstructorTest()
@@ -25,7 +48,9 @@ class InventoryManagerTest
         assertEquals(8, inventory.getIngredientList().size());
         assertEquals(0, inventory.getMenuItemList().size());
     }
-
+    //Module 9: collections test
+    //ingredients are stored in a list, and is manipulated through inventory manager methods which perform actions on the list
+    //Connected with JavaFX
     @Test
     void setIngredientAmountTest() throws ItemNotFoundException
     {
@@ -56,7 +81,8 @@ class InventoryManagerTest
         // Verify that changing a nonexistent value does throw an exception
         assertThrows(ItemNotFoundException.class, () -> inventory.setIngredientAmount("Ice", 9));
     }
-
+    //Module 9: linked list test
+    //
     @Test
     void addMenuItemTest() throws ItemNotFoundException
     {
@@ -133,7 +159,6 @@ class InventoryManagerTest
         // Rice is an ingredient in the list, so it should not throw an exception.
         assertDoesNotThrow(() -> inv.getMenuItemAmount("pie"));
     }
-
     @Test
     void setMenuItemAmountTest() throws ItemNotFoundException
     {
