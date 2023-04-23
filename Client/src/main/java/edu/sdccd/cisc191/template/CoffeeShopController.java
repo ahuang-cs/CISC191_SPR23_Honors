@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 public class CoffeeShopController extends CoffeeShop {
 
@@ -19,7 +20,7 @@ public class CoffeeShopController extends CoffeeShop {
         public void removeItemQuantity(ActionEvent a) {
                 subtractItemQuantity();
         }
-        public void showCostcoVendorData(ActionEvent e) throws IOException {costcoVendor();}
+        public void showCostcoVendorData(ActionEvent e) throws IOException, URISyntaxException {costcoVendor();}
         public void showWalmartVendorData(ActionEvent e) throws IOException {walmartVendor();}
         public void getLowestIngredientPrices(ActionEvent e) throws IOException {getLowestIngredientPrices();}
         public void addMenuItem(ActionEvent e) {
