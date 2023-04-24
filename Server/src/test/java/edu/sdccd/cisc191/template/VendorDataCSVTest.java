@@ -23,12 +23,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class VendorDataCSVTest {
     //Module 7: I/O streams
-    //uses the importCostcoVendor method to load in the data from the Costco.json file, and checks if it contains an expected ingredient.
+    //File is written when starting server, and is read from when calling print walmart/costco vendor data.
     //Integrated with the JavaFX interface.
     @Test
     public void importCostcoVendorDataTest()throws IOException, URISyntaxException {
         VendorDataCSV exportList = new VendorDataCSV();
-
+        exportList.writeToCostcoFile();
         List<CostcoCSV> list = exportList.importCostcoVendor();
 
         CostcoCSV expectedData = new CostcoCSV("Eggs", Ingredient.Units.NUM, 0.99);
