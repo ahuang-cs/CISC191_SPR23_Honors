@@ -419,7 +419,6 @@ public class CoffeeShop{
         return userChoice;
     }
 
-    //Module 7: Still need to write unit test
     static void costcoVendor() throws IOException {
 
         VendorDataCSV exportList = new VendorDataCSV();
