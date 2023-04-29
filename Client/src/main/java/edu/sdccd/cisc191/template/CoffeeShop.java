@@ -25,16 +25,23 @@ import java.io.File;
 import java.util.*;
 
 public class CoffeeShop{
-    static InventoryManager inventory;      // Manages the inventory of Menu Items and Ingredients.
+
+    /***
+     * Manages the inventory of Menu Items and Ingredients.
+     */
+    static InventoryManager inventory;
 
     public static void main(String[] args) {
         inventory = new InventoryManager();
     }
 
+
     static void printAllMenuItems() throws ItemNotFoundException
     {
         List<MenuItem> menuItems = inventory.getMenuItemList();
-        // New code
+        /***
+         * New code
+         */
         if (menuItems.size() == 0)
         {
             System.out.println("There are no Menu Items in the inventory right now.");
@@ -52,8 +59,12 @@ public class CoffeeShop{
                 menuItemName = menuItem.getName();
                 menuItemPrice = menuItem.getSalePrice();
                 menuItemQuantity = menuItem.getQuantity();
-                //.getMenuItemAmount not working
-                //System.out.printf("%-50s %-10d %.2f\n", menuItemName, inventory.getMenuItemAmount(menuItemName), menuItemPrice);
+
+                /***
+                 * .getMenuItemAmount not working
+                 * System.out.printf("%-50s %-10d %.2f\n", menuItemName, inventory.getMenuItemAmount(menuItemName), menuItemPrice);
+                 */
+
                 System.out.printf("%-50s %-10d %.2f\n", menuItemName, menuItemQuantity, menuItemPrice);
             }
 
@@ -62,9 +73,13 @@ public class CoffeeShop{
         }
     }
 
+
     static void addItemQuantity()
     {
-        // Verify that there exist menu items to modify
+        /***
+         * Verify that there exist menu items to modify
+         */
+
         if (inventory.getMenuItemList().size() > 0)
         {
             Scanner keyboard = new Scanner(System.in);
@@ -107,18 +122,27 @@ public class CoffeeShop{
 
                 if (!badInput && (userInputAmount < 0))
                 {
-                    // The user input a negative number
-                    // Undo the erroneous calculation
+                    /***
+                     * The user input a negative number
+                     * Undo the erroneous calculation
+                     */
+
                     try
                     {
                         inventory.setMenuItemAmount(userInputName, finalItemAmount - userInputAmount);
                     }
                     catch (ItemNotFoundException e)
                     {
-                        // Do nothing.
+                        /***
+                         * Do nothing.
+                         */
+
                     }
 
-                    // Print out an error message
+                    /***
+                     * Print out an error message
+                     */
+
                     System.out.println("This is an error: You cannot add a negative amount of a menu item.");
                     keyboard.nextLine();
                     badInput = true;
@@ -150,7 +174,10 @@ public class CoffeeShop{
                 userInputName = keyboard.nextLine();
                 System.out.println("How much of this item would you like to remove?");
 
-                // Validate user input.
+                /***
+                 * Validate user input.
+                 */
+
                 try
                 {
                     userInputAmount = keyboard.nextInt();
@@ -178,33 +205,47 @@ public class CoffeeShop{
 
                 if (!badInput && userInputAmount < 0)
                 {
-                    // The user input a negative number, effectively adding the amount to the inventory.
-                    // Undo erroneous calculation.
+                    /***
+                     * The user input a negative number, effectively adding the amount to the inventory.
+                     * Undo erroneous calculation.
+                     */
+
                     try
                     {
                         inventory.setMenuItemAmount(userInputName, finalItemAmount + userInputAmount);
                     }
                     catch (ItemNotFoundException e)
                     {
-                        // Do nothing.
+                        /***
+                         * Do nothing.
+                         */
                     }
 
-                    // Print out error message.
+                    /***
+                     * Print out error message.
+                     */
+
                     System.out.println("This is an error: You cannot remove a negative amount of a menu item.");
                     keyboard.nextLine();
                     badInput = true;
                 }
                 else if (!badInput && finalItemAmount < 0)
                 {
-                    // The user attempted to remove more of the menu item than there is present in the inventory.
-                    // Undo erroneous Calculation
+                    /***
+                     *  The user attempted to remove more of the menu item than there is present in the inventory.
+                     * Undo erroneous Calculation
+                     */
+
                     try
                     {
                         inventory.setMenuItemAmount(userInputName, finalItemAmount + userInputAmount);
                     }
                     catch (ItemNotFoundException e)
                     {
-                        // Do nothing.
+                        /***
+                         * Do nothing.
+                         */
+
                     }
 
                     System.out.println("This is an error: You cannot remove " + userInputAmount + " of this item.");
@@ -232,15 +273,24 @@ public class CoffeeShop{
         double itemPrice = 0.0;
         int itemAmount = 0;
 
-        // Prompt the user for input and store that input in userChoice.
+        /***
+         * Prompt the user for input and store that input in userChoice.
+         */
+
         int userChoice = showMenuItemOptions();
 
-        // Prompt the user to enter the name of the menu item to be created.
+        /***
+         * Prompt the user to enter the name of the menu item to be created.
+         */
+
         System.out.print("Enter the name of this Menu Item: ");
         itemName = keyboard.nextLine();
 
-        // Prompt the user to enter the price of the menu item to be created.
-        // Validate user input.
+        /***
+         *  Prompt the user to enter the price of the menu item to be created.
+         * Validate user input.
+         */
+
         do
         {
             badInput = false;
@@ -266,7 +316,10 @@ public class CoffeeShop{
                 badInput = true;
             }
 
-            // Check whether the item price is negative.
+            /***
+             * Check whether the item price is negative.
+             */
+
             if (itemPrice < 0)
             {
                 System.out.println("ERROR: " + itemPrice + " is negative and is therefore not a valid item price.");
@@ -276,14 +329,21 @@ public class CoffeeShop{
             }
         } while (badInput);
 
-        // Prompt the user to enter the amount of the item to be added into the inventory.
-        // Validate user input.
+        /***
+         * Prompt the user to enter the amount of the item to be added into the inventory.
+         * Validate user input.
+         */
+
         do
         {
             badInput = false;
 
             System.out.println("Enter the amount of this Menu Item to be added to the inventory: ");
-            // Catch the item price
+
+            /***
+             * Catch the item price
+             */
+
             try
             {
                 itemAmount = keyboard.nextInt();
@@ -303,7 +363,10 @@ public class CoffeeShop{
                 badInput = true;
             }
 
-            // Check whether the item price is negative.
+            /***
+             * Check whether the item price is negative.
+             */
+
             if (itemAmount < 0)
             {
                 System.out.println("ERROR: " + itemAmount + " is negative and is therefore not a valid input.");
@@ -313,12 +376,19 @@ public class CoffeeShop{
             }
         } while (badInput);
 
-        // Process the user input
+        /***
+         * Process the user input
+         */
+
         MenuItem newItem = new MenuItem();
         List<Ingredient> recipe = new ArrayList<>();
         switch (userChoice)
         {
-            case 1: //coffee
+
+            /***
+             * Coffee
+             */
+            case 1:
             {
                 newItem.setName(itemName);
                 newItem.setSalePrice(itemPrice);
@@ -328,7 +398,11 @@ public class CoffeeShop{
                 newItem.setRecipe(recipe);
                 break;
             }
-            case 2: //donut
+
+            /***
+             * Donut
+             */
+            case 2:
             {
                 newItem.setName(itemName);
                 newItem.setSalePrice(itemPrice);
@@ -340,7 +414,11 @@ public class CoffeeShop{
                 recipe.add(new Ingredient("Flour",Ingredient.Units.LB, 2/12));
                 newItem.setRecipe(recipe);
             }
-            case 3: //other
+
+            /***
+             * Other
+             */
+            case 3:
             {
                 newItem.setName(itemName);
                 newItem.setSalePrice(itemPrice);
@@ -376,7 +454,10 @@ public class CoffeeShop{
         int userChoice = 0;
         boolean badInput = false;
 
-        // Display the menu and retrieve user input until a proper value has been reached.
+        /***
+         * Display the menu and retrieve user input until a proper value has been reached.
+         */
+
         do
         {
             badInput = false;
@@ -387,7 +468,10 @@ public class CoffeeShop{
             System.out.println("[3]: Other");
             System.out.print("Enter the number of your choice, then press <ENTER>: ");
 
-            // Receive and validate user input.
+            /***
+             * Receive and validate user input.
+             */
+
             try
             {
                 userChoice = keyboard.nextInt();
@@ -499,7 +583,10 @@ public class CoffeeShop{
     }
     static void addIngredientQuantity()
     {
-        // Verify that there exist Ingredients to modify
+        /***
+         * Verify that there exist Ingredients to modify
+         */
+
         if (inventory.getIngredientList().size() > 0)
         {
             Scanner keyboard = new Scanner(System.in);
@@ -542,18 +629,28 @@ public class CoffeeShop{
 
                 if (!badInput && (userInputAmount < 0))
                 {
-                    // The user input a negative number
-                    // Undo the erroneous calculation
+
+                    /***
+                     * The user input a negative number
+                     * Undo the erroneous calculation
+                     */
+
                     try
                     {
                         inventory.setIngredientAmount(userInputName, finalItemAmount - userInputAmount);
                     }
                     catch (ItemNotFoundException e)
                     {
-                        // Do nothing.
+                        /**
+                         * Do nothing.
+                         */
+
                     }
 
-                    // Print out an error message
+                    /***
+                     * Print out an error message
+                     */
+
                     System.out.println("This is an error: You cannot add a negative amount of a ingredient.");
                     keyboard.nextLine();
                     badInput = true;
@@ -584,7 +681,10 @@ public class CoffeeShop{
                 userInputName = keyboard.nextLine();
                 System.out.println("What quantity of this ingredient would you like to remove?");
 
-                // Validate user input.
+                /***
+                 * Validate user input.
+                 */
+
                 try
                 {
                     userInputAmount = keyboard.nextInt();
@@ -612,33 +712,48 @@ public class CoffeeShop{
 
                 if (!badInput && userInputAmount < 0)
                 {
-                    // The user input a negative number, effectively adding the amount to the inventory.
-                    // Undo erroneous calculation.
+                    /***
+                     * The user input a negative number, effectively adding the amount to the inventory.
+                     * Undo erroneous calculation.
+                     */
+
                     try
                     {
                         inventory.setIngredientAmount(userInputName, finalItemAmount + userInputAmount);
                     }
                     catch (ItemNotFoundException e)
                     {
-                        // Do nothing.
+                        /***
+                         *Do nothing.
+                         */
+
                     }
 
-                    // Print out error message.
+                    /***
+                     * Print out error message.
+                     */
+
                     System.out.println("This is an error: You cannot remove a negative amount of a ingredient.");
                     keyboard.nextLine();
                     badInput = true;
                 }
                 else if (!badInput && finalItemAmount < 0)
                 {
-                    // The user attempted to remove more of the ingredient than there is present in the inventory.
-                    // Undo erroneous Calculation
+                    /***
+                     * The user attempted to remove more of the ingredient than there is present in the inventory.
+                     * Undo erroneous Calculation
+                     */
+
                     try
                     {
                         inventory.setIngredientAmount(userInputName, finalItemAmount + userInputAmount);
                     }
                     catch (ItemNotFoundException e)
                     {
-                        // Do nothing.
+                        /***
+                         * Do nothing.
+                         */
+
                     }
 
                     System.out.println("This is an error: You cannot remove " + userInputAmount + " of this ingredient.");
