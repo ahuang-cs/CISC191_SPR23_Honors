@@ -307,72 +307,75 @@ public class MenuItemList
      */
     private List<MenuItem> sortAlphabetically(List<MenuItem> itemList)
     {
-        boolean listSorted = false;
-        String nameOne = "";
-        String nameTwo = "";
-        MenuItem temp;
-
-        for (int i = 1; i < itemList.size() && !listSorted; i++)
-        {
-            // If the list is not sorted, we can change that later.
-            listSorted = true;
-
-            for (int j = 0; j < itemList.size() - i; j++)
-            {
-                // Compare the names of each item with the item directly after it.
-                nameOne = itemList.get(j).getName();
-                nameTwo = itemList.get(j+1).getName();
-
-                if (nameOne.compareToIgnoreCase(nameTwo) > 0)
-                {
-                    listSorted = false;
-                    // Swap the two items.
-
-                    temp = itemList.get(j);
-                    itemList.set(j, itemList.get(j+1));
-                    itemList.set(j+1, temp);
-                }
-            }
+        if (itemList.size() <= 1) {
+            return itemList;
         }
 
-        return itemList;
+        // Divide the list into two halves.
+        int mid = itemList.size() / 2;
+        List<MenuItem> leftList = itemList.subList(0, mid);
+        List<MenuItem> rightList = itemList.subList(mid, itemList.size());
+
+        // Recursively sort the two halves.
+        leftList = sortAlphabetically(leftList);
+        rightList = sortAlphabetically(rightList);
+
+        // Merge the two sorted halves.
+        List<MenuItem> mergedList = new ArrayList<>();
+        int leftIndex = 0;
+        int rightIndex = 0;
+        while (leftIndex < leftList.size() && rightIndex < rightList.size()) {
+            if (leftList.get(leftIndex).getName().compareToIgnoreCase(rightList.get(rightIndex).getName()) < 0) {
+                mergedList.add(leftList.get(leftIndex));
+                leftIndex++;
+            } else {
+                mergedList.add(rightList.get(rightIndex));
+                rightIndex++;
+            }
+        }
+        mergedList.addAll(leftList.subList(leftIndex, leftList.size()));
+        mergedList.addAll(rightList.subList(rightIndex, rightList.size()));
+
+        return mergedList;
     }
 
 
     /**
      * Sorts an array of menu items by price from low to high.
-     * This method implements a BUBBLE SORT. More efficient algorithms are possible and should be considered.
+     * This method implements a MERGE SORT.
      * @param itemList The array of menu items to be sorted.
      * @return The sorted array of menu items.
      */
-    private List<MenuItem> sortByPrice(List<MenuItem> itemList)
-    {
-        boolean listSorted = false;
-        double priceOne = 0.0;
-        double priceTwo = 0.0;
-        MenuItem temp;
+    private List<MenuItem> sortByPrice(List<MenuItem> itemList) {
+        if (itemList.size() <= 1) {
+            return itemList;
+        }
 
-        for (int i = 1; i < itemList.size() && !listSorted; i++)
-        {
-            // If the list is not sorted, we can change that later.
-            listSorted = true;
+        // Divide the list into two halves.
+        int mid = itemList.size() / 2;
+        List<MenuItem> leftList = itemList.subList(0, mid);
+        List<MenuItem> rightList = itemList.subList(mid, itemList.size());
 
-            for (int j = 0; j < itemList.size() - i; j++)
-            {
-                // Compare the names of each item with the item directly after it.
-                priceOne = itemList.get(j).getSalePrice();
-                priceTwo = itemList.get(j+1).getSalePrice();
+        // Recursively sort the two halves.
+        leftList = sortByPrice(leftList);
+        rightList = sortByPrice(rightList);
 
-                if (priceOne > priceTwo)
-                {
-                    listSorted = false;
-                    // Swap the two items.
-                    temp = itemList.get(j);
-                    itemList.set(j, itemList.get(j+1));
-                    itemList.set(j+1, temp);
-                }
+        // Merge the two sorted halves.
+        List<MenuItem> mergedList = new ArrayList<>();
+        int leftIndex = 0;
+        int rightIndex = 0;
+        while (leftIndex < leftList.size() && rightIndex < rightList.size()) {
+            if (leftList.get(leftIndex).getSalePrice() < rightList.get(rightIndex).getSalePrice()) {
+                mergedList.add(leftList.get(leftIndex));
+                leftIndex++;
+            } else {
+                mergedList.add(rightList.get(rightIndex));
+                rightIndex++;
             }
         }
-        return itemList;
+        mergedList.addAll(leftList.subList(leftIndex, leftList.size()));
+        mergedList.addAll(rightList.subList(rightIndex, rightList.size()));
+
+        return mergedList;
     }
 }
