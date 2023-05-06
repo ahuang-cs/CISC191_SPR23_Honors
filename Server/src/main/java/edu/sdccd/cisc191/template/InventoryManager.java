@@ -1,7 +1,9 @@
 package edu.sdccd.cisc191.template;
 
 import edu.sdccd.cisc191.template.Ingredient.Ingredient;
+import edu.sdccd.cisc191.template.ItemNotFoundException;
 import edu.sdccd.cisc191.template.MenuItem.MenuItem;
+import edu.sdccd.cisc191.template.MenuItemList;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
@@ -13,6 +15,7 @@ public class InventoryManager
 {
 
     // ************************ DATA ***********************
+    //TODO: Add concurrency controls to prevent bugs with multiple clients changing/getting data at same time
 
     // Holds a list of all stocked ingredients.
     public List<Ingredient> ingredientList;
@@ -23,7 +26,7 @@ public class InventoryManager
     // ******************** END OF DATA ********************
 
     /**
-     * Creates a new InventoryManager object
+     * Creates a new edu.sdccd.cisc191.template.InventoryManager object
      */
     public InventoryManager()
     {
