@@ -9,24 +9,22 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 public class CoffeeShopController extends CoffeeShop {
+        InventoryManager inventoryManager = new InventoryManager();
+        CoffeeShop coffeeShop = new CoffeeShop(inventoryManager);
 
-        public void displayMenu(ActionEvent a) throws ItemNotFoundException
-        {
-                printAllMenuItems();
-        }
-        public void addItemQuantity(ActionEvent a) {
-                addItemQuantity();
-        }
+        public CoffeeShopController(InventoryManager givenInventoryManager) {super(givenInventoryManager);}
+        public void displayMenu(ActionEvent a) throws ItemNotFoundException {coffeeShop.printAllMenuItems();}
+        public void addItemQuantity(ActionEvent a) {coffeeShop.addItemQuantity();}
         public void removeItemQuantity(ActionEvent a) {
-                subtractItemQuantity();
+                coffeeShop.subtractItemQuantity();
         }
-        public void showCostcoVendorData(ActionEvent e) throws IOException, URISyntaxException {costcoVendor();}
-        public void showWalmartVendorData(ActionEvent e) throws IOException {walmartVendor();}
-        public void getLowestIngredientPrices(ActionEvent e) throws IOException {getLowestIngredientPrices();}
+        public void showCostcoVendorData(ActionEvent e) throws IOException, URISyntaxException {coffeeShop.costcoVendor();}
+        public void showWalmartVendorData(ActionEvent e) throws IOException {coffeeShop.walmartVendor();}
+        public void getLowestIngredientPrices(ActionEvent e) throws IOException {coffeeShop.getLowestIngredientPrices();}
         public void addMenuItem(ActionEvent e) {
-                addMenuItem();
+                coffeeShop.addMenuItem();
         }
-        public void printIngredientStock(ActionEvent e){printIngredients();}
+        public void printIngredientStock(ActionEvent e){coffeeShop.printIngredients();}
         public void addIngredientQuantity(ActionEvent e){addIngredientQuantity();}
         public void removeIngredientQuantity(ActionEvent e){removeIngredientQuantity();}
         public void sortAlphabetically(ActionEvent e){inventory.menuItemList.getAlphabeticallySortedList();}

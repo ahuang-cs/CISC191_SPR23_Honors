@@ -1,19 +1,10 @@
 
 package edu.sdccd.cisc191.template;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.sdccd.cisc191.template.Ingredient.Ingredient;
 import edu.sdccd.cisc191.template.MenuItem.MenuItem;
-import javafx.application.Application;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 
-import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -21,16 +12,26 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-import java.io.File;
-import java.util.*;
-
-public class CoffeeShop{
+public class CoffeeShop extends Thread{
     static InventoryManager inventory;      // Manages the inventory of Menu Items and Ingredients.
 
-    public static void main(String[] args) {
-        inventory = new InventoryManager();
+    public CoffeeShop(InventoryManager givenInventoryManager) {
+        inventory = givenInventoryManager;
     }
+    @Override
+    public void run()
+    {
+        System.out.println("running in Thread: " + Thread.currentThread().getName());
 
+        //consumes numberOfItemsToProduce items
+        try{
+            printAllMenuItems();
+        }
+        catch(Exception e){
+            System.out.println("threading error: "+e);
+        }
+        System.out.println("ended.");
+    }
     static void printAllMenuItems() throws ItemNotFoundException
     {
         List<MenuItem> menuItems = inventory.getMenuItemList();

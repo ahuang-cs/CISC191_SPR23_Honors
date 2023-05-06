@@ -1,7 +1,7 @@
 package edu.sdccd.cisc191.template;
 
 /*
- * This class contains all unit tests for InventoryManager.java
+ * This class contains all unit tests for edu.sdccd.cisc191.template.InventoryManager.java
  */
 
 import edu.sdccd.cisc191.template.Ingredient.Ingredient;
@@ -78,7 +78,7 @@ class InventoryManagerTest
     @Test
     void addMenuItemTest() throws ItemNotFoundException
     {
-        // Create a new InventoryManager object to test
+        // Create a new edu.sdccd.cisc191.template.InventoryManager object to test
         InventoryManager inventory = new InventoryManager();
 
         // Create menu items
@@ -118,14 +118,14 @@ class InventoryManagerTest
         assertEquals(18, inventory.getMenuItemAmount("Tea"));
     }
 
-    // Testing the InventoryManager constructor
+    // Testing the edu.sdccd.cisc191.template.InventoryManager constructor
     @Test
     void InventoryManagerConstructorTest()
     {
-        // Create a new InventoryManager object called inventory
+        // Create a new edu.sdccd.cisc191.template.InventoryManager object called inventory
         InventoryManager inventory = new InventoryManager();
 
-        // A new InventoryManager object should have menu items but 8 recipes (prepopulated ingredient database)
+        // A new edu.sdccd.cisc191.template.InventoryManager object should have menu items but 8 recipes (prepopulated ingredient database)
         assertEquals(8, inventory.getIngredientList().size());
         assertEquals(0, inventory.getMenuItemList().size());
     }
