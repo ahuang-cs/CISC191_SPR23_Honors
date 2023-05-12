@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class InventoryManager
@@ -33,7 +34,8 @@ public class InventoryManager
         //Module 8
         //For now, menu items will be stored on memory, and not saved. Ingredients will be stored on the database.
         Ingredient[] responseArr = getIngredientData();
-        ingredientList = new ArrayList<>();
+        //synchronized list provides thread safety
+        ingredientList = Collections.synchronizedList(new ArrayList<>());
         for(Ingredient ingredient:responseArr){
             addIngredient(ingredient);
         }
@@ -51,9 +53,13 @@ public class InventoryManager
     {
         return ingredientList;
     }
+    public int getNumberOfIngredients() {return ingredientList.size();}
     public void addIngredient(Ingredient ingredient)
     {
         ingredientList.add(ingredient);
+    }
+    public Ingredient deleteIngredient(String ingredientName){
+        return ingredientList.remove(findIngredient(ingredientName));
     }
 
     /**
@@ -328,6 +334,8 @@ public class InventoryManager
             return menuItemList.getRecipe(itemName);
         }
     }
+
+
     // ******************** End of Recipe Methods ********************
 
 }

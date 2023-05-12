@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 public class CoffeeShopController extends CoffeeShop {
-        public CoffeeShopController() {}
         public void setInventoryManager(InventoryManager providedInventoryManager){super.setInventoryManager(providedInventoryManager);}
         public void displayMenu(ActionEvent a) throws ItemNotFoundException {printAllMenuItems();}
         public void addItemQuantity(ActionEvent a) {addItemQuantity();}

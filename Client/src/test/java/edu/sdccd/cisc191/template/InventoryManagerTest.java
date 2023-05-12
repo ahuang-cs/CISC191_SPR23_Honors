@@ -118,52 +118,84 @@ class InventoryManagerTest
         assertEquals(18, inventory.getMenuItemAmount("Tea"));
     }
     //Module 13: Concurrency
-
-
-    // Testing the edu.sdccd.cisc191.template.InventoryManager constructor
     @Test
-    void InventoryManagerConstructorTest()
+    void testWarehouse()
     {
-        // Create a new edu.sdccd.cisc191.template.InventoryManager object called inventory
-        InventoryManager inventory = new InventoryManager();
+        InventoryManager inventoryManager = new InventoryManager();
+        Ingredient ingredient1 = new Ingredient();
+        //subtracting the 8 ingredients that are loaded in from the spring server
+        assertEquals(0, inventoryManager.getNumberOfIngredients()-8);
+        inventoryManager.addIngredient(ingredient1);
+        assertEquals(1, inventoryManager.getNumberOfIngredients()-8);
+        assertEquals(ingredient1, inventoryManager.deleteIngredient(ingredient1.getIngredientName()));
+        assertEquals(0, inventoryManager.getNumberOfIngredients()-8);
+        Ingredient ingredient2 = new Ingredient();
+        Ingredient ingredient3 = new Ingredient();
+        inventoryManager.addIngredient(ingredient2);
+        inventoryManager.addIngredient(ingredient3);
+        assertEquals(2, inventoryManager.getNumberOfIngredients()-8);
+        assertEquals(ingredient3, inventoryManager.deleteIngredient(ingredient3.getIngredientName()));
+        assertEquals(ingredient2, inventoryManager.deleteIngredient(ingredient2.getIngredientName()));
+        assertEquals(0, inventoryManager.getNumberOfIngredients()-8);
+    }
 
-        // A new edu.sdccd.cisc191.template.InventoryManager object should have menu items but 8 recipes (prepopulated ingredient database)
-        assertEquals(8, inventory.getIngredientList().size());
-        assertEquals(0, inventory.getMenuItemList().size());
+    /**
+     * In this test we are simulating many producers creating items sequentially
+     * that are then stored in a warehouse.
+     */
+    @Test
+    void testProducingSequentially()
+    {
+        InventoryManager inventoryManager = new InventoryManager();
+
+        int numberOfProducers = 10000;
+        int numberOfItemsPerProducer = 10;
+        Producer[] producers = new Producer[numberOfProducers];
+        for (int i = 0; i < numberOfProducers; i++)
+        {
+            producers[i] = new Producer("Producer Ingredient " + i, inventoryManager, numberOfItemsPerProducer);
+        }
+
+        // Execute all the producers in the current thread
+        for (int i = 0; i < numberOfProducers; i++)
+        {
+            producers[i].run();
+        }
+        // There should be numberOfProducers*numberOfItemsPerProducer items at the warehouse
+        assertEquals(numberOfProducers * numberOfItemsPerProducer, inventoryManager.getNumberOfIngredients()-8);
     }
     @Test
-    void getMenuItemAmountExceptionTest()
+    void testProducingConcurrently() throws InterruptedException
     {
-        InventoryManager inv = new InventoryManager();
+        InventoryManager inventoryManager = new InventoryManager();
 
-        // Check searching for a menu item in an empty list.
-        assertThrows(ItemNotFoundException.class, () -> inv.getMenuItemAmount("Croissant"));
+        // You may have to run this test multiple times for it to fail
+        // If the program does not run, reduce the following numbers
+        // If the test does not fail, increase the following numbers
+        int numberOfProducers = 10000;
+        int numberOfItemsPerProducer = 10;
+        Producer[] producers = new Producer[numberOfProducers];
+        for (int i = 0; i < numberOfProducers; i++)
+        {
+            producers[i] = new Producer("Producer" + i, inventoryManager, numberOfItemsPerProducer);
+        }
 
-        // Check searching for an menu item in a working inventory.
+        // Execute all the producers in separate threads
+        for (int i = 0; i < numberOfProducers; i++)
+        {
+            producers[i].start();
+        }
 
-        MenuItem cake = new MenuItem();
-        cake.setName("Cake");
-        cake.setSalePrice(12.00);
-        cake.setQuantity(2);
-        MenuItem pie = new MenuItem();
-        pie.setName("Pie");
-        pie.setSalePrice(16.99);
-        pie.setQuantity(3);
-        MenuItem lemonade = new MenuItem();
-        lemonade.setName("Lemonade");
-        lemonade.setSalePrice(3.99);
-        lemonade.setQuantity(20);
+        // Wait for producers to complete
+        for (int i = 0; i < numberOfProducers; i++)
+        {
+            producers[i].join();
+        }
 
-        inv.addMenuItem(cake);
-        inv.addMenuItem(pie);
-        inv.addMenuItem(lemonade);
-
-        // Cheese is not an ingredient in the list, so it should throw an exception.
-        assertThrows(ItemNotFoundException.class, () -> inv.getMenuItemAmount("soda"));
-
-        // Rice is an ingredient in the list, so it should not throw an exception.
-        assertDoesNotThrow(() -> inv.getMenuItemAmount("pie"));
+        // There should be numberOfProducers*numberOfItemsPerProducer items at the warehouse
+        assertEquals(numberOfProducers * numberOfItemsPerProducer, inventoryManager.getNumberOfIngredients()-8);
     }
+
     @Test
     void setMenuItemAmountTest() throws ItemNotFoundException
     {

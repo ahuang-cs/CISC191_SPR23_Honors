@@ -12,24 +12,10 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-public class CoffeeShop extends Thread{
+public class CoffeeShop{
     static InventoryManager inventory = new InventoryManager();      // Manages the inventory of Menu Items and Ingredients.
-    public CoffeeShop() {}
-    @Override
-    public void run()
-    {
-        System.out.println("running in Thread: " + Thread.currentThread().getName());
-
-        //consumes numberOfItemsToProduce items
-        try{
-            double amount = inventory.getIngredientAmount("coffee beans");
-            inventory.setIngredientAmount("coffee beans", amount+1);
-        }
-        catch(Exception e){
-            System.out.println("threading error: "+e);
-        }
-        System.out.println("ended.");
-    }
+    //concurrency implementation can be done by inputting multiple ingredients and each ingredient uses a producer thread to add it to the inventory manager.
+    //multiple windows is another option
     protected void setInventoryManager(InventoryManager givenInventoryManager) {
         inventory = givenInventoryManager;
     }
