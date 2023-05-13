@@ -16,7 +16,6 @@ public class InventoryManager
 {
 
     // ************************ DATA ***********************
-    //TODO: Add concurrency controls to prevent bugs with multiple clients changing/getting data at same time
 
     // Holds a list of all stocked ingredients.
     public List<Ingredient> ingredientList;
@@ -53,13 +52,16 @@ public class InventoryManager
     {
         return ingredientList;
     }
-    public int getNumberOfIngredients() {return ingredientList.size();}
-    public void addIngredient(Ingredient ingredient)
-    {
-        ingredientList.add(ingredient);
+    public int getNumberOfIngredients() {synchronized(ingredientList){return ingredientList.size();}}
+    public void addIngredient(Ingredient ingredient) {
+        synchronized(ingredientList) {
+            ingredientList.add(ingredient);
+        }
     }
     public Ingredient deleteIngredient(String ingredientName){
-        return ingredientList.remove(findIngredient(ingredientName));
+        synchronized(ingredientList) {
+            return ingredientList.remove(findIngredient(ingredientName));
+        }
     }
 
     /**
@@ -70,18 +72,17 @@ public class InventoryManager
     private int findIngredient(String target)
     {
         int targetIndex = -1;    // Stores the index of the target ingredient.
-
-        // If there are elements in ingredientList, search each element.
-        for (int i = 0; i < ingredientList.size(); i++)
-        {
-            // Compare each element with the target string.
-            if (target.equalsIgnoreCase(ingredientList.get(i).getIngredientName()))
-            {
-                // If the target matches this element, return the index of this element.
-                targetIndex = i;
+        synchronized(ingredientList) {
+            // If there are elements in ingredientList, search each element.
+            for (int i = 0; i < ingredientList.size(); i++) {
+                // Compare each element with the target string.
+                if (target.equalsIgnoreCase(ingredientList.get(i).getIngredientName())) {
+                    // If the target matches this element, return the index of this element.
+                    targetIndex = i;
+                }
             }
+            return targetIndex;
         }
-        return targetIndex;
     }
 
     /**
@@ -96,30 +97,26 @@ public class InventoryManager
      * @param amount The new amount of the ingredient.
      * @throws ItemNotFoundException Thrown when changing the amount of an ingredient that does not exist.
      */
-    public void setIngredientAmount(String ingredient, double amount) throws ItemNotFoundException
-    {
+    public void setIngredientAmount(String ingredient, double amount) throws ItemNotFoundException {
         int ingredientIndex = 0; // The index of the ingredient which we want to alter.
 
-        // Search for the ingredient in the ingredientList array.
-        ingredientIndex = findIngredient(ingredient);
-        // Verify that the ingredient we want to alter is actually in the array.
-        if (ingredientIndex != -1)
-        {
-            // If the ingredient is present, set the corresponding value in the inventory to amount.
-            Ingredient newIngredient = ingredientList.get(ingredientIndex);
-            newIngredient.setQuantity(amount);
-            System.out.printf("new "+newIngredient.getIngredientName()+" quantity: "+"%.2f"+" "+newIngredient.getUnit()+"%n", newIngredient.getQuantity());
-            ingredientList.set(ingredientIndex, newIngredient);
-        }
-        else
-        {
-            // The ingredient is not present in the array.
-            // Throw an ItemNotFound exception.
-            throw new ItemNotFoundException();
+        synchronized (ingredientList) {
+            // Search for the ingredient in the ingredientList array.
+            ingredientIndex = findIngredient(ingredient);
+            // Verify that the ingredient we want to alter is actually in the array.
+            if (ingredientIndex != -1) {
+                // If the ingredient is present, set the corresponding value in the inventory to amount.
+                Ingredient newIngredient = ingredientList.get(ingredientIndex);
+                newIngredient.setQuantity(amount);
+                System.out.printf("new " + newIngredient.getIngredientName() + " quantity: " + "%.2f" + " " + newIngredient.getUnit() + "%n", newIngredient.getQuantity());
+                ingredientList.set(ingredientIndex, newIngredient);
+            } else {
+                // The ingredient is not present in the array.
+                // Throw an ItemNotFound exception.
+                throw new ItemNotFoundException();
+            }
         }
     }
-
-
     /**
      * Returns a list of all ingredients in the inventory
      * @return a String[] containing all ingredients in chronological order
@@ -133,22 +130,19 @@ public class InventoryManager
     public double getIngredientAmount(String ingredientName) throws ItemNotFoundException
     {
         double amount = 0;             // The value to be returned, contains the value of the ingredient (if present).
-
-        // Search for the ingredient in the ingredientList array.
-        int ingredientIndex = findIngredient(ingredientName);
-        // Verify that the ingredient is actually present in the arrays.
-        if (ingredientIndex != -1)
-        {
-            // If the ingredient is present, set amount to the value stored in ingredientInventory
-            amount = ingredientList.get(ingredientIndex).getQuantity();
+        synchronized(ingredientList) {
+            // Search for the ingredient in the ingredientList array.
+            int ingredientIndex = findIngredient(ingredientName);
+            // Verify that the ingredient is actually present in the arrays.
+            if (ingredientIndex != -1) {
+                // If the ingredient is present, set amount to the value stored in ingredientInventory
+                amount = ingredientList.get(ingredientIndex).getQuantity();
+            } else {
+                // The ingredient is not in the array.
+                // Throw an exception.
+                throw new ItemNotFoundException();
+            }
         }
-        else
-        {
-            // The ingredient is not in the array.
-            // Throw an exception.
-            throw new ItemNotFoundException();
-        }
-
         return amount;
     }
 
@@ -184,38 +178,37 @@ public class InventoryManager
 
 
     public boolean canAddMenuItem(List<Ingredient> recipe, int amount){
-
-        boolean canAdd = true;
-        for(Ingredient recipeIngredient:recipe){
-            //check if there is enough ingredient quantity to make the item
-            boolean isInStock = false;
-            for(Ingredient stockIngredient : ingredientList){
-                if(stockIngredient.getIngredientName().equalsIgnoreCase(recipeIngredient.getIngredientName())) {
-                    isInStock = true;
+        synchronized(ingredientList) {
+            boolean canAdd = true;
+            for (Ingredient recipeIngredient : recipe) {
+                //check if there is enough ingredient quantity to make the item
+                boolean isInStock = false;
+                for (Ingredient stockIngredient : ingredientList) {
+                    if (stockIngredient.getIngredientName().equalsIgnoreCase(recipeIngredient.getIngredientName())) {
+                        isInStock = true;
+                    }
                 }
-            }
-            if(isInStock){
-                double quantityInStock = 0;
-                try{
-                    quantityInStock = getIngredientAmount(recipeIngredient.getIngredientName());
-                }
-                catch(Exception ItemNotFoundException){
-                    System.out.println("Could not add menu item, required ingredient not found");
-                }
-                double quantityInRecipe = recipeIngredient.getQuantity()*amount;
-                if(quantityInRecipe>quantityInStock){
+                if (isInStock) {
+                    double quantityInStock = 0;
+                    try {
+                        quantityInStock = getIngredientAmount(recipeIngredient.getIngredientName());
+                    } catch (Exception ItemNotFoundException) {
+                        System.out.println("Could not add menu item, required ingredient not found");
+                    }
+                    double quantityInRecipe = recipeIngredient.getQuantity() * amount;
+                    if (quantityInRecipe > quantityInStock) {
+                        canAdd = false;
+                        System.out.println("Not enough " + recipeIngredient.getIngredientName() + " in stock");
+                        System.out.println("In stock: " + quantityInStock + " " + recipeIngredient.getUnit());
+                        System.out.println("Quantity needed: " + recipeIngredient.getQuantity() * amount + " " + recipeIngredient.getUnit());
+                    }
+                } else {
                     canAdd = false;
-                    System.out.println("Not enough "+recipeIngredient.getIngredientName()+" in stock");
-                    System.out.println("In stock: "+quantityInStock+" "+recipeIngredient.getUnit());
-                    System.out.println("Quantity needed: "+recipeIngredient.getQuantity()*amount+" "+recipeIngredient.getUnit());
+                    System.out.println("Ingredient " + recipeIngredient.getIngredientName() + " does not exist in the inventory");
                 }
             }
-            else{
-                canAdd = false;
-                System.out.println("Ingredient "+recipeIngredient.getIngredientName()+" does not exist in the inventory");
-            }
+            return canAdd;
         }
-        return canAdd;
     }
     /**
      * Sets the amount of a MenuItem stored in the inventory if ingredient inventory has enough stock
@@ -223,7 +216,7 @@ public class InventoryManager
      * @param amount The new amount to be stored in the inventory.
      * @throws ItemNotFoundException Thrown when attempting to access a MenuItem that does not exist.
      */
-    public void setMenuItemAmount(String itemName, int amount) throws ItemNotFoundException
+    public synchronized void setMenuItemAmount(String itemName, int amount) throws ItemNotFoundException
     {
         // Verify that the item is actually in the array.
         List<Ingredient> recipe = menuItemList.getRecipe(itemName);
