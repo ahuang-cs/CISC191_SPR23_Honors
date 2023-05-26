@@ -14,9 +14,16 @@ import java.util.List;
 
 public class VendorDataCSV implements VendorData {
     private Vendor vendor;
-
     public VendorDataCSV() {
         //vendor = newVendor;
+    }
+    public List<VendorDataCSV> importVendorData() throws URISyntaxException, IOException{
+        return new ArrayList<>();
+    }
+
+    @Override
+    public void exportVendorData(VendorDataCSV VendorDataCSV) throws URISyntaxException, IOException {
+
     }
 
     public static void writeToCostcoFile() throws IOException {
@@ -53,7 +60,6 @@ public class VendorDataCSV implements VendorData {
         mapper.writeValue(new File("Costco.json"), list); //write to a Jason file
     }
 
-    @Override
     public List<CostcoCSV> importCostcoVendor() throws URISyntaxException, IOException {
 
         /** convert a list/JAVA into JSON format **/

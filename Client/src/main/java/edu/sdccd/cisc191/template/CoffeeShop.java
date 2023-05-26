@@ -7,10 +7,7 @@ import javafx.fxml.FXML;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class CoffeeShop{
     static InventoryManager inventory = new InventoryManager();      // Manages the inventory of Menu Items and Ingredients.
@@ -439,6 +436,47 @@ public class CoffeeShop{
             System.out.printf("%-15s%-10s%-10s\n", e.getIngredientName(),e.getUnit(), e.getPrice());
         });
     }
+    private static Object[] getLowestIngredientPrice(Ingredient ingredient,List<CostcoCSV> costcoList, List<WalmartCSV> walmartList) {
+
+        double costcoPrice = costcoList.parallelStream()
+                .filter(costcoIngredient -> ingredient.getIngredientName()
+                        .equalsIgnoreCase(costcoIngredient
+                                .getIngredientName()))
+                .mapToDouble(CostcoCSV::getPrice)
+                .findFirst()
+                .orElse(Double.MAX_VALUE);
+
+        double walmartPrice = walmartList.parallelStream()
+                .filter(walmartIngredient -> ingredient.getIngredientName()
+                        .equalsIgnoreCase(walmartIngredient
+                                .getIngredientName()))
+                .mapToDouble(WalmartCSV::getPrice)
+                .findFirst()
+                .orElse(Double.MAX_VALUE);
+
+        if (costcoPrice == Double.MAX_VALUE && walmartPrice == Double.MAX_VALUE) {
+            Object[] array = new Object[2];
+            array[0] = -1;
+            array[1] = "Could not find item";
+            return array;
+        } else if(costcoPrice>walmartPrice){
+            Object[] array = new Object[2];
+            array[0] = costcoPrice;
+            array[1] = "Walmart";
+            return array;
+        } else if(costcoPrice<walmartPrice){
+            Object[] array = new Object[2];
+            array[0] = walmartPrice;
+            array[1] = "Costco";
+            return array;
+        }
+        else {
+            Object[] array = new Object[2];
+            array[0] = costcoPrice;
+            array[1] = "Same price";
+            return array;
+        }
+    }
     @FXML
     static void getLowestIngredientPrices() throws IOException{
         VendorDataCSV exportList = new VendorDataCSV();
@@ -465,30 +503,12 @@ public class CoffeeShop{
 
         List<Ingredient> allIngredients = inventory.getIngredientList();
         allIngredients.forEach(ingredient -> {
-            double costcoPrice = costcoList.parallelStream()
-                    .filter(costcoIngredient -> ingredient.getIngredientName()
-                                                            .equalsIgnoreCase(costcoIngredient
-                                                                    .getIngredientName()))
-                    .mapToDouble(CostcoCSV::getPrice)
-                    .findFirst()
-                    .orElse(Double.MAX_VALUE);
-
-            double walmartPrice = walmartList.parallelStream()
-                    .filter(walmartIngredient -> ingredient.getIngredientName()
-                                                            .equalsIgnoreCase(walmartIngredient
-                                                                    .getIngredientName()))
-                    .mapToDouble(WalmartCSV::getPrice)
-                    .findFirst()
-                    .orElse(Double.MAX_VALUE);
-
-            if (costcoPrice == Double.MAX_VALUE && walmartPrice == Double.MAX_VALUE) {
+            Object[] price = getLowestIngredientPrice(ingredient, costcoList, walmartList);
+            if((double)price[1]==-1){
                 System.out.printf("%-15s%-10s\n", ingredient.getIngredientName(), "could not find price in vendors");
-            } else if (costcoPrice == walmartPrice) {
-                System.out.printf("%-15s%-10s%-10s\n", ingredient.getIngredientName(), costcoPrice, "Same price");
-            } else if (costcoPrice < walmartPrice) {
-                System.out.printf("%-15s%-10s%-10s\n", ingredient.getIngredientName(), costcoPrice, "Costco");
-            } else if (walmartPrice < costcoPrice) {
-                System.out.printf("%-15s%-10s%-10s\n", ingredient.getIngredientName(), walmartPrice, "Walmart");
+            }
+            else {
+                System.out.printf("%-15s%-10s%-10s\n", ingredient.getIngredientName(), price[0], price[1]);
             }
         });
 
@@ -516,9 +536,11 @@ public class CoffeeShop{
 //            } else if (walmartPrice < costcoPrice) {
 //                System.out.printf("%-15s%-10s%-10s\n", ingredient.getIngredientName(), costcoPrice, "Walmart");
 //            }
-//
 //        }
     }
+
+
+
     static void printIngredients(){
         inventory.printAllIngredients();
     }

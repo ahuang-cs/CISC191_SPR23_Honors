@@ -52,7 +52,7 @@ public class InventoryManager
     {
         return ingredientList;
     }
-    public int getNumberOfIngredients() {synchronized(ingredientList){return ingredientList.size();}}
+    public int getNumberOfIngredients() {return ingredientList.size();}
     public void addIngredient(Ingredient ingredient) {
         synchronized(ingredientList) {
             ingredientList.add(ingredient);

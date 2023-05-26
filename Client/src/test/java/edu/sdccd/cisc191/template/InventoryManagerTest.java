@@ -8,6 +8,8 @@ import edu.sdccd.cisc191.template.Ingredient.Ingredient;
 import edu.sdccd.cisc191.template.MenuItem.MenuItem;
 import org.junit.jupiter.api.Test;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class InventoryManagerTest
 {
-    //Module 8: networking test
+    //Module 8/12: networking test
     //a request is made to the server in the getIngredientData() method, and the response is converted to a list
     // Integrated with collections
     @Test
@@ -119,7 +121,7 @@ class InventoryManagerTest
     }
     //Module 13: Concurrency
     @Test
-    void testWarehouse()
+    void testInventoryManager()
     {
         InventoryManager inventoryManager = new InventoryManager();
         Ingredient ingredient1 = new Ingredient();
@@ -138,7 +140,6 @@ class InventoryManagerTest
         assertEquals(ingredient2, inventoryManager.deleteIngredient(ingredient2.getIngredientName()));
         assertEquals(0, inventoryManager.getNumberOfIngredients()-8);
     }
-
     /**
      * In this test we are simulating many producers creating items sequentially
      * that are then stored in a warehouse.
@@ -147,9 +148,10 @@ class InventoryManagerTest
     void testProducingSequentially()
     {
         InventoryManager inventoryManager = new InventoryManager();
+        long startTime = System.nanoTime();
 
         int numberOfProducers = 10000;
-        int numberOfItemsPerProducer = 10;
+        int numberOfItemsPerProducer = 100;
         Producer[] producers = new Producer[numberOfProducers];
         for (int i = 0; i < numberOfProducers; i++)
         {
@@ -161,19 +163,32 @@ class InventoryManagerTest
         {
             producers[i].run();
         }
+        long endTime = System.nanoTime();
+        System.out.println(endTime-startTime);
         // There should be numberOfProducers*numberOfItemsPerProducer items at the warehouse
         assertEquals(numberOfProducers * numberOfItemsPerProducer, inventoryManager.getNumberOfIngredients()-8);
+        try
+        {
+            String filename= "SequentialData.txt";
+            FileWriter fw = new FileWriter(filename,true); //the true will append the new data
+            fw.write(endTime-startTime+" //"+numberOfItemsPerProducer+" number of items per producer\n");//appends the string to the file
+            fw.close();
+        }
+        catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
     @Test
     void testProducingConcurrently() throws InterruptedException
     {
         InventoryManager inventoryManager = new InventoryManager();
+        long startTime = System.nanoTime();
 
         // You may have to run this test multiple times for it to fail
         // If the program does not run, reduce the following numbers
         // If the test does not fail, increase the following numbers
         int numberOfProducers = 10000;
-        int numberOfItemsPerProducer = 10;
+        int numberOfItemsPerProducer = 100;
         Producer[] producers = new Producer[numberOfProducers];
         for (int i = 0; i < numberOfProducers; i++)
         {
@@ -191,10 +206,30 @@ class InventoryManagerTest
         {
             producers[i].join();
         }
+        long endTime = System.nanoTime();
+        System.out.println(endTime-startTime);
+        try
+        {
+            String filename= "ConcurrentData.txt";
+            FileWriter fw = new FileWriter(filename,true); //the true will append the new data
+            fw.write(endTime-startTime+" //"+numberOfItemsPerProducer+" number of items per producer Error:"+(inventoryManager.getNumberOfIngredients()-8-numberOfProducers * numberOfItemsPerProducer)+"\n");//appends the string to the file
+            fw.close();
+        }
+        catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         // There should be numberOfProducers*numberOfItemsPerProducer items at the warehouse
         assertEquals(numberOfProducers * numberOfItemsPerProducer, inventoryManager.getNumberOfIngredients()-8);
     }
+
+    //Module 14/15: Lambdas/stream api
+    @Test
+    public void generateData(){
+
+    }
+
+
 
     @Test
     void setMenuItemAmountTest() throws ItemNotFoundException

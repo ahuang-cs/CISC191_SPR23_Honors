@@ -19,11 +19,11 @@ public class Producer extends Thread
     @Override
     public void run()
     {
-        System.out.println(name + " running in Thread: " + Thread.currentThread().getName());
+        //System.out.println(name + " running in Thread: " + Thread.currentThread().getName());
         for(int i=0; i<numberOfItemsToProduce; i++){
             inventoryManager.addIngredient(new Ingredient(name+i, Ingredient.Units.NUM, 5));
         }
-        System.out.println(name + " ended.");
+        //System.out.println(name + " ended.");
     }
 
 }
