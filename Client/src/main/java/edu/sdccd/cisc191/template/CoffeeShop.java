@@ -465,14 +465,18 @@ public class CoffeeShop{
 
         List<Ingredient> allIngredients = inventory.getIngredientList();
         allIngredients.forEach(ingredient -> {
-            double costcoPrice = costcoList.stream()
-                    .filter(costcoIngredient -> ingredient.getIngredientName().equalsIgnoreCase(costcoIngredient.getIngredientName()))
+            double costcoPrice = costcoList.parallelStream()
+                    .filter(costcoIngredient -> ingredient.getIngredientName()
+                                                            .equalsIgnoreCase(costcoIngredient
+                                                                    .getIngredientName()))
                     .mapToDouble(CostcoCSV::getPrice)
                     .findFirst()
                     .orElse(Double.MAX_VALUE);
 
-            double walmartPrice = walmartList.stream()
-                    .filter(walmartIngredient -> ingredient.getIngredientName().equalsIgnoreCase(walmartIngredient.getIngredientName()))
+            double walmartPrice = walmartList.parallelStream()
+                    .filter(walmartIngredient -> ingredient.getIngredientName()
+                                                            .equalsIgnoreCase(walmartIngredient
+                                                                    .getIngredientName()))
                     .mapToDouble(WalmartCSV::getPrice)
                     .findFirst()
                     .orElse(Double.MAX_VALUE);
