@@ -436,7 +436,7 @@ public class CoffeeShop{
             System.out.printf("%-15s%-10s%-10s\n", e.getIngredientName(),e.getUnit(), e.getPrice());
         });
     }
-    private static Object[] getLowestIngredientPrice(Ingredient ingredient,List<CostcoCSV> costcoList, List<WalmartCSV> walmartList) {
+    public static Object[] getLowestIngredientPrice(Ingredient ingredient,List<CostcoCSV> costcoList, List<WalmartCSV> walmartList) {
 
         double costcoPrice = costcoList.parallelStream()
                 .filter(costcoIngredient -> ingredient.getIngredientName()
@@ -504,7 +504,7 @@ public class CoffeeShop{
         List<Ingredient> allIngredients = inventory.getIngredientList();
         allIngredients.forEach(ingredient -> {
             Object[] price = getLowestIngredientPrice(ingredient, costcoList, walmartList);
-            if((double)price[1]==-1){
+            if((double)price[0]==-1){
                 System.out.printf("%-15s%-10s\n", ingredient.getIngredientName(), "could not find price in vendors");
             }
             else {

@@ -4,6 +4,7 @@ package edu.sdccd.cisc191.template;
  * This class contains all unit tests for edu.sdccd.cisc191.template.InventoryManager.java
  */
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.sdccd.cisc191.template.Ingredient.Ingredient;
 import edu.sdccd.cisc191.template.MenuItem.MenuItem;
@@ -12,10 +13,13 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import static edu.sdccd.cisc191.template.CoffeeShop.getLowestIngredientPrice;
+import static edu.sdccd.cisc191.template.CoffeeShop.inventory;
 import static org.junit.jupiter.api.Assertions.*;
 
 class InventoryManagerTest
@@ -227,6 +231,43 @@ class InventoryManagerTest
     }
 
     //Module 14/15: Lambdas/stream api
+    @Test
+    void StreamAPILowestIngredientPriceTest(){
+        try{
+            ObjectMapper mapper = new ObjectMapper();
+            File costcoFile = new File("CostcoTestData.json");
+            File walmartFile = new File("WalmartTestData.json");
+            List<CostcoCSV> costcoCSVData = mapper.readValue(costcoFile, new TypeReference<List<CostcoCSV>>() {});
+            List<WalmartCSV> walmartCSVData = mapper.readValue(walmartFile, new TypeReference<List<WalmartCSV>>() {});
+
+            //generate list of ingredients with same names as costco/walmart test file
+            List<Ingredient> allIngredients = new ArrayList<>();
+            char[] alphabet = "abcdefghijklmnopqrstuvwxyz".toCharArray();
+            for(int i=0;i<100;i++){
+                String ingredientName=""+alphabet[(i/26/26/26/26)%26]+alphabet[(i/26/26/26)%26]+alphabet[(i/26/26)%26]+alphabet[(i/26)%26]+alphabet[(i)%26];
+                allIngredients.add(new Ingredient(ingredientName, Ingredient.Units.NUM));
+            }
+
+            List<String> results = new ArrayList<>();
+
+            allIngredients.forEach(ingredient -> {
+                Object[] price = getLowestIngredientPrice(ingredient, costcoCSVData, walmartCSVData);
+
+                if((double)price[0]==-1){
+                    results.add(ingredient.getIngredientName() + " could not find price in vendors");
+                }
+                else {
+                    results.add(ingredient.getIngredientName() + " " + price[0] + price[1]);
+                }
+            });
+            System.out.println(results);
+        }
+        catch(IOException e) {
+            System.out.println(e);
+        }
+
+
+    }
     @Test
     public void generateCostcoData() throws IOException{
         ObjectMapper mapper = new ObjectMapper();

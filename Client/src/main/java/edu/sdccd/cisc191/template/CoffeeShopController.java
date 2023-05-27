@@ -16,7 +16,7 @@ public class CoffeeShopController extends CoffeeShop {
                 subtractItemQuantity();
         }
         public void showCostcoVendorData(ActionEvent e) throws IOException, URISyntaxException {costcoVendor();}
-        public void showWalmartVendorData(ActionEvent e) throws IOException {walmartVendor();}
+        public void showWalmartVendorData() throws IOException {walmartVendor();}
         public void getLowestIngredientPrices(ActionEvent e) throws IOException {getLowestIngredientPrices();}
         public void addMenuItem(ActionEvent e) {
                 addMenuItem();
