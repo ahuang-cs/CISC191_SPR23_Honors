@@ -477,6 +477,44 @@ public class CoffeeShop{
             return array;
         }
     }
+    public static Object[] getLowestIngredientPriceNoStream(Ingredient ingredient,List<CostcoCSV> costcoList, List<WalmartCSV> walmartList) {
+
+        double costcoPrice = Double.MAX_VALUE;
+        double walmartPrice = Double.MAX_VALUE;
+        for (CostcoCSV costcoIngredient : costcoList) {
+            if (ingredient.getIngredientName().equalsIgnoreCase(costcoIngredient.getIngredientName())) {
+                costcoPrice = costcoIngredient.getPrice();
+            }
+        }
+        for (WalmartCSV walmartIngredient : walmartList) {
+            if (ingredient.getIngredientName().equalsIgnoreCase(walmartIngredient.getIngredientName())) {
+                walmartPrice = walmartIngredient.getPrice();
+            }
+        }
+
+        if (costcoPrice == Double.MAX_VALUE && walmartPrice == Double.MAX_VALUE) {
+            Object[] array = new Object[2];
+            array[0] = -1;
+            array[1] = "Could not find item";
+            return array;
+        } else if (costcoPrice > walmartPrice) {
+            Object[] array = new Object[2];
+            array[0] = costcoPrice;
+            array[1] = "Walmart";
+            return array;
+        } else if (costcoPrice < walmartPrice) {
+            Object[] array = new Object[2];
+            array[0] = walmartPrice;
+            array[1] = "Costco";
+            return array;
+        } else {
+            Object[] array = new Object[2];
+            array[0] = costcoPrice;
+            array[1] = "Same price";
+            return array;
+        }
+    }
+
     @FXML
     static void getLowestIngredientPrices() throws IOException{
         VendorDataCSV exportList = new VendorDataCSV();
