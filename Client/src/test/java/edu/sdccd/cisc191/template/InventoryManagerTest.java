@@ -245,11 +245,10 @@ class InventoryManagerTest
             char[] alphabet = "abcdefghijklmnopqrstuvwxyz".toCharArray();
             for(int i=0;i<100;i++){
                 String ingredientName=""+alphabet[(i/26/26/26/26)%26]+alphabet[(i/26/26/26)%26]+alphabet[(i/26/26)%26]+alphabet[(i/26)%26]+alphabet[(i)%26];
-                allIngredients.add(new Ingredient(ingredientName, Ingredient.Units.NUM));
+                allIngredients.add(new Ingredient(ingredientName, Ingredient.Units.NUM, 0));
             }
 
             List<String> results = new ArrayList<>();
-
             allIngredients.forEach(ingredient -> {
                 Object[] price = getLowestIngredientPrice(ingredient, costcoCSVData, walmartCSVData);
 
@@ -260,7 +259,11 @@ class InventoryManagerTest
                     results.add(ingredient.getIngredientName() + " " + price[0] + price[1]);
                 }
             });
-            System.out.println(results);
+            File correctDataFile = new File("LowestPriceTestData.json");
+            List<String> correctData = mapper.readValue(correctDataFile, new TypeReference<List<String>>() {});
+            for(int i=0;i<correctData.size();i++) {
+                assertEquals(correctData.get(i), results.get(i));
+            }
         }
         catch(IOException e) {
             System.out.println(e);
@@ -289,6 +292,41 @@ class InventoryManagerTest
             list.add(new CostcoCSV((""+alphabet[(i/26/26/26/26)%26]+alphabet[(i/26/26/26)%26]+alphabet[(i/26/26)%26]+alphabet[(i/26)%26]+alphabet[(i)%26]), Ingredient.Units.NUM,  r.nextInt(100)));
         }
         mapper.writeValue(new File("WalmartTestData.json"), list);
+    }
+    @Test
+    public void generateLowestPriceData(){
+
+        ObjectMapper mapper = new ObjectMapper();
+        try{
+            File costcoFile = new File("CostcoTestData.json");
+            File walmartFile = new File("WalmartTestData.json");
+            List<CostcoCSV> costcoCSVData = mapper.readValue(costcoFile, new TypeReference<List<CostcoCSV>>() {});
+            List<WalmartCSV> walmartCSVData = mapper.readValue(walmartFile, new TypeReference<List<WalmartCSV>>() {});
+
+            char[] alphabet = "abcdefghijklmnopqrstuvwxyz".toCharArray();
+            List<Ingredient> allIngredients = new ArrayList<>();
+            for(int i=0;i<100;i++){
+                String ingredientName=""+alphabet[(i/26/26/26/26)%26]+alphabet[(i/26/26/26)%26]+alphabet[(i/26/26)%26]+alphabet[(i/26)%26]+alphabet[(i)%26];
+                allIngredients.add(new Ingredient(ingredientName, Ingredient.Units.NUM, 0));
+            }
+
+            List<String> results = new ArrayList<>();
+
+            allIngredients.forEach(ingredient -> {
+                Object[] price = getLowestIngredientPrice(ingredient, costcoCSVData, walmartCSVData);
+
+                if((double)price[0]==-1){
+                    results.add(ingredient.getIngredientName() + " could not find price in vendors");
+                }
+                else {
+                    results.add(ingredient.getIngredientName() + " " + price[0] + price[1]);
+                }
+            });
+            mapper.writeValue(new File("LowestPriceTestData.json"), results);
+        }catch(IOException e) {
+            System.out.println(e);
+        }
+
     }
 
 
