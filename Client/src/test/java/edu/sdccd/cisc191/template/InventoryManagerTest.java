@@ -4,14 +4,17 @@ package edu.sdccd.cisc191.template;
  * This class contains all unit tests for edu.sdccd.cisc191.template.InventoryManager.java
  */
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.sdccd.cisc191.template.Ingredient.Ingredient;
 import edu.sdccd.cisc191.template.MenuItem.MenuItem;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -225,8 +228,26 @@ class InventoryManagerTest
 
     //Module 14/15: Lambdas/stream api
     @Test
-    public void generateData(){
-
+    public void generateCostcoData() throws IOException{
+        ObjectMapper mapper = new ObjectMapper();
+        List<CostcoCSV> list = new ArrayList<>();
+        Random r = new Random();
+        char[] alphabet = "abcdefghijklmnopqrstuvwxyz".toCharArray();
+        for(int i=0;i<100;i++){
+            list.add(new CostcoCSV((""+alphabet[(i/26/26/26/26)%26]+alphabet[(i/26/26/26)%26]+alphabet[(i/26/26)%26]+alphabet[(i/26)%26]+alphabet[(i)%26]), Ingredient.Units.NUM,  r.nextInt(100)));
+        }
+        mapper.writeValue(new File("CostcoTestData.json"), list);
+    }
+    @Test
+    public void generateWalmartData()throws IOException{
+        ObjectMapper mapper = new ObjectMapper();
+        List<CostcoCSV> list = new ArrayList<>();
+        Random r = new Random();
+        char[] alphabet = "abcdefghijklmnopqrstuvwxyz".toCharArray();
+        for(int i=0;i<100;i++){
+            list.add(new CostcoCSV((""+alphabet[(i/26/26/26/26)%26]+alphabet[(i/26/26/26)%26]+alphabet[(i/26/26)%26]+alphabet[(i/26)%26]+alphabet[(i)%26]), Ingredient.Units.NUM,  r.nextInt(100)));
+        }
+        mapper.writeValue(new File("WalmartTestData.json"), list);
     }
 
 
