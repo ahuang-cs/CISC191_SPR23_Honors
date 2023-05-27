@@ -242,7 +242,9 @@ class InventoryManagerTest
             //generate list of ingredients with same names as costco/walmart test file
             List<Ingredient> allIngredients = new ArrayList<>();
             char[] alphabet = "abcdefghijklmnopqrstuvwxyz".toCharArray();
-            for(int i=0;i<costcoCSVData.size();i++){
+
+            int numberOfIngredients = 100;
+            for(int i=0;i<numberOfIngredients;i++){
                 String ingredientName=""+alphabet[(i/26/26/26/26)%26]+alphabet[(i/26/26/26)%26]+alphabet[(i/26/26)%26]+alphabet[(i/26)%26]+alphabet[(i)%26];
                 allIngredients.add(new Ingredient(ingredientName, Ingredient.Units.NUM, 0));
             }
@@ -265,7 +267,7 @@ class InventoryManagerTest
             {
                 String filename= "StreamAPITimes.txt";
                 FileWriter fw = new FileWriter(filename,true); //the true will append the new data
-                fw.write(endTime-startTime+" //"+costcoCSVData.size()+" ingredients in file\n");//appends the string to the file
+                fw.write(endTime-startTime+" //"+costcoCSVData.size()+" ingredients in file, finding lowest price of"+numberOfIngredients+"\n");//appends the string to the file
                 fw.close();
             }
             catch (IOException e) {
@@ -295,7 +297,8 @@ class InventoryManagerTest
             //generate list of ingredients with same names as costco/walmart test file
             List<Ingredient> allIngredients = new ArrayList<>();
             char[] alphabet = "abcdefghijklmnopqrstuvwxyz".toCharArray();
-            for(int i=0;i<100;i++){
+            int numberOfIngredients = 100;
+            for(int i=0;i<numberOfIngredients;i++){
                 String ingredientName=""+alphabet[(i/26/26/26/26)%26]+alphabet[(i/26/26/26)%26]+alphabet[(i/26/26)%26]+alphabet[(i/26)%26]+alphabet[(i)%26];
                 allIngredients.add(new Ingredient(ingredientName, Ingredient.Units.NUM, 0));
             }
@@ -319,7 +322,7 @@ class InventoryManagerTest
             {
                 String filename= "NoStreamAPITimes.txt";
                 FileWriter fw = new FileWriter(filename,true); //the true will append the new data
-                fw.write(endTime-startTime+" //"+costcoCSVData.size()+" ingredients in file\n");//appends the string to the file
+                fw.write(endTime-startTime+" //"+costcoCSVData.size()+" ingredients in file, finding lowest price of"+numberOfIngredients+"\n");//appends the string to the file
                 fw.close();
             }
             catch (IOException e) {
@@ -370,7 +373,7 @@ class InventoryManagerTest
 
             char[] alphabet = "abcdefghijklmnopqrstuvwxyz".toCharArray();
             List<Ingredient> allIngredients = new ArrayList<>();
-            for(int i=0;i<100;i++){
+            for(int i=0;i<costcoCSVData.size();i++){
                 String ingredientName=""+alphabet[(i/26/26/26/26)%26]+alphabet[(i/26/26/26)%26]+alphabet[(i/26/26)%26]+alphabet[(i/26)%26]+alphabet[(i)%26];
                 allIngredients.add(new Ingredient(ingredientName, Ingredient.Units.NUM, 0));
             }
@@ -394,7 +397,7 @@ class InventoryManagerTest
 
     }
 
-    
+
     @Test
     void setMenuItemAmountTest() throws ItemNotFoundException
     {
