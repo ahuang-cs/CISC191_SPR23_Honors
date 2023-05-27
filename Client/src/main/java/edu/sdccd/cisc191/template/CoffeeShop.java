@@ -504,7 +504,7 @@ public class CoffeeShop{
         List<Ingredient> allIngredients = inventory.getIngredientList();
         allIngredients.forEach(ingredient -> {
             Object[] price = getLowestIngredientPrice(ingredient, costcoList, walmartList);
-            if((double)price[1]==-1){
+            if((double)price[0]==-1){
                 System.out.printf("%-15s%-10s\n", ingredient.getIngredientName(), "could not find price in vendors");
             }
             else {
